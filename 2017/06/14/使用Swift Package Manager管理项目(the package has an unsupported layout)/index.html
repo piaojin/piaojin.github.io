@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS,Swift-使用Swift Package Manager管理项目(the package has an unsupported layout) | 飘金的博客</title>
+
+  <!-- keywords -->
+  
+    <meta name="keywords" content="iOS,Swift">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用Swift Package Manager管理项目(the package has an unsupported layout)">
+<meta name="keywords" content="iOS,Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Swift Package Manager管理项目(the package has an unsupported layout)">
+<meta property="og:url" content="http://yoursite.com/2017/06/14/使用Swift Package Manager管理项目(the package has an unsupported layout)/index.html">
+<meta property="og:site_name" content="飘金的博客">
+<meta property="og:description" content="使用Swift Package Manager管理项目(the package has an unsupported layout)">
+<meta property="og:updated_time" content="2017-06-14T14:12:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Swift Package Manager管理项目(the package has an unsupported layout)">
+<meta name="twitter:description" content="使用Swift Package Manager管理项目(the package has an unsupported layout)">
+  
+    <link rel="alternative" href="/atom.xml" title="飘金的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+  
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-85415703-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+      <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("K1qAIJa0JgKeGUnrlq0G526F-gzGzoHsz", "n4XwRe0iBOxWpBaYJ7HNWPA3");</script>
+<script src="/js/Counter.js"></script>
+  
+</head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">飘金</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">会炒菜的猿</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">飘金</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">飘金</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">会炒菜的猿</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-使用Swift Package Manager管理项目(the package has an unsupported layout)" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/06/14/使用Swift Package Manager管理项目(the package has an unsupported layout)/" class="article-date">
+  	<time datetime="2017-06-14T06:23:47.000Z" itemprop="datePublished">2017-06-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用Swift Package Manager管理项目(the package has an unsupported layout)
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/iOS/">iOS</a>
+	</div>
+
+
+        
+          
+<div class="counter-tag counter">
+    <span id="/2017/06/14/使用Swift Package Manager管理项目(the package has an unsupported layout)/" class="leancloud_visitors post-title-link"
+          style="font-size: 12px" data-flag-title="使用Swift Package Manager管理项目(the package has an unsupported layout)">
+         &nbsp;
+        view
+    </span>
+</div>
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用Swift Package Manager管理项目(the package has an unsupported layout)<br><a id="more"></a></p>
+<h3 id="首先指定一个文件夹创建一个空的项目"><a href="#首先指定一个文件夹创建一个空的项目" class="headerlink" title="首先指定一个文件夹创建一个空的项目"></a>首先指定一个文件夹创建一个空的项目</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">swift package init --type executable</div></pre></td></tr></table></figure>
+<h3 id="这时创建出来的空项目的目录结构为"><a href="#这时创建出来的空项目的目录结构为" class="headerlink" title="这时创建出来的空项目的目录结构为"></a>这时创建出来的空项目的目录结构为</h3><ul>
+<li><p>Package.swift</p>
+</li>
+<li><p>Source:</p>
+</li>
+<li><p>main.swift</p>
+</li>
+<li><p>Test:</p>
+</li>
+</ul>
+<h3 id="如果，我们随意变动这个目录结构，都会造成之后build出问题，导致无法使用SPM管理。对于SPM的使用是有很严格的规范的。"><a href="#如果，我们随意变动这个目录结构，都会造成之后build出问题，导致无法使用SPM管理。对于SPM的使用是有很严格的规范的。" class="headerlink" title="如果，我们随意变动这个目录结构，都会造成之后build出问题，导致无法使用SPM管理。对于SPM的使用是有很严格的规范的。"></a>如果，我们随意变动这个目录结构，都会造成之后build出问题，导致无法使用SPM管理。对于SPM的使用是有很严格的规范的。</h3><h3 id="比如下列这样都是错误的"><a href="#比如下列这样都是错误的" class="headerlink" title="比如下列这样都是错误的"></a>比如下列这样都是错误的</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">Package.swift</div><div class="line"></div><div class="line">Source:</div><div class="line"></div><div class="line">main.swift</div><div class="line"></div><div class="line">ModuleA:</div><div class="line"></div><div class="line">ClassA.swift</div><div class="line"></div><div class="line">Test:</div><div class="line"></div><div class="line">Package.swift</div><div class="line"></div><div class="line">Source:</div><div class="line"></div><div class="line">main.swift</div><div class="line"></div><div class="line">ClassA.swift</div><div class="line"></div><div class="line">Test:Package.swift</div><div class="line"></div><div class="line">ModuleA:</div><div class="line"></div><div class="line">ClassA.swift</div><div class="line"></div><div class="line">Source:</div><div class="line"></div><div class="line">main.swift</div><div class="line"></div><div class="line">Test:</div></pre></td></tr></table></figure>
+<h3 id="在build时会出现"><a href="#在build时会出现" class="headerlink" title="在build时会出现"></a>在build时会出现</h3><h3 id="error-the-package-has-an-unsupported-layout-unexpected-source-file-s-found-…"><a href="#error-the-package-has-an-unsupported-layout-unexpected-source-file-s-found-…" class="headerlink" title="error: the package has an unsupported layout, unexpected source file(s) found:…."></a>error: the package has an unsupported layout, unexpected source file(s) found:….</h3><h3 id="fix-move-the-file-s-inside-a-module"><a href="#fix-move-the-file-s-inside-a-module" class="headerlink" title="fix: move the file(s) inside a module"></a>fix: move the file(s) inside a module</h3><h3 id="正确的目录结构应该是这样的"><a href="#正确的目录结构应该是这样的" class="headerlink" title="正确的目录结构应该是这样的"></a>正确的目录结构应该是这样的</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Package.swift</div><div class="line"></div><div class="line">Source:</div><div class="line"></div><div class="line">ModuleA:</div><div class="line"></div><div class="line">main.swift</div><div class="line"></div><div class="line">ModuleC:</div><div class="line"></div><div class="line">C.swift</div></pre></td></tr></table></figure>
+<h3 id="Test-在source文件夹中，需要把项目代码以模块的方式划分，这样就能正常使用SPM了，然后在build一下"><a href="#Test-在source文件夹中，需要把项目代码以模块的方式划分，这样就能正常使用SPM了，然后在build一下" class="headerlink" title="Test:在source文件夹中，需要把项目代码以模块的方式划分，这样就能正常使用SPM了，然后在build一下"></a>Test:在source文件夹中，需要把项目代码以模块的方式划分，这样就能正常使用SPM了，然后在build一下</h3><h3 id="swift-build然后终端上就会显示"><a href="#swift-build然后终端上就会显示" class="headerlink" title="swift build然后终端上就会显示"></a>swift build然后终端上就会显示</h3><h3 id="Compile-Swift-Module-‘ModuleC’-2-sources"><a href="#Compile-Swift-Module-‘ModuleC’-2-sources" class="headerlink" title="Compile Swift Module ‘ModuleC’ (2 sources)"></a>Compile Swift Module ‘ModuleC’ (2 sources)</h3><h3 id="Compile-Swift-Module-‘ModuleA’-1-sources"><a href="#Compile-Swift-Module-‘ModuleA’-1-sources" class="headerlink" title="Compile Swift Module ‘ModuleA’ (1 sources)"></a>Compile Swift Module ‘ModuleA’ (1 sources)</h3><h3 id="Linking-build-debug-ModuleA"><a href="#Linking-build-debug-ModuleA" class="headerlink" title="Linking ./.build/debug/ModuleA"></a>Linking ./.build/debug/ModuleA</h3><h3 id="说明ModuleA和ModuleC都已经构建好了，然后输入"><a href="#说明ModuleA和ModuleC都已经构建好了，然后输入" class="headerlink" title="说明ModuleA和ModuleC都已经构建好了，然后输入"></a>说明ModuleA和ModuleC都已经构建好了，然后输入</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">swift package generate-xcodeproj</div></pre></td></tr></table></figure>
+<h3 id="就可以使用Xcode编写代码了。当你打开Xcode的时候，你会发现，在左侧目录下方生成了ModuleC-framework，接着需要General中添加这个库，然后可以在ModuleA中使用。在使用过程中，可能会出现-initializer-is-inaccessible-due-to-‘internal’-protection-level的错误，这是因为ModuleC中的文件没有init方法，只要写一个init方法，就不会报这个错误，可以正常编写代码了"><a href="#就可以使用Xcode编写代码了。当你打开Xcode的时候，你会发现，在左侧目录下方生成了ModuleC-framework，接着需要General中添加这个库，然后可以在ModuleA中使用。在使用过程中，可能会出现-initializer-is-inaccessible-due-to-‘internal’-protection-level的错误，这是因为ModuleC中的文件没有init方法，只要写一个init方法，就不会报这个错误，可以正常编写代码了" class="headerlink" title="就可以使用Xcode编写代码了。当你打开Xcode的时候，你会发现，在左侧目录下方生成了ModuleC.framework，接着需要General中添加这个库，然后可以在ModuleA中使用。在使用过程中，可能会出现 initializer is inaccessible due to ‘internal’ protection level的错误，这是因为ModuleC中的文件没有init方法，只要写一个init方法，就不会报这个错误，可以正常编写代码了"></a>就可以使用Xcode编写代码了。当你打开Xcode的时候，你会发现，在左侧目录下方生成了ModuleC.framework，接着需要General中添加这个库，然后可以在ModuleA中使用。在使用过程中，可能会出现 initializer is inaccessible due to ‘internal’ protection level的错误，这是因为ModuleC中的文件没有init方法，只要写一个init方法，就不会报这个错误，可以正常编写代码了</h3><h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><h3 id="https-swift-org-package-manager-example-usage"><a href="#https-swift-org-package-manager-example-usage" class="headerlink" title="https://swift.org/package-manager/#example-usage"></a><a href="https://swift.org/package-manager/#example-usage" target="_blank" rel="external">https://swift.org/package-manager/#example-usage</a></h3>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/06/14/Xcode控制台调试常用命令/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          Xcode控制台调试常用命令
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/14/iOS 设置视图半透明而子控件不透明/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">iOS 设置视图半透明而子控件不透明</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="使用Swift Package Manager管理项目(the package has an unsupported layout)" data-title="使用Swift Package Manager管理项目(the package has an unsupported layout)" data-url="http://yoursite.com/2017/06/14/使用Swift Package Manager管理项目(the package has an unsupported layout)/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="使用Swift Package Manager管理项目(the package has an unsupported layout)">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="使用Swift Package Manager管理项目(the package has an unsupported layout)" data-title="使用Swift Package Manager管理项目(the package has an unsupported layout)" data-url="http://yoursite.com/2017/06/14/使用Swift Package Manager管理项目(the package has an unsupported layout)/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"winnerweb"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2017 飘金
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

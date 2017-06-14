@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS,Swift-Xcode控制台调试常用命令 | 飘金的博客</title>
+
+  <!-- keywords -->
+  
+    <meta name="keywords" content="iOS,Swift">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Xcode控制台调试常用命令">
+<meta name="keywords" content="iOS,Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Xcode控制台调试常用命令">
+<meta property="og:url" content="http://yoursite.com/2017/06/14/Xcode控制台调试常用命令/index.html">
+<meta property="og:site_name" content="飘金的博客">
+<meta property="og:description" content="Xcode控制台调试常用命令">
+<meta property="og:image" content="http://files.jb51.net/file_images/article/201612/201612210932141.png">
+<meta property="og:image" content="http://files.jb51.net/file_images/article/201612/201612210932152.png">
+<meta property="og:image" content="http://files.jb51.net/file_images/article/201612/201612210932153.png">
+<meta property="og:image" content="http://files.jb51.net/file_images/article/201612/201612210932154.jpg">
+<meta property="og:updated_time" content="2017-06-14T14:08:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Xcode控制台调试常用命令">
+<meta name="twitter:description" content="Xcode控制台调试常用命令">
+<meta name="twitter:image" content="http://files.jb51.net/file_images/article/201612/201612210932141.png">
+  
+    <link rel="alternative" href="/atom.xml" title="飘金的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+  
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-85415703-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+      <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("K1qAIJa0JgKeGUnrlq0G526F-gzGzoHsz", "n4XwRe0iBOxWpBaYJ7HNWPA3");</script>
+<script src="/js/Counter.js"></script>
+  
+</head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">飘金</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">会炒菜的猿</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">飘金</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">飘金</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">会炒菜的猿</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-Xcode控制台调试常用命令" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/06/14/Xcode控制台调试常用命令/" class="article-date">
+  	<time datetime="2017-06-14T06:23:47.000Z" itemprop="datePublished">2017-06-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Xcode控制台调试常用命令
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/iOS/">iOS</a>
+	</div>
+
+
+        
+          
+<div class="counter-tag counter">
+    <span id="/2017/06/14/Xcode控制台调试常用命令/" class="leancloud_visitors post-title-link"
+          style="font-size: 12px" data-flag-title="Xcode控制台调试常用命令">
+         &nbsp;
+        view
+    </span>
+</div>
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Xcode控制台调试常用命令<br><a id="more"></a></p>
+<h3 id="IOS-Xcode调试常用命令和断点"><a href="#IOS-Xcode调试常用命令和断点" class="headerlink" title="IOS Xcode调试常用命令和断点"></a>IOS Xcode调试常用命令和断点</h3><h3 id="Xcode-中的调试技巧与我们的日常开发息息相关，而这些调试技巧在我们解决Bug时，常常有事半功倍的作用，经常会用到的有各种断点-和-命令。而这些调试技巧也经常会在面试中问到，所以不知道的就来看看吧。"><a href="#Xcode-中的调试技巧与我们的日常开发息息相关，而这些调试技巧在我们解决Bug时，常常有事半功倍的作用，经常会用到的有各种断点-和-命令。而这些调试技巧也经常会在面试中问到，所以不知道的就来看看吧。" class="headerlink" title="Xcode 中的调试技巧与我们的日常开发息息相关，而这些调试技巧在我们解决Bug时，常常有事半功倍的作用，经常会用到的有各种断点 和 命令。而这些调试技巧也经常会在面试中问到，所以不知道的就来看看吧。"></a>Xcode 中的调试技巧与我们的日常开发息息相关，而这些调试技巧在我们解决Bug时，常常有事半功倍的作用，经常会用到的有各种断点 和 命令。而这些调试技巧也经常会在面试中问到，所以不知道的就来看看吧。</h3><p><img src="http://files.jb51.net/file_images/article/201612/201612210932141.png" alt=""></p>
+<h4 id="调试命令"><a href="#调试命令" class="headerlink" title="调试命令"></a>调试命令</h4><h3 id="在上图中，右侧绿色区域就是Log-输出区，在-Log-输出区可以使用一些命令，来辅助调试。"><a href="#在上图中，右侧绿色区域就是Log-输出区，在-Log-输出区可以使用一些命令，来辅助调试。" class="headerlink" title="在上图中，右侧绿色区域就是Log 输出区，在 Log 输出区可以使用一些命令，来辅助调试。"></a>在上图中，右侧绿色区域就是Log 输出区，在 Log 输出区可以使用一些命令，来辅助调试。</h3><h3 id="那有哪些调试命令呢？"><a href="#那有哪些调试命令呢？" class="headerlink" title="那有哪些调试命令呢？"></a>那有哪些调试命令呢？</h3><h4 id="想要看所有的调试命令，可以在上图的右侧区域输入help，就会列出所有的调试命令。"><a href="#想要看所有的调试命令，可以在上图的右侧区域输入help，就会列出所有的调试命令。" class="headerlink" title="想要看所有的调试命令，可以在上图的右侧区域输入help，就会列出所有的调试命令。"></a>想要看所有的调试命令，可以在上图的右侧区域输入help，就会列出所有的调试命令。</h4><h4 id="本文就介绍几个使用频率比较高的，其他就查看后，自行了解吧。"><a href="#本文就介绍几个使用频率比较高的，其他就查看后，自行了解吧。" class="headerlink" title="本文就介绍几个使用频率比较高的，其他就查看后，自行了解吧。"></a>本文就介绍几个使用频率比较高的，其他就查看后，自行了解吧。</h4><ul>
+<li><h2 id="1-p-命令"><a href="#1-p-命令" class="headerlink" title="1. p 命令"></a>1. p 命令</h2>?<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-- (&apos;expression --&apos;) Evaluate an expression on the current thread.</div><div class="line">Displays any returned value with LLDB&apos;s default formatting.</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="p-命令是-print-命令的简写，使用p-命令可以查看基本数据类型的值，但是如果-使用-p-命令-查看的是对象，那么只会返回对象的指针地址。"><a href="#p-命令是-print-命令的简写，使用p-命令可以查看基本数据类型的值，但是如果-使用-p-命令-查看的是对象，那么只会返回对象的指针地址。" class="headerlink" title="p 命令是 print 命令的简写，使用p 命令可以查看基本数据类型的值，但是如果 使用 p 命令 查看的是对象，那么只会返回对象的指针地址。"></a>p 命令是 print 命令的简写，使用p 命令可以查看基本数据类型的值，但是如果 使用 p 命令 查看的是对象，那么只会返回对象的指针地址。</h3><h3 id="p-命令后面除了可以接-变量、常量，还可以接-表达式。（❌但是不可以使用宏❌）"><a href="#p-命令后面除了可以接-变量、常量，还可以接-表达式。（❌但是不可以使用宏❌）" class="headerlink" title="p 命令后面除了可以接 变量、常量，还可以接 表达式。（❌但是不可以使用宏❌）"></a>p 命令后面除了可以接 变量、常量，还可以接 表达式。（❌但是不可以使用宏❌）</h3><ul>
+<li><h2 id="2-po-命令"><a href="#2-po-命令" class="headerlink" title="2. po 命令"></a>2. po 命令</h2></li>
+</ul>
+<h3 id="po-命令可以理解为打印对象。功能与-p-命令类似，所以也是可以打印-常量、变量，打印表达式返回的对象等。（❌也不可以打印宏❌）"><a href="#po-命令可以理解为打印对象。功能与-p-命令类似，所以也是可以打印-常量、变量，打印表达式返回的对象等。（❌也不可以打印宏❌）" class="headerlink" title="po 命令可以理解为打印对象。功能与 p 命令类似，所以也是可以打印 常量、变量，打印表达式返回的对象等。（❌也不可以打印宏❌）"></a>po 命令可以理解为打印对象。功能与 p 命令类似，所以也是可以打印 常量、变量，打印表达式返回的对象等。（❌也不可以打印宏❌）</h3><p><img src="http://files.jb51.net/file_images/article/201612/201612210932152.png" alt=""></p>
+<h3 id="当然，这些打印功能，除了使用命令外，我们也可以使用左侧区域，点击变量右键—-gt-print-Description-of-“xxx”："><a href="#当然，这些打印功能，除了使用命令外，我们也可以使用左侧区域，点击变量右键—-gt-print-Description-of-“xxx”：" class="headerlink" title="当然，这些打印功能，除了使用命令外，我们也可以使用左侧区域，点击变量右键—&gt; print Description of “xxx”："></a>当然，这些打印功能，除了使用命令外，我们也可以使用左侧区域，点击变量右键—&gt; print Description of “xxx”：</h3><p><img src="http://files.jb51.net/file_images/article/201612/201612210932153.png" alt=""></p>
+<h3 id="当然还有其他的打印方法："><a href="#当然还有其他的打印方法：" class="headerlink" title="当然还有其他的打印方法："></a>当然还有其他的打印方法：</h3><p><img src="http://files.jb51.net/file_images/article/201612/201612210932154.jpg" alt=""></p>
+<ul>
+<li><h2 id="3-expr-命令"><a href="#3-expr-命令" class="headerlink" title="3.expr 命令"></a>3.expr 命令</h2></li>
+</ul>
+<h3 id="expr-是-expression-的简写，-使用expr-命令，能够在调试时，动态的执行赋值表达式，同时打印出结果。我们可以在调试时，动态的修改变量的值，这在调试想要让应用执行异常路径（如执行某个else-情况）很有用。"><a href="#expr-是-expression-的简写，-使用expr-命令，能够在调试时，动态的执行赋值表达式，同时打印出结果。我们可以在调试时，动态的修改变量的值，这在调试想要让应用执行异常路径（如执行某个else-情况）很有用。" class="headerlink" title="expr 是 expression 的简写， 使用expr 命令，能够在调试时，动态的执行赋值表达式，同时打印出结果。我们可以在调试时，动态的修改变量的值，这在调试想要让应用执行异常路径（如执行某个else 情况）很有用。"></a>expr 是 expression 的简写， 使用expr 命令，能够在调试时，动态的执行赋值表达式，同时打印出结果。我们可以在调试时，动态的修改变量的值，这在调试想要让应用执行异常路径（如执行某个else 情况）很有用。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(lldb) p i </div><div class="line">(NSInteger) $16 = 1</div><div class="line">(lldb) expression i = 5</div><div class="line">(NSInteger) $17 = 5</div><div class="line">(lldb) po i </div><div class="line">5</div></pre></td></tr></table></figure>
+<ul>
+<li><h2 id="4-call-命令"><a href="#4-call-命令" class="headerlink" title="4.call 命令"></a>4.call 命令</h2></li>
+</ul>
+<h3 id="上面是动态修改变量的值，-Xcode-还支持动态调用函数。在控制台执行该命令，可以在不修改代码，不重新编译的情况下，修改界面上的视图。"><a href="#上面是动态修改变量的值，-Xcode-还支持动态调用函数。在控制台执行该命令，可以在不修改代码，不重新编译的情况下，修改界面上的视图。" class="headerlink" title="上面是动态修改变量的值， Xcode 还支持动态调用函数。在控制台执行该命令，可以在不修改代码，不重新编译的情况下，修改界面上的视图。"></a>上面是动态修改变量的值， Xcode 还支持动态调用函数。在控制台执行该命令，可以在不修改代码，不重新编译的情况下，修改界面上的视图。</h3><h3 id="这里有一个动态将cell-的某个子视图移除的范例："><a href="#这里有一个动态将cell-的某个子视图移除的范例：" class="headerlink" title="这里有一个动态将cell 的某个子视图移除的范例："></a>这里有一个动态将cell 的某个子视图移除的范例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">(lldb) po cell.contentView.subviews</div><div class="line">&lt;__NSArrayM 0x60800005f5f0&gt;(</div><div class="line">&lt;UILabel: 0x7f91f4f18c90; frame = (5 5; 300 25); text = &apos;2 - Drawing index is top ...&apos;; userInteractionEnabled = NO; tag = 1; layer = &lt;_UILabelLayer: 0x60800009ff40&gt;&gt;,</div><div class="line">&lt;UIImageView: 0x7f91f4d20050; frame = (105 20; 85 85); opaque = NO; userInteractionEnabled = NO; tag = 2; layer = &lt;CALayer: 0x60000003ff60&gt;&gt;,</div><div class="line">&lt;UIImageView: 0x7f91f4f18f10; frame = (200 20; 85 85); opaque = NO; userInteractionEnabled = NO; tag = 3; layer = &lt;CALayer: 0x608000039860&gt;&gt;</div><div class="line">)</div><div class="line"></div><div class="line">(lldb) call [label removeFromSuperview]</div><div class="line">(lldb) po cell.contentView.subviews</div><div class="line">&lt;__NSArrayM 0x600000246de0&gt;(</div><div class="line">&lt;UIImageView: 0x7f91f4d20050; frame = (105 20; 85 85); opaque = NO; userInteractionEnabled = NO; tag = 2; layer = &lt;CALayer: 0x60000003ff60&gt;&gt;,</div><div class="line">&lt;UIImageView: 0x7f91f4f18f10; frame = (200 20; 85 85); opaque = NO; userInteractionEnabled = NO; tag = 3; layer = &lt;CALayer: 0x608000039860&gt;&gt;</div><div class="line">)</div></pre></td></tr></table></figure>
+<ul>
+<li><h2 id="5-bt命令"><a href="#5-bt命令" class="headerlink" title="5.bt命令"></a>5.bt命令</h2></li>
+</ul>
+<h3 id="bt-命令-可以打印出线程的堆栈信息，该信息比左侧的Debug-Navigator-看到的还要详细一些。"><a href="#bt-命令-可以打印出线程的堆栈信息，该信息比左侧的Debug-Navigator-看到的还要详细一些。" class="headerlink" title="bt 命令 可以打印出线程的堆栈信息，该信息比左侧的Debug Navigator 看到的还要详细一些。"></a>bt 命令 可以打印出线程的堆栈信息，该信息比左侧的Debug Navigator 看到的还要详细一些。</h3><h3 id="bt-命令是打印当前线程的堆栈信息"><a href="#bt-命令是打印当前线程的堆栈信息" class="headerlink" title="bt 命令是打印当前线程的堆栈信息"></a>bt 命令是打印当前线程的堆栈信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">(lldb) bt </div><div class="line">* thread #1: tid = 0x27363, 0x000000010d204125 TestDemo`-[FifthViewController tableView:cellForRowAtIndexPath:](self=0x00007f91f4e153c0, _cmd=&quot;tableView:cellForRowAtIndexPath:&quot;, tableView=0x00007f91f5889600, indexPath=0xc000000000400016) + 2757 at FifthViewController.m:91, queue = &apos;com.apple.main-thread&apos;, stop reason = breakpoint 6.1</div><div class="line">* frame #0: 0x000000010d204125 TestDemo`-[FifthViewController tableView:cellForRowAtIndexPath:](self=0x00007f91f4e153c0, _cmd=&quot;tableView:cellForRowAtIndexPath:&quot;, tableView=0x00007f91f5889600, indexPath=0xc000000000400016) + 2757 at FifthViewController.m:91</div><div class="line">frame #1: 0x0000000111d0a7b5 UIKit`-[UITableView _createPreparedCellForGlobalRow:withIndexPath:willDisplay:] + 757</div><div class="line">frame #2: 0x0000000111d0aa13 UIKit`-[UITableView _createPreparedCellForGlobalRow:willDisplay:] + 74</div><div class="line">frame #3: 0x0000000111cde47d UIKit`-[UITableView _updateVisibleCellsNow:isRecursive:] + 3295</div><div class="line">frame #4: 0x0000000111d13d95 UIKit`-[UITableView _performWithCachedTraitCollection:] + 110</div><div class="line">frame #5: 0x0000000111cfa5ef UIKit`-[UITableView layoutSubviews] + 222</div><div class="line">frame #6: 0x0000000111c61f50 UIKit`-[UIView(CALayerDelegate) layoutSublayersOfLayer:] + 1237</div><div class="line">frame #7: 0x00000001117a5cc4 QuartzCore`-[CALayer layoutSublayers] + 146</div><div class="line">frame #8: 0x0000000111799788 QuartzCore`CA::Layer::layout_if_needed(CA::Transaction*) + 366</div><div class="line">frame #9: 0x0000000111799606 QuartzCore`CA::Layer::layout_and_display_if_needed(CA::Transaction*) + 24</div><div class="line">frame #10: 0x0000000111727680 QuartzCore`CA::Context::commit_transaction(CA::Transaction*) + 280</div><div class="line">frame #11: 0x0000000111754767 QuartzCore`CA::Transaction::commit() + 475</div><div class="line">frame #12: 0x00000001117550d7 QuartzCore`CA::Transaction::observer_callback(__CFRunLoopObserver*, unsigned long, void*) + 113</div><div class="line">frame #13: 0x0000000110743e17 CoreFoundation`__CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__ + 23</div><div class="line">frame #14: 0x0000000110743d87 CoreFoundation`__CFRunLoopDoObservers + 391</div><div class="line">frame #15: 0x0000000110728b9e CoreFoundation`__CFRunLoopRun + 1198</div><div class="line">frame #16: 0x0000000110728494 CoreFoundation`CFRunLoopRunSpecific + 420</div><div class="line">frame #17: 0x0000000114390a6f GraphicsServices`GSEventRunModal + 161</div><div class="line">frame #18: 0x0000000111b9d964 UIKit`UIApplicationMain + 159</div><div class="line">frame #19: 0x000000010d21294f TestDemo`main(argc=1, argv=0x00007fff529fe620) + 111 at main.m:14</div><div class="line">frame #20: 0x000000011458a68d libdyld.dylib`start + 1</div><div class="line">(lldb)</div></pre></td></tr></table></figure>
+<h3 id="bt-all-命令是打印所有线程的堆栈信息。打印出来的信息太多，就不展示了！"><a href="#bt-all-命令是打印所有线程的堆栈信息。打印出来的信息太多，就不展示了！" class="headerlink" title="bt all 命令是打印所有线程的堆栈信息。打印出来的信息太多，就不展示了！"></a>bt all 命令是打印所有线程的堆栈信息。打印出来的信息太多，就不展示了！</h3><ul>
+<li><h2 id="6-image-命令"><a href="#6-image-命令" class="headerlink" title="6.image 命令"></a>6.image 命令</h2></li>
+</ul>
+<h3 id="image-list"><a href="#image-list" class="headerlink" title="image list"></a>image list</h3><h3 id="命令可以列出当前App中的所有module（这个module-在后面符号断点时有用到），可以查看某一个地址对应的代码位置。"><a href="#命令可以列出当前App中的所有module（这个module-在后面符号断点时有用到），可以查看某一个地址对应的代码位置。" class="headerlink" title="命令可以列出当前App中的所有module（这个module 在后面符号断点时有用到），可以查看某一个地址对应的代码位置。"></a>命令可以列出当前App中的所有module（这个module 在后面符号断点时有用到），可以查看某一个地址对应的代码位置。</h3><h3 id="除了-image-list-还有-image-add、image-lookup等命令，可以自行查看。"><a href="#除了-image-list-还有-image-add、image-lookup等命令，可以自行查看。" class="headerlink" title="除了 image list 还有 image add、image lookup等命令，可以自行查看。"></a>除了 image list 还有 image add、image lookup等命令，可以自行查看。</h3><h3 id="当遇到crash-时，查看线程栈，只能看到栈帧的地址，使用-image-lookup-–address-地址-可以方便的定位到这个地址对应的代码行。"><a href="#当遇到crash-时，查看线程栈，只能看到栈帧的地址，使用-image-lookup-–address-地址-可以方便的定位到这个地址对应的代码行。" class="headerlink" title="当遇到crash 时，查看线程栈，只能看到栈帧的地址，使用 image lookup –address 地址 可以方便的定位到这个地址对应的代码行。"></a>当遇到crash 时，查看线程栈，只能看到栈帧的地址，使用 image lookup –address 地址 可以方便的定位到这个地址对应的代码行。</h3>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/06/14/Swift反射API及其用法/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          Swift反射API及其用法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/14/使用Swift Package Manager管理项目(the package has an unsupported layout)/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">使用Swift Package Manager管理项目(the package has an unsupported layout)</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="Xcode控制台调试常用命令" data-title="Xcode控制台调试常用命令" data-url="http://yoursite.com/2017/06/14/Xcode控制台调试常用命令/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="Xcode控制台调试常用命令">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Xcode控制台调试常用命令" data-title="Xcode控制台调试常用命令" data-url="http://yoursite.com/2017/06/14/Xcode控制台调试常用命令/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"winnerweb"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2017 飘金
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

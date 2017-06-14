@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS,Swift-iOS 设置视图半透明而子控件不透明 | 飘金的博客</title>
+
+  <!-- keywords -->
+  
+    <meta name="keywords" content="iOS,Swift">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="iOS 设置视图半透明而子控件不透明">
+<meta name="keywords" content="iOS,Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 设置视图半透明而子控件不透明">
+<meta property="og:url" content="http://yoursite.com/2017/06/14/iOS 设置视图半透明而子控件不透明/index.html">
+<meta property="og:site_name" content="飘金的博客">
+<meta property="og:description" content="iOS 设置视图半透明而子控件不透明">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/435323-416cfd6efb5ac77c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-06-14T14:09:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 设置视图半透明而子控件不透明">
+<meta name="twitter:description" content="iOS 设置视图半透明而子控件不透明">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/435323-416cfd6efb5ac77c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  
+    <link rel="alternative" href="/atom.xml" title="飘金的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+  
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-85415703-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+      <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("K1qAIJa0JgKeGUnrlq0G526F-gzGzoHsz", "n4XwRe0iBOxWpBaYJ7HNWPA3");</script>
+<script src="/js/Counter.js"></script>
+  
+</head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">飘金</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">会炒菜的猿</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">飘金</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">飘金</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">会炒菜的猿</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-iOS 设置视图半透明而子控件不透明" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/06/14/iOS 设置视图半透明而子控件不透明/" class="article-date">
+  	<time datetime="2017-06-14T06:23:47.000Z" itemprop="datePublished">2017-06-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iOS 设置视图半透明而子控件不透明
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/iOS/">iOS</a>
+	</div>
+
+
+        
+          
+<div class="counter-tag counter">
+    <span id="/2017/06/14/iOS 设置视图半透明而子控件不透明/" class="leancloud_visitors post-title-link"
+          style="font-size: 12px" data-flag-title="iOS 设置视图半透明而子控件不透明">
+         &nbsp;
+        view
+    </span>
+</div>
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>iOS 设置视图半透明而子控件不透明<br><a id="more"></a></p>
+<h1 id="让一个控件半透明，通常我们第一个想到的方法就是调整控件的alpha值。当然如果你的视图上如果有其他子控件就会发现这样的方法是可能达不到你的预期，否则你应该看不到这篇文章了。"><a href="#让一个控件半透明，通常我们第一个想到的方法就是调整控件的alpha值。当然如果你的视图上如果有其他子控件就会发现这样的方法是可能达不到你的预期，否则你应该看不到这篇文章了。" class="headerlink" title="让一个控件半透明，通常我们第一个想到的方法就是调整控件的alpha值。当然如果你的视图上如果有其他子控件就会发现这样的方法是可能达不到你的预期，否则你应该看不到这篇文章了。"></a>让一个控件半透明，通常我们第一个想到的方法就是调整控件的alpha值。当然如果你的视图上如果有其他子控件就会发现这样的方法是可能达不到你的预期，否则你应该看不到这篇文章了。</h1><h3 id="对视图直接设置alpha属性的值会导致其子控件也变得半透明，而通常我们的需求是：背景半透明而其子控件不透明。"><a href="#对视图直接设置alpha属性的值会导致其子控件也变得半透明，而通常我们的需求是：背景半透明而其子控件不透明。" class="headerlink" title="对视图直接设置alpha属性的值会导致其子控件也变得半透明，而通常我们的需求是：背景半透明而其子控件不透明。"></a>对视图直接设置alpha属性的值会导致其子控件也变得半透明，而通常我们的需求是：背景半透明而其子控件不透明。</h3><h3 id="先说解决办法："><a href="#先说解决办法：" class="headerlink" title="先说解决办法："></a>先说解决办法：</h3><h3 id="1-用一张半透明的图片做背景。"><a href="#1-用一张半透明的图片做背景。" class="headerlink" title="1.用一张半透明的图片做背景。"></a>1.用一张半透明的图片做背景。</h3><p>这个方法当然可以达到要求，但是从编程初期前辈就教导我说在工程中尽量少加入资源，能不用图片的尽量不用图片（如纯色背景之类的）</p>
+<h3 id="2-使用colorWithWhite：alpha：方法"><a href="#2-使用colorWithWhite：alpha：方法" class="headerlink" title="2.使用colorWithWhite：alpha：方法"></a>2.使用colorWithWhite：alpha：方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bgView.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.5];</div></pre></td></tr></table></figure>
+<p>这也是我之前使用比较多的方法，white后面的参数表示灰度，从0-1之间表示从黑到白的变化，alpha就是你想调整的透明度。由于我做的半透明背景基色基本非黑即白，这个方法基本也够用了。缺点就是不能设置其他颜色（彩色）的半透明</p>
+<h3 id="3-使用colorWithRed-green-blue-alpha-方法"><a href="#3-使用colorWithRed-green-blue-alpha-方法" class="headerlink" title="3.使用colorWithRed:green:blue:alpha:方法"></a>3.使用colorWithRed:green:blue:alpha:方法</h3><p>这其实是我重点想说的方法。为什么呢？</p>
+<p>相信大家平时用代码给视图着色的时候，可能都用过类似<br>colorWithHexString:或colorWithHexColor:这样的方法，即：对UIColor类进行扩展，将16进制（如：#ffffff）的颜色字符串作为参入传入，并返回该色值对应的UIColor类型的颜色</p>
+<p>这一层的包装使我们（起码是我）对UIColor自带的方法colorWithRed:green:blue:alpha:既熟悉又陌生，熟悉是我们无数次调用这个扩展的方法来设置颜色,其本质都是在调用它，陌生可能是因为对它太过熟悉导致我几乎忘记它还有一个alpha参数可以让我们设置半透明的背景色。而且通过这种方法就可以达到让背景成为任何颜色的半透明而且其子控件不透明。</p>
+<p>当我发现可以用这个方法设置背景半透明而子控件不透明的时候，有点哭笑不得。那感觉就像是你突然发现你以为十分熟悉的室友竟然还有一项瞬间移动的技能。</p>
+<p>所以我决定以后给我的UIColor扩展类增加一个方法：<br>colorWithHexColor:alpha:（怎么添加边笑边流泪的表情…）</p>
+<h3 id="4-在xib或者storyBoard里面对背景进行设置"><a href="#4-在xib或者storyBoard里面对背景进行设置" class="headerlink" title="4. 在xib或者storyBoard里面对背景进行设置"></a>4. 在xib或者storyBoard里面对背景进行设置</h3><h3 id="如图："><a href="#如图：" class="headerlink" title="如图："></a>如图：</h3><p><img src="http://upload-images.jianshu.io/upload_images/435323-416cfd6efb5ac77c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Aaron Swartz"></p>
+<h4 id="半透明背景xib设置-png"><a href="#半透明背景xib设置-png" class="headerlink" title="半透明背景xib设置.png"></a>半透明背景xib设置.png</h4><h4 id="半透明背景xib设置-png-1"><a href="#半透明背景xib设置-png-1" class="headerlink" title="半透明背景xib设置.png"></a>半透明背景xib设置.png</h4><p>通过对背景颜色设置图中的Opacity滑块调整透明度，同样可以达到设置背景半透明而子控件不透明的目的。</p>
+<h3 id="5-使用colorWithAlphaComponent-方法"><a href="#5-使用colorWithAlphaComponent-方法" class="headerlink" title="5.使用colorWithAlphaComponent:方法"></a>5.使用colorWithAlphaComponent:方法</h3><p>在博友的提醒下,发现还有一个方法,现在补充上来.<br>和前面说的几个设置背景色的方法不太一样的是,这是一个实例方法,一个UIColor的实例调用此方法后会返回一个带透明度的UIColor.使用方法如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">UIColor *color = [UIColor blackColor];</div><div class="line">bgView.backgroundColor = [color colorWithAlphaComponent:0.5];</div></pre></td></tr></table></figure></p>
+<h3 id="经测试-将返回值设置给底层的背景颜色-也可以保证子控件不透明"><a href="#经测试-将返回值设置给底层的背景颜色-也可以保证子控件不透明" class="headerlink" title="经测试,将返回值设置给底层的背景颜色,也可以保证子控件不透明."></a>经测试,将返回值设置给底层的背景颜色,也可以保证子控件不透明.</h3>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/06/14/使用Swift Package Manager管理项目(the package has an unsupported layout)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          使用Swift Package Manager管理项目(the package has an unsupported layout)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/14/基于Perfect的Swift3.1服务器开发案例/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">基于Perfect的Swift3.1服务器开发案例</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="iOS 设置视图半透明而子控件不透明" data-title="iOS 设置视图半透明而子控件不透明" data-url="http://yoursite.com/2017/06/14/iOS 设置视图半透明而子控件不透明/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="iOS 设置视图半透明而子控件不透明">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="iOS 设置视图半透明而子控件不透明" data-title="iOS 设置视图半透明而子控件不透明" data-url="http://yoursite.com/2017/06/14/iOS 设置视图半透明而子控件不透明/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"winnerweb"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2017 飘金
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
