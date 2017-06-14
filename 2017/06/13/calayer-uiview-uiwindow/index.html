@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS,Swift-UIView,UIWindow,CALayer之间的区别联系 | 飘金的博客</title>
+
+  <!-- keywords -->
+  
+    <meta name="keywords" content="iOS,Swift">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="UIView,UIWindow,CALayer之间的区别联系">
+<meta name="keywords" content="iOS,Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UIView,UIWindow,CALayer之间的区别联系">
+<meta property="og:url" content="http://yoursite.com/2017/06/13/calayer-uiview-uiwindow/index.html">
+<meta property="og:site_name" content="飘金的博客">
+<meta property="og:description" content="UIView,UIWindow,CALayer之间的区别联系">
+<meta property="og:updated_time" content="2017-06-14T13:59:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UIView,UIWindow,CALayer之间的区别联系">
+<meta name="twitter:description" content="UIView,UIWindow,CALayer之间的区别联系">
+  
+    <link rel="alternative" href="/atom.xml" title="飘金的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+  
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-85415703-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+      <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("K1qAIJa0JgKeGUnrlq0G526F-gzGzoHsz", "n4XwRe0iBOxWpBaYJ7HNWPA3");</script>
+<script src="/js/Counter.js"></script>
+  
+</head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">飘金</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">会炒菜的猿</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">飘金</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">飘金</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">会炒菜的猿</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-calayer-uiview-uiwindow" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/06/13/calayer-uiview-uiwindow/" class="article-date">
+  	<time datetime="2017-06-13T06:23:47.000Z" itemprop="datePublished">2017-06-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      UIView,UIWindow,CALayer之间的区别联系
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/iOS/">iOS</a>
+	</div>
+
+
+        
+          
+<div class="counter-tag counter">
+    <span id="/2017/06/13/calayer-uiview-uiwindow/" class="leancloud_visitors post-title-link"
+          style="font-size: 12px" data-flag-title="UIView,UIWindow,CALayer之间的区别联系">
+         &nbsp;
+        view
+    </span>
+</div>
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>UIView,UIWindow,CALayer之间的区别联系<br><a id="more"></a></p>
+<h2 id="UIView是视图的基类，UIViewController是视图控制器的基类，UIResponder是表示一个可以在屏幕上响应触摸事件的对象；"><a href="#UIView是视图的基类，UIViewController是视图控制器的基类，UIResponder是表示一个可以在屏幕上响应触摸事件的对象；" class="headerlink" title="UIView是视图的基类，UIViewController是视图控制器的基类，UIResponder是表示一个可以在屏幕上响应触摸事件的对象；"></a>UIView是视图的基类，UIViewController是视图控制器的基类，UIResponder是表示一个可以在屏幕上响应触摸事件的对象；</h2><h2 id="UIwindow是UIView的子类，UIWindow的主要作用：一是提供一个区域来显示UIView，二是将事件（event）的分发给UIView，一个应用基本上只有一个UIWindow"><a href="#UIwindow是UIView的子类，UIWindow的主要作用：一是提供一个区域来显示UIView，二是将事件（event）的分发给UIView，一个应用基本上只有一个UIWindow" class="headerlink" title="UIwindow是UIView的子类，UIWindow的主要作用：一是提供一个区域来显示UIView，二是将事件（event）的分发给UIView，一个应用基本上只有一个UIWindow."></a>UIwindow是UIView的子类，UIWindow的主要作用：一是提供一个区域来显示UIView，二是将事件（event）的分发给UIView，一个应用基本上只有一个UIWindow.</h2><h2 id="万物归根，UIView和CALayer都是的老祖都是NSObjet。可见UIResponder是用来响应事件的，也就是UIView可以响应用户事件。"><a href="#万物归根，UIView和CALayer都是的老祖都是NSObjet。可见UIResponder是用来响应事件的，也就是UIView可以响应用户事件。" class="headerlink" title="万物归根，UIView和CALayer都是的老祖都是NSObjet。可见UIResponder是用来响应事件的，也就是UIView可以响应用户事件。"></a>万物归根，UIView和CALayer都是的老祖都是NSObjet。可见UIResponder是用来响应事件的，也就是UIView可以响应用户事件。</h2><blockquote>
+<h2 id="一-继承结构"><a href="#一-继承结构" class="headerlink" title="一.继承结构"></a>一.继承结构</h2></blockquote>
+<ul>
+<li><h3 id="1-UIView的继承结构为-UIResponder-NSObject"><a href="#1-UIView的继承结构为-UIResponder-NSObject" class="headerlink" title="1: UIView的继承结构为: UIResponder : NSObject"></a>1: UIView的继承结构为: UIResponder : NSObject</h3></li>
+</ul>
+<h3 id="UIResponder是用来响应事件的，也就是UIView可以响应用户事件"><a href="#UIResponder是用来响应事件的，也就是UIView可以响应用户事件" class="headerlink" title="UIResponder是用来响应事件的，也就是UIView可以响应用户事件"></a>UIResponder是用来响应事件的，也就是UIView可以响应用户事件</h3><ul>
+<li><h3 id="2：CALayer的继承结构为：NSObject。"><a href="#2：CALayer的继承结构为：NSObject。" class="headerlink" title="2：CALayer的继承结构为：NSObject。"></a>2：CALayer的继承结构为：NSObject。</h3></li>
+</ul>
+<h3 id="直接从NSObject继承，没有UIResponder类，所以CALayer不能响应任何用户事件。"><a href="#直接从NSObject继承，没有UIResponder类，所以CALayer不能响应任何用户事件。" class="headerlink" title="直接从NSObject继承，没有UIResponder类，所以CALayer不能响应任何用户事件。"></a>直接从NSObject继承，没有UIResponder类，所以CALayer不能响应任何用户事件。</h3><blockquote>
+<h2 id="二-所属框架"><a href="#二-所属框架" class="headerlink" title="二.所属框架"></a>二.所属框架</h2></blockquote>
+<ul>
+<li><h3 id="1：UIView是在-System-Library-Frameworks-UIKit-framework中定义的。"><a href="#1：UIView是在-System-Library-Frameworks-UIKit-framework中定义的。" class="headerlink" title="1：UIView是在 /System/Library/Frameworks/UIKit.framework中定义的。"></a>1：UIView是在 /System/Library/Frameworks/UIKit.framework中定义的。</h3></li>
+<li><h3 id="2：CALayer是在-System-Library-Frameworks-QuartzCore-framework定义的。而且CALayer作为一个低级的，可以承载绘制内容的底层对象出现在该框架中。"><a href="#2：CALayer是在-System-Library-Frameworks-QuartzCore-framework定义的。而且CALayer作为一个低级的，可以承载绘制内容的底层对象出现在该框架中。" class="headerlink" title="2：CALayer是在/System/Library/Frameworks/QuartzCore.framework定义的。而且CALayer作为一个低级的，可以承载绘制内容的底层对象出现在该框架中。"></a>2：CALayer是在/System/Library/Frameworks/QuartzCore.framework定义的。而且CALayer作为一个低级的，可以承载绘制内容的底层对象出现在该框架中。</h3></li>
+</ul>
+<h2 id="UIView侧重于对显示内容的管理，CALayer侧重于对内容的绘制。"><a href="#UIView侧重于对显示内容的管理，CALayer侧重于对内容的绘制。" class="headerlink" title="UIView侧重于对显示内容的管理，CALayer侧重于对内容的绘制。"></a>UIView侧重于对显示内容的管理，CALayer侧重于对内容的绘制。</h2><blockquote>
+<h2 id="三-相似"><a href="#三-相似" class="headerlink" title="三.相似"></a>三.相似</h2></blockquote>
+<ul>
+<li><h3 id="1：相似的树形结构"><a href="#1：相似的树形结构" class="headerlink" title="1：相似的树形结构"></a>1：相似的树形结构</h3></li>
+<li><h3 id="2：显示内容绘制方式"><a href="#2：显示内容绘制方式" class="headerlink" title="2：显示内容绘制方式"></a>2：显示内容绘制方式</h3></li>
+<li><h3 id="3-布局约束"><a href="#3-布局约束" class="headerlink" title="3: 布局约束"></a>3: 布局约束</h3></li>
+</ul>
+<blockquote>
+<h2 id="四-其它区别"><a href="#四-其它区别" class="headerlink" title="四.其它区别"></a>四.其它区别</h2></blockquote>
+<ul>
+<li><h3 id="1、UIView是IOS系统中界面元素的基础，所有的界面元素都继承自它。它本身完全是由CoreAnimation来实现的（Mac下似乎不是这样）。它真正的绘图部分是由一个叫CALayer（Core-Animation-Layer）的类来管理。UIView本身，更像是一个CALayer的管理器，访问它的跟绘图和跟坐标有关的属性，例如frame，bounds等等，实际上内部都是在访问它所包含的CALayer的相关属性。"><a href="#1、UIView是IOS系统中界面元素的基础，所有的界面元素都继承自它。它本身完全是由CoreAnimation来实现的（Mac下似乎不是这样）。它真正的绘图部分是由一个叫CALayer（Core-Animation-Layer）的类来管理。UIView本身，更像是一个CALayer的管理器，访问它的跟绘图和跟坐标有关的属性，例如frame，bounds等等，实际上内部都是在访问它所包含的CALayer的相关属性。" class="headerlink" title="1、UIView是IOS系统中界面元素的基础，所有的界面元素都继承自它。它本身完全是由CoreAnimation来实现的（Mac下似乎不是这样）。它真正的绘图部分是由一个叫CALayer（Core Animation Layer）的类来管理。UIView本身，更像是一个CALayer的管理器，访问它的跟绘图和跟坐标有关的属性，例如frame，bounds等等，实际上内部都是在访问它所包含的CALayer的相关属性。"></a>1、UIView是IOS系统中界面元素的基础，所有的界面元素都继承自它。它本身完全是由CoreAnimation来实现的（Mac下似乎不是这样）。它真正的绘图部分是由一个叫CALayer（Core Animation Layer）的类来管理。UIView本身，更像是一个CALayer的管理器，访问它的跟绘图和跟坐标有关的属性，例如frame，bounds等等，实际上内部都是在访问它所包含的CALayer的相关属性。</h3></li>
+<li><h3 id="2、UIView有个layer属性，可以返回它的主CALayer实例，UIView有一个layerClass类方法，返回主layer所使用的类，UIView的子类，可以通过重载这个方法，来让UIView使用不同的CALayer来显示。"><a href="#2、UIView有个layer属性，可以返回它的主CALayer实例，UIView有一个layerClass类方法，返回主layer所使用的类，UIView的子类，可以通过重载这个方法，来让UIView使用不同的CALayer来显示。" class="headerlink" title="2、UIView有个layer属性，可以返回它的主CALayer实例，UIView有一个layerClass类方法，返回主layer所使用的类，UIView的子类，可以通过重载这个方法，来让UIView使用不同的CALayer来显示。"></a>2、UIView有个layer属性，可以返回它的主CALayer实例，UIView有一个layerClass类方法，返回主layer所使用的类，UIView的子类，可以通过重载这个方法，来让UIView使用不同的CALayer来显示。</h3></li>
+<li><h3 id="3、UIView的CALayer类似UIView的子View树形结构，也可以向它的layer上添加layer，来完成某些特殊的表示。"><a href="#3、UIView的CALayer类似UIView的子View树形结构，也可以向它的layer上添加layer，来完成某些特殊的表示。" class="headerlink" title="3、UIView的CALayer类似UIView的子View树形结构，也可以向它的layer上添加layer，来完成某些特殊的表示。"></a>3、UIView的CALayer类似UIView的子View树形结构，也可以向它的layer上添加layer，来完成某些特殊的表示。</h3></li>
+</ul>
+<h3 id="例如下面的代码："><a href="#例如下面的代码：" class="headerlink" title="例如下面的代码："></a>例如下面的代码：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">CALayer *grayLayer=[[CALayer alloc] init];  </div><div class="line">grayLayer.backgroundColor=[[[UIColor redColor]</div><div class="line">colorWithAlphaComponent:1.0]</div><div class="line">CGColor];    </div><div class="line">[self.view.layer addSublayer:grayLayer];</div></pre></td></tr></table></figure>
+<h3 id="会在目标View上敷上一层红色的透明薄膜。"><a href="#会在目标View上敷上一层红色的透明薄膜。" class="headerlink" title="会在目标View上敷上一层红色的透明薄膜。"></a>会在目标View上敷上一层红色的透明薄膜。</h3><ul>
+<li><h3 id="4、UIView的layer树形在系统内部，被系统维护着三份copy（这里的理解可能不准确）"><a href="#4、UIView的layer树形在系统内部，被系统维护着三份copy（这里的理解可能不准确）" class="headerlink" title="4、UIView的layer树形在系统内部，被系统维护着三份copy（这里的理解可能不准确）"></a>4、UIView的layer树形在系统内部，被系统维护着三份copy（这里的理解可能不准确）</h3></li>
+</ul>
+<h3 id="第一份，逻辑树，就是代码里可以操纵的，例如更改layer的属性等等就在这一份。"><a href="#第一份，逻辑树，就是代码里可以操纵的，例如更改layer的属性等等就在这一份。" class="headerlink" title="第一份，逻辑树，就是代码里可以操纵的，例如更改layer的属性等等就在这一份。"></a>第一份，逻辑树，就是代码里可以操纵的，例如更改layer的属性等等就在这一份。</h3><ul>
+<li><h3 id="第二份，动画树，这是一个中间层，系统正在这一层上更改属性，进行各种渲染操作。"><a href="#第二份，动画树，这是一个中间层，系统正在这一层上更改属性，进行各种渲染操作。" class="headerlink" title="第二份，动画树，这是一个中间层，系统正在这一层上更改属性，进行各种渲染操作。"></a>第二份，动画树，这是一个中间层，系统正在这一层上更改属性，进行各种渲染操作。</h3></li>
+<li><h3 id="第三份，显示树，这棵树的内容是当前正被显示在屏幕上的内容。-这三棵树的逻辑结构都是一样的，区别只有各自的属性。"><a href="#第三份，显示树，这棵树的内容是当前正被显示在屏幕上的内容。-这三棵树的逻辑结构都是一样的，区别只有各自的属性。" class="headerlink" title="第三份，显示树，这棵树的内容是当前正被显示在屏幕上的内容。    这三棵树的逻辑结构都是一样的，区别只有各自的属性。"></a>第三份，显示树，这棵树的内容是当前正被显示在屏幕上的内容。    这三棵树的逻辑结构都是一样的，区别只有各自的属性。</h3></li>
+<li><h3 id="5、动画的动作UIView的主layer以外（觉得是这样），对它的subLayer，也就是子layer的属性进行更改，系统将自动进行动画生成，动画持续时间有个缺省时间，感觉大概是0-5秒。在动画时间里，系统自动判断哪些属性更改了，自动对更改的属性进行动画插值，生成中间帧，然后连续显示产生动画效果。"><a href="#5、动画的动作UIView的主layer以外（觉得是这样），对它的subLayer，也就是子layer的属性进行更改，系统将自动进行动画生成，动画持续时间有个缺省时间，感觉大概是0-5秒。在动画时间里，系统自动判断哪些属性更改了，自动对更改的属性进行动画插值，生成中间帧，然后连续显示产生动画效果。" class="headerlink" title="5、动画的动作UIView的主layer以外（觉得是这样），对它的subLayer，也就是子layer的属性进行更改，系统将自动进行动画生成，动画持续时间有个缺省时间，感觉大概是0.5秒。在动画时间里，系统自动判断哪些属性更改了，自动对更改的属性进行动画插值，生成中间帧，然后连续显示产生动画效果。"></a>5、动画的动作UIView的主layer以外（觉得是这样），对它的subLayer，也就是子layer的属性进行更改，系统将自动进行动画生成，动画持续时间有个缺省时间，感觉大概是0.5秒。在动画时间里，系统自动判断哪些属性更改了，自动对更改的属性进行动画插值，生成中间帧，然后连续显示产生动画效果。</h3></li>
+<li><h3 id="6、坐标系系统（对position和anchorPoint的关系不是很清楚）"><a href="#6、坐标系系统（对position和anchorPoint的关系不是很清楚）" class="headerlink" title="6、坐标系系统（对position和anchorPoint的关系不是很清楚）"></a>6、坐标系系统（对position和anchorPoint的关系不是很清楚）</h3></li>
+</ul>
+<h3 id="CALayer的坐标系系统和UIView有点不一样，它多了一个叫anchorPoint的属性，它使用CGPoint结构，但值域是0至1，也就是按比例来设置的。这个点是各种图形变换的坐标原点，同时会更改layer的position位置，它的缺省值是｛0-5，0-5｝，也就是在layer-的中央。-某-layer-anchorPoint-CGPointMake-0-f-0-f-若这么设置，layer的左上角就会被挪到原来的中间的位置。-但是加上这句代码就好了：-某-layer-position-CGPointMake-0-f-0-f"><a href="#CALayer的坐标系系统和UIView有点不一样，它多了一个叫anchorPoint的属性，它使用CGPoint结构，但值域是0至1，也就是按比例来设置的。这个点是各种图形变换的坐标原点，同时会更改layer的position位置，它的缺省值是｛0-5，0-5｝，也就是在layer-的中央。-某-layer-anchorPoint-CGPointMake-0-f-0-f-若这么设置，layer的左上角就会被挪到原来的中间的位置。-但是加上这句代码就好了：-某-layer-position-CGPointMake-0-f-0-f" class="headerlink" title="CALayer的坐标系系统和UIView有点不一样，它多了一个叫anchorPoint的属性，它使用CGPoint结构，但值域是0至1，也就是按比例来设置的。这个点是各种图形变换的坐标原点，同时会更改layer的position位置，它的缺省值是｛0.5，0.5｝，也就是在layer 的中央。    某 layer.anchorPoint=CGPointMake(0.f,0.f);    若这么设置，layer的左上角就会被挪到原来的中间的位置。    但是加上这句代码就好了：    某 layer.position=CGPointMake(0.f,0.f);"></a>CALayer的坐标系系统和UIView有点不一样，它多了一个叫anchorPoint的属性，它使用CGPoint结构，但值域是0至1，也就是按比例来设置的。这个点是各种图形变换的坐标原点，同时会更改layer的position位置，它的缺省值是｛0.5，0.5｝，也就是在layer 的中央。    某 layer.anchorPoint=CGPointMake(0.f,0.f);    若这么设置，layer的左上角就会被挪到原来的中间的位置。    但是加上这句代码就好了：    某 layer.position=CGPointMake(0.f,0.f);</h3><ul>
+<li><h3 id="7、需要注意的：-layer可以设置圆角显示，例如UIButton的效果，也就是设置阴影显示，但是如果layer树中的某个layer设置了圆角，树中所有layer的阴影效果都将显示不了。如果既想有圆角又要阴影，好像只能做两个重叠的UIView，一个显示圆角，一个显示阴影。"><a href="#7、需要注意的：-layer可以设置圆角显示，例如UIButton的效果，也就是设置阴影显示，但是如果layer树中的某个layer设置了圆角，树中所有layer的阴影效果都将显示不了。如果既想有圆角又要阴影，好像只能做两个重叠的UIView，一个显示圆角，一个显示阴影。" class="headerlink" title="7、需要注意的：    layer可以设置圆角显示，例如UIButton的效果，也就是设置阴影显示，但是如果layer树中的某个layer设置了圆角，树中所有layer的阴影效果都将显示不了。如果既想有圆角又要阴影，好像只能做两个重叠的UIView，一个显示圆角，一个显示阴影。"></a>7、需要注意的：    layer可以设置圆角显示，例如UIButton的效果，也就是设置阴影显示，但是如果layer树中的某个layer设置了圆角，树中所有layer的阴影效果都将显示不了。如果既想有圆角又要阴影，好像只能做两个重叠的UIView，一个显示圆角，一个显示阴影。</h3></li>
+</ul>
+<blockquote>
+<h2 id="为什么？"><a href="#为什么？" class="headerlink" title="为什么？"></a>为什么？</h2></blockquote>
+<ul>
+<li><h3 id="1-UIView-是什么，做什么"><a href="#1-UIView-是什么，做什么" class="headerlink" title="1.UIView 是什么，做什么"></a>1.UIView 是什么，做什么</h3></li>
+</ul>
+<h3 id="UIView是用来显示内容的，可以处理用户事件"><a href="#UIView是用来显示内容的，可以处理用户事件" class="headerlink" title="UIView是用来显示内容的，可以处理用户事件"></a>UIView是用来显示内容的，可以处理用户事件</h3><ul>
+<li><h3 id="2-（CALayer是什么，做什么"><a href="#2-（CALayer是什么，做什么" class="headerlink" title="2.（CALayer是什么，做什么"></a>2.（CALayer是什么，做什么</h3></li>
+</ul>
+<h3 id="CALayer是用来绘制内容的，对内容进行动画处理依赖与UIView来进行显示，不能处理用户事件。"><a href="#CALayer是用来绘制内容的，对内容进行动画处理依赖与UIView来进行显示，不能处理用户事件。" class="headerlink" title="CALayer是用来绘制内容的，对内容进行动画处理依赖与UIView来进行显示，不能处理用户事件。"></a>CALayer是用来绘制内容的，对内容进行动画处理依赖与UIView来进行显示，不能处理用户事件。</h3><ul>
+<li><h3 id="3-为何有两套结构"><a href="#3-为何有两套结构" class="headerlink" title="3.为何有两套结构?"></a>3.为何有两套结构?</h3></li>
+</ul>
+<h3 id="并不是两套体系，UIView和CALayer是相互依赖的关系。UIView依赖与calayer提供的内容，CALayer依赖uivew提供的容器来显示绘制的内容。归根到底CALayer是这一切的基础，如果没有CALayer，UIView自身也不会存在，UIView是一个特殊的CALayer实现，添加了响应事件的能力。"><a href="#并不是两套体系，UIView和CALayer是相互依赖的关系。UIView依赖与calayer提供的内容，CALayer依赖uivew提供的容器来显示绘制的内容。归根到底CALayer是这一切的基础，如果没有CALayer，UIView自身也不会存在，UIView是一个特殊的CALayer实现，添加了响应事件的能力。" class="headerlink" title="并不是两套体系，UIView和CALayer是相互依赖的关系。UIView依赖与calayer提供的内容，CALayer依赖uivew提供的容器来显示绘制的内容。归根到底CALayer是这一切的基础，如果没有CALayer，UIView自身也不会存在，UIView是一个特殊的CALayer实现，添加了响应事件的能力。"></a>并不是两套体系，UIView和CALayer是相互依赖的关系。UIView依赖与calayer提供的内容，CALayer依赖uivew提供的容器来显示绘制的内容。归根到底CALayer是这一切的基础，如果没有CALayer，UIView自身也不会存在，UIView是一个特殊的CALayer实现，添加了响应事件的能力。</h3><ul>
+<li><h3 id="4-两者之间的关系"><a href="#4-两者之间的关系" class="headerlink" title="4.两者之间的关系"></a>4.两者之间的关系</h3></li>
+</ul>
+<h3 id="UIView来自CALayer，高于CALayer，是CALayer高层实现与封装。UIView的所有特性来源于CALayer支持。"><a href="#UIView来自CALayer，高于CALayer，是CALayer高层实现与封装。UIView的所有特性来源于CALayer支持。" class="headerlink" title="UIView来自CALayer，高于CALayer，是CALayer高层实现与封装。UIView的所有特性来源于CALayer支持。"></a>UIView来自CALayer，高于CALayer，是CALayer高层实现与封装。UIView的所有特性来源于CALayer支持。</h3>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/06/14/piaojin/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="calayer-uiview-uiwindow" data-title="UIView,UIWindow,CALayer之间的区别联系" data-url="http://yoursite.com/2017/06/13/calayer-uiview-uiwindow/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="UIView,UIWindow,CALayer之间的区别联系">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="calayer-uiview-uiwindow" data-title="UIView,UIWindow,CALayer之间的区别联系" data-url="http://yoursite.com/2017/06/13/calayer-uiview-uiwindow/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"winnerweb"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2017 飘金
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
