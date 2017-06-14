@@ -3,22 +3,25 @@
 <head>
   <meta charset="utf-8">
   
-  <title>飘金的博客</title>
+  <title>iOS,Swift,离屏渲染-离屏渲染 | 飘金的博客</title>
 
   <!-- keywords -->
   
+    <meta name="keywords" content="iOS,Swift,离屏渲染">
+  
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="GPU渲染机制： CPU 计算好显示内容提交到 GPU，GPU 渲染完成后将渲染结果放入帧缓冲区，随后视频控制器会按照 VSync 信号逐行读取帧缓冲区的数据，经过可能的数模转换传递给显示器显示。 GPU屏幕渲染有以下两种方式：  On-Screen Rendering意为当前屏幕渲染，指的是GPU的渲染操作是在当前用于显示的屏幕缓冲区中进行。 Off-Screen Rendering意为离屏渲">
+  <meta name="description" content="离屏渲染">
+<meta name="keywords" content="iOS,Swift,离屏渲染">
 <meta property="og:type" content="article">
-<meta property="og:title" content="飘金的博客">
+<meta property="og:title" content="离屏渲染">
 <meta property="og:url" content="http://yoursite.com/2017/06/14/离屏渲染浅析/index.html">
 <meta property="og:site_name" content="飘金的博客">
-<meta property="og:description" content="GPU渲染机制： CPU 计算好显示内容提交到 GPU，GPU 渲染完成后将渲染结果放入帧缓冲区，随后视频控制器会按照 VSync 信号逐行读取帧缓冲区的数据，经过可能的数模转换传递给显示器显示。 GPU屏幕渲染有以下两种方式：  On-Screen Rendering意为当前屏幕渲染，指的是GPU的渲染操作是在当前用于显示的屏幕缓冲区中进行。 Off-Screen Rendering意为离屏渲">
-<meta property="og:updated_time" content="2017-06-14T07:32:17.000Z">
+<meta property="og:description" content="离屏渲染">
+<meta property="og:updated_time" content="2017-06-14T14:03:16.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="飘金的博客">
-<meta name="twitter:description" content="GPU渲染机制： CPU 计算好显示内容提交到 GPU，GPU 渲染完成后将渲染结果放入帧缓冲区，随后视频控制器会按照 VSync 信号逐行读取帧缓冲区的数据，经过可能的数模转换传递给显示器显示。 GPU屏幕渲染有以下两种方式：  On-Screen Rendering意为当前屏幕渲染，指的是GPU的渲染操作是在当前用于显示的屏幕缓冲区中进行。 Off-Screen Rendering意为离屏渲">
+<meta name="twitter:title" content="离屏渲染">
+<meta name="twitter:description" content="离屏渲染">
   
     <link rel="alternative" href="/atom.xml" title="飘金的博客" type="application/atom+xml">
   
@@ -204,7 +207,7 @@
   
     <div class="article-meta">
       <a href="/2017/06/14/离屏渲染浅析/" class="article-date">
-  	<time datetime="2017-06-14T07:31:25.000Z" itemprop="datePublished">2017-06-14</time>
+  	<time datetime="2017-06-14T14:02:00.000Z" itemprop="datePublished">2017-06-14</time>
 </a>
     </div>
   
@@ -213,9 +216,48 @@
       <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      离屏渲染
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/iOS/">iOS</a>
+	</div>
+
+
+        
+          
+<div class="counter-tag counter">
+    <span id="/2017/06/14/离屏渲染浅析/" class="leancloud_visitors post-title-link"
+          style="font-size: 12px" data-flag-title="离屏渲染">
+         &nbsp;
+        view
+    </span>
+</div>
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
+        <p>离屏渲染<br><a id="more"></a></p>
+<blockquote>
 <h1 id="GPU渲染机制："><a href="#GPU渲染机制：" class="headerlink" title="GPU渲染机制："></a>GPU渲染机制：</h1></blockquote>
 <h2 id="CPU-计算好显示内容提交到-GPU，GPU-渲染完成后将渲染结果放入帧缓冲区，随后视频控制器会按照-VSync-信号逐行读取帧缓冲区的数据，经过可能的数模转换传递给显示器显示。"><a href="#CPU-计算好显示内容提交到-GPU，GPU-渲染完成后将渲染结果放入帧缓冲区，随后视频控制器会按照-VSync-信号逐行读取帧缓冲区的数据，经过可能的数模转换传递给显示器显示。" class="headerlink" title="CPU 计算好显示内容提交到 GPU，GPU 渲染完成后将渲染结果放入帧缓冲区，随后视频控制器会按照 VSync 信号逐行读取帧缓冲区的数据，经过可能的数模转换传递给显示器显示。"></a>CPU 计算好显示内容提交到 GPU，GPU 渲染完成后将渲染结果放入帧缓冲区，随后视频控制器会按照 VSync 信号逐行读取帧缓冲区的数据，经过可能的数模转换传递给显示器显示。</h2><blockquote>
 <h1 id="GPU屏幕渲染有以下两种方式："><a href="#GPU屏幕渲染有以下两种方式：" class="headerlink" title="GPU屏幕渲染有以下两种方式："></a>GPU屏幕渲染有以下两种方式：</h1></blockquote>
@@ -261,8 +303,8 @@
 <nav id="article-nav">
   
   
-    <a href="/2017/06/14/piaojin/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title"></div>
+    <a href="/2017/06/13/calayer-uiview-uiwindow/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">UIView,UIWindow,CALayer之间的区别联系</div>
       <strong class="article-nav-caption">&gt;</strong>
     </a>
   
@@ -272,7 +314,7 @@
 </article>
 
 
-<div class="ds-share share" data-thread-key="离屏渲染浅析" data-title="" data-url="http://yoursite.com/2017/06/14/离屏渲染浅析/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="">
+<div class="ds-share share" data-thread-key="离屏渲染浅析" data-title="离屏渲染" data-url="http://yoursite.com/2017/06/14/离屏渲染浅析/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="离屏渲染">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
@@ -291,7 +333,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="离屏渲染浅析" data-title="" data-url="http://yoursite.com/2017/06/14/离屏渲染浅析/"></div>
+	<div class="ds-thread" data-thread-key="离屏渲染浅析" data-title="离屏渲染" data-url="http://yoursite.com/2017/06/14/离屏渲染浅析/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
