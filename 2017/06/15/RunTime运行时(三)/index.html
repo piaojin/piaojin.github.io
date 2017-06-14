@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS,Swift-RunTime运行时(三) | 飘金的博客</title>
+
+  <!-- keywords -->
+  
+    <meta name="keywords" content="iOS,Swift">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="RunTime运行时(三)">
+<meta name="keywords" content="iOS,Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RunTime运行时(三)">
+<meta property="og:url" content="http://yoursite.com/2017/06/15/RunTime运行时(三)/index.html">
+<meta property="og:site_name" content="飘金的博客">
+<meta property="og:description" content="RunTime运行时(三)">
+<meta property="og:updated_time" content="2017-06-14T14:19:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RunTime运行时(三)">
+<meta name="twitter:description" content="RunTime运行时(三)">
+  
+    <link rel="alternative" href="/atom.xml" title="飘金的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+  
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-85415703-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+      <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("K1qAIJa0JgKeGUnrlq0G526F-gzGzoHsz", "n4XwRe0iBOxWpBaYJ7HNWPA3");</script>
+<script src="/js/Counter.js"></script>
+  
+</head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">飘金</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">会炒菜的猿</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">飘金</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">飘金</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">会炒菜的猿</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-RunTime运行时(三)" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/06/15/RunTime运行时(三)/" class="article-date">
+  	<time datetime="2017-06-15T06:23:47.000Z" itemprop="datePublished">2017-06-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RunTime运行时(三)
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/iOS/">iOS</a>
+	</div>
+
+
+        
+          
+<div class="counter-tag counter">
+    <span id="/2017/06/15/RunTime运行时(三)/" class="leancloud_visitors post-title-link"
+          style="font-size: 12px" data-flag-title="RunTime运行时(三)">
+         &nbsp;
+        view
+    </span>
+</div>
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>RunTime运行时(三)<br><a id="more"></a></p>
+<h3 id="学了那么久的Objective-C，给我的感觉就是它什么都是动态的，你将会听到一个新的名词："><a href="#学了那么久的Objective-C，给我的感觉就是它什么都是动态的，你将会听到一个新的名词：" class="headerlink" title="学了那么久的Objective-C，给我的感觉就是它什么都是动态的，你将会听到一个新的名词："></a>学了那么久的Objective-C，给我的感觉就是它什么都是动态的，你将会听到一个新的名词：</h3><blockquote>
+<h3 id="一、动态方法解析"><a href="#一、动态方法解析" class="headerlink" title="一、动态方法解析"></a>一、动态方法解析</h3></blockquote>
+<ul>
+<li><h3 id="1、-BOOL-resolveInstanceMethod-SEL-sel"><a href="#1、-BOOL-resolveInstanceMethod-SEL-sel" class="headerlink" title="1、+(BOOL) resolveInstanceMethod:(SEL) sel"></a>1、+(BOOL) resolveInstanceMethod:(SEL) sel</h3></li>
+</ul>
+<h3 id="这是NSObject根类提供的类方法，调用时机为当被调用的方法实现部分没有找到，而消息转发机制启动之前的这个中间时刻。"><a href="#这是NSObject根类提供的类方法，调用时机为当被调用的方法实现部分没有找到，而消息转发机制启动之前的这个中间时刻。" class="headerlink" title="这是NSObject根类提供的类方法，调用时机为当被调用的方法实现部分没有找到，而消息转发机制启动之前的这个中间时刻。"></a>这是NSObject根类提供的类方法，调用时机为当被调用的方法实现部分没有找到，而消息转发机制启动之前的这个中间时刻。</h3><ul>
+<li><h3 id="2、-dynamic关键字"><a href="#2、-dynamic关键字" class="headerlink" title="2、@dynamic关键字"></a>2、@dynamic关键字</h3></li>
+</ul>
+<h3 id="Objective-C2-0-提供了-dynamic关键字。这个关键字有两个作用："><a href="#Objective-C2-0-提供了-dynamic关键字。这个关键字有两个作用：" class="headerlink" title="Objective-C2.0 提供了@dynamic关键字。这个关键字有两个作用："></a>Objective-C2.0 提供了@dynamic关键字。这个关键字有两个作用：</h3><h3 id="①告诉编译器不要创建实现属性所用的实例变量；"><a href="#①告诉编译器不要创建实现属性所用的实例变量；" class="headerlink" title="①告诉编译器不要创建实现属性所用的实例变量；"></a>①告诉编译器不要创建实现属性所用的实例变量；</h3><h3 id="②告诉编译器不要创建该属性的get和setter方法。"><a href="#②告诉编译器不要创建该属性的get和setter方法。" class="headerlink" title="②告诉编译器不要创建该属性的get和setter方法。"></a>②告诉编译器不要创建该属性的get和setter方法。</h3><h3 id="如果我们在-interface接口文件中声明了一个属性，如下所示："><a href="#如果我们在-interface接口文件中声明了一个属性，如下所示：" class="headerlink" title="如果我们在@interface接口文件中声明了一个属性，如下所示："></a>如果我们在@interface接口文件中声明了一个属性，如下所示：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@property(nonatomic,retain) NSString    *name;</div></pre></td></tr></table></figure>
+<h3 id="默认情况下，编译器会为当前类自动生成一个NSString-name的实例变量（如果想改变实例变量的名称可以用-synthesize关键字），同时会生成两个名为-NSString-name和-void-setName-NSString-aName的存取方法。"><a href="#默认情况下，编译器会为当前类自动生成一个NSString-name的实例变量（如果想改变实例变量的名称可以用-synthesize关键字），同时会生成两个名为-NSString-name和-void-setName-NSString-aName的存取方法。" class="headerlink" title="默认情况下，编译器会为当前类自动生成一个NSString   _name的实例变量（如果想改变实例变量的名称可以用@synthesize关键字），同时会生成两个名为- (NSString )name和- (void)setName:(NSString *)aName的存取方法。"></a>默认情况下，编译器会为当前类自动生成一个NSString   <em>_name的实例变量（如果想改变实例变量的名称可以用@synthesize关键字），同时会生成两个名为- (NSString </em>)name和- (void)setName:(NSString *)aName的存取方法。</h3><h3 id="而-dynamic关键字就是告诉编译器不要做这些事，同时在使用了存取方法时也不要报错，即让编译器相信存取方法会在运行时找到。"><a href="#而-dynamic关键字就是告诉编译器不要做这些事，同时在使用了存取方法时也不要报错，即让编译器相信存取方法会在运行时找到。" class="headerlink" title="而@dynamic关键字就是告诉编译器不要做这些事，同时在使用了存取方法时也不要报错，即让编译器相信存取方法会在运行时找到。"></a>而@dynamic关键字就是告诉编译器不要做这些事，同时在使用了存取方法时也不要报错，即让编译器相信存取方法会在运行时找到。</h3><h3 id="比如在-implementation文件中做了如下声明："><a href="#比如在-implementation文件中做了如下声明：" class="headerlink" title="比如在@implementation文件中做了如下声明："></a>比如在@implementation文件中做了如下声明：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@dynamic name;</div></pre></td></tr></table></figure>
+<h3 id="如果使用了name属性的setter方法，又不想在运行时崩溃，就可以在运行时做点动作："><a href="#如果使用了name属性的setter方法，又不想在运行时崩溃，就可以在运行时做点动作：" class="headerlink" title="如果使用了name属性的setter方法，又不想在运行时崩溃，就可以在运行时做点动作："></a>如果使用了name属性的setter方法，又不想在运行时崩溃，就可以在运行时做点动作：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">void dynamicMethodIMP(id self, SEL _cmd)  </div><div class="line">&#123;  </div><div class="line">// implementation ....  </div><div class="line">&#125;  </div><div class="line"></div><div class="line">+ (BOOL)resolveInstanceMethod:(SEL)sel  </div><div class="line">&#123;  </div><div class="line">NSLog(@&quot;sel is %@&quot;, NSStringFromSelector(sel));  </div><div class="line">if(sel == @selector(setName:))&#123;  </div><div class="line">class_addMethod([self class],sel,(IMP)dynamicMethodIMP,&quot;v@:&quot;);  </div><div class="line">return YES;  </div><div class="line">&#125;  </div><div class="line">return [super resolveInstanceMethod:sel];  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="在resolveInstanceMethod的实现中，我们通过class-addMethod方法动态的向当前对象增加了dynamicMethodIMP函数，来代替-void-setName-NSString-name的实现部分，从而达到了动态生成name属性方法的目的。"><a href="#在resolveInstanceMethod的实现中，我们通过class-addMethod方法动态的向当前对象增加了dynamicMethodIMP函数，来代替-void-setName-NSString-name的实现部分，从而达到了动态生成name属性方法的目的。" class="headerlink" title="在resolveInstanceMethod的实现中，我们通过class_addMethod方法动态的向当前对象增加了dynamicMethodIMP函数，来代替-(void)setName:(NSString *)name的实现部分，从而达到了动态生成name属性方法的目的。"></a>在resolveInstanceMethod的实现中，我们通过class_addMethod方法动态的向当前对象增加了dynamicMethodIMP函数，来代替-(void)setName:(NSString *)name的实现部分，从而达到了动态生成name属性方法的目的。</h3><h3 id="值得说明的是："><a href="#值得说明的是：" class="headerlink" title="值得说明的是："></a>值得说明的是：</h3><h3 id="①在上个例子中，我们自己实现了-void-setName-NSString-name方法，则在运行的时候，调用完我们实现的-void-setName-NSString-name方法后，运行时系统仍然会调-BOOL-resolveInstanceMethod-SEL-sel方法，只不过这里的sel会变成-doZombieMe，从而我们实现重定向的if分支就进不去了，即我们实现的方法不会被覆盖。"><a href="#①在上个例子中，我们自己实现了-void-setName-NSString-name方法，则在运行的时候，调用完我们实现的-void-setName-NSString-name方法后，运行时系统仍然会调-BOOL-resolveInstanceMethod-SEL-sel方法，只不过这里的sel会变成-doZombieMe，从而我们实现重定向的if分支就进不去了，即我们实现的方法不会被覆盖。" class="headerlink" title="①在上个例子中，我们自己实现了-(void)setName:(NSString )name方法，则在运行的时候，调用完我们实现的-(void)setName:(NSString )name方法后，运行时系统仍然会调+(BOOL) resolveInstanceMethod:(SEL) sel方法，只不过这里的sel会变成_doZombieMe，从而我们实现重定向的if分支就进不去了，即我们实现的方法不会被覆盖。"></a>①在上个例子中，我们自己实现了-(void)setName:(NSString <em>)name方法，则在运行的时候，调用完我们实现的-(void)setName:(NSString </em>)name方法后，运行时系统仍然会调+(BOOL) resolveInstanceMethod:(SEL) sel方法，只不过这里的sel会变成_doZombieMe，从而我们实现重定向的if分支就进不去了，即我们实现的方法不会被覆盖。</h3><h3 id="②”v-”属于Objective-C类型编码的内容，感兴趣的同学可以自己google一下。"><a href="#②”v-”属于Objective-C类型编码的内容，感兴趣的同学可以自己google一下。" class="headerlink" title="②”v@:”属于Objective-C类型编码的内容，感兴趣的同学可以自己google一下。"></a>②”v@:”属于Objective-C类型编码的内容，感兴趣的同学可以自己google一下。</h3><blockquote>
+<h3 id="二、runtime-system消息转发机制"><a href="#二、runtime-system消息转发机制" class="headerlink" title="二、runtime system消息转发机制"></a>二、runtime system消息转发机制</h3></blockquote>
+<h3 id="对象是谦恭的，它会接收所有发送过来的消息，哪怕这些消息自己无法响应。问题来了：当对象无法响应这些消息时怎么办？runtime提供了消息转发机制来处理该问题。"><a href="#对象是谦恭的，它会接收所有发送过来的消息，哪怕这些消息自己无法响应。问题来了：当对象无法响应这些消息时怎么办？runtime提供了消息转发机制来处理该问题。" class="headerlink" title="对象是谦恭的，它会接收所有发送过来的消息，哪怕这些消息自己无法响应。问题来了：当对象无法响应这些消息时怎么办？runtime提供了消息转发机制来处理该问题。"></a>对象是谦恭的，它会接收所有发送过来的消息，哪怕这些消息自己无法响应。问题来了：当对象无法响应这些消息时怎么办？runtime提供了消息转发机制来处理该问题。</h3><h3 id="当外部调用的某个方法对象没有实现，而且resolveInstanceMethod方法中也没有做重定向处理时，就会触发-void-forwardInvocation-NSInvocation-anInvocation方法。在该方法中，可以实现对不能处理的消息做的一些默认处理-也可以以其它的某种方式来避免错误被抛出。像forwardInvocation-的名字一样-这个方法通常用来将不能处理的消息转发给其它的对象。通常我们重写该方法的方式如下所示："><a href="#当外部调用的某个方法对象没有实现，而且resolveInstanceMethod方法中也没有做重定向处理时，就会触发-void-forwardInvocation-NSInvocation-anInvocation方法。在该方法中，可以实现对不能处理的消息做的一些默认处理-也可以以其它的某种方式来避免错误被抛出。像forwardInvocation-的名字一样-这个方法通常用来将不能处理的消息转发给其它的对象。通常我们重写该方法的方式如下所示：" class="headerlink" title="当外部调用的某个方法对象没有实现，而且resolveInstanceMethod方法中也没有做重定向处理时，就会触发- (void)forwardInvocation:(NSInvocation *)anInvocation方法。在该方法中，可以实现对不能处理的消息做的一些默认处理,也可以以其它的某种方式来避免错误被抛出。像forwardInvocation:的名字一样,这个方法通常用来将不能处理的消息转发给其它的对象。通常我们重写该方法的方式如下所示："></a>当外部调用的某个方法对象没有实现，而且resolveInstanceMethod方法中也没有做重定向处理时，就会触发- (void)forwardInvocation:(NSInvocation *)anInvocation方法。在该方法中，可以实现对不能处理的消息做的一些默认处理,也可以以其它的某种方式来避免错误被抛出。像forwardInvocation:的名字一样,这个方法通常用来将不能处理的消息转发给其它的对象。通常我们重写该方法的方式如下所示：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">-(void)forwardInvocation:(NSInvocation *)invocation  </div><div class="line">&#123;  </div><div class="line">SEL invSEL = invocation.selector;  </div><div class="line">if ([someOtherObject respondsToSelector:invSEL])  </div><div class="line">[anInvocation invokeWithTarget:someOtherObject];  </div><div class="line">&#125; else &#123;  </div><div class="line">[self doesNotRecognizeSelector:invSEL];   </div><div class="line">&#125;                                          </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="怎么看着有点像多继承呀？？？你说对了，消息转发提供了多重继承的很多特性。然而-两者有很大的不同-多重继承是将不同的行为封装到单个的对象中-有可能导致庞大的-复杂的对象。而消息转发是将问题分解到更小的对象中-但是又以一种对消息发送对象来说完全透明的方式将这些对象联系起来。总之，Objective-C通过这种方式，一定程度上减小了自己不支持多继承的劣势。"><a href="#怎么看着有点像多继承呀？？？你说对了，消息转发提供了多重继承的很多特性。然而-两者有很大的不同-多重继承是将不同的行为封装到单个的对象中-有可能导致庞大的-复杂的对象。而消息转发是将问题分解到更小的对象中-但是又以一种对消息发送对象来说完全透明的方式将这些对象联系起来。总之，Objective-C通过这种方式，一定程度上减小了自己不支持多继承的劣势。" class="headerlink" title="怎么看着有点像多继承呀？？？你说对了，消息转发提供了多重继承的很多特性。然而,两者有很大的不同:多重继承是将不同的行为封装到单个的对象中,有可能导致庞大的,复杂的对象。而消息转发是将问题分解到更小的对象中,但是又以一种对消息发送对象来说完全透明的方式将这些对象联系起来。总之，Objective-C通过这种方式，一定程度上减小了自己不支持多继承的劣势。"></a>怎么看着有点像多继承呀？？？你说对了，消息转发提供了多重继承的很多特性。然而,两者有很大的不同:多重继承是将不同的行为封装到单个的对象中,有可能导致庞大的,复杂的对象。而消息转发是将问题分解到更小的对象中,但是又以一种对消息发送对象来说完全透明的方式将这些对象联系起来。总之，Objective-C通过这种方式，一定程度上减小了自己不支持多继承的劣势。</h3>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/06/15/RunTime运行时(一)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          RunTime运行时(一)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/15/RunTime运行时之动态替换和改变方法实现/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">RunTime运行时之动态替换和改变方法实现</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="RunTime运行时(三)" data-title="RunTime运行时(三)" data-url="http://yoursite.com/2017/06/15/RunTime运行时(三)/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="RunTime运行时(三)">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="RunTime运行时(三)" data-title="RunTime运行时(三)" data-url="http://yoursite.com/2017/06/15/RunTime运行时(三)/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"winnerweb"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2017 飘金
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

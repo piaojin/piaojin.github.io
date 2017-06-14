@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS,Swift-RunLoop的内部逻辑 | 飘金的博客</title>
+
+  <!-- keywords -->
+  
+    <meta name="keywords" content="iOS,Swift">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="RunLoop的内部逻辑">
+<meta name="keywords" content="iOS,Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RunLoop的内部逻辑">
+<meta property="og:url" content="http://yoursite.com/2017/06/15/RunLoop的内部逻辑/index.html">
+<meta property="og:site_name" content="飘金的博客">
+<meta property="og:description" content="RunLoop的内部逻辑">
+<meta property="og:image" content="http://blog.ibireme.com/wp-content/uploads/2015/05/RunLoop_1.png">
+<meta property="og:updated_time" content="2017-06-14T14:26:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RunLoop的内部逻辑">
+<meta name="twitter:description" content="RunLoop的内部逻辑">
+<meta name="twitter:image" content="http://blog.ibireme.com/wp-content/uploads/2015/05/RunLoop_1.png">
+  
+    <link rel="alternative" href="/atom.xml" title="飘金的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+  
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-85415703-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+      <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("K1qAIJa0JgKeGUnrlq0G526F-gzGzoHsz", "n4XwRe0iBOxWpBaYJ7HNWPA3");</script>
+<script src="/js/Counter.js"></script>
+  
+</head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">飘金</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">会炒菜的猿</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">飘金</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">飘金</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">会炒菜的猿</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-RunLoop的内部逻辑" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/06/15/RunLoop的内部逻辑/" class="article-date">
+  	<time datetime="2017-06-15T06:23:47.000Z" itemprop="datePublished">2017-06-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RunLoop的内部逻辑
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/iOS/">iOS</a>
+	</div>
+
+
+        
+          
+<div class="counter-tag counter">
+    <span id="/2017/06/15/RunLoop的内部逻辑/" class="leancloud_visitors post-title-link"
+          style="font-size: 12px" data-flag-title="RunLoop的内部逻辑">
+         &nbsp;
+        view
+    </span>
+</div>
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>RunLoop的内部逻辑<br><a id="more"></a></p>
+<h3 id="根据苹果在文档里的说明，RunLoop-内部的逻辑大致如下"><a href="#根据苹果在文档里的说明，RunLoop-内部的逻辑大致如下" class="headerlink" title="根据苹果在文档里的说明，RunLoop 内部的逻辑大致如下:"></a>根据苹果在<a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/Multithreading/RunLoopManagement/RunLoopManagement.html#//apple_ref/doc/uid/10000057i-CH16-SW23" target="_blank" rel="external">文档</a>里的说明，RunLoop 内部的逻辑大致如下:</h3><p><img src="http://blog.ibireme.com/wp-content/uploads/2015/05/RunLoop_1.png" alt=""></p>
+<h3 id="其内部代码整理如下-（太长了不想看可以直接跳过去，后面会有说明）："><a href="#其内部代码整理如下-（太长了不想看可以直接跳过去，后面会有说明）：" class="headerlink" title="其内部代码整理如下 （太长了不想看可以直接跳过去，后面会有说明）："></a>其内部代码整理如下 （太长了不想看可以直接跳过去，后面会有说明）：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div></pre></td><td class="code"><pre><div class="line">/// 用DefaultMode启动</div><div class="line">void CFRunLoopRun(void) &#123;</div><div class="line">CFRunLoopRunSpecific(CFRunLoopGetCurrent(), kCFRunLoopDefaultMode, 1.0e10, false);</div><div class="line">&#125;</div><div class="line"></div><div class="line">/// 用指定的Mode启动，允许设置RunLoop超时时间</div><div class="line">int CFRunLoopRunInMode(CFStringRef modeName, CFTimeInterval seconds, Boolean stopAfterHandle) &#123;</div><div class="line">return CFRunLoopRunSpecific(CFRunLoopGetCurrent(), modeName, seconds, returnAfterSourceHandled);</div><div class="line">&#125;</div><div class="line"></div><div class="line">/// RunLoop的实现</div><div class="line">int CFRunLoopRunSpecific(runloop, modeName, seconds, stopAfterHandle) &#123;</div><div class="line"></div><div class="line">/// 首先根据modeName找到对应mode</div><div class="line">CFRunLoopModeRef currentMode = __CFRunLoopFindMode(runloop, modeName, false);</div><div class="line">/// 如果mode里没有source/timer/observer, 直接返回。</div><div class="line">if (__CFRunLoopModeIsEmpty(currentMode)) return;</div><div class="line"></div><div class="line">/// 1. 通知 Observers: RunLoop 即将进入 loop。</div><div class="line">__CFRunLoopDoObservers(runloop, currentMode, kCFRunLoopEntry);</div><div class="line"></div><div class="line">/// 内部函数，进入loop</div><div class="line">__CFRunLoopRun(runloop, currentMode, seconds, returnAfterSourceHandled) &#123;</div><div class="line"></div><div class="line">Boolean sourceHandledThisLoop = NO;</div><div class="line">int retVal = 0;</div><div class="line">do &#123;</div><div class="line"></div><div class="line">/// 2. 通知 Observers: RunLoop 即将触发 Timer 回调。</div><div class="line">__CFRunLoopDoObservers(runloop, currentMode, kCFRunLoopBeforeTimers);</div><div class="line">/// 3. 通知 Observers: RunLoop 即将触发 Source0 (非port) 回调。</div><div class="line">__CFRunLoopDoObservers(runloop, currentMode, kCFRunLoopBeforeSources);</div><div class="line">/// 执行被加入的block</div><div class="line">__CFRunLoopDoBlocks(runloop, currentMode);</div><div class="line"></div><div class="line">/// 4. RunLoop 触发 Source0 (非port) 回调。</div><div class="line">sourceHandledThisLoop = __CFRunLoopDoSources0(runloop, currentMode, stopAfterHandle);</div><div class="line">/// 执行被加入的block</div><div class="line">__CFRunLoopDoBlocks(runloop, currentMode);</div><div class="line"></div><div class="line">/// 5. 如果有 Source1 (基于port) 处于 ready 状态，直接处理这个 Source1 然后跳转去处理消息。</div><div class="line">if (__Source0DidDispatchPortLastTime) &#123;</div><div class="line">Boolean hasMsg = __CFRunLoopServiceMachPort(dispatchPort, &amp;msg)</div><div class="line">if (hasMsg) goto handle_msg;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/// 通知 Observers: RunLoop 的线程即将进入休眠(sleep)。</div><div class="line">if (!sourceHandledThisLoop) &#123;</div><div class="line">__CFRunLoopDoObservers(runloop, currentMode, kCFRunLoopBeforeWaiting);</div><div class="line">&#125;</div><div class="line"></div><div class="line">/// 7. 调用 mach_msg 等待接受 mach_port 的消息。线程将进入休眠, 直到被下面某一个事件唤醒。</div><div class="line">/// • 一个基于 port 的Source 的事件。</div><div class="line">/// • 一个 Timer 到时间了</div><div class="line">/// • RunLoop 自身的超时时间到了</div><div class="line">/// • 被其他什么调用者手动唤醒</div><div class="line">__CFRunLoopServiceMachPort(waitSet, &amp;msg, sizeof(msg_buffer), &amp;livePort) &#123;</div><div class="line">mach_msg(msg, MACH_RCV_MSG, port); // thread wait for receive msg</div><div class="line">&#125;</div><div class="line"></div><div class="line">/// 8. 通知 Observers: RunLoop 的线程刚刚被唤醒了。</div><div class="line">__CFRunLoopDoObservers(runloop, currentMode, kCFRunLoopAfterWaiting);</div><div class="line"></div><div class="line">/// 收到消息，处理消息。</div><div class="line">handle_msg:</div><div class="line"></div><div class="line">/// 9.1 如果一个 Timer 到时间了，触发这个Timer的回调。</div><div class="line">if (msg_is_timer) &#123;</div><div class="line">__CFRunLoopDoTimers(runloop, currentMode, mach_absolute_time())</div><div class="line">&#125; </div><div class="line"></div><div class="line">/// 9.2 如果有dispatch到main_queue的block，执行block。</div><div class="line">else if (msg_is_dispatch) &#123;</div><div class="line">__CFRUNLOOP_IS_SERVICING_THE_MAIN_DISPATCH_QUEUE__(msg);</div><div class="line">&#125; </div><div class="line"></div><div class="line">/// 9.3 如果一个 Source1 (基于port) 发出事件了，处理这个事件</div><div class="line">else &#123;</div><div class="line">CFRunLoopSourceRef source1 = __CFRunLoopModeFindSourceForMachPort(runloop, currentMode, livePort);</div><div class="line">sourceHandledThisLoop = __CFRunLoopDoSource1(runloop, currentMode, source1, msg);</div><div class="line">if (sourceHandledThisLoop) &#123;</div><div class="line">mach_msg(reply, MACH_SEND_MSG, reply);</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/// 执行加入到Loop的block</div><div class="line">__CFRunLoopDoBlocks(runloop, currentMode);</div><div class="line"></div><div class="line"></div><div class="line">if (sourceHandledThisLoop &amp;&amp; stopAfterHandle) &#123;</div><div class="line">/// 进入loop时参数说处理完事件就返回。</div><div class="line">retVal = kCFRunLoopRunHandledSource;</div><div class="line">&#125; else if (timeout) &#123;</div><div class="line">/// 超出传入参数标记的超时时间了</div><div class="line">retVal = kCFRunLoopRunTimedOut;</div><div class="line">&#125; else if (__CFRunLoopIsStopped(runloop)) &#123;</div><div class="line">/// 被外部调用者强制停止了</div><div class="line">retVal = kCFRunLoopRunStopped;</div><div class="line">&#125; else if (__CFRunLoopModeIsEmpty(runloop, currentMode)) &#123;</div><div class="line">/// source/timer/observer一个都没有了</div><div class="line">retVal = kCFRunLoopRunFinished;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/// 如果没超时，mode里没空，loop也没被停止，那继续loop。</div><div class="line">&#125; while (retVal == 0);</div><div class="line">&#125;</div><div class="line"></div><div class="line">/// 10. 通知 Observers: RunLoop 即将退出。</div><div class="line">__CFRunLoopDoObservers(rl, currentMode, kCFRunLoopExit);</div><div class="line">&#125;</div><div class="line"></div><div class="line">/// 用DefaultMode启动</div><div class="line">void CFRunLoopRun(void) &#123;</div><div class="line">CFRunLoopRunSpecific(CFRunLoopGetCurrent(), kCFRunLoopDefaultMode, 1.0e10, false);</div><div class="line">&#125;</div><div class="line"></div><div class="line">/// 用指定的Mode启动，允许设置RunLoop超时时间</div><div class="line">int CFRunLoopRunInMode(CFStringRef modeName, CFTimeInterval seconds, Boolean stopAfterHandle) &#123;</div><div class="line">return CFRunLoopRunSpecific(CFRunLoopGetCurrent(), modeName, seconds, returnAfterSourceHandled);</div><div class="line">&#125;</div><div class="line"></div><div class="line">/// RunLoop的实现</div><div class="line">int CFRunLoopRunSpecific(runloop, modeName, seconds, stopAfterHandle) &#123;</div><div class="line"></div><div class="line">/// 首先根据modeName找到对应mode</div><div class="line">CFRunLoopModeRef currentMode = __CFRunLoopFindMode(runloop, modeName, false);</div><div class="line">/// 如果mode里没有source/timer/observer, 直接返回。</div><div class="line">if (__CFRunLoopModeIsEmpty(currentMode)) return;</div><div class="line"></div><div class="line">/// 1. 通知 Observers: RunLoop 即将进入 loop。</div><div class="line">__CFRunLoopDoObservers(runloop, currentMode, kCFRunLoopEntry);</div><div class="line"></div><div class="line">/// 内部函数，进入loop</div><div class="line">__CFRunLoopRun(runloop, currentMode, seconds, returnAfterSourceHandled) &#123;</div><div class="line"></div><div class="line">Boolean sourceHandledThisLoop = NO;</div><div class="line">int retVal = 0;</div><div class="line">do &#123;</div><div class="line"></div><div class="line">/// 2. 通知 Observers: RunLoop 即将触发 Timer 回调。</div><div class="line">__CFRunLoopDoObservers(runloop, currentMode, kCFRunLoopBeforeTimers);</div><div class="line">/// 3. 通知 Observers: RunLoop 即将触发 Source0 (非port) 回调。</div><div class="line">__CFRunLoopDoObservers(runloop, currentMode, kCFRunLoopBeforeSources);</div><div class="line">/// 执行被加入的block</div><div class="line">__CFRunLoopDoBlocks(runloop, currentMode);</div><div class="line"></div><div class="line">/// 4. RunLoop 触发 Source0 (非port) 回调。</div><div class="line">sourceHandledThisLoop = __CFRunLoopDoSources0(runloop, currentMode, stopAfterHandle);</div><div class="line">/// 执行被加入的block</div><div class="line">__CFRunLoopDoBlocks(runloop, currentMode);</div><div class="line"></div><div class="line">/// 5. 如果有 Source1 (基于port) 处于 ready 状态，直接处理这个 Source1 然后跳转去处理消息。</div><div class="line">if (__Source0DidDispatchPortLastTime) &#123;</div><div class="line">Boolean hasMsg = __CFRunLoopServiceMachPort(dispatchPort, &amp;msg)</div><div class="line">if (hasMsg) goto handle_msg;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/// 通知 Observers: RunLoop 的线程即将进入休眠(sleep)。</div><div class="line">if (!sourceHandledThisLoop) &#123;</div><div class="line">__CFRunLoopDoObservers(runloop, currentMode, kCFRunLoopBeforeWaiting);</div><div class="line">&#125;</div><div class="line"></div><div class="line">/// 7. 调用 mach_msg 等待接受 mach_port 的消息。线程将进入休眠, 直到被下面某一个事件唤醒。</div><div class="line">/// • 一个基于 port 的Source 的事件。</div><div class="line">/// • 一个 Timer 到时间了</div><div class="line">/// • RunLoop 自身的超时时间到了</div><div class="line">/// • 被其他什么调用者手动唤醒</div><div class="line">__CFRunLoopServiceMachPort(waitSet, &amp;msg, sizeof(msg_buffer), &amp;livePort) &#123;</div><div class="line">mach_msg(msg, MACH_RCV_MSG, port); // thread wait for receive msg</div><div class="line">&#125;</div><div class="line"></div><div class="line">/// 8. 通知 Observers: RunLoop 的线程刚刚被唤醒了。</div><div class="line">__CFRunLoopDoObservers(runloop, currentMode, kCFRunLoopAfterWaiting);</div><div class="line"></div><div class="line">/// 收到消息，处理消息。</div><div class="line">handle_msg:</div><div class="line"></div><div class="line">/// 9.1 如果一个 Timer 到时间了，触发这个Timer的回调。</div><div class="line">if (msg_is_timer) &#123;</div><div class="line">__CFRunLoopDoTimers(runloop, currentMode, mach_absolute_time())</div><div class="line">&#125; </div><div class="line"></div><div class="line">/// 9.2 如果有dispatch到main_queue的block，执行block。</div><div class="line">else if (msg_is_dispatch) &#123;</div><div class="line">__CFRUNLOOP_IS_SERVICING_THE_MAIN_DISPATCH_QUEUE__(msg);</div><div class="line">&#125; </div><div class="line"></div><div class="line">/// 9.3 如果一个 Source1 (基于port) 发出事件了，处理这个事件</div><div class="line">else &#123;</div><div class="line">CFRunLoopSourceRef source1 = __CFRunLoopModeFindSourceForMachPort(runloop, currentMode, livePort);</div><div class="line">sourceHandledThisLoop = __CFRunLoopDoSource1(runloop, currentMode, source1, msg);</div><div class="line">if (sourceHandledThisLoop) &#123;</div><div class="line">mach_msg(reply, MACH_SEND_MSG, reply);</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/// 执行加入到Loop的block</div><div class="line">__CFRunLoopDoBlocks(runloop, currentMode);</div><div class="line"></div><div class="line"></div><div class="line">if (sourceHandledThisLoop &amp;&amp; stopAfterHandle) &#123;</div><div class="line">/// 进入loop时参数说处理完事件就返回。</div><div class="line">retVal = kCFRunLoopRunHandledSource;</div><div class="line">&#125; else if (timeout) &#123;</div><div class="line">/// 超出传入参数标记的超时时间了</div><div class="line">retVal = kCFRunLoopRunTimedOut;</div><div class="line">&#125; else if (__CFRunLoopIsStopped(runloop)) &#123;</div><div class="line">/// 被外部调用者强制停止了</div><div class="line">retVal = kCFRunLoopRunStopped;</div><div class="line">&#125; else if (__CFRunLoopModeIsEmpty(runloop, currentMode)) &#123;</div><div class="line">/// source/timer/observer一个都没有了</div><div class="line">retVal = kCFRunLoopRunFinished;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/// 如果没超时，mode里没空，loop也没被停止，那继续loop。</div><div class="line">&#125; while (retVal == 0);</div><div class="line">&#125;</div><div class="line"></div><div class="line">/// 10. 通知 Observers: RunLoop 即将退出。</div><div class="line">__CFRunLoopDoObservers(rl, currentMode, kCFRunLoopExit);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="可以看到，实际上-RunLoop-就是这样一个函数，其内部是一个-do-while-循环。当你调用-CFRunLoopRun-时，线程就会一直停留在这个循环里；直到超时或被手动停止，该函数才会返回。"><a href="#可以看到，实际上-RunLoop-就是这样一个函数，其内部是一个-do-while-循环。当你调用-CFRunLoopRun-时，线程就会一直停留在这个循环里；直到超时或被手动停止，该函数才会返回。" class="headerlink" title="可以看到，实际上 RunLoop 就是这样一个函数，其内部是一个 do-while 循环。当你调用 CFRunLoopRun() 时，线程就会一直停留在这个循环里；直到超时或被手动停止，该函数才会返回。"></a>可以看到，实际上 RunLoop 就是这样一个函数，其内部是一个 do-while 循环。当你调用 CFRunLoopRun() 时，线程就会一直停留在这个循环里；直到超时或被手动停止，该函数才会返回。</h3>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/06/15/RunLoop与PerformSelector/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          RunLoop与PerformSelector
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/15/RunLoop与线程与GCD的关系/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">RunLoop与线程与GCD的关系</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="RunLoop的内部逻辑" data-title="RunLoop的内部逻辑" data-url="http://yoursite.com/2017/06/15/RunLoop的内部逻辑/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="RunLoop的内部逻辑">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="RunLoop的内部逻辑" data-title="RunLoop的内部逻辑" data-url="http://yoursite.com/2017/06/15/RunLoop的内部逻辑/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"winnerweb"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2017 飘金
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
