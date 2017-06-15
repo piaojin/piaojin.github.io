@@ -1,17 +1,99 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
-  <meta charset="utf-8">
-  
-  <title>iOS,Swift-如何创建一个纯 Swift 模块 | 飘金的博客</title>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-  <!-- keywords -->
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
-    <meta name="keywords" content="iOS,Swift">
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
   
 
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="如何创建一个纯 Swift 模块">
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,Swift" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="如何创建一个纯 Swift 模块">
 <meta name="keywords" content="iOS,Swift">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何创建一个纯 Swift 模块">
@@ -22,377 +104,609 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何创建一个纯 Swift 模块">
 <meta name="twitter:description" content="如何创建一个纯 Swift 模块">
-  
-    <link rel="alternative" href="/atom.xml" title="飘金的博客" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/favicon.ico">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-<script>
-    (function(){
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-        }
-        else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
 </script>
 
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/14/如何创建一个纯 Swift 模块/"/>
+
+
+
+
+
+  <title>如何创建一个纯 Swift 模块 | 飘金的博客</title>
   
-<!-- Google Analytics -->
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-85415703-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-<!-- End Google Analytics -->
 
 
-  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
-  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 
-  
-      <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-<script>AV.initialize("K1qAIJa0JgKeGUnrlq0G526F-gzGzoHsz", "n4XwRe0iBOxWpBaYJ7HNWPA3");</script>
-<script src="/js/Counter.js"></script>
-  
+
+
+
+
+
+
+
+
+
+
+
 </head>
-<body>
-  <div id="container">
-    <div id="particles-js"></div>
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
-			
-		</a>
 
-		<hgroup>
-		  <h1 class="header-author"><a href="/">飘金</a></h1>
-		</hgroup>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-		
-		<p class="header-subtitle">会炒菜的猿</p>
-		
+  
+  
+    
+  
 
-		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						<div class="icon-wrap icon-link hide" data-idx="2">
-							<div class="loopback_l"></div>
-							<div class="loopback_r"></div>
-						</div>
-						
-						
-					</div>
-					
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>菜单</li>
-						<li>标签</li>
-						
-						<li>友情链接</li>
-						
-						
-					</ul>
-				</div>
-			</div>
-		
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
 
-		<div class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
-							<li><a href="https://github.com/piaojin">github</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="header-nav">
-						<div class="social">
-							
-								<a class="github" target="_blank" href="https://github.com/piaojin" title="github">github</a>
-					        
-								<a class="简书" target="_blank" href="http://www.jianshu.com/u/da7864faa1be" title="简书">简书</a>
-					        
-						</div>
-					</nav>
-				</section>
-				
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
-					</div>
-				</section>
-				
-				
-				
-				<section class="switch-part switch-part3">
-					<div id="js-friends">
-					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
-			        
-			        </div>
-				</section>
-				
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-				
-			</div>
-		</div>
-	</header>				
-</div>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">飘金的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
     </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide">飘金</h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-				<img lazy-src="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" class="js-avatar">
-			</div>
-			<hgroup>
-			  <h1 class="header-author">飘金</h1>
-			</hgroup>
-			
-			<p class="header-subtitle">会炒菜的猿</p>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/archives">所有文章</a></li>
-		        
-					<li><a href="https://github.com/piaojin">github</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-						<a class="github" target="_blank" href="https://github.com/piaojin" title="github">github</a>
-			        
-						<a class="简书" target="_blank" href="http://www.jianshu.com/u/da7864faa1be" title="简书">简书</a>
-			        
-				</div>
-			</nav>
-		</header>				
-	</div>
+      
+        <p class="site-subtitle">会炒菜的猿</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
 </nav>
-      <div class="body-wrap"><article id="post-如何创建一个纯 Swift 模块" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/06/14/如何创建一个纯 Swift 模块/" class="article-date">
-  	<time datetime="2017-06-14T06:23:47.000Z" itemprop="datePublished">2017-06-14</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
     
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      如何创建一个纯 Swift 模块
-      
-    </h1>
+
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
+  
+  
+  
 
-        
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/iOS/">iOS</a>
-	</div>
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/14/如何创建一个纯 Swift 模块/">
 
-
-        
-          
-<div class="counter-tag counter">
-    <span id="/2017/06/14/如何创建一个纯 Swift 模块/" class="leancloud_visitors post-title-link"
-          style="font-size: 12px" data-flag-title="如何创建一个纯 Swift 模块">
-         &nbsp;
-        view
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="飘金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
-</div>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="飘金的博客">
+    </span>
+
+    
+      <header class="post-header">
 
         
-        <div class="clearfix"></div>
-      </div>
-      
+        
+          <h1 class="post-title" itemprop="name headline">如何创建一个纯 Swift 模块</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-14T14:23:47+08:00">
+                2017-06-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
       
         <p>如何创建一个纯 Swift 模块<br><a id="more"></a></p>
 <h2 id="Swift是一门从零开始的创新的编程语言，用于iOS，OS-X，watchOS，和tvOS应用的开发，它吸取了C以及Objective-C的优点，且不受C兼容性的限制。Swift采用安全编程模型-并添加了许多新的特性来使编程更加简单，更加灵活和有趣。Swift基于成熟而且流行的Cocoa和Cocoa-Touch框架，这是我们重新定义了软件开发方法的一个好时机，"><a href="#Swift是一门从零开始的创新的编程语言，用于iOS，OS-X，watchOS，和tvOS应用的开发，它吸取了C以及Objective-C的优点，且不受C兼容性的限制。Swift采用安全编程模型-并添加了许多新的特性来使编程更加简单，更加灵活和有趣。Swift基于成熟而且流行的Cocoa和Cocoa-Touch框架，这是我们重新定义了软件开发方法的一个好时机，" class="headerlink" title="Swift是一门从零开始的创新的编程语言，用于iOS，OS X，watchOS，和tvOS应用的开发，它吸取了C以及Objective-C的优点，且不受C兼容性的限制。Swift采用安全编程模型,并添加了许多新的特性来使编程更加简单，更加灵活和有趣。Swift基于成熟而且流行的Cocoa和Cocoa Touch框架，这是我们重新定义了软件开发方法的一个好时机，"></a>Swift是一门从零开始的创新的编程语言，用于iOS，OS X，watchOS，和tvOS应用的开发，它吸取了C以及Objective-C的优点，且不受C兼容性的限制。Swift采用安全编程模型,并添加了许多新的特性来使编程更加简单，更加灵活和有趣。Swift基于成熟而且流行的Cocoa和Cocoa Touch框架，这是我们重新定义了软件开发方法的一个好时机，</h2><h2 id="如果你已经开始接触Swift，你可能会考虑如何在Swift项目中加入第三方库，使项目运行得更好。Railsware-com的移动开发人员，Alex-Denisov-iOS工程师和大量的开源粉丝，准备讨论一下这个问题。"><a href="#如果你已经开始接触Swift，你可能会考虑如何在Swift项目中加入第三方库，使项目运行得更好。Railsware-com的移动开发人员，Alex-Denisov-iOS工程师和大量的开源粉丝，准备讨论一下这个问题。" class="headerlink" title="如果你已经开始接触Swift，你可能会考虑如何在Swift项目中加入第三方库，使项目运行得更好。Railsware.com的移动开发人员，Alex Denisov,iOS工程师和大量的开源粉丝，准备讨论一下这个问题。"></a>如果你已经开始接触Swift，你可能会考虑如何在Swift项目中加入第三方库，使项目运行得更好。Railsware.com的移动开发人员，Alex Denisov,iOS工程师和大量的开源粉丝，准备讨论一下这个问题。</h2><h2 id="苹果提供了一种机制通过框架来分发代码，所以使用ObjC和Swift代码来自定义一个框架库是非常简单的（对于iOS也一样）。接下来创建一个纯的Swift模块，就像苹果创建的Swift标准库和Cocoa-Cocoa-Touch桥接库。"><a href="#苹果提供了一种机制通过框架来分发代码，所以使用ObjC和Swift代码来自定义一个框架库是非常简单的（对于iOS也一样）。接下来创建一个纯的Swift模块，就像苹果创建的Swift标准库和Cocoa-Cocoa-Touch桥接库。" class="headerlink" title="苹果提供了一种机制通过框架来分发代码，所以使用ObjC和Swift代码来自定义一个框架库是非常简单的（对于iOS也一样）。接下来创建一个纯的Swift模块，就像苹果创建的Swift标准库和Cocoa/Cocoa Touch桥接库。"></a>苹果提供了一种机制通过框架来分发代码，所以使用ObjC和Swift代码来自定义一个框架库是非常简单的（对于iOS也一样）。接下来创建一个纯的Swift模块，就像苹果创建的Swift标准库和Cocoa/Cocoa Touch桥接库。</h2><h2 id="现在我们来创建一个简单的叫Logger的Swift模块，它只有一个方法：log。这个Swift模块至少要包含三个文件，文件列表如下："><a href="#现在我们来创建一个简单的叫Logger的Swift模块，它只有一个方法：log。这个Swift模块至少要包含三个文件，文件列表如下：" class="headerlink" title="现在我们来创建一个简单的叫Logger的Swift模块，它只有一个方法：log。这个Swift模块至少要包含三个文件，文件列表如下："></a>现在我们来创建一个简单的叫Logger的Swift模块，它只有一个方法：log。这个Swift模块至少要包含三个文件，文件列表如下：</h2><h2 id="Logger-swiftmodule-公共接口的定义文件"><a href="#Logger-swiftmodule-公共接口的定义文件" class="headerlink" title="Logger.swiftmodule - 公共接口的定义文件"></a>Logger.swiftmodule - 公共接口的定义文件</h2><h2 id="Logger-swiftdoc-文档文件"><a href="#Logger-swiftdoc-文档文件" class="headerlink" title="Logger.swiftdoc - 文档文件"></a>Logger.swiftdoc - 文档文件</h2><h2 id="libLogger-a-编译后的库文件-可能是一个动态库，这取决于你的工程任务"><a href="#libLogger-a-编译后的库文件-可能是一个动态库，这取决于你的工程任务" class="headerlink" title="libLogger.a - 编译后的库文件(可能是一个动态库，这取决于你的工程任务)"></a>libLogger.a - 编译后的库文件(可能是一个动态库，这取决于你的工程任务)</h2><h2 id="我们现在开始创建一个Logger的库："><a href="#我们现在开始创建一个Logger的库：" class="headerlink" title="我们现在开始创建一个Logger的库："></a>我们现在开始创建一个Logger的库：</h2><h2 id="下面将使用”-gt-“前缀来实例化这个Logger对象，并记录一些日志："><a href="#下面将使用”-gt-“前缀来实例化这个Logger对象，并记录一些日志：" class="headerlink" title="下面将使用”&gt; “前缀来实例化这个Logger对象，并记录一些日志："></a>下面将使用”&gt; “前缀来实例化这个Logger对象，并记录一些日志：</h2><h2 id="现在来创建libLooger-a文件，命令如下："><a href="#现在来创建libLooger-a文件，命令如下：" class="headerlink" title="现在来创建libLooger.a文件，命令如下："></a>现在来创建libLooger.a文件，命令如下：</h2><h2 id="xcrun-swift-emit-library-emit-object-Logger-swift-sdk-xcrun-–show-sdk-path-–sdk-macosx-module-nameLoggerar-rcs-libLogger-a-Logger-o"><a href="#xcrun-swift-emit-library-emit-object-Logger-swift-sdk-xcrun-–show-sdk-path-–sdk-macosx-module-nameLoggerar-rcs-libLogger-a-Logger-o" class="headerlink" title="xcrun swift -emit-library -emit-object Logger.swift -sdk $(xcrun –show-sdk-path –sdk macosx) -module-nameLoggerar rcs libLogger.a Logger.o"></a>xcrun swift -emit-library -emit-object Logger.swift -sdk $(xcrun –show-sdk-path –sdk macosx) -module-nameLoggerar rcs libLogger.a Logger.o</h2><h2 id="emit-library表示生成动态链接共享库，而使用-emit-object不仅会生成文件还会生成包含main方法，所以你会得到一个”Duplicate-Symbol“的链接错误。"><a href="#emit-library表示生成动态链接共享库，而使用-emit-object不仅会生成文件还会生成包含main方法，所以你会得到一个”Duplicate-Symbol“的链接错误。" class="headerlink" title="-emit-library表示生成动态链接共享库，而使用-emit-object不仅会生成文件还会生成包含main方法，所以你会得到一个”Duplicate Symbol“的链接错误。"></a>-emit-library表示生成动态链接共享库，而使用-emit-object不仅会生成文件还会生成包含main方法，所以你会得到一个”Duplicate Symbol“的链接错误。</h2><h2 id="解决方法很简单：执行时，同时加入-emit-object和-emit-library两个参数，就像上面描述的命名一样。"><a href="#解决方法很简单：执行时，同时加入-emit-object和-emit-library两个参数，就像上面描述的命名一样。" class="headerlink" title="解决方法很简单：执行时，同时加入-emit-object和-emit-library两个参数，就像上面描述的命名一样。"></a>解决方法很简单：执行时，同时加入-emit-object和-emit-library两个参数，就像上面描述的命名一样。</h2><h2 id="接下来创建Logger-swiftdoc和Logger-swiftmoudle："><a href="#接下来创建Logger-swiftdoc和Logger-swiftmoudle：" class="headerlink" title="接下来创建Logger.swiftdoc和Logger.swiftmoudle："></a>接下来创建Logger.swiftdoc和Logger.swiftmoudle：</h2><h2 id="xcrun-swift-emit-moduleLogger-swift-sdk-xcrun-–show-sdk-path-–sdk-macosx-module-name-Logger"><a href="#xcrun-swift-emit-moduleLogger-swift-sdk-xcrun-–show-sdk-path-–sdk-macosx-module-name-Logger" class="headerlink" title="xcrun swift -emit-moduleLogger.swift -sdk$(xcrun –show-sdk-path –sdk macosx) -module-name Logger"></a>xcrun swift -emit-moduleLogger.swift -sdk$(xcrun –show-sdk-path –sdk macosx) -module-name Logger</h2><h2 id="至此我们有了一个完整的模块，可以添加到一个真实地工程里面了。创建一个简单地Swift的工程，添加下面的这些文件："><a href="#至此我们有了一个完整的模块，可以添加到一个真实地工程里面了。创建一个简单地Swift的工程，添加下面的这些文件：" class="headerlink" title="至此我们有了一个完整的模块，可以添加到一个真实地工程里面了。创建一个简单地Swift的工程，添加下面的这些文件："></a>至此我们有了一个完整的模块，可以添加到一个真实地工程里面了。创建一个简单地Swift的工程，添加下面的这些文件：</h2><h2 id="然后设置Swift的”Import-paths”配置："><a href="#然后设置Swift的”Import-paths”配置：" class="headerlink" title="然后设置Swift的”Import paths”配置："></a>然后设置Swift的”Import paths”配置：</h2><h2 id="为了使你工程正常运行，你还需要导入刚创建的Logger模块："><a href="#为了使你工程正常运行，你还需要导入刚创建的Logger模块：" class="headerlink" title="为了使你工程正常运行，你还需要导入刚创建的Logger模块："></a>为了使你工程正常运行，你还需要导入刚创建的Logger模块：</h2><h2 id="瞧，程序成功运行了！"><a href="#瞧，程序成功运行了！" class="headerlink" title="瞧，程序成功运行了！"></a>瞧，程序成功运行了！</h2><h2 id="处理文档记录是非常简单的。添加文档记录到模块里面只需使用”-“来添加注释即可，例如："><a href="#处理文档记录是非常简单的。添加文档记录到模块里面只需使用”-“来添加注释即可，例如：" class="headerlink" title="处理文档记录是非常简单的。添加文档记录到模块里面只需使用”///“来添加注释即可，例如："></a>处理文档记录是非常简单的。添加文档记录到模块里面只需使用”///“来添加注释即可，例如：</h2><h2 id="集成后你将在Xcode的右边看到文档记录的相关信息。"><a href="#集成后你将在Xcode的右边看到文档记录的相关信息。" class="headerlink" title="集成后你将在Xcode的右边看到文档记录的相关信息。"></a>集成后你将在Xcode的右边看到文档记录的相关信息。</h2><h2 id="注意：要想集成并使用一个新的模块，你需要重新启动Xcode。"><a href="#注意：要想集成并使用一个新的模块，你需要重新启动Xcode。" class="headerlink" title="注意：要想集成并使用一个新的模块，你需要重新启动Xcode。"></a>注意：要想集成并使用一个新的模块，你需要重新启动Xcode。</h2><h2 id="这个方法有可能不适合常规的IOS-OSX开发，因为它必须创建和支持Make-CMake-file，这个生成是比较复杂的。但是如果你想创建一个纯Swift模块，不使用任何Obj-C代码的话，那这就是很有用的方法。"><a href="#这个方法有可能不适合常规的IOS-OSX开发，因为它必须创建和支持Make-CMake-file，这个生成是比较复杂的。但是如果你想创建一个纯Swift模块，不使用任何Obj-C代码的话，那这就是很有用的方法。" class="headerlink" title="这个方法有可能不适合常规的IOS/OSX开发，因为它必须创建和支持Make/CMake file，这个生成是比较复杂的。但是如果你想创建一个纯Swift模块，不使用任何Obj-C代码的话，那这就是很有用的方法。"></a>这个方法有可能不适合常规的IOS/OSX开发，因为它必须创建和支持Make/CMake file，这个生成是比较复杂的。但是如果你想创建一个纯Swift模块，不使用任何Obj-C代码的话，那这就是很有用的方法。</h2>
       
     </div>
-    
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2017/06/14/基于Perfect的Swift3.1服务器开发案例/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">&lt;</strong>
-      <div class="article-nav-title">
+
+    <div>
+      
         
-          基于Perfect的Swift3.1服务器开发案例
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/06/14/Swift中有个双问号操作符/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Swift中有个双问号操作符</div>
-      <strong class="article-nav-caption">&gt;</strong>
-    </a>
-  
-</nav>
 
-  
-</article>
-
-
-<div class="ds-share share" data-thread-key="如何创建一个纯 Swift 模块" data-title="如何创建一个纯 Swift 模块" data-url="http://yoursite.com/2017/06/14/如何创建一个纯 Swift 模块/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="如何创建一个纯 Swift 模块">
-    <div class="ds-share-inline">
-      <ul  class="ds-share-icons-16">
-      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-      </ul>
-      <div class="ds-share-icons-more">
-      </div>
+      
     </div>
- </div>
- 
 
+    <div>
+      
+        
 
+      
+    </div>
 
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="如何创建一个纯 Swift 模块" data-title="如何创建一个纯 Swift 模块" data-url="http://yoursite.com/2017/06/14/如何创建一个纯 Swift 模块/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"winnerweb"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
+    <div>
+      
+        
 
+      
+    </div>
 
-
-
-</div>
-      <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-      <div class="footer-left">
-        &copy; 2017 飘金
-      </div>
-        <div class="footer-right">
-          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
         </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/14/Swift之Defer/" rel="next" title="Swift之Defer">
+                <i class="fa fa-chevron-left"></i> Swift之Defer
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/14/基于Perfect的Swift3.1服务器开发案例/" rel="prev" title="基于Perfect的Swift3.1服务器开发案例">
+                基于Perfect的Swift3.1服务器开发案例 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
     </div>
   </div>
-</footer>
-    </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
     
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  </div>
 
 
-<script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: true,
-		animate: true,
-		isHome: false,
-		isPost: true,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false
-	}
-</script>
-<script src="/js/main.js"></script>
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="飘金" />
+          <p class="site-author-name" itemprop="name">飘金</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
 
 
+      </section>
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
 
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
-</script>
+            
+              
+            
 
-<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Swift是一门从零开始的创新的编程语言，用于iOS，OS-X，watchOS，和tvOS应用的开发，它吸取了C以及Objective-C的优点，且不受C兼容性的限制。Swift采用安全编程模型-并添加了许多新的特性来使编程更加简单，更加灵活和有趣。Swift基于成熟而且流行的Cocoa和Cocoa-Touch框架，这是我们重新定义了软件开发方法的一个好时机，"><span class="nav-number">1.</span> <span class="nav-text">Swift是一门从零开始的创新的编程语言，用于iOS，OS X，watchOS，和tvOS应用的开发，它吸取了C以及Objective-C的优点，且不受C兼容性的限制。Swift采用安全编程模型,并添加了许多新的特性来使编程更加简单，更加灵活和有趣。Swift基于成熟而且流行的Cocoa和Cocoa Touch框架，这是我们重新定义了软件开发方法的一个好时机，</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如果你已经开始接触Swift，你可能会考虑如何在Swift项目中加入第三方库，使项目运行得更好。Railsware-com的移动开发人员，Alex-Denisov-iOS工程师和大量的开源粉丝，准备讨论一下这个问题。"><span class="nav-number">2.</span> <span class="nav-text">如果你已经开始接触Swift，你可能会考虑如何在Swift项目中加入第三方库，使项目运行得更好。Railsware.com的移动开发人员，Alex Denisov,iOS工程师和大量的开源粉丝，准备讨论一下这个问题。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#苹果提供了一种机制通过框架来分发代码，所以使用ObjC和Swift代码来自定义一个框架库是非常简单的（对于iOS也一样）。接下来创建一个纯的Swift模块，就像苹果创建的Swift标准库和Cocoa-Cocoa-Touch桥接库。"><span class="nav-number">3.</span> <span class="nav-text">苹果提供了一种机制通过框架来分发代码，所以使用ObjC和Swift代码来自定义一个框架库是非常简单的（对于iOS也一样）。接下来创建一个纯的Swift模块，就像苹果创建的Swift标准库和Cocoa/Cocoa Touch桥接库。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#现在我们来创建一个简单的叫Logger的Swift模块，它只有一个方法：log。这个Swift模块至少要包含三个文件，文件列表如下："><span class="nav-number">4.</span> <span class="nav-text">现在我们来创建一个简单的叫Logger的Swift模块，它只有一个方法：log。这个Swift模块至少要包含三个文件，文件列表如下：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Logger-swiftmodule-公共接口的定义文件"><span class="nav-number">5.</span> <span class="nav-text">Logger.swiftmodule - 公共接口的定义文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Logger-swiftdoc-文档文件"><span class="nav-number">6.</span> <span class="nav-text">Logger.swiftdoc - 文档文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#libLogger-a-编译后的库文件-可能是一个动态库，这取决于你的工程任务"><span class="nav-number">7.</span> <span class="nav-text">libLogger.a - 编译后的库文件(可能是一个动态库，这取决于你的工程任务)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我们现在开始创建一个Logger的库："><span class="nav-number">8.</span> <span class="nav-text">我们现在开始创建一个Logger的库：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下面将使用”-gt-“前缀来实例化这个Logger对象，并记录一些日志："><span class="nav-number">9.</span> <span class="nav-text">下面将使用”> “前缀来实例化这个Logger对象，并记录一些日志：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#现在来创建libLooger-a文件，命令如下："><span class="nav-number">10.</span> <span class="nav-text">现在来创建libLooger.a文件，命令如下：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xcrun-swift-emit-library-emit-object-Logger-swift-sdk-xcrun-–show-sdk-path-–sdk-macosx-module-nameLoggerar-rcs-libLogger-a-Logger-o"><span class="nav-number">11.</span> <span class="nav-text">xcrun swift -emit-library -emit-object Logger.swift -sdk $(xcrun –show-sdk-path –sdk macosx) -module-nameLoggerar rcs libLogger.a Logger.o</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#emit-library表示生成动态链接共享库，而使用-emit-object不仅会生成文件还会生成包含main方法，所以你会得到一个”Duplicate-Symbol“的链接错误。"><span class="nav-number">12.</span> <span class="nav-text">-emit-library表示生成动态链接共享库，而使用-emit-object不仅会生成文件还会生成包含main方法，所以你会得到一个”Duplicate Symbol“的链接错误。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方法很简单：执行时，同时加入-emit-object和-emit-library两个参数，就像上面描述的命名一样。"><span class="nav-number">13.</span> <span class="nav-text">解决方法很简单：执行时，同时加入-emit-object和-emit-library两个参数，就像上面描述的命名一样。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接下来创建Logger-swiftdoc和Logger-swiftmoudle："><span class="nav-number">14.</span> <span class="nav-text">接下来创建Logger.swiftdoc和Logger.swiftmoudle：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xcrun-swift-emit-moduleLogger-swift-sdk-xcrun-–show-sdk-path-–sdk-macosx-module-name-Logger"><span class="nav-number">15.</span> <span class="nav-text">xcrun swift -emit-moduleLogger.swift -sdk$(xcrun –show-sdk-path –sdk macosx) -module-name Logger</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#至此我们有了一个完整的模块，可以添加到一个真实地工程里面了。创建一个简单地Swift的工程，添加下面的这些文件："><span class="nav-number">16.</span> <span class="nav-text">至此我们有了一个完整的模块，可以添加到一个真实地工程里面了。创建一个简单地Swift的工程，添加下面的这些文件：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#然后设置Swift的”Import-paths”配置："><span class="nav-number">17.</span> <span class="nav-text">然后设置Swift的”Import paths”配置：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为了使你工程正常运行，你还需要导入刚创建的Logger模块："><span class="nav-number">18.</span> <span class="nav-text">为了使你工程正常运行，你还需要导入刚创建的Logger模块：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#瞧，程序成功运行了！"><span class="nav-number">19.</span> <span class="nav-text">瞧，程序成功运行了！</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理文档记录是非常简单的。添加文档记录到模块里面只需使用”-“来添加注释即可，例如："><span class="nav-number">20.</span> <span class="nav-text">处理文档记录是非常简单的。添加文档记录到模块里面只需使用”///“来添加注释即可，例如：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集成后你将在Xcode的右边看到文档记录的相关信息。"><span class="nav-number">21.</span> <span class="nav-text">集成后你将在Xcode的右边看到文档记录的相关信息。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意：要想集成并使用一个新的模块，你需要重新启动Xcode。"><span class="nav-number">22.</span> <span class="nav-text">注意：要想集成并使用一个新的模块，你需要重新启动Xcode。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#这个方法有可能不适合常规的IOS-OSX开发，因为它必须创建和支持Make-CMake-file，这个生成是比较复杂的。但是如果你想创建一个纯Swift模块，不使用任何Obj-C代码的话，那这就是很有用的方法。"><span class="nav-number">23.</span> <span class="nav-text">这个方法有可能不适合常规的IOS/OSX开发，因为它必须创建和支持Make/CMake file，这个生成是比较复杂的。但是如果你想创建一个纯Swift模块，不使用任何Obj-C代码的话，那这就是很有用的方法。</span></a></li></ol></div>
+            
 
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">飘金</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
 
   </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>
