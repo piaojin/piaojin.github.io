@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>实例化讲解RunLoop | 飘金的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="实例化讲解RunLoop">
+<meta name="keywords" content="iOS,Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实例化讲解RunLoop">
+<meta property="og:url" content="http://yoursite.com/2017/06/15/实例化讲解RunLoop/index.html">
+<meta property="og:site_name" content="飘金的博客">
+<meta property="og:description" content="实例化讲解RunLoop">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1513759-e6f4d26e1ae55d20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/440">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1513759-fa79f186a6e43047.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/440">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1513759-09e30658d91e4b06.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/540">
+<meta property="og:updated_time" content="2017-06-14T14:23:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="实例化讲解RunLoop">
+<meta name="twitter:description" content="实例化讲解RunLoop">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1513759-e6f4d26e1ae55d20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/440">
+  
+    <link rel="alternative" href="/atom.xml" title="飘金的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">飘金</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">会炒菜的猿</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/Home">博客首页</a></li>
+                        
+                            <li><a href="/works">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/luuman" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://luuman.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">纯海迷、爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">飘金</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">飘金</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">会炒菜的猿</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/Home">博客首页</a></li>
+                
+                    <li><a href="/works">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/luuman" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-实例化讲解RunLoop" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/06/15/实例化讲解RunLoop/" class="article-date">
+      <time datetime="2017-06-15T06:23:47.000Z" itemprop="datePublished">2017-06-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      实例化讲解RunLoop
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/iOS/">iOS</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>实例化讲解RunLoop<br><a id="more"></a></p>
+<h2 id="转自此处"><a href="#转自此处" class="headerlink" title="转自此处"></a><a href="http://www.jianshu.com/p/536184bfd163" target="_blank" rel="external">转自此处</a></h2><h1 id="实例化讲解RunLoop"><a href="#实例化讲解RunLoop" class="headerlink" title="实例化讲解RunLoop"></a>实例化讲解RunLoop</h1><h2 id="之前看过很多有关RunLoop的文章，其中要么是主要介绍RunLoop的基本概念，要么是主要讲解RunLoop的底层原理，很少用真正的实例来讲解RunLoop的，这其中有大部分原因是由于大家在项目中很少能用到RunLoop吧。基于这种原因，本文中将用很少的篇幅来对基础内容做以介绍，然后主要利用实例来加深大家对RunLoop的理解。本文主要分为如下几个部分"><a href="#之前看过很多有关RunLoop的文章，其中要么是主要介绍RunLoop的基本概念，要么是主要讲解RunLoop的底层原理，很少用真正的实例来讲解RunLoop的，这其中有大部分原因是由于大家在项目中很少能用到RunLoop吧。基于这种原因，本文中将用很少的篇幅来对基础内容做以介绍，然后主要利用实例来加深大家对RunLoop的理解。本文主要分为如下几个部分" class="headerlink" title="之前看过很多有关RunLoop的文章，其中要么是主要介绍RunLoop的基本概念，要么是主要讲解RunLoop的底层原理，很少用真正的实例来讲解RunLoop的，这其中有大部分原因是由于大家在项目中很少能用到RunLoop吧。基于这种原因，本文中将用很少的篇幅来对基础内容做以介绍，然后主要利用实例来加深大家对RunLoop的理解。本文主要分为如下几个部分:"></a>之前看过很多有关RunLoop的文章，其中要么是主要介绍RunLoop的基本概念，要么是主要讲解RunLoop的底层原理，很少用真正的实例来讲解RunLoop的，这其中有大部分原因是由于大家在项目中很少能用到RunLoop吧。基于这种原因，本文中将用很少的篇幅来对基础内容做以介绍，然后主要利用实例来加深大家对RunLoop的理解。本文主要分为如下几个部分:</h2><ul>
+<li><h2 id="RunLoop的基础知识"><a href="#RunLoop的基础知识" class="headerlink" title="RunLoop的基础知识"></a>RunLoop的基础知识</h2></li>
+<li><h2 id="初识RunLoop，如何让RunLoop进驻线程"><a href="#初识RunLoop，如何让RunLoop进驻线程" class="headerlink" title="初识RunLoop，如何让RunLoop进驻线程"></a>初识RunLoop，如何让RunLoop进驻线程</h2></li>
+<li><h2 id="深入理解Perform-Selector"><a href="#深入理解Perform-Selector" class="headerlink" title="深入理解Perform Selector"></a>深入理解Perform Selector</h2></li>
+<li><h2 id="一直”活着”的后台线程"><a href="#一直”活着”的后台线程" class="headerlink" title="一直”活着”的后台线程"></a>一直”活着”的后台线程</h2></li>
+<li><h2 id="深入理解NSTimer"><a href="#深入理解NSTimer" class="headerlink" title="深入理解NSTimer"></a>深入理解NSTimer</h2></li>
+<li><h2 id="让两个后台线程有依赖性的一种方式"><a href="#让两个后台线程有依赖性的一种方式" class="headerlink" title="让两个后台线程有依赖性的一种方式"></a>让两个后台线程有依赖性的一种方式</h2></li>
+<li><h2 id="NSURLConnetction的内部实现"><a href="#NSURLConnetction的内部实现" class="headerlink" title="NSURLConnetction的内部实现"></a>NSURLConnetction的内部实现</h2></li>
+<li><h2 id="AFNetWorking中是如何使用RunLoop的"><a href="#AFNetWorking中是如何使用RunLoop的" class="headerlink" title="AFNetWorking中是如何使用RunLoop的?"></a>AFNetWorking中是如何使用RunLoop的?</h2></li>
+<li><h2 id="其它-利用GCD实现定时器功能"><a href="#其它-利用GCD实现定时器功能" class="headerlink" title="其它:利用GCD实现定时器功能"></a>其它:利用GCD实现定时器功能</h2></li>
+<li><h2 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h2></li>
+</ul>
+<blockquote>
+<h2 id="一、RunLoop的基本概念"><a href="#一、RunLoop的基本概念" class="headerlink" title="一、RunLoop的基本概念:"></a>一、RunLoop的基本概念:</h2></blockquote>
+<h3 id="什么是RunLoop？提到RunLoop，我们一般都会提到线程，这是为什么呢？先来看下官方对RunLoop的定义-RunLoop系统中和线程相关的基础架构的组成部分-和线程相关-，一个RunLoop是一个事件处理环，系统利用这个事件处理环来安排事务，协调输入的各种事件。RunLoop的目的是让你的线程在有工作的时候忙碌，没有工作的时候休眠-和线程相关-。可能这样说你还不是特别清楚RunLoop究竟是用来做什么的，打个比方来说明-我们把线程比作一辆跑车，把这辆跑车的主人比作RunLoop，那么在没有’主人’的时候，这个跑车的生命是直线型的，其启动，运行完之后就会废弃-没有人对其进行控制，’撞坏’被收回-，当有了RunLoop这个主人之后，‘线程’这辆跑车的生命就有了保障，这个时候，跑车的生命是环形的，并且在主人有比赛任务的时候就会被RunLoop这个主人所唤醒-在没有任务的时候可以休眠-在IOS中，开启线程是很消耗性能的，开启主线程要消耗1M内存，开启一个后台线程需要消耗512k内存，我们应当在线程没有任务的时候休眠，来释放所占用的资源，以便CPU进行更加高效的工作-，这样可以增加跑车的效率-也就是说RunLoop是为线程所服务的。这个例子有点不是很贴切，线程和RunLoop之间是以键值对的形式一一对应的，其中key是thread，value是runLoop-这点可以从苹果公开的源码中看出来-，其实RunLoop是管理线程的一种机制，这种机制不仅在IOS上有，在Node-js中的EventLoop，Android中的Looper，都有类似的模式。刚才所说的比赛任务就是唤醒跑车这个线程的一个source-RunLoop-Mode就是，一系列输入的source-timer以及observer，RunLoop-Mode包含以下几种"><a href="#什么是RunLoop？提到RunLoop，我们一般都会提到线程，这是为什么呢？先来看下官方对RunLoop的定义-RunLoop系统中和线程相关的基础架构的组成部分-和线程相关-，一个RunLoop是一个事件处理环，系统利用这个事件处理环来安排事务，协调输入的各种事件。RunLoop的目的是让你的线程在有工作的时候忙碌，没有工作的时候休眠-和线程相关-。可能这样说你还不是特别清楚RunLoop究竟是用来做什么的，打个比方来说明-我们把线程比作一辆跑车，把这辆跑车的主人比作RunLoop，那么在没有’主人’的时候，这个跑车的生命是直线型的，其启动，运行完之后就会废弃-没有人对其进行控制，’撞坏’被收回-，当有了RunLoop这个主人之后，‘线程’这辆跑车的生命就有了保障，这个时候，跑车的生命是环形的，并且在主人有比赛任务的时候就会被RunLoop这个主人所唤醒-在没有任务的时候可以休眠-在IOS中，开启线程是很消耗性能的，开启主线程要消耗1M内存，开启一个后台线程需要消耗512k内存，我们应当在线程没有任务的时候休眠，来释放所占用的资源，以便CPU进行更加高效的工作-，这样可以增加跑车的效率-也就是说RunLoop是为线程所服务的。这个例子有点不是很贴切，线程和RunLoop之间是以键值对的形式一一对应的，其中key是thread，value是runLoop-这点可以从苹果公开的源码中看出来-，其实RunLoop是管理线程的一种机制，这种机制不仅在IOS上有，在Node-js中的EventLoop，Android中的Looper，都有类似的模式。刚才所说的比赛任务就是唤醒跑车这个线程的一个source-RunLoop-Mode就是，一系列输入的source-timer以及observer，RunLoop-Mode包含以下几种" class="headerlink" title="什么是RunLoop？提到RunLoop，我们一般都会提到线程，这是为什么呢？先来看下官方对RunLoop的定义:RunLoop系统中和线程相关的基础架构的组成部分(和线程相关)，一个RunLoop是一个事件处理环，系统利用这个事件处理环来安排事务，协调输入的各种事件。RunLoop的目的是让你的线程在有工作的时候忙碌，没有工作的时候休眠(和线程相关)。可能这样说你还不是特别清楚RunLoop究竟是用来做什么的，打个比方来说明:我们把线程比作一辆跑车，把这辆跑车的主人比作RunLoop，那么在没有’主人’的时候，这个跑车的生命是直线型的，其启动，运行完之后就会废弃(没有人对其进行控制，’撞坏’被收回)，当有了RunLoop这个主人之后，‘线程’这辆跑车的生命就有了保障，这个时候，跑车的生命是环形的，并且在主人有比赛任务的时候就会被RunLoop这个主人所唤醒,在没有任务的时候可以休眠(在IOS中，开启线程是很消耗性能的，开启主线程要消耗1M内存，开启一个后台线程需要消耗512k内存，我们应当在线程没有任务的时候休眠，来释放所占用的资源，以便CPU进行更加高效的工作)，这样可以增加跑车的效率,也就是说RunLoop是为线程所服务的。这个例子有点不是很贴切，线程和RunLoop之间是以键值对的形式一一对应的，其中key是thread，value是runLoop(这点可以从苹果公开的源码中看出来)，其实RunLoop是管理线程的一种机制，这种机制不仅在IOS上有，在Node.js中的EventLoop，Android中的Looper，都有类似的模式。刚才所说的比赛任务就是唤醒跑车这个线程的一个source;RunLoop Mode就是，一系列输入的source,timer以及observer，RunLoop Mode包含以下几种:"></a>什么是RunLoop？提到RunLoop，我们一般都会提到线程，这是为什么呢？先来看下官方对RunLoop的定义:RunLoop系统中和线程相关的基础架构的组成部分(和线程相关)，一个RunLoop是一个事件处理环，系统利用这个事件处理环来安排事务，协调输入的各种事件。RunLoop的目的是让你的线程在有工作的时候忙碌，没有工作的时候休眠(和线程相关)。可能这样说你还不是特别清楚RunLoop究竟是用来做什么的，打个比方来说明:我们把线程比作一辆跑车，把这辆跑车的主人比作RunLoop，那么在没有’主人’的时候，这个跑车的生命是直线型的，其启动，运行完之后就会废弃(没有人对其进行控制，’撞坏’被收回)，当有了RunLoop这个主人之后，‘线程’这辆跑车的生命就有了保障，这个时候，跑车的生命是环形的，并且在主人有比赛任务的时候就会被RunLoop这个主人所唤醒,在没有任务的时候可以休眠(在IOS中，开启线程是很消耗性能的，开启主线程要消耗1M内存，开启一个后台线程需要消耗512k内存，我们应当在线程没有任务的时候休眠，来释放所占用的资源，以便CPU进行更加高效的工作)，这样可以增加跑车的效率,也就是说RunLoop是为线程所服务的。这个例子有点不是很贴切，线程和RunLoop之间是以键值对的形式一一对应的，其中key是thread，value是runLoop(这点可以从苹果公开的源码中看出来)，其实RunLoop是管理线程的一种机制，这种机制不仅在IOS上有，在Node.js中的EventLoop，Android中的Looper，都有类似的模式。刚才所说的比赛任务就是唤醒跑车这个线程的一个source;RunLoop Mode就是，一系列输入的source,timer以及observer，RunLoop Mode包含以下几种:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">NSDefaultRunLoopMode,</div><div class="line">NSEventTrackingRunLoopMode,</div><div class="line">UIInitializationRunLoopMode,</div><div class="line">NSRunLoopCommonModes,</div><div class="line">NSConnectionReplyMode,</div><div class="line">NSModalPanelRunLoopMode</div></pre></td></tr></table></figure>
+<h3 id="至于这些mode各自的含义，读者可自己查询，网上不乏这类资源"><a href="#至于这些mode各自的含义，读者可自己查询，网上不乏这类资源" class="headerlink" title="至于这些mode各自的含义，读者可自己查询，网上不乏这类资源;"></a>至于这些mode各自的含义，读者可自己查询，网上不乏这类资源;</h3><blockquote>
+<h2 id="二、初识RunLoop，如何让RunLoop进驻线程"><a href="#二、初识RunLoop，如何让RunLoop进驻线程" class="headerlink" title="二、初识RunLoop，如何让RunLoop进驻线程"></a>二、初识RunLoop，如何让RunLoop进驻线程</h2></blockquote>
+<h3 id="我们在主线程中添加如下代码"><a href="#我们在主线程中添加如下代码" class="headerlink" title="我们在主线程中添加如下代码:"></a>我们在主线程中添加如下代码:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">while (1) &#123;</div><div class="line">NSLog(@&quot;while begin&quot;);</div><div class="line">// the thread be blocked here</div><div class="line">NSRunLoop *runLoop = [NSRunLoop currentRunLoop];</div><div class="line">[runLoop runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];</div><div class="line">// this will not be executed</div><div class="line">NSLog(@&quot;while end&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="这个时候我们可以看到主线程在执行完-runLoop-runMode-NSDefaultRunLoopMode-beforeDate-NSDate-distantFuture-之后被阻塞而没有执行下面的NSLog-”while-end”-同时，我们利用GCD，将这段代码放到一个后台线程中"><a href="#这个时候我们可以看到主线程在执行完-runLoop-runMode-NSDefaultRunLoopMode-beforeDate-NSDate-distantFuture-之后被阻塞而没有执行下面的NSLog-”while-end”-同时，我们利用GCD，将这段代码放到一个后台线程中" class="headerlink" title="这个时候我们可以看到主线程在执行完[runLoop runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]]; 之后被阻塞而没有执行下面的NSLog(@”while end”);同时，我们利用GCD，将这段代码放到一个后台线程中:"></a>这个时候我们可以看到主线程在执行完[runLoop runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]]; 之后被阻塞而没有执行下面的NSLog(@”while end”);同时，我们利用GCD，将这段代码放到一个后台线程中:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</div><div class="line">while (1) &#123;</div><div class="line">NSLog(@&quot;while begin&quot;);</div><div class="line">NSRunLoop *subRunLoop = [NSRunLoop currentRunLoop];</div><div class="line">[subRunLoop runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];</div><div class="line">NSLog(@&quot;while end&quot;);</div><div class="line">&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="这个时候我们发现这个while循环会一直在执行；这是为什么呢-我们先将这两个RunLoop分别打印出来"><a href="#这个时候我们发现这个while循环会一直在执行；这是为什么呢-我们先将这两个RunLoop分别打印出来" class="headerlink" title="这个时候我们发现这个while循环会一直在执行；这是为什么呢?我们先将这两个RunLoop分别打印出来:"></a>这个时候我们发现这个while循环会一直在执行；这是为什么呢?我们先将这两个RunLoop分别打印出来:</h3><h1 id="主线程的RunLoop"><a href="#主线程的RunLoop" class="headerlink" title="主线程的RunLoop"></a>主线程的RunLoop</h1><p><img src="http://upload-images.jianshu.io/upload_images/1513759-e6f4d26e1ae55d20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/440" alt=""></p>
+<h3 id="由于这个日志比较长，我就只截取了上面的一部分。我们再看我们新建的子线程中的RunLoop-打印出来之后"><a href="#由于这个日志比较长，我就只截取了上面的一部分。我们再看我们新建的子线程中的RunLoop-打印出来之后" class="headerlink" title="由于这个日志比较长，我就只截取了上面的一部分。我们再看我们新建的子线程中的RunLoop,打印出来之后:"></a>由于这个日志比较长，我就只截取了上面的一部分。我们再看我们新建的子线程中的RunLoop,打印出来之后:</h3><h1 id="backGroundThreadRunLoop-png"><a href="#backGroundThreadRunLoop-png" class="headerlink" title="backGroundThreadRunLoop.png"></a>backGroundThreadRunLoop.png</h1><p><img src="http://upload-images.jianshu.io/upload_images/1513759-fa79f186a6e43047.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/440" alt=""></p>
+<h3 id="从中可以看出来：我们新建的线程中"><a href="#从中可以看出来：我们新建的线程中" class="headerlink" title="从中可以看出来：我们新建的线程中:"></a>从中可以看出来：我们新建的线程中:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sources0 = (null),</div><div class="line">sources1 = (null),</div><div class="line">observers = (null),</div><div class="line">timers = (null)</div></pre></td></tr></table></figure>
+<h3 id="我们看到虽然有Mode，但是我们没有给它soures-observer-timer，其实Mode中的这些source-observer-timer，统称为这个Mode的item，如果一个Mode中一个item都没有，则这个RunLoop会直接退出，不进入循环-其实线程之所以可以一直存在就是由于RunLoop将其带入了这个循环中-。下面我们为这个RunLoop添加个source"><a href="#我们看到虽然有Mode，但是我们没有给它soures-observer-timer，其实Mode中的这些source-observer-timer，统称为这个Mode的item，如果一个Mode中一个item都没有，则这个RunLoop会直接退出，不进入循环-其实线程之所以可以一直存在就是由于RunLoop将其带入了这个循环中-。下面我们为这个RunLoop添加个source" class="headerlink" title="我们看到虽然有Mode，但是我们没有给它soures,observer,timer，其实Mode中的这些source,observer,timer，统称为这个Mode的item，如果一个Mode中一个item都没有，则这个RunLoop会直接退出，不进入循环(其实线程之所以可以一直存在就是由于RunLoop将其带入了这个循环中)。下面我们为这个RunLoop添加个source:"></a>我们看到虽然有Mode，但是我们没有给它soures,observer,timer，其实Mode中的这些source,observer,timer，统称为这个Mode的item，如果一个Mode中一个item都没有，则这个RunLoop会直接退出，不进入循环(其实线程之所以可以一直存在就是由于RunLoop将其带入了这个循环中)。下面我们为这个RunLoop添加个source:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</div><div class="line">while (1) &#123;</div><div class="line">NSPort *macPort = [NSPort port];</div><div class="line">NSLog(@&quot;while begin&quot;);</div><div class="line">NSRunLoop *subRunLoop = [NSRunLoop currentRunLoop];</div><div class="line">[subRunLoop addPort:macPort forMode:NSDefaultRunLoopMode];</div><div class="line">[subRunLoop runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];</div><div class="line">NSLog(@&quot;while end&quot;);</div><div class="line">NSLog(@&quot;%@&quot;,subRunLoop);</div><div class="line">&#125;    </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="这样我们可以看到能够实现了和主线程中相同的效果，线程在这个地方暂停了，为什么呢？我们明天让RunLoop在distantFuture之前都一直run的啊？相信大家已经猜出出来了。这个时候线程被RunLoop带到‘坑’里去了，这个‘坑’就是一个循环，在循环中这个线程可以在没有任务的时候休眠，在有任务的时候被唤醒；当然我们只用一个while-1-也可以让这个线程一直存在，但是这个线程会一直在唤醒状态，及时它没有任务也一直处于运转状态，这对于CPU来说是非常不高效的。"><a href="#这样我们可以看到能够实现了和主线程中相同的效果，线程在这个地方暂停了，为什么呢？我们明天让RunLoop在distantFuture之前都一直run的啊？相信大家已经猜出出来了。这个时候线程被RunLoop带到‘坑’里去了，这个‘坑’就是一个循环，在循环中这个线程可以在没有任务的时候休眠，在有任务的时候被唤醒；当然我们只用一个while-1-也可以让这个线程一直存在，但是这个线程会一直在唤醒状态，及时它没有任务也一直处于运转状态，这对于CPU来说是非常不高效的。" class="headerlink" title="这样我们可以看到能够实现了和主线程中相同的效果，线程在这个地方暂停了，为什么呢？我们明天让RunLoop在distantFuture之前都一直run的啊？相信大家已经猜出出来了。这个时候线程被RunLoop带到‘坑’里去了，这个‘坑’就是一个循环，在循环中这个线程可以在没有任务的时候休眠，在有任务的时候被唤醒；当然我们只用一个while(1)也可以让这个线程一直存在，但是这个线程会一直在唤醒状态，及时它没有任务也一直处于运转状态，这对于CPU来说是非常不高效的。"></a>这样我们可以看到能够实现了和主线程中相同的效果，线程在这个地方暂停了，为什么呢？我们明天让RunLoop在distantFuture之前都一直run的啊？相信大家已经猜出出来了。这个时候线程被RunLoop带到‘坑’里去了，这个‘坑’就是一个循环，在循环中这个线程可以在没有任务的时候休眠，在有任务的时候被唤醒；当然我们只用一个while(1)也可以让这个线程一直存在，但是这个线程会一直在唤醒状态，及时它没有任务也一直处于运转状态，这对于CPU来说是非常不高效的。</h3><h2 id="小结-我们的RunLoop要想工作，必须要让它存在一个Item-source-observer或者timer-，主线程之所以能够一直存在，并且随时准备被唤醒就是应为系统为其添加了很多Item"><a href="#小结-我们的RunLoop要想工作，必须要让它存在一个Item-source-observer或者timer-，主线程之所以能够一直存在，并且随时准备被唤醒就是应为系统为其添加了很多Item" class="headerlink" title="小结:我们的RunLoop要想工作，必须要让它存在一个Item(source,observer或者timer)，主线程之所以能够一直存在，并且随时准备被唤醒就是应为系统为其添加了很多Item"></a>小结:我们的RunLoop要想工作，必须要让它存在一个Item(source,observer或者timer)，主线程之所以能够一直存在，并且随时准备被唤醒就是应为系统为其添加了很多Item</h2><blockquote>
+<h2 id="三、深入理解Perform-Selector"><a href="#三、深入理解Perform-Selector" class="headerlink" title="三、深入理解Perform Selector"></a>三、深入理解Perform Selector</h2></blockquote>
+<h3 id="我们先在主线程中使用下performselector"><a href="#我们先在主线程中使用下performselector" class="headerlink" title="我们先在主线程中使用下performselector:"></a>我们先在主线程中使用下performselector:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">- (void)tryPerformSelectorOnMianThread&#123;</div><div class="line"></div><div class="line">[self performSelector:@selector(mainThreadMethod) withObject:nil]; &#125;</div><div class="line"></div><div class="line">- (void)mainThreadMethod&#123;</div><div class="line"></div><div class="line">NSLog(@&quot;execute %s&quot;,__func__);</div><div class="line"></div><div class="line">// print: execute -[ViewController mainThreadMethod]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="这样我们在ViewDidLoad中调用tryPerformSelectorOnMianThread-就会立即执行，并且输出-print-execute-ViewController-mainThreadMethod"><a href="#这样我们在ViewDidLoad中调用tryPerformSelectorOnMianThread-就会立即执行，并且输出-print-execute-ViewController-mainThreadMethod" class="headerlink" title="这样我们在ViewDidLoad中调用tryPerformSelectorOnMianThread,就会立即执行，并且输出:print: execute -[ViewController mainThreadMethod];"></a>这样我们在ViewDidLoad中调用tryPerformSelectorOnMianThread,就会立即执行，并且输出:print: execute -[ViewController mainThreadMethod];</h3><h3 id="和上面的例子一样，我们使用GCD-让这个方法在后台线程中执行"><a href="#和上面的例子一样，我们使用GCD-让这个方法在后台线程中执行" class="headerlink" title="和上面的例子一样，我们使用GCD,让这个方法在后台线程中执行"></a>和上面的例子一样，我们使用GCD,让这个方法在后台线程中执行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">- (void)tryPerformSelectorOnBackGroundThread&#123;</div><div class="line"></div><div class="line">dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</div><div class="line"></div><div class="line">[self performSelector:@selector(backGroundThread) onThread:[NSThread currentThread] withObject:nil waitUntilDone:NO];</div><div class="line"></div><div class="line">&#125;);</div><div class="line">&#125;</div><div class="line">- (void)backGroundThread&#123;</div><div class="line"></div><div class="line">NSLog(@&quot;%u&quot;,[NSThread isMainThread]);</div><div class="line"></div><div class="line">NSLog(@&quot;execute %s&quot;,__FUNCTION__);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="同样的，我们调用tryPerformSelectorOnBackGroundThread这个方法，我们会发现，下面的backGroundThread不会被调用，这是什么原因呢？"><a href="#同样的，我们调用tryPerformSelectorOnBackGroundThread这个方法，我们会发现，下面的backGroundThread不会被调用，这是什么原因呢？" class="headerlink" title="同样的，我们调用tryPerformSelectorOnBackGroundThread这个方法，我们会发现，下面的backGroundThread不会被调用，这是什么原因呢？"></a>同样的，我们调用tryPerformSelectorOnBackGroundThread这个方法，我们会发现，下面的backGroundThread不会被调用，这是什么原因呢？</h3><h2 id="这是因为，在调用performSelector-onThread-withObject-waitUntilDone的时候，系统会给我们创建一个Timer的source，加到对应的RunLoop上去，然而这个时候我们没有RunLoop-如果我们加上RunLoop"><a href="#这是因为，在调用performSelector-onThread-withObject-waitUntilDone的时候，系统会给我们创建一个Timer的source，加到对应的RunLoop上去，然而这个时候我们没有RunLoop-如果我们加上RunLoop" class="headerlink" title="这是因为，在调用performSelector:onThread: withObject: waitUntilDone的时候，系统会给我们创建一个Timer的source，加到对应的RunLoop上去，然而这个时候我们没有RunLoop,如果我们加上RunLoop:"></a>这是因为，在调用performSelector:onThread: withObject: waitUntilDone的时候，系统会给我们创建一个Timer的source，加到对应的RunLoop上去，然而这个时候我们没有RunLoop,如果我们加上RunLoop:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">- (void)tryPerformSelectorOnBackGroundThread&#123;</div><div class="line"></div><div class="line">dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</div><div class="line"></div><div class="line">[self performSelector:@selector(backGroundThread) onThread:[NSThread currentThread] withObject:nil waitUntilDone:NO];</div><div class="line"></div><div class="line">NSRunLoop *runLoop = [NSRunLoop currentRunLoop];</div><div class="line">[runLoop run];</div><div class="line"></div><div class="line">&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="这时就会发现我们的方法正常被调用了。那么为什么主线程中的perfom-selector却能够正常调用呢？通过上面的例子相信你已经猜到了，主线程的RunLoop是一直存在的，所以我们在主线程中执行的时候，无需再添加RunLoop。"><a href="#这时就会发现我们的方法正常被调用了。那么为什么主线程中的perfom-selector却能够正常调用呢？通过上面的例子相信你已经猜到了，主线程的RunLoop是一直存在的，所以我们在主线程中执行的时候，无需再添加RunLoop。" class="headerlink" title="这时就会发现我们的方法正常被调用了。那么为什么主线程中的perfom selector却能够正常调用呢？通过上面的例子相信你已经猜到了，主线程的RunLoop是一直存在的，所以我们在主线程中执行的时候，无需再添加RunLoop。"></a>这时就会发现我们的方法正常被调用了。那么为什么主线程中的perfom selector却能够正常调用呢？通过上面的例子相信你已经猜到了，主线程的RunLoop是一直存在的，所以我们在主线程中执行的时候，无需再添加RunLoop。</h3><h2 id="小结-当perform-selector在后台线程中执行的时候，这个线程必须有一个开启的runLoop"><a href="#小结-当perform-selector在后台线程中执行的时候，这个线程必须有一个开启的runLoop" class="headerlink" title="小结:当perform selector在后台线程中执行的时候，这个线程必须有一个开启的runLoop"></a>小结:当perform selector在后台线程中执行的时候，这个线程必须有一个开启的runLoop</h2><blockquote>
+<h2 id="四、一直”活着”的后台线程"><a href="#四、一直”活着”的后台线程" class="headerlink" title="四、一直”活着”的后台线程"></a>四、一直”活着”的后台线程</h2></blockquote>
+<h3 id="现在有这样一个需求，每点击一下屏幕，让子线程做一个任务-然后大家一般会想到这样的方式"><a href="#现在有这样一个需求，每点击一下屏幕，让子线程做一个任务-然后大家一般会想到这样的方式" class="headerlink" title="现在有这样一个需求，每点击一下屏幕，让子线程做一个任务,然后大家一般会想到这样的方式:"></a>现在有这样一个需求，每点击一下屏幕，让子线程做一个任务,然后大家一般会想到这样的方式:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">@interface ViewController ()</div><div class="line"></div><div class="line">@property(nonatomic,strong) NSThread *myThread;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation ViewController</div><div class="line"></div><div class="line">- (void)alwaysLiveBackGoundThread&#123;</div><div class="line"></div><div class="line">NSThread *thread = [[NSThread alloc]initWithTarget:self selector:@selector(myThreadRun) object:@&quot;etund&quot;];</div><div class="line">self.myThread = thread;</div><div class="line">[self.myThread start];</div><div class="line"></div><div class="line">&#125;</div><div class="line">- (void)myThreadRun&#123;</div><div class="line"></div><div class="line">NSLog(@&quot;my thread run&quot;);</div><div class="line"></div><div class="line">&#125;</div><div class="line">- (void)touchesBegan:(NSSet&lt;UITouch *&gt; *)touches withEvent:(UIEvent *)event&#123;</div><div class="line"></div><div class="line">NSLog(@&quot;%@&quot;,self.myThread);</div><div class="line">[self performSelector:@selector(doBackGroundThreadWork) onThread:self.myThread withObject:nil waitUntilDone:NO];</div><div class="line">&#125;</div><div class="line">- (void)doBackGroundThreadWork&#123;</div><div class="line"></div><div class="line">NSLog(@&quot;do some work %s&quot;,__FUNCTION__);</div><div class="line"></div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<h3 id="这个方法中，我们利用一个强引用来获取了后台线程中的thread-然后在点击屏幕的时候，在这个线程上执行doBackGroundThreadWork这个方法，此时我们可以看到，在touchesBegin方法中，self-myThread是存在的，但是这是为是什么呢？这就要从线程的五大状态来说明了-新建状态、就绪状态、运行状态、阻塞状态、死亡状态，这个时候尽管内存中还有线程，但是这个线程在执行完任务之后已经死亡了，经过上面的论述，我们应该怎样处理呢？我们可以给这个线程的RunLoop添加一个source，那么这个线程就会检测这个source等待执行，而不至于死亡-有工作的强烈愿望而不死亡"><a href="#这个方法中，我们利用一个强引用来获取了后台线程中的thread-然后在点击屏幕的时候，在这个线程上执行doBackGroundThreadWork这个方法，此时我们可以看到，在touchesBegin方法中，self-myThread是存在的，但是这是为是什么呢？这就要从线程的五大状态来说明了-新建状态、就绪状态、运行状态、阻塞状态、死亡状态，这个时候尽管内存中还有线程，但是这个线程在执行完任务之后已经死亡了，经过上面的论述，我们应该怎样处理呢？我们可以给这个线程的RunLoop添加一个source，那么这个线程就会检测这个source等待执行，而不至于死亡-有工作的强烈愿望而不死亡" class="headerlink" title="这个方法中，我们利用一个强引用来获取了后台线程中的thread,然后在点击屏幕的时候，在这个线程上执行doBackGroundThreadWork这个方法，此时我们可以看到，在touchesBegin方法中，self.myThread是存在的，但是这是为是什么呢？这就要从线程的五大状态来说明了:新建状态、就绪状态、运行状态、阻塞状态、死亡状态，这个时候尽管内存中还有线程，但是这个线程在执行完任务之后已经死亡了，经过上面的论述，我们应该怎样处理呢？我们可以给这个线程的RunLoop添加一个source，那么这个线程就会检测这个source等待执行，而不至于死亡(有工作的强烈愿望而不死亡):"></a>这个方法中，我们利用一个强引用来获取了后台线程中的thread,然后在点击屏幕的时候，在这个线程上执行doBackGroundThreadWork这个方法，此时我们可以看到，在touchesBegin方法中，self.myThread是存在的，但是这是为是什么呢？这就要从线程的五大状态来说明了:新建状态、就绪状态、运行状态、阻塞状态、死亡状态，这个时候尽管内存中还有线程，但是这个线程在执行完任务之后已经死亡了，经过上面的论述，我们应该怎样处理呢？我们可以给这个线程的RunLoop添加一个source，那么这个线程就会检测这个source等待执行，而不至于死亡(有工作的强烈愿望而不死亡):</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (void)myThreadRun&#123;</div><div class="line"></div><div class="line">[[NSRunLoop currentRunLoop] addPort:[[NSPort alloc] init] forMode:NSDefaultRunLoopMode]; </div><div class="line">[[NSRunLoop currentRunLoop] run]</div><div class="line"></div><div class="line">NSLog(@&quot;my thread run&quot;);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="这个时候再次点击屏幕，我们就会发现，后台线程中执行的任务可以正常进行了。"><a href="#这个时候再次点击屏幕，我们就会发现，后台线程中执行的任务可以正常进行了。" class="headerlink" title="这个时候再次点击屏幕，我们就会发现，后台线程中执行的任务可以正常进行了。"></a>这个时候再次点击屏幕，我们就会发现，后台线程中执行的任务可以正常进行了。</h3><h2 id="小结-正常情况下，后台线程执行完任务之后就处于死亡状态，我们要避免这种情况的发生可以利用RunLoop，并且给它一个Source这样来保证线程依旧还在"><a href="#小结-正常情况下，后台线程执行完任务之后就处于死亡状态，我们要避免这种情况的发生可以利用RunLoop，并且给它一个Source这样来保证线程依旧还在" class="headerlink" title="小结:正常情况下，后台线程执行完任务之后就处于死亡状态，我们要避免这种情况的发生可以利用RunLoop，并且给它一个Source这样来保证线程依旧还在"></a>小结:正常情况下，后台线程执行完任务之后就处于死亡状态，我们要避免这种情况的发生可以利用RunLoop，并且给它一个Source这样来保证线程依旧还在</h2><blockquote>
+<h2 id="五、深入理解NSTimer"><a href="#五、深入理解NSTimer" class="headerlink" title="五、深入理解NSTimer"></a>五、深入理解NSTimer</h2></blockquote>
+<h3 id="我们平时使用NSTimer，一般是在主线程中的，代码大多如下"><a href="#我们平时使用NSTimer，一般是在主线程中的，代码大多如下" class="headerlink" title="我们平时使用NSTimer，一般是在主线程中的，代码大多如下:"></a>我们平时使用NSTimer，一般是在主线程中的，代码大多如下:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">- (void)tryTimerOnMainThread&#123;</div><div class="line"></div><div class="line">NSTimer *myTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self       </div><div class="line">selector:@selector(timerAction) userInfo:nil repeats:YES];</div><div class="line"></div><div class="line">[myTimer fire];</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)timerAction&#123;</div><div class="line"></div><div class="line">NSLog(@&quot;timer action&quot;);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="这个时候代码按照我们预定的结果运行，如果我们把这个Tiemr放到后台线程中呢"><a href="#这个时候代码按照我们预定的结果运行，如果我们把这个Tiemr放到后台线程中呢" class="headerlink" title="这个时候代码按照我们预定的结果运行，如果我们把这个Tiemr放到后台线程中呢?"></a>这个时候代码按照我们预定的结果运行，如果我们把这个Tiemr放到后台线程中呢?</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</div><div class="line"></div><div class="line">NSTimer *myTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timerAction) userInfo:nil repeats:YES];</div><div class="line"></div><div class="line">[myTimer fire];</div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="这个时候我们会发现，这个timer只执行了一次，就停止了。这是为什么呢？通过上面的讲解，想必你已经知道了，NSTimer-只有注册到RunLoop之后才会生效，这个注册是由系统自动给我们完成的-既然需要注册到RunLoop-那么我们就需要有一个RunLoop-我们在后台线程中加入如下的代码"><a href="#这个时候我们会发现，这个timer只执行了一次，就停止了。这是为什么呢？通过上面的讲解，想必你已经知道了，NSTimer-只有注册到RunLoop之后才会生效，这个注册是由系统自动给我们完成的-既然需要注册到RunLoop-那么我们就需要有一个RunLoop-我们在后台线程中加入如下的代码" class="headerlink" title="这个时候我们会发现，这个timer只执行了一次，就停止了。这是为什么呢？通过上面的讲解，想必你已经知道了，NSTimer,只有注册到RunLoop之后才会生效，这个注册是由系统自动给我们完成的,既然需要注册到RunLoop,那么我们就需要有一个RunLoop,我们在后台线程中加入如下的代码:"></a>这个时候我们会发现，这个timer只执行了一次，就停止了。这是为什么呢？通过上面的讲解，想必你已经知道了，NSTimer,只有注册到RunLoop之后才会生效，这个注册是由系统自动给我们完成的,既然需要注册到RunLoop,那么我们就需要有一个RunLoop,我们在后台线程中加入如下的代码:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NSRunLoop *runLoop = [NSRunLoop currentRunLoop];</div><div class="line">[runLoop run];</div></pre></td></tr></table></figure>
+<h3 id="这样我们就会发现程序正常运行了。在Timer注册到RunLoop之后，RunLoop会为其重复的时间点注册好事件，比如1：10，1：20，1：30这几个时间点。有时候我们会在这个线程中执行一个耗时操作，这个时候RunLoop为了节省资源，并不会在非常准确的时间点回调这个Timer，这就造成了误差-Timer有个冗余度属性叫做tolerance-它标明了当前点到后，容许有多少最大误差-，可以在执行一段循环之后调用一个耗时操作，很容易看到timer会有很大的误差，这说明在线程很闲的时候使用NSTiemr是比较傲你准确的，当线程很忙碌时候会有较大的误差。系统还有一个CADisplayLink-也可以实现定时效果，它是一个和屏幕的刷新率一样的定时器。如果在两次屏幕刷新之间执行一个耗时的任务，那其中就会有一个帧被跳过去，造成界面卡顿。另外GCD也可以实现定时器的效果，由于其和RunLoop没有关联，所以有时候使用它会更加的准确，这在最后会给予说明。"><a href="#这样我们就会发现程序正常运行了。在Timer注册到RunLoop之后，RunLoop会为其重复的时间点注册好事件，比如1：10，1：20，1：30这几个时间点。有时候我们会在这个线程中执行一个耗时操作，这个时候RunLoop为了节省资源，并不会在非常准确的时间点回调这个Timer，这就造成了误差-Timer有个冗余度属性叫做tolerance-它标明了当前点到后，容许有多少最大误差-，可以在执行一段循环之后调用一个耗时操作，很容易看到timer会有很大的误差，这说明在线程很闲的时候使用NSTiemr是比较傲你准确的，当线程很忙碌时候会有较大的误差。系统还有一个CADisplayLink-也可以实现定时效果，它是一个和屏幕的刷新率一样的定时器。如果在两次屏幕刷新之间执行一个耗时的任务，那其中就会有一个帧被跳过去，造成界面卡顿。另外GCD也可以实现定时器的效果，由于其和RunLoop没有关联，所以有时候使用它会更加的准确，这在最后会给予说明。" class="headerlink" title="这样我们就会发现程序正常运行了。在Timer注册到RunLoop之后，RunLoop会为其重复的时间点注册好事件，比如1：10，1：20，1：30这几个时间点。有时候我们会在这个线程中执行一个耗时操作，这个时候RunLoop为了节省资源，并不会在非常准确的时间点回调这个Timer，这就造成了误差(Timer有个冗余度属性叫做tolerance,它标明了当前点到后，容许有多少最大误差)，可以在执行一段循环之后调用一个耗时操作，很容易看到timer会有很大的误差，这说明在线程很闲的时候使用NSTiemr是比较傲你准确的，当线程很忙碌时候会有较大的误差。系统还有一个CADisplayLink,也可以实现定时效果，它是一个和屏幕的刷新率一样的定时器。如果在两次屏幕刷新之间执行一个耗时的任务，那其中就会有一个帧被跳过去，造成界面卡顿。另外GCD也可以实现定时器的效果，由于其和RunLoop没有关联，所以有时候使用它会更加的准确，这在最后会给予说明。"></a>这样我们就会发现程序正常运行了。在Timer注册到RunLoop之后，RunLoop会为其重复的时间点注册好事件，比如1：10，1：20，1：30这几个时间点。有时候我们会在这个线程中执行一个耗时操作，这个时候RunLoop为了节省资源，并不会在非常准确的时间点回调这个Timer，这就造成了误差(Timer有个冗余度属性叫做tolerance,它标明了当前点到后，容许有多少最大误差)，可以在执行一段循环之后调用一个耗时操作，很容易看到timer会有很大的误差，这说明在线程很闲的时候使用NSTiemr是比较傲你准确的，当线程很忙碌时候会有较大的误差。系统还有一个CADisplayLink,也可以实现定时效果，它是一个和屏幕的刷新率一样的定时器。如果在两次屏幕刷新之间执行一个耗时的任务，那其中就会有一个帧被跳过去，造成界面卡顿。另外GCD也可以实现定时器的效果，由于其和RunLoop没有关联，所以有时候使用它会更加的准确，这在最后会给予说明。</h3><blockquote>
+<h2 id="六、让两个后台线程有依赖性的一种方式"><a href="#六、让两个后台线程有依赖性的一种方式" class="headerlink" title="六、让两个后台线程有依赖性的一种方式"></a>六、让两个后台线程有依赖性的一种方式</h2></blockquote>
+<h3 id="给两个后台线程添加依赖可能有很多的方式，这里说明一种利用RunLoop实现的方式。原理很简单，我们先让一个线程工作，当工作完成之后唤醒另外的一线程-通过上面对RunLoop的说明，相信大家很容易能够理解这些代码"><a href="#给两个后台线程添加依赖可能有很多的方式，这里说明一种利用RunLoop实现的方式。原理很简单，我们先让一个线程工作，当工作完成之后唤醒另外的一线程-通过上面对RunLoop的说明，相信大家很容易能够理解这些代码" class="headerlink" title="给两个后台线程添加依赖可能有很多的方式，这里说明一种利用RunLoop实现的方式。原理很简单，我们先让一个线程工作，当工作完成之后唤醒另外的一线程,通过上面对RunLoop的说明，相信大家很容易能够理解这些代码:"></a>给两个后台线程添加依赖可能有很多的方式，这里说明一种利用RunLoop实现的方式。原理很简单，我们先让一个线程工作，当工作完成之后唤醒另外的一线程,通过上面对RunLoop的说明，相信大家很容易能够理解这些代码:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">- (void)runLoopAddDependance&#123;</div><div class="line"></div><div class="line">self.runLoopThreadDidFinishFlag = NO;</div><div class="line">NSLog(@&quot;Start a New Run Loop Thread&quot;);</div><div class="line">NSThread *runLoopThread = [[NSThread alloc] initWithTarget:self selector:@selector(handleRunLoopThreadTask) object:nil];</div><div class="line">[runLoopThread start];</div><div class="line"></div><div class="line">NSLog(@&quot;Exit handleRunLoopThreadButtonTouchUpInside&quot;);</div><div class="line">dispatch_async(dispatch_get_global_queue(0, 0), ^&#123;</div><div class="line"></div><div class="line"></div><div class="line">while (!_runLoopThreadDidFinishFlag) &#123;</div><div class="line"></div><div class="line">self.myThread = [NSThread currentThread];</div><div class="line">NSLog(@&quot;Begin RunLoop&quot;);</div><div class="line">NSRunLoop *runLoop = [NSRunLoop currentRunLoop];</div><div class="line">NSPort *myPort = [NSPort port];</div><div class="line">[runLoop addPort:myPort forMode:NSDefaultRunLoopMode];</div><div class="line">[[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];</div><div class="line">NSLog(@&quot;End RunLoop&quot;);</div><div class="line">[self.myThread cancel];</div><div class="line">self.myThread = nil;</div><div class="line"></div><div class="line">&#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">&#125;</div><div class="line">- (void)handleRunLoopThreadTask</div><div class="line">&#123;</div><div class="line">NSLog(@&quot;Enter Run Loop Thread&quot;);</div><div class="line">for (NSInteger i = 0; i &lt; 5; i ++) &#123;</div><div class="line">NSLog(@&quot;In Run Loop Thread, count = %ld&quot;, i);</div><div class="line">sleep(1);</div><div class="line">&#125;</div><div class="line">#if 0</div><div class="line">// 错误示范</div><div class="line">_runLoopThreadDidFinishFlag = YES;</div><div class="line">// 这个时候并不能执行线程完成之后的任务，因为Run Loop所在的线程并不知道runLoopThreadDidFinishFlag被重新赋值。Run Loop这个时候没有被任务事件源唤醒。</div><div class="line">// 正确的做法是使用 &quot;selector&quot;方法唤醒Run Loop。 即如下:</div><div class="line">#endif</div><div class="line">NSLog(@&quot;Exit Normal Thread&quot;);</div><div class="line">[self performSelector:@selector(tryOnMyThread) onThread:self.myThread withObject:nil waitUntilDone:NO];</div><div class="line"></div><div class="line">// NSLog(@&quot;Exit Run Loop Thread&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<h2 id="七、NSURLConnection的执行过程"><a href="#七、NSURLConnection的执行过程" class="headerlink" title="七、NSURLConnection的执行过程"></a>七、NSURLConnection的执行过程</h2></blockquote>
+<h3 id="在使用NSURLConnection时，我们会传入一个Delegate-当我们调用了-connection-start-之后，这个Delegate会不停的收到事件的回调。实际上，start这个函数的内部会获取CurrentRunloop，然后在其中的DefaultMode中添加4个source。如下图所示，CFMultiplexerSource是负责各种Delegate回调的，CFHTTPCookieStorage是处理各种Cookie的。如下图所示"><a href="#在使用NSURLConnection时，我们会传入一个Delegate-当我们调用了-connection-start-之后，这个Delegate会不停的收到事件的回调。实际上，start这个函数的内部会获取CurrentRunloop，然后在其中的DefaultMode中添加4个source。如下图所示，CFMultiplexerSource是负责各种Delegate回调的，CFHTTPCookieStorage是处理各种Cookie的。如下图所示" class="headerlink" title="在使用NSURLConnection时，我们会传入一个Delegate,当我们调用了[connection start]之后，这个Delegate会不停的收到事件的回调。实际上，start这个函数的内部会获取CurrentRunloop，然后在其中的DefaultMode中添加4个source。如下图所示，CFMultiplexerSource是负责各种Delegate回调的，CFHTTPCookieStorage是处理各种Cookie的。如下图所示:"></a>在使用NSURLConnection时，我们会传入一个Delegate,当我们调用了[connection start]之后，这个Delegate会不停的收到事件的回调。实际上，start这个函数的内部会获取CurrentRunloop，然后在其中的DefaultMode中添加4个source。如下图所示，CFMultiplexerSource是负责各种Delegate回调的，CFHTTPCookieStorage是处理各种Cookie的。如下图所示:</h3><p><img src="http://upload-images.jianshu.io/upload_images/1513759-09e30658d91e4b06.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/540" alt=""></p>
+<h3 id="从中可以看出，当开始网络传输是，我们可以看到NSURLConnection创建了两个新的线程-com-apple-NSURLConnectionLoader和com-apple-CFSocket-private。其中CFSocket是处理底层socket链接的。NSURLConnectionLoader这个线程内部会使用RunLoop来接收底层socket的事件，并通过之前添加的source，来通知-唤醒-上层的Delegate。这样我们就可以理解我们平时封装网络请求时候常见的下面逻辑了"><a href="#从中可以看出，当开始网络传输是，我们可以看到NSURLConnection创建了两个新的线程-com-apple-NSURLConnectionLoader和com-apple-CFSocket-private。其中CFSocket是处理底层socket链接的。NSURLConnectionLoader这个线程内部会使用RunLoop来接收底层socket的事件，并通过之前添加的source，来通知-唤醒-上层的Delegate。这样我们就可以理解我们平时封装网络请求时候常见的下面逻辑了" class="headerlink" title="从中可以看出，当开始网络传输是，我们可以看到NSURLConnection创建了两个新的线程:com.apple.NSURLConnectionLoader和com.apple.CFSocket.private。其中CFSocket是处理底层socket链接的。NSURLConnectionLoader这个线程内部会使用RunLoop来接收底层socket的事件，并通过之前添加的source，来通知(唤醒)上层的Delegate。这样我们就可以理解我们平时封装网络请求时候常见的下面逻辑了:"></a>从中可以看出，当开始网络传输是，我们可以看到NSURLConnection创建了两个新的线程:com.apple.NSURLConnectionLoader和com.apple.CFSocket.private。其中CFSocket是处理底层socket链接的。NSURLConnectionLoader这个线程内部会使用RunLoop来接收底层socket的事件，并通过之前添加的source，来通知(唤醒)上层的Delegate。这样我们就可以理解我们平时封装网络请求时候常见的下面逻辑了:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">while (!_isEndRequest)</div><div class="line">&#123;</div><div class="line">NSLog(@&quot;entered run loop&quot;);</div><div class="line">[[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];</div><div class="line">&#125;</div><div class="line"></div><div class="line">NSLog(@&quot;main finished，task be removed&quot;);</div><div class="line"></div><div class="line">- (void)connectionDidFinishLoading:(NSURLConnection *)connection</div><div class="line">&#123;</div><div class="line"></div><div class="line">_isEndRequest = YES;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="这里我们就可以解决下面这些疑问了"><a href="#这里我们就可以解决下面这些疑问了" class="headerlink" title="这里我们就可以解决下面这些疑问了:"></a>这里我们就可以解决下面这些疑问了:</h3><h3 id="为什么这个While循环不停的执行，还需要使用一个RunLoop-程序执行一个while循环是不会耗费很大性能的，我们这里的目的是想让子线程在有任务的时候处理任务，没有任务的时候休眠，来节约CPU的开支。"><a href="#为什么这个While循环不停的执行，还需要使用一个RunLoop-程序执行一个while循环是不会耗费很大性能的，我们这里的目的是想让子线程在有任务的时候处理任务，没有任务的时候休眠，来节约CPU的开支。" class="headerlink" title="为什么这个While循环不停的执行，还需要使用一个RunLoop? 程序执行一个while循环是不会耗费很大性能的，我们这里的目的是想让子线程在有任务的时候处理任务，没有任务的时候休眠，来节约CPU的开支。"></a>为什么这个While循环不停的执行，还需要使用一个RunLoop? 程序执行一个while循环是不会耗费很大性能的，我们这里的目的是想让子线程在有任务的时候处理任务，没有任务的时候休眠，来节约CPU的开支。</h3><h3 id="如果没有为RunLoop添加item-那么它就会立即退出，这里的item呢-其实系统已经给我们默认添加了4个source了。"><a href="#如果没有为RunLoop添加item-那么它就会立即退出，这里的item呢-其实系统已经给我们默认添加了4个source了。" class="headerlink" title="如果没有为RunLoop添加item,那么它就会立即退出，这里的item呢? 其实系统已经给我们默认添加了4个source了。"></a>如果没有为RunLoop添加item,那么它就会立即退出，这里的item呢? 其实系统已经给我们默认添加了4个source了。</h3><h3 id="既然-NSRunLoop-currentRunLoop-runMode-NSDefaultRunLoopMode-beforeDate-NSDate-distantFuture-让线程在这里停下来，那么为什么这个循环会持续的执行呢？因为这个一直在处理任务，并且接受系统对这个Delegate的回调，也就是这个回调唤醒了这个线程，让它在这里循环。"><a href="#既然-NSRunLoop-currentRunLoop-runMode-NSDefaultRunLoopMode-beforeDate-NSDate-distantFuture-让线程在这里停下来，那么为什么这个循环会持续的执行呢？因为这个一直在处理任务，并且接受系统对这个Delegate的回调，也就是这个回调唤醒了这个线程，让它在这里循环。" class="headerlink" title="既然[[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];让线程在这里停下来，那么为什么这个循环会持续的执行呢？因为这个一直在处理任务，并且接受系统对这个Delegate的回调，也就是这个回调唤醒了这个线程，让它在这里循环。"></a>既然[[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];让线程在这里停下来，那么为什么这个循环会持续的执行呢？因为这个一直在处理任务，并且接受系统对这个Delegate的回调，也就是这个回调唤醒了这个线程，让它在这里循环。</h3><blockquote>
+<h2 id="八、AFNetWorking中是如何使用RunLoop的"><a href="#八、AFNetWorking中是如何使用RunLoop的" class="headerlink" title="八、AFNetWorking中是如何使用RunLoop的?"></a>八、AFNetWorking中是如何使用RunLoop的?</h2></blockquote>
+<h3 id="在AFN中AFURLConnectionOperation是基于NSURLConnection构建的，其希望能够在后台线程来接收Delegate的回调。为此AFN创建了一个线程-然后在里面开启了一个RunLoop，然后添加item"><a href="#在AFN中AFURLConnectionOperation是基于NSURLConnection构建的，其希望能够在后台线程来接收Delegate的回调。为此AFN创建了一个线程-然后在里面开启了一个RunLoop，然后添加item" class="headerlink" title="在AFN中AFURLConnectionOperation是基于NSURLConnection构建的，其希望能够在后台线程来接收Delegate的回调。为此AFN创建了一个线程,然后在里面开启了一个RunLoop，然后添加item"></a>在AFN中AFURLConnectionOperation是基于NSURLConnection构建的，其希望能够在后台线程来接收Delegate的回调。为此AFN创建了一个线程,然后在里面开启了一个RunLoop，然后添加item</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">+ (void)networkRequestThreadEntryPoint:(id)__unused object &#123;</div><div class="line">@autoreleasepool &#123;</div><div class="line">[[NSThread currentThread] setName:@&quot;AFNetworking&quot;];</div><div class="line">NSRunLoop *runLoop = [NSRunLoop currentRunLoop];</div><div class="line">[runLoop addPort:[NSMachPort port] forMode:NSDefaultRunLoopMode];</div><div class="line">[runLoop run];</div><div class="line">&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (NSThread *)networkRequestThread &#123;</div><div class="line">static NSThread *_networkRequestThread = nil;</div><div class="line">static dispatch_once_t oncePredicate;</div><div class="line">dispatch_once(&amp;oncePredicate, ^&#123; </div><div class="line">_networkRequestThread = [[NSThread alloc] initWithTarget:self selector:@selector(networkRequestThreadEntryPoint:) object:nil];</div><div class="line">[_networkRequestThread start];</div><div class="line">&#125;);</div><div class="line">return _networkRequestThread;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="这里这个NSMachPort的作用和上文中的一样，就是让线程不至于在很快死亡，然后RunLoop不至于退出-如果要使用这个MachPort的话，调用者需要持有这个NSMachPort，然后在外部线程通过这个port发送信息到这个loop内部-它这里没有这么做-。然后和上面的做法相似，在需要后台执行这个任务的时候，会通过调用-NSObject-performSelector-onThread-来将这个任务扔给后台线程的RunLoop中来执行。"><a href="#这里这个NSMachPort的作用和上文中的一样，就是让线程不至于在很快死亡，然后RunLoop不至于退出-如果要使用这个MachPort的话，调用者需要持有这个NSMachPort，然后在外部线程通过这个port发送信息到这个loop内部-它这里没有这么做-。然后和上面的做法相似，在需要后台执行这个任务的时候，会通过调用-NSObject-performSelector-onThread-来将这个任务扔给后台线程的RunLoop中来执行。" class="headerlink" title="这里这个NSMachPort的作用和上文中的一样，就是让线程不至于在很快死亡，然后RunLoop不至于退出(如果要使用这个MachPort的话，调用者需要持有这个NSMachPort，然后在外部线程通过这个port发送信息到这个loop内部,它这里没有这么做)。然后和上面的做法相似，在需要后台执行这个任务的时候，会通过调用:[NSObject performSelector:onThread:..]来将这个任务扔给后台线程的RunLoop中来执行。"></a>这里这个NSMachPort的作用和上文中的一样，就是让线程不至于在很快死亡，然后RunLoop不至于退出(如果要使用这个MachPort的话，调用者需要持有这个NSMachPort，然后在外部线程通过这个port发送信息到这个loop内部,它这里没有这么做)。然后和上面的做法相似，在需要后台执行这个任务的时候，会通过调用:[NSObject performSelector:onThread:..]来将这个任务扔给后台线程的RunLoop中来执行。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">- (void)start &#123;</div><div class="line">[self.lock lock];</div><div class="line">if ([self isCancelled]) &#123;</div><div class="line">[self performSelector:@selector(cancelConnection) onThread:[[self class] networkRequestThread] withObject:nil waitUntilDone:NO modes:[self.runLoopModes allObjects]];</div><div class="line">&#125; else if ([self isReady]) &#123;</div><div class="line">self.state = AFOperationExecutingState;</div><div class="line">[self performSelector:@selector(operationDidStart) onThread:[[self class] networkRequestThread] withObject:nil waitUntilDone:NO modes:[self.runLoopModes allObjects]];</div><div class="line">&#125;</div><div class="line">[self.lock unlock];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<h2 id="GCD定时器的实现"><a href="#GCD定时器的实现" class="headerlink" title="GCD定时器的实现"></a>GCD定时器的实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">- (void)gcdTimer&#123;</div><div class="line"></div><div class="line">// get the queue</div><div class="line">dispatch_queue_t queue = dispatch_get_global_queue(0, 0);</div><div class="line"></div><div class="line">// creat timer</div><div class="line">self.timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);</div><div class="line">// config the timer (starting time，interval)</div><div class="line">// set begining time</div><div class="line">dispatch_time_t start = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC));</div><div class="line">// set the interval</div><div class="line">uint64_t interver = (uint64_t)(1.0 * NSEC_PER_SEC);</div><div class="line"></div><div class="line">dispatch_source_set_timer(self.timer, start, interver, 0.0);</div><div class="line"></div><div class="line">dispatch_source_set_event_handler(self.timer, ^&#123;</div><div class="line"></div><div class="line">// the tarsk needed to be processed async</div><div class="line">dispatch_async(dispatch_get_global_queue(0, 0), ^&#123;</div><div class="line"></div><div class="line">for (int i = 0; i &lt; 100000; i++) &#123;</div><div class="line"></div><div class="line">NSLog(@&quot;gcdTimer&quot;);</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">&#125;);</div><div class="line"></div><div class="line"></div><div class="line">&#125;);</div><div class="line"></div><div class="line">dispatch_resume(self.timer);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</blockquote>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/06/15/实例化讲解RunLoop/">实例化讲解RunLoop</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 飘金 的个人博客">飘金</a></p>
+        <p><span>发布时间:</span>2017年06月15日 - 14时23分</p>
+        <p><span>最后更新:</span>2017年06月14日 - 22时23分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/06/15/实例化讲解RunLoop/" title="实例化讲解RunLoop">http://yoursite.com/2017/06/15/实例化讲解RunLoop/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/06/15/实例化讲解RunLoop/　　作者: 飘金" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2017/06/15/RunLoop与AutoreleasePool/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          RunLoop与AutoreleasePool
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/14/离屏渲染浅析/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">离屏渲染</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#转自此处"><span class="toc-number">1.</span> <span class="toc-text">转自此处</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实例化讲解RunLoop"><span class="toc-number"></span> <span class="toc-text">实例化讲解RunLoop</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#之前看过很多有关RunLoop的文章，其中要么是主要介绍RunLoop的基本概念，要么是主要讲解RunLoop的底层原理，很少用真正的实例来讲解RunLoop的，这其中有大部分原因是由于大家在项目中很少能用到RunLoop吧。基于这种原因，本文中将用很少的篇幅来对基础内容做以介绍，然后主要利用实例来加深大家对RunLoop的理解。本文主要分为如下几个部分"><span class="toc-number">1.</span> <span class="toc-text">之前看过很多有关RunLoop的文章，其中要么是主要介绍RunLoop的基本概念，要么是主要讲解RunLoop的底层原理，很少用真正的实例来讲解RunLoop的，这其中有大部分原因是由于大家在项目中很少能用到RunLoop吧。基于这种原因，本文中将用很少的篇幅来对基础内容做以介绍，然后主要利用实例来加深大家对RunLoop的理解。本文主要分为如下几个部分:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RunLoop的基础知识"><span class="toc-number">2.</span> <span class="toc-text">RunLoop的基础知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初识RunLoop，如何让RunLoop进驻线程"><span class="toc-number">3.</span> <span class="toc-text">初识RunLoop，如何让RunLoop进驻线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#深入理解Perform-Selector"><span class="toc-number">4.</span> <span class="toc-text">深入理解Perform Selector</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一直”活着”的后台线程"><span class="toc-number">5.</span> <span class="toc-text">一直”活着”的后台线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#深入理解NSTimer"><span class="toc-number">6.</span> <span class="toc-text">深入理解NSTimer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#让两个后台线程有依赖性的一种方式"><span class="toc-number">7.</span> <span class="toc-text">让两个后台线程有依赖性的一种方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSURLConnetction的内部实现"><span class="toc-number">8.</span> <span class="toc-text">NSURLConnetction的内部实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AFNetWorking中是如何使用RunLoop的"><span class="toc-number">9.</span> <span class="toc-text">AFNetWorking中是如何使用RunLoop的?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其它-利用GCD实现定时器功能"><span class="toc-number">10.</span> <span class="toc-text">其它:利用GCD实现定时器功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#延伸阅读"><span class="toc-number">11.</span> <span class="toc-text">延伸阅读</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、RunLoop的基本概念"><span class="toc-number">12.</span> <span class="toc-text">一、RunLoop的基本概念:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是RunLoop？提到RunLoop，我们一般都会提到线程，这是为什么呢？先来看下官方对RunLoop的定义-RunLoop系统中和线程相关的基础架构的组成部分-和线程相关-，一个RunLoop是一个事件处理环，系统利用这个事件处理环来安排事务，协调输入的各种事件。RunLoop的目的是让你的线程在有工作的时候忙碌，没有工作的时候休眠-和线程相关-。可能这样说你还不是特别清楚RunLoop究竟是用来做什么的，打个比方来说明-我们把线程比作一辆跑车，把这辆跑车的主人比作RunLoop，那么在没有’主人’的时候，这个跑车的生命是直线型的，其启动，运行完之后就会废弃-没有人对其进行控制，’撞坏’被收回-，当有了RunLoop这个主人之后，‘线程’这辆跑车的生命就有了保障，这个时候，跑车的生命是环形的，并且在主人有比赛任务的时候就会被RunLoop这个主人所唤醒-在没有任务的时候可以休眠-在IOS中，开启线程是很消耗性能的，开启主线程要消耗1M内存，开启一个后台线程需要消耗512k内存，我们应当在线程没有任务的时候休眠，来释放所占用的资源，以便CPU进行更加高效的工作-，这样可以增加跑车的效率-也就是说RunLoop是为线程所服务的。这个例子有点不是很贴切，线程和RunLoop之间是以键值对的形式一一对应的，其中key是thread，value是runLoop-这点可以从苹果公开的源码中看出来-，其实RunLoop是管理线程的一种机制，这种机制不仅在IOS上有，在Node-js中的EventLoop，Android中的Looper，都有类似的模式。刚才所说的比赛任务就是唤醒跑车这个线程的一个source-RunLoop-Mode就是，一系列输入的source-timer以及observer，RunLoop-Mode包含以下几种"><span class="toc-number">12.1.</span> <span class="toc-text">什么是RunLoop？提到RunLoop，我们一般都会提到线程，这是为什么呢？先来看下官方对RunLoop的定义:RunLoop系统中和线程相关的基础架构的组成部分(和线程相关)，一个RunLoop是一个事件处理环，系统利用这个事件处理环来安排事务，协调输入的各种事件。RunLoop的目的是让你的线程在有工作的时候忙碌，没有工作的时候休眠(和线程相关)。可能这样说你还不是特别清楚RunLoop究竟是用来做什么的，打个比方来说明:我们把线程比作一辆跑车，把这辆跑车的主人比作RunLoop，那么在没有’主人’的时候，这个跑车的生命是直线型的，其启动，运行完之后就会废弃(没有人对其进行控制，’撞坏’被收回)，当有了RunLoop这个主人之后，‘线程’这辆跑车的生命就有了保障，这个时候，跑车的生命是环形的，并且在主人有比赛任务的时候就会被RunLoop这个主人所唤醒,在没有任务的时候可以休眠(在IOS中，开启线程是很消耗性能的，开启主线程要消耗1M内存，开启一个后台线程需要消耗512k内存，我们应当在线程没有任务的时候休眠，来释放所占用的资源，以便CPU进行更加高效的工作)，这样可以增加跑车的效率,也就是说RunLoop是为线程所服务的。这个例子有点不是很贴切，线程和RunLoop之间是以键值对的形式一一对应的，其中key是thread，value是runLoop(这点可以从苹果公开的源码中看出来)，其实RunLoop是管理线程的一种机制，这种机制不仅在IOS上有，在Node.js中的EventLoop，Android中的Looper，都有类似的模式。刚才所说的比赛任务就是唤醒跑车这个线程的一个source;RunLoop Mode就是，一系列输入的source,timer以及observer，RunLoop Mode包含以下几种:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#至于这些mode各自的含义，读者可自己查询，网上不乏这类资源"><span class="toc-number">12.2.</span> <span class="toc-text">至于这些mode各自的含义，读者可自己查询，网上不乏这类资源;</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、初识RunLoop，如何让RunLoop进驻线程"><span class="toc-number">13.</span> <span class="toc-text">二、初识RunLoop，如何让RunLoop进驻线程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#我们在主线程中添加如下代码"><span class="toc-number">13.1.</span> <span class="toc-text">我们在主线程中添加如下代码:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#这个时候我们可以看到主线程在执行完-runLoop-runMode-NSDefaultRunLoopMode-beforeDate-NSDate-distantFuture-之后被阻塞而没有执行下面的NSLog-”while-end”-同时，我们利用GCD，将这段代码放到一个后台线程中"><span class="toc-number">13.2.</span> <span class="toc-text">这个时候我们可以看到主线程在执行完[runLoop runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]]; 之后被阻塞而没有执行下面的NSLog(@”while end”);同时，我们利用GCD，将这段代码放到一个后台线程中:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#这个时候我们发现这个while循环会一直在执行；这是为什么呢-我们先将这两个RunLoop分别打印出来"><span class="toc-number">13.3.</span> <span class="toc-text">这个时候我们发现这个while循环会一直在执行；这是为什么呢?我们先将这两个RunLoop分别打印出来:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#主线程的RunLoop"><span class="toc-number"></span> <span class="toc-text">主线程的RunLoop</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#由于这个日志比较长，我就只截取了上面的一部分。我们再看我们新建的子线程中的RunLoop-打印出来之后"><span class="toc-number">0.1.</span> <span class="toc-text">由于这个日志比较长，我就只截取了上面的一部分。我们再看我们新建的子线程中的RunLoop,打印出来之后:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#backGroundThreadRunLoop-png"><span class="toc-number"></span> <span class="toc-text">backGroundThreadRunLoop.png</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#从中可以看出来：我们新建的线程中"><span class="toc-number">0.1.</span> <span class="toc-text">从中可以看出来：我们新建的线程中:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我们看到虽然有Mode，但是我们没有给它soures-observer-timer，其实Mode中的这些source-observer-timer，统称为这个Mode的item，如果一个Mode中一个item都没有，则这个RunLoop会直接退出，不进入循环-其实线程之所以可以一直存在就是由于RunLoop将其带入了这个循环中-。下面我们为这个RunLoop添加个source"><span class="toc-number">0.2.</span> <span class="toc-text">我们看到虽然有Mode，但是我们没有给它soures,observer,timer，其实Mode中的这些source,observer,timer，统称为这个Mode的item，如果一个Mode中一个item都没有，则这个RunLoop会直接退出，不进入循环(其实线程之所以可以一直存在就是由于RunLoop将其带入了这个循环中)。下面我们为这个RunLoop添加个source:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#这样我们可以看到能够实现了和主线程中相同的效果，线程在这个地方暂停了，为什么呢？我们明天让RunLoop在distantFuture之前都一直run的啊？相信大家已经猜出出来了。这个时候线程被RunLoop带到‘坑’里去了，这个‘坑’就是一个循环，在循环中这个线程可以在没有任务的时候休眠，在有任务的时候被唤醒；当然我们只用一个while-1-也可以让这个线程一直存在，但是这个线程会一直在唤醒状态，及时它没有任务也一直处于运转状态，这对于CPU来说是非常不高效的。"><span class="toc-number">0.3.</span> <span class="toc-text">这样我们可以看到能够实现了和主线程中相同的效果，线程在这个地方暂停了，为什么呢？我们明天让RunLoop在distantFuture之前都一直run的啊？相信大家已经猜出出来了。这个时候线程被RunLoop带到‘坑’里去了，这个‘坑’就是一个循环，在循环中这个线程可以在没有任务的时候休眠，在有任务的时候被唤醒；当然我们只用一个while(1)也可以让这个线程一直存在，但是这个线程会一直在唤醒状态，及时它没有任务也一直处于运转状态，这对于CPU来说是非常不高效的。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结-我们的RunLoop要想工作，必须要让它存在一个Item-source-observer或者timer-，主线程之所以能够一直存在，并且随时准备被唤醒就是应为系统为其添加了很多Item"><span class="toc-number">1.</span> <span class="toc-text">小结:我们的RunLoop要想工作，必须要让它存在一个Item(source,observer或者timer)，主线程之所以能够一直存在，并且随时准备被唤醒就是应为系统为其添加了很多Item</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、深入理解Perform-Selector"><span class="toc-number">2.</span> <span class="toc-text">三、深入理解Perform Selector</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#我们先在主线程中使用下performselector"><span class="toc-number">2.1.</span> <span class="toc-text">我们先在主线程中使用下performselector:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#这样我们在ViewDidLoad中调用tryPerformSelectorOnMianThread-就会立即执行，并且输出-print-execute-ViewController-mainThreadMethod"><span class="toc-number">2.2.</span> <span class="toc-text">这样我们在ViewDidLoad中调用tryPerformSelectorOnMianThread,就会立即执行，并且输出:print: execute -[ViewController mainThreadMethod];</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#和上面的例子一样，我们使用GCD-让这个方法在后台线程中执行"><span class="toc-number">2.3.</span> <span class="toc-text">和上面的例子一样，我们使用GCD,让这个方法在后台线程中执行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#同样的，我们调用tryPerformSelectorOnBackGroundThread这个方法，我们会发现，下面的backGroundThread不会被调用，这是什么原因呢？"><span class="toc-number">2.4.</span> <span class="toc-text">同样的，我们调用tryPerformSelectorOnBackGroundThread这个方法，我们会发现，下面的backGroundThread不会被调用，这是什么原因呢？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#这是因为，在调用performSelector-onThread-withObject-waitUntilDone的时候，系统会给我们创建一个Timer的source，加到对应的RunLoop上去，然而这个时候我们没有RunLoop-如果我们加上RunLoop"><span class="toc-number">3.</span> <span class="toc-text">这是因为，在调用performSelector:onThread: withObject: waitUntilDone的时候，系统会给我们创建一个Timer的source，加到对应的RunLoop上去，然而这个时候我们没有RunLoop,如果我们加上RunLoop:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#这时就会发现我们的方法正常被调用了。那么为什么主线程中的perfom-selector却能够正常调用呢？通过上面的例子相信你已经猜到了，主线程的RunLoop是一直存在的，所以我们在主线程中执行的时候，无需再添加RunLoop。"><span class="toc-number">3.1.</span> <span class="toc-text">这时就会发现我们的方法正常被调用了。那么为什么主线程中的perfom selector却能够正常调用呢？通过上面的例子相信你已经猜到了，主线程的RunLoop是一直存在的，所以我们在主线程中执行的时候，无需再添加RunLoop。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结-当perform-selector在后台线程中执行的时候，这个线程必须有一个开启的runLoop"><span class="toc-number">4.</span> <span class="toc-text">小结:当perform selector在后台线程中执行的时候，这个线程必须有一个开启的runLoop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、一直”活着”的后台线程"><span class="toc-number">5.</span> <span class="toc-text">四、一直”活着”的后台线程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#现在有这样一个需求，每点击一下屏幕，让子线程做一个任务-然后大家一般会想到这样的方式"><span class="toc-number">5.1.</span> <span class="toc-text">现在有这样一个需求，每点击一下屏幕，让子线程做一个任务,然后大家一般会想到这样的方式:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#这个方法中，我们利用一个强引用来获取了后台线程中的thread-然后在点击屏幕的时候，在这个线程上执行doBackGroundThreadWork这个方法，此时我们可以看到，在touchesBegin方法中，self-myThread是存在的，但是这是为是什么呢？这就要从线程的五大状态来说明了-新建状态、就绪状态、运行状态、阻塞状态、死亡状态，这个时候尽管内存中还有线程，但是这个线程在执行完任务之后已经死亡了，经过上面的论述，我们应该怎样处理呢？我们可以给这个线程的RunLoop添加一个source，那么这个线程就会检测这个source等待执行，而不至于死亡-有工作的强烈愿望而不死亡"><span class="toc-number">5.2.</span> <span class="toc-text">这个方法中，我们利用一个强引用来获取了后台线程中的thread,然后在点击屏幕的时候，在这个线程上执行doBackGroundThreadWork这个方法，此时我们可以看到，在touchesBegin方法中，self.myThread是存在的，但是这是为是什么呢？这就要从线程的五大状态来说明了:新建状态、就绪状态、运行状态、阻塞状态、死亡状态，这个时候尽管内存中还有线程，但是这个线程在执行完任务之后已经死亡了，经过上面的论述，我们应该怎样处理呢？我们可以给这个线程的RunLoop添加一个source，那么这个线程就会检测这个source等待执行，而不至于死亡(有工作的强烈愿望而不死亡):</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#这个时候再次点击屏幕，我们就会发现，后台线程中执行的任务可以正常进行了。"><span class="toc-number">5.3.</span> <span class="toc-text">这个时候再次点击屏幕，我们就会发现，后台线程中执行的任务可以正常进行了。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结-正常情况下，后台线程执行完任务之后就处于死亡状态，我们要避免这种情况的发生可以利用RunLoop，并且给它一个Source这样来保证线程依旧还在"><span class="toc-number">6.</span> <span class="toc-text">小结:正常情况下，后台线程执行完任务之后就处于死亡状态，我们要避免这种情况的发生可以利用RunLoop，并且给它一个Source这样来保证线程依旧还在</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、深入理解NSTimer"><span class="toc-number">7.</span> <span class="toc-text">五、深入理解NSTimer</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#我们平时使用NSTimer，一般是在主线程中的，代码大多如下"><span class="toc-number">7.1.</span> <span class="toc-text">我们平时使用NSTimer，一般是在主线程中的，代码大多如下:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#这个时候代码按照我们预定的结果运行，如果我们把这个Tiemr放到后台线程中呢"><span class="toc-number">7.2.</span> <span class="toc-text">这个时候代码按照我们预定的结果运行，如果我们把这个Tiemr放到后台线程中呢?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#这个时候我们会发现，这个timer只执行了一次，就停止了。这是为什么呢？通过上面的讲解，想必你已经知道了，NSTimer-只有注册到RunLoop之后才会生效，这个注册是由系统自动给我们完成的-既然需要注册到RunLoop-那么我们就需要有一个RunLoop-我们在后台线程中加入如下的代码"><span class="toc-number">7.3.</span> <span class="toc-text">这个时候我们会发现，这个timer只执行了一次，就停止了。这是为什么呢？通过上面的讲解，想必你已经知道了，NSTimer,只有注册到RunLoop之后才会生效，这个注册是由系统自动给我们完成的,既然需要注册到RunLoop,那么我们就需要有一个RunLoop,我们在后台线程中加入如下的代码:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#这样我们就会发现程序正常运行了。在Timer注册到RunLoop之后，RunLoop会为其重复的时间点注册好事件，比如1：10，1：20，1：30这几个时间点。有时候我们会在这个线程中执行一个耗时操作，这个时候RunLoop为了节省资源，并不会在非常准确的时间点回调这个Timer，这就造成了误差-Timer有个冗余度属性叫做tolerance-它标明了当前点到后，容许有多少最大误差-，可以在执行一段循环之后调用一个耗时操作，很容易看到timer会有很大的误差，这说明在线程很闲的时候使用NSTiemr是比较傲你准确的，当线程很忙碌时候会有较大的误差。系统还有一个CADisplayLink-也可以实现定时效果，它是一个和屏幕的刷新率一样的定时器。如果在两次屏幕刷新之间执行一个耗时的任务，那其中就会有一个帧被跳过去，造成界面卡顿。另外GCD也可以实现定时器的效果，由于其和RunLoop没有关联，所以有时候使用它会更加的准确，这在最后会给予说明。"><span class="toc-number">7.4.</span> <span class="toc-text">这样我们就会发现程序正常运行了。在Timer注册到RunLoop之后，RunLoop会为其重复的时间点注册好事件，比如1：10，1：20，1：30这几个时间点。有时候我们会在这个线程中执行一个耗时操作，这个时候RunLoop为了节省资源，并不会在非常准确的时间点回调这个Timer，这就造成了误差(Timer有个冗余度属性叫做tolerance,它标明了当前点到后，容许有多少最大误差)，可以在执行一段循环之后调用一个耗时操作，很容易看到timer会有很大的误差，这说明在线程很闲的时候使用NSTiemr是比较傲你准确的，当线程很忙碌时候会有较大的误差。系统还有一个CADisplayLink,也可以实现定时效果，它是一个和屏幕的刷新率一样的定时器。如果在两次屏幕刷新之间执行一个耗时的任务，那其中就会有一个帧被跳过去，造成界面卡顿。另外GCD也可以实现定时器的效果，由于其和RunLoop没有关联，所以有时候使用它会更加的准确，这在最后会给予说明。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、让两个后台线程有依赖性的一种方式"><span class="toc-number">8.</span> <span class="toc-text">六、让两个后台线程有依赖性的一种方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#给两个后台线程添加依赖可能有很多的方式，这里说明一种利用RunLoop实现的方式。原理很简单，我们先让一个线程工作，当工作完成之后唤醒另外的一线程-通过上面对RunLoop的说明，相信大家很容易能够理解这些代码"><span class="toc-number">8.1.</span> <span class="toc-text">给两个后台线程添加依赖可能有很多的方式，这里说明一种利用RunLoop实现的方式。原理很简单，我们先让一个线程工作，当工作完成之后唤醒另外的一线程,通过上面对RunLoop的说明，相信大家很容易能够理解这些代码:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七、NSURLConnection的执行过程"><span class="toc-number">9.</span> <span class="toc-text">七、NSURLConnection的执行过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在使用NSURLConnection时，我们会传入一个Delegate-当我们调用了-connection-start-之后，这个Delegate会不停的收到事件的回调。实际上，start这个函数的内部会获取CurrentRunloop，然后在其中的DefaultMode中添加4个source。如下图所示，CFMultiplexerSource是负责各种Delegate回调的，CFHTTPCookieStorage是处理各种Cookie的。如下图所示"><span class="toc-number">9.1.</span> <span class="toc-text">在使用NSURLConnection时，我们会传入一个Delegate,当我们调用了[connection start]之后，这个Delegate会不停的收到事件的回调。实际上，start这个函数的内部会获取CurrentRunloop，然后在其中的DefaultMode中添加4个source。如下图所示，CFMultiplexerSource是负责各种Delegate回调的，CFHTTPCookieStorage是处理各种Cookie的。如下图所示:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#从中可以看出，当开始网络传输是，我们可以看到NSURLConnection创建了两个新的线程-com-apple-NSURLConnectionLoader和com-apple-CFSocket-private。其中CFSocket是处理底层socket链接的。NSURLConnectionLoader这个线程内部会使用RunLoop来接收底层socket的事件，并通过之前添加的source，来通知-唤醒-上层的Delegate。这样我们就可以理解我们平时封装网络请求时候常见的下面逻辑了"><span class="toc-number">9.2.</span> <span class="toc-text">从中可以看出，当开始网络传输是，我们可以看到NSURLConnection创建了两个新的线程:com.apple.NSURLConnectionLoader和com.apple.CFSocket.private。其中CFSocket是处理底层socket链接的。NSURLConnectionLoader这个线程内部会使用RunLoop来接收底层socket的事件，并通过之前添加的source，来通知(唤醒)上层的Delegate。这样我们就可以理解我们平时封装网络请求时候常见的下面逻辑了:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#这里我们就可以解决下面这些疑问了"><span class="toc-number">9.3.</span> <span class="toc-text">这里我们就可以解决下面这些疑问了:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么这个While循环不停的执行，还需要使用一个RunLoop-程序执行一个while循环是不会耗费很大性能的，我们这里的目的是想让子线程在有任务的时候处理任务，没有任务的时候休眠，来节约CPU的开支。"><span class="toc-number">9.4.</span> <span class="toc-text">为什么这个While循环不停的执行，还需要使用一个RunLoop? 程序执行一个while循环是不会耗费很大性能的，我们这里的目的是想让子线程在有任务的时候处理任务，没有任务的时候休眠，来节约CPU的开支。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如果没有为RunLoop添加item-那么它就会立即退出，这里的item呢-其实系统已经给我们默认添加了4个source了。"><span class="toc-number">9.5.</span> <span class="toc-text">如果没有为RunLoop添加item,那么它就会立即退出，这里的item呢? 其实系统已经给我们默认添加了4个source了。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#既然-NSRunLoop-currentRunLoop-runMode-NSDefaultRunLoopMode-beforeDate-NSDate-distantFuture-让线程在这里停下来，那么为什么这个循环会持续的执行呢？因为这个一直在处理任务，并且接受系统对这个Delegate的回调，也就是这个回调唤醒了这个线程，让它在这里循环。"><span class="toc-number">9.6.</span> <span class="toc-text">既然[[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];让线程在这里停下来，那么为什么这个循环会持续的执行呢？因为这个一直在处理任务，并且接受系统对这个Delegate的回调，也就是这个回调唤醒了这个线程，让它在这里循环。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#八、AFNetWorking中是如何使用RunLoop的"><span class="toc-number">10.</span> <span class="toc-text">八、AFNetWorking中是如何使用RunLoop的?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在AFN中AFURLConnectionOperation是基于NSURLConnection构建的，其希望能够在后台线程来接收Delegate的回调。为此AFN创建了一个线程-然后在里面开启了一个RunLoop，然后添加item"><span class="toc-number">10.1.</span> <span class="toc-text">在AFN中AFURLConnectionOperation是基于NSURLConnection构建的，其希望能够在后台线程来接收Delegate的回调。为此AFN创建了一个线程,然后在里面开启了一个RunLoop，然后添加item</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#这里这个NSMachPort的作用和上文中的一样，就是让线程不至于在很快死亡，然后RunLoop不至于退出-如果要使用这个MachPort的话，调用者需要持有这个NSMachPort，然后在外部线程通过这个port发送信息到这个loop内部-它这里没有这么做-。然后和上面的做法相似，在需要后台执行这个任务的时候，会通过调用-NSObject-performSelector-onThread-来将这个任务扔给后台线程的RunLoop中来执行。"><span class="toc-number">10.2.</span> <span class="toc-text">这里这个NSMachPort的作用和上文中的一样，就是让线程不至于在很快死亡，然后RunLoop不至于退出(如果要使用这个MachPort的话，调用者需要持有这个NSMachPort，然后在外部线程通过这个port发送信息到这个loop内部,它这里没有这么做)。然后和上面的做法相似，在需要后台执行这个任务的时候，会通过调用:[NSObject performSelector:onThread:..]来将这个任务扔给后台线程的RunLoop中来执行。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GCD定时器的实现"><span class="toc-number">11.</span> <span class="toc-text">GCD定时器的实现</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'luuman',
+      repo: 'luuman.github.io',
+      oauth: {
+        client_id: 'null',
+        client_secret: 'null',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/06/15/RunLoop与AutoreleasePool/" title="上一篇: RunLoop与AutoreleasePool">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/06/14/离屏渲染浅析/" title="下一篇: 离屏渲染">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/Observer监听RunLoop状态变化(kCFRunLoopBeforeWaiting,kCFRunLoopAfterWaiting等)/">Observer监听RunLoop状态变化(kCFRunLoopBeforeWaiting,kCFRunLoopAfterWaiting等)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/深入理解RunLoop/">深入理解RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与PerformSelector/">RunLoop与PerformSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与NSURLConnection/">RunLoop与NSURLConnection</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与Timer以及常用Mode/">RunLoop与Timer以及常用Mode</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop的内部逻辑/">RunLoop的内部逻辑</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与线程与GCD的关系/">RunLoop与线程与GCD的关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时(一)/">RunTime运行时(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时(三)/">RunTime运行时(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时(二)/">RunTime运行时(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之动态替换和改变方法实现/">RunTime运行时之动态替换和改变方法实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之动态添加方法/">RunTime运行时之动态添加方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之成员变量和属性/">RunTime运行时之成员变量和属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之改变私有属性的值/">RunTime运行时之改变私有属性的值</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/Runtime运行时之Class常用方法/">Runtime运行时之Class常用方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/SpriteKitSwiftGamePanda/">用SpriteKit写的熊猫跑酷小游戏</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与AutoreleasePool/">RunLoop与AutoreleasePool</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/实例化讲解RunLoop/">实例化讲解RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/离屏渲染浅析/">离屏渲染</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/iOS 设置视图半透明而子控件不透明/">iOS 设置视图半透明而子控件不透明</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift反射API及其用法/">Swift反射API及其用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/UIScrollView与AutoLayout或Masonry结合使用/">UIScrollView与AutoLayout或Masonry结合使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Xcode控制台调试常用命令/">Xcode控制台调试常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift利用反射机制(Mirror)获取类的属性列表与值/">Swift利用反射机制(Mirror)获取类的属性列表与值</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift之Defer/">Swift之Defer</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift枚举相关值/">Swift枚举相关值</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/tableView cell 中如果有文本框点击自动滚动不被键盘挡住/">tableView cell 中如果有文本框点击自动滚动不被键盘挡住</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/使用Swift Package Manager管理项目(the package has an unsupported layout)/">使用Swift Package Manager管理项目(the package has an unsupported layout)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/基于Perfect的Swift3.1服务器开发案例/">基于Perfect的Swift3.1服务器开发案例</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/如何创建一个纯 Swift 模块/">如何创建一个纯 Swift 模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift中有个双问号操作符/">Swift中有个双问号操作符</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/iOS clang编译OC成C++文件/">iOS clang编译OC成C++文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/calayer-uiview-uiwindow/">UIView,UIWindow,CALayer之间的区别联系</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 飘金
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >海贼到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
