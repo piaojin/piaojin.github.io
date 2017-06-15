@@ -2,12 +2,6 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="baidu-site-verification" content="L6Lm9d5Crl"/>
-   
-    <meta name="keywords" content="iOS,Swift" />
-  
-  
-  
   
   <title>Swift反射API及其用法 | 飘金的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -29,7 +23,7 @@
     <link rel="icon" href="/img/favicon.png">
   
   
-  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
   
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
@@ -43,6 +37,7 @@
     <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
   <script>
       var yiliaConfig = {
+          rootUrl: '/',
           fancybox: true,
           animate: true,
           isHome: false,
@@ -60,69 +55,19 @@
     <div class="overlay"></div>
 <div class="intrude-less">
     <header id="header" class="inner">
-        <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
         <a href="/" class="profilepic">
             
-            <img lazy-src="/img/piaojin.png" class="js-avatar">
+            <img lazy-src="/img/head.jpg" class="js-avatar">
             
         </a>
+
         <hgroup>
-          <h1 class="header-author"><a href="/">飘金</a></h1>
+          <h1 class="header-author"><a href="/" title="Hi Mate">飘金</a></h1>
         </hgroup>
+
         
         <p class="header-subtitle">会炒菜的猿</p>
         
-        
-            <form>
-                <input type="text" class="st-default-search-input search" id="local-search-input" placeholder=" Search...">
-            </form>
-            <div id="local-search-result"></div>
-        
-        
-            <script type="text/javascript">
-                (function() {
-                    'use strict';
-                    function getMatchData(keyword, data) {
-                        var matchData = [];
-                        for(var i =0;i<data.length;i++){
-                            if(data[i].title.toLowerCase().indexOf(keyword)>=0) 
-                                matchData.push(data[i])
-                        }
-                        return matchData;
-                    }
-                    var $input = $('#local-search-input');
-                    var $resultContent = $('#local-search-result');
-                    $input.keyup(function(){
-                        $.ajax({
-                            url: '/search.json',
-                            dataType: "json",
-                            success: function( json ) {
-                                var str='<ul class=\"search-result-list\">';                
-                                var keyword = $input.val().trim().toLowerCase();
-                                $resultContent.innerHTML = "";
-                                if ($input.val().trim().length <= 0) {
-                                    $resultContent.empty();
-                                    $('#switch-area').show();
-                                    return;
-                                }
-                                var results = getMatchData(keyword, json);
-                                if(results.length === 0){
-                                    $resultContent.empty();
-                                    $('#switch-area').show();
-                                    return;
-                                } 
-                                for(var i =0; i<results.length; i++){
-                                    str += "<li><a href='"+ results[i].url +"' class='search-result-title'>"+ results[i].title +"</a></li>";
-                                }
-                                str += "</ul>";
-                                $resultContent.empty();
-                                $resultContent.append(str);
-                                $('#switch-area').hide();
-                            }
-                        });
-                    });
-                })();
-            </script>
         
         
             <div id="switch-btn" class="switch-btn">
@@ -148,6 +93,7 @@
                         </div>
                         
                     </div>
+                    
                 </div>
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
@@ -164,32 +110,44 @@
                 </div>
             </div>
         
+
         <div id="switch-area" class="switch-area">
             <div class="switch-wrap">
                 <section class="switch-part switch-part1">
                     <nav class="header-menu">
                         <ul>
                         
-                            <li><a  href="/archives/">所有文章</a></li>
+                            <li><a href="/Home">博客首页</a></li>
                         
-                            <li><a  href="https://github.com/piaojin">github</a></li>
+                            <li><a href="/works">作品展示</a></li>
                         
-                            <li><a  href="http://www.jianshu.com/u/da7864faa1be">简书</a></li>
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
                         
                         </ul>
                     </nav>
                     <nav class="header-nav">
                         <ul class="social">
                             
-                                <a class="fl github"  target="_blank" href="https://github.com/piaojin" title="github">github</a>
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
                             
-                                <a class="fl weibo"  target="_blank" href="http://www.jianshu.com/u/da7864faa1be" title="weibo">weibo</a>
+                                <a class="fl github" target="_blank" href="https://github.com/luuman" title="github">github</a>
                             
-                                <a class="fl rss"  target="_blank" href="/atom.xml" title="rss">rss</a>
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
                             
                         </ul>
                     </nav>
                 </section>
+                
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
@@ -198,46 +156,43 @@
                 </section>
                 
                 
+                
                 <section class="switch-part switch-part3">
                     <div id="js-friends">
                     
-                      <a target="_blank"  class="main-nav-link switch-friends-link" href="http://blog.csdn.net/baidu_21483933">csdn</a>
-                    
-                      <a target="_blank"  class="main-nav-link switch-friends-link" href="https://segmentfault.com/blog/maocg_web">segmentfault</a>
-                    
-                      <a target="_blank"  class="main-nav-link switch-friends-link" href="http://www.jianshu.com/u/da7864faa1be">简书</a>
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://luuman.github.io/">name</a>
                     
                     </div>
                 </section>
                 
+
                 
                 
                 <section class="switch-part switch-part4">
                 
-                    <div id="js-aboutme">爱动漫,爱编程,爱睡觉,爱老婆,爱的太多了!</div>
+                    <div id="js-aboutme">纯海迷、爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
                 </section>
                 
             </div>
         </div>
-    </header>
+    </header>                
 </div>
-
     </div>
     <div class="mid-col">
       <nav id="mobile-nav">
       <div class="overlay">
           <div class="slider-trigger"></div>
-          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">飘金</a></h1>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">飘金</a></h1>
       </div>
     <div class="intrude-less">
         <header id="header" class="inner">
             <a href="/" class="profilepic">
                 
-                    <img lazy-src="/img/piaojin.png" class="js-avatar">
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
                 
             </a>
             <hgroup>
-              <h1 class="header-author"><a href="/" title="回到主页">飘金</a></h1>
+              <h1 class="header-author"><a href="/" title="Me">飘金</a></h1>
             </hgroup>
             
             <p class="header-subtitle">会炒菜的猿</p>
@@ -245,11 +200,13 @@
             <nav class="header-menu">
                 <ul>
                 
-                    <li><a href="/archives/">所有文章</a></li>
+                    <li><a href="/Home">博客首页</a></li>
                 
-                    <li><a href="https://github.com/piaojin">github</a></li>
+                    <li><a href="/works">作品展示</a></li>
                 
-                    <li><a href="http://www.jianshu.com/u/da7864faa1be">简书</a></li>
+                    <li><a href="/about">留言打卡</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
                 
                 <div class="clearfix"></div>
                 </ul>
@@ -257,11 +214,19 @@
             <nav class="header-nav">
                 <div class="social">
                     
-                        <a class="github" target="_blank" href="https://github.com/piaojin" title="github">github</a>
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
                     
-                        <a class="weibo" target="_blank" href="http://www.jianshu.com/u/da7864faa1be" title="weibo">weibo</a>
+                        <a class="github" target="_blank" href="https://github.com/luuman" title="github">github</a>
                     
-                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
                     
                 </div>
             </nav>
@@ -271,10 +236,9 @@
       <div class="body-wrap"><article id="post-Swift反射API及其用法" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a  href="/2017/06/14/Swift反射API及其用法/" class="article-date">
+      <a href="/2017/06/14/Swift反射API及其用法/" class="article-date">
       <time datetime="2017-06-14T06:23:47.000Z" itemprop="datePublished">2017-06-14</time>
 </a>
-
     </div>
   
   <div class="article-inner">
@@ -289,7 +253,6 @@
       Swift反射API及其用法
     </h1>
   
-
 
       </header>
       
@@ -380,19 +343,68 @@
 </blockquote>
 <h4 id="反射-API-的源文件注释非常详细，我强烈建议每个人都去看看。"><a href="#反射-API-的源文件注释非常详细，我强烈建议每个人都去看看。" class="headerlink" title="反射 API 的源文件注释非常详细，我强烈建议每个人都去看看。"></a>反射 API 的源文件注释非常详细，我强烈建议每个人都去看看。</h4><h4 id="同时，GitHub-上的CoreValue项目展示了关于这个技术更详尽的实现，它可以让你很轻松滴把struct编码成CoreData，或者把CoreData解码成struct。"><a href="#同时，GitHub-上的CoreValue项目展示了关于这个技术更详尽的实现，它可以让你很轻松滴把struct编码成CoreData，或者把CoreData解码成struct。" class="headerlink" title="同时，GitHub 上的CoreValue项目展示了关于这个技术更详尽的实现，它可以让你很轻松滴把struct编码成CoreData，或者把CoreData解码成struct。"></a>同时，GitHub 上的CoreValue项目展示了关于这个技术更详尽的实现，它可以让你很轻松滴把struct编码成CoreData，或者把CoreData解码成struct。</h4><h4 id="1、实际上，Any是一个空的协议，所有的东西都隐式滴符合这个协议。"><a href="#1、实际上，Any是一个空的协议，所有的东西都隐式滴符合这个协议。" class="headerlink" title="1、实际上，Any是一个空的协议，所有的东西都隐式滴符合这个协议。"></a>1、实际上，Any是一个空的协议，所有的东西都隐式滴符合这个协议。</h4><h4 id="2、更确切地说，是一个空的可选类型。"><a href="#2、更确切地说，是一个空的可选类型。" class="headerlink" title="2、更确切地说，是一个空的可选类型。"></a>2、更确切地说，是一个空的可选类型。</h4><h4 id="3、我对注释稍微做了简化。"><a href="#3、我对注释稍微做了简化。" class="headerlink" title="3、我对注释稍微做了简化。"></a>3、我对注释稍微做了简化。</h4>
       
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
     </div>
     
   </div>
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a  href="/2017/06/14/Swift反射API及其用法/">Swift反射API及其用法</a></p>
-        <p><span>文章作者:</span><a  href="/" title="访问 飘金 的个人博客">飘金</a></p>
+        <p><span>本文标题:</span><a href="/2017/06/14/Swift反射API及其用法/">Swift反射API及其用法</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 飘金 的个人博客">飘金</a></p>
         <p><span>发布时间:</span>2017年06月14日 - 14时23分</p>
         <p><span>最后更新:</span>2017年06月14日 - 22时13分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/06/14/Swift反射API及其用法/" title="Swift反射API及其用法">http://yoursite.com/2017/06/14/Swift反射API及其用法/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/06/14/Swift反射API及其用法/　　作者: 飘金" title=""></span>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/06/14/Swift反射API及其用法/　　作者: 飘金" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
             <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
@@ -403,23 +415,22 @@
 
 <nav id="article-nav">
   
-    <a  href="/2017/06/14/Swift利用反射机制(Mirror)获取类的属性列表与值/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/06/14/tableView cell 中如果有文本框点击自动滚动不被键盘挡住/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          Swift利用反射机制(Mirror)获取类的属性列表与值
+          tableView cell 中如果有文本框点击自动滚动不被键盘挡住
         
       </div>
     </a>
   
   
-    <a  href="/2017/06/14/tableView cell 中如果有文本框点击自动滚动不被键盘挡住/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">tableView cell 中如果有文本框点击自动滚动不被键盘挡住</div>
+    <a href="/2017/06/14/UIScrollView与AutoLayout或Masonry结合使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">UIScrollView与AutoLayout或Masonry结合使用</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
 </nav>
-
 
   
 </article>
@@ -428,19 +439,13 @@
     <strong class="toc-title">文章目录</strong>
     <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#尽管-Swift-一直在强调强类型、编译时安全和静态调度，但它的标准库仍然提供了反射机制。可能你已经在很多博客文章或者类似Tuples、Midi-Packets和Core-Data的项目中见过它。也许你刚好对在项目中使用反射机制感兴趣，或者你想更好的了解反射可以应用的领域，那这篇文章就正是你需要的。文章的内容是基于我在德国法兰克福-Macoun会议上的一次演讲，它对-Swift-的反射-API-做了一个概述。"><span class="toc-number">1.</span> <span class="toc-text">尽管 Swift 一直在强调强类型、编译时安全和静态调度，但它的标准库仍然提供了反射机制。可能你已经在很多博客文章或者类似Tuples、Midi Packets和Core Data的项目中见过它。也许你刚好对在项目中使用反射机制感兴趣，或者你想更好的了解反射可以应用的领域，那这篇文章就正是你需要的。文章的内容是基于我在德国法兰克福 Macoun会议上的一次演讲，它对 Swift 的反射 API 做了一个概述。</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#理解这个主题最好的方式就是看-API，看它都提供了什么功能。"><span class="toc-number">1.0.1.</span> <span class="toc-text">理解这个主题最好的方式就是看 API，看它都提供了什么功能。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Swift-的反射机制是基于一个叫Mirror的struct来实现的。你为具体的subject创建一个Mirror，然后就可以通过它查询这个对象subject。"><span class="toc-number">1.0.2.</span> <span class="toc-text">Swift 的反射机制是基于一个叫Mirror的struct来实现的。你为具体的subject创建一个Mirror，然后就可以通过它查询这个对象subject。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在我们创建Mirror之前，我们先创建一个可以让我们当做对象来使用的简单数据结构。"><span class="toc-number">1.0.3.</span> <span class="toc-text">在我们创建Mirror之前，我们先创建一个可以让我们当做对象来使用的简单数据结构。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建Mirror最简单的方式就是使用reflecting构造器："><span class="toc-number">1.0.4.</span> <span class="toc-text">创建Mirror最简单的方式就是使用reflecting构造器：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#然后在aBookmarkstruct上使用它："><span class="toc-number">1.0.5.</span> <span class="toc-text">然后在aBookmarkstruct上使用它：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#这段代码创建了Bookmark-的-Mirror。正如你所见，对象的类型是Any。这是-Swift-中最通用的类型。Swift-中的任何东西至少都是Any类型的1。这样一来mirror就可以兼容struct-class-enum-Tuple-Array-Dictionary-set等。"><span class="toc-number">1.0.6.</span> <span class="toc-text">这段代码创建了Bookmark 的 Mirror。正如你所见，对象的类型是Any。这是 Swift 中最通用的类型。Swift 中的任何东西至少都是Any类型的1。这样一来mirror就可以兼容struct,class,enum,Tuple,Array,Dictionary,set等。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Mirror结构体还有另外三个构造器，然而这三个都是在你需要自定义mirror这种情况下使用的。我们会在接下来讨论自定义mirror时详细讲解这些额外的构造器。"><span class="toc-number">1.0.7.</span> <span class="toc-text">Mirror结构体还有另外三个构造器，然而这三个都是在你需要自定义mirror这种情况下使用的。我们会在接下来讨论自定义mirror时详细讲解这些额外的构造器。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Mirror-struct中包含几个types来帮助确定你想查询的信息。"><span class="toc-number">1.0.8.</span> <span class="toc-text">Mirror struct中包含几个types来帮助确定你想查询的信息。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第一个是DisplayStyleenum，它会告诉你对象的类型："><span class="toc-number">1.0.9.</span> <span class="toc-text">第一个是DisplayStyleenum，它会告诉你对象的类型：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#这些都是反射-API-的辅助类型。正如之前我们知道的，反射只要求对象是Any类型，而且Swift-标准库中还有很多类型为Any的东西没有被列举在上面的DisplayStyleenum中。如果试图反射它们中间的某一个又会发生什么呢？比如closure。"><span class="toc-number">1.0.10.</span> <span class="toc-text">这些都是反射 API 的辅助类型。正如之前我们知道的，反射只要求对象是Any类型，而且Swift 标准库中还有很多类型为Any的东西没有被列举在上面的DisplayStyleenum中。如果试图反射它们中间的某一个又会发生什么呢？比如closure。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在这种情况下，这里你会得到一个mirror，但是DisplayStyle为nil2"><span class="toc-number">1.0.11.</span> <span class="toc-text">在这种情况下，这里你会得到一个mirror，但是DisplayStyle为nil2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#也有提供给Mirror的子节点使用的typealias："><span class="toc-number">1.0.12.</span> <span class="toc-text">也有提供给Mirror的子节点使用的typealias：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#所以每个Child都包含一个可选的label和Any类型的value。为什么label是Optional的？如果你仔细考虑下，其实这是非常有意义的，并不是所有支持反射的数据结构都包含有名字的子节点。struct会以属性的名字做为label，但是Collection只有下标，没有名字。Tuple同样也可能没有给它们的条目指定名字。"><span class="toc-number">1.0.13.</span> <span class="toc-text">所以每个Child都包含一个可选的label和Any类型的value。为什么label是Optional的？如果你仔细考虑下，其实这是非常有意义的，并不是所有支持反射的数据结构都包含有名字的子节点。struct会以属性的名字做为label，但是Collection只有下标，没有名字。Tuple同样也可能没有给它们的条目指定名字。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#接下来是AncestorRepresentationenum3："><span class="toc-number">1.0.14.</span> <span class="toc-text">接下来是AncestorRepresentationenum3：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#这个enum用来定义被反射的对象的父类应该如何被反射。也就是说，这只应用于class类型的对象。默认情况（正如你所见）下-Swift-会为每个父类生成额外的mirror。然而，如果你需要做更复杂的操作，你可以使用AncestorRepresentation-enum来定义父类被反射的细节。我们会在下面的内容中进一步研究这个。"><span class="toc-number">1.0.15.</span> <span class="toc-text">这个enum用来定义被反射的对象的父类应该如何被反射。也就是说，这只应用于class类型的对象。默认情况（正如你所见）下 Swift 会为每个父类生成额外的mirror。然而，如果你需要做更复杂的操作，你可以使用AncestorRepresentation enum来定义父类被反射的细节。我们会在下面的内容中进一步研究这个。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#现在我们有了给Bookmark类型的对象aBookmark做反射的实例变量aMirror。可以用它来做什么呢？"><span class="toc-number">1.0.16.</span> <span class="toc-text">现在我们有了给Bookmark类型的对象aBookmark做反射的实例变量aMirror。可以用它来做什么呢？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#下面列举了Mirror可用的属性-方法："><span class="toc-number">1.0.17.</span> <span class="toc-text">下面列举了Mirror可用的属性 / 方法：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#下面我们会分别对它们进行解析。"><span class="toc-number">1.0.18.</span> <span class="toc-text">下面我们会分别对它们进行解析。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#displayStyle"><span class="toc-number">1.0.19.</span> <span class="toc-text">displayStyle</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#很简单，它会返回DisplayStyleenum的其中一种情况。如果你想要对某种不支持的类型进行反射，你会得到一个空的Optional值（这个之前解释过）。"><span class="toc-number">1.0.20.</span> <span class="toc-text">很简单，它会返回DisplayStyleenum的其中一种情况。如果你想要对某种不支持的类型进行反射，你会得到一个空的Optional值（这个之前解释过）。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#print-aMirror-displayStyle"><span class="toc-number">1.0.21.</span> <span class="toc-text">print(aMirror.displayStyle)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#输出-Optional-Swift-Mirror-DisplayStyle-Struct"><span class="toc-number">1.0.22.</span> <span class="toc-text">// 输出: Optional(Swift.Mirror.DisplayStyle.Struct)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#译者注-此处输出：Optional-Struct"><span class="toc-number">1.0.23.</span> <span class="toc-text">// [译者注]此处输出：Optional(Struct)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#children"><span class="toc-number">1.0.24.</span> <span class="toc-text">children</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#这会返回一个包含了对象所有的子节点的AnyForwardCollection。这些子节点不单单限于Array或者Dictionary中的条目。诸如struct或者class中所有的属性也是由AnyForwardCollection这个属性返回的子节点。AnyForwardCollection协议意味着这是一个支持遍历的Collection类型。"><span class="toc-number">1.0.25.</span> <span class="toc-text">这会返回一个包含了对象所有的子节点的AnyForwardCollection。这些子节点不单单限于Array或者Dictionary中的条目。诸如struct或者class中所有的属性也是由AnyForwardCollection这个属性返回的子节点。AnyForwardCollection协议意味着这是一个支持遍历的Collection类型。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#group-Tech"><span class="toc-number">1.0.26.</span> <span class="toc-text">//: group Tech</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SubjectType"><span class="toc-number">1.0.27.</span> <span class="toc-text">SubjectType</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#这是对象的类型："><span class="toc-number">1.0.28.</span> <span class="toc-text">这是对象的类型：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#print-aMirror-subjectType"><span class="toc-number">1.0.29.</span> <span class="toc-text">print(aMirror.subjectType)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#输出-Bookmark"><span class="toc-number">1.0.30.</span> <span class="toc-text">//输出 : Bookmark</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#输出-NSNull"><span class="toc-number">1.0.31.</span> <span class="toc-text">//输出 : NSNull</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#然而，Swift-的文档中有下面一句话：“当self是另外一个mirror的superclassMirror-时，这个类型和对象的动态类型可能会不一样。”"><span class="toc-number">1.0.32.</span> <span class="toc-text">然而，Swift 的文档中有下面一句话：“当self是另外一个mirror的superclassMirror()时，这个类型和对象的动态类型可能会不一样。”</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#这是我们对象父类的mirror。如果这个对象不是一个类，它会是一个空的Optional值。如果对象的类型是基于类的，你会得到一个新的Mirror："><span class="toc-number">1.0.33.</span> <span class="toc-text">这是我们对象父类的mirror。如果这个对象不是一个类，它会是一个空的Optional值。如果对象的类型是基于类的，你会得到一个新的Mirror：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#试试-struct"><span class="toc-number">1.0.34.</span> <span class="toc-text">// 试试 struct</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#输出-Optional-Mirror-for-Store"><span class="toc-number">1.0.35.</span> <span class="toc-text">// 输出: Optional(Mirror for Store)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例"><span class="toc-number">1.0.36.</span> <span class="toc-text">实例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Struct转Core-Data"><span class="toc-number">1.0.37.</span> <span class="toc-text">Struct转Core Data</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#假设我们在一个叫Books-Bunny的新兴高科技公司工作，我们以浏览器插件的方式提供了一个人工智能，它可以自动分析用户访问的所有网站，然后把相关页面自动保存到书签中。"><span class="toc-number">1.0.38.</span> <span class="toc-text">假设我们在一个叫Books Bunny的新兴高科技公司工作，我们以浏览器插件的方式提供了一个人工智能，它可以自动分析用户访问的所有网站，然后把相关页面自动保存到书签中。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#现在是-2016-年，Swift-已经开源，所以我们的后台服务端肯定是用-Swift-编写。因为在我们的系统中同时有数以百万计的网站访问活动，我们想用struct来存储用户访问网站的分析数据。不过，如果我们-AI-认定某个页面的数据是需要保存到书签中的话，我们需要使用CoreData来把这个类型的对象保存到数据库中。"><span class="toc-number">1.0.39.</span> <span class="toc-text">现在是 2016 年，Swift 已经开源，所以我们的后台服务端肯定是用 Swift 编写。因为在我们的系统中同时有数以百万计的网站访问活动，我们想用struct来存储用户访问网站的分析数据。不过，如果我们 AI 认定某个页面的数据是需要保存到书签中的话，我们需要使用CoreData来把这个类型的对象保存到数据库中。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#现在我们不想为每个新建的struct单独写自定义的Core-Data序列化代码。而是想以一种更优雅的方式来开发，从而可以让将来的所有struct都可以利用这种方式来做序列化。"><span class="toc-number">1.0.40.</span> <span class="toc-text">现在我们不想为每个新建的struct单独写自定义的Core Data序列化代码。而是想以一种更优雅的方式来开发，从而可以让将来的所有struct都可以利用这种方式来做序列化。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#那么我们该怎么做呢？"><span class="toc-number">1.0.41.</span> <span class="toc-text">那么我们该怎么做呢？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一个协议"><span class="toc-number">1.0.42.</span> <span class="toc-text">一个协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#记住，我们有一个struct，它需要自动转换为NSManagedObject（Core-Data）。"><span class="toc-number">1.0.43.</span> <span class="toc-text">记住，我们有一个struct，它需要自动转换为NSManagedObject（Core Data）。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#如果我们想要支持不同的struct甚至类型，我们可以用协议来实现，然后确保我们需要的类型符合这个协议。所以我们假想的协议应该有哪些功能呢？"><span class="toc-number">1.0.44.</span> <span class="toc-text">如果我们想要支持不同的struct甚至类型，我们可以用协议来实现，然后确保我们需要的类型符合这个协议。所以我们假想的协议应该有哪些功能呢？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第一，协议应该允许自定义我们想要创建的Core-Data-实体的名字"><span class="toc-number">1.0.45.</span> <span class="toc-text">第一，协议应该允许自定义我们想要创建的Core Data 实体的名字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第二，协议需要提供一种方式来告诉它如何转换为NSManagedObject。"><span class="toc-number">1.0.46.</span> <span class="toc-text">第二，协议需要提供一种方式来告诉它如何转换为NSManagedObject。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#我们的protocol（协议）-看起来是下面这个样子的："><span class="toc-number">1.0.47.</span> <span class="toc-text">我们的protocol（协议） 看起来是下面这个样子的：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#toCoreData方法使用了-Swift-2-0-新的异常处理来抛出错误，如果转换失败，会有几种错误情况，这些情况都在下面的ErrorTypeenum进行了列举："><span class="toc-number">1.0.48.</span> <span class="toc-text">toCoreData方法使用了 Swift 2.0 新的异常处理来抛出错误，如果转换失败，会有几种错误情况，这些情况都在下面的ErrorTypeenum进行了列举：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#上面列举了三种转换时需要注意的错误情况。第一种情况是我们试图把它应用到非struct的对象上。第二种情况是我们想要创建的entity在-Core-Data-模型中不存在。第三种情况是我们想要把一些不能存储在-Core-Data-中的东西保存到-Core-Data-中（即enum）。"><span class="toc-number">1.0.49.</span> <span class="toc-text">上面列举了三种转换时需要注意的错误情况。第一种情况是我们试图把它应用到非struct的对象上。第二种情况是我们想要创建的entity在 Core Data 模型中不存在。第三种情况是我们想要把一些不能存储在 Core Data 中的东西保存到 Core Data 中（即enum）。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#让我们创建一个struct然后为其增加协议一致性："><span class="toc-number">1.0.50.</span> <span class="toc-text">让我们创建一个struct然后为其增加协议一致性：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#接下来，我们要实现toCoreData方法。"><span class="toc-number">1.0.51.</span> <span class="toc-text">接下来，我们要实现toCoreData方法。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#协议扩展"><span class="toc-number">1.0.52.</span> <span class="toc-text">协议扩展</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#当然我们可以为每个struct都写新的toCoreData方法，但是工作量很大，因为struct不支持继承，所以我们不能使用基类的方式。不过我们可以使用protocol-extension来扩展这个方法到所有相符合的struct："><span class="toc-number">1.0.53.</span> <span class="toc-text">当然我们可以为每个struct都写新的toCoreData方法，但是工作量很大，因为struct不支持继承，所以我们不能使用基类的方式。不过我们可以使用protocol extension来扩展这个方法到所有相符合的struct：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#因为扩展已经被应用到相符合的struct，这个方法就可以在struct的上下文中被调用。因此，在协议中，self指的是我们想分析的struct。"><span class="toc-number">1.0.54.</span> <span class="toc-text">因为扩展已经被应用到相符合的struct，这个方法就可以在struct的上下文中被调用。因此，在协议中，self指的是我们想分析的struct。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#所以，我们需要做的第一步就是创建一个可以写入我们Bookmark-struct值的NSManagedObject。我们该怎么做呢？"><span class="toc-number">1.0.55.</span> <span class="toc-text">所以，我们需要做的第一步就是创建一个可以写入我们Bookmark struct值的NSManagedObject。我们该怎么做呢？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一点Core-Data"><span class="toc-number">1.0.56.</span> <span class="toc-text">一点Core Data</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Core-Data有点啰嗦，所以如果需要创建一个对象，我们需要如下的步骤："><span class="toc-number">1.0.57.</span> <span class="toc-text">Core Data有点啰嗦，所以如果需要创建一个对象，我们需要如下的步骤：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获得我们需要创建的实体的名字（字符串）"><span class="toc-number">1.0.58.</span> <span class="toc-text">获得我们需要创建的实体的名字（字符串）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取NSManagedObjectContext，然后为我们的实体创建NSEntityDescription"><span class="toc-number">1.0.59.</span> <span class="toc-text">获取NSManagedObjectContext，然后为我们的实体创建NSEntityDescription</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#利用这些信息创建NSManagedObject。"><span class="toc-number">1.0.60.</span> <span class="toc-text">利用这些信息创建NSManagedObject。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实现代码如下："><span class="toc-number">1.0.61.</span> <span class="toc-text">实现代码如下：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取-Core-Data-实体的名字"><span class="toc-number">1.0.62.</span> <span class="toc-text">// 获取 Core Data 实体的名字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建实体描述"><span class="toc-number">1.0.63.</span> <span class="toc-text">// 创建实体描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实体可能不存在-所以我们使用-‘guard-let’-来判断，如果实体"><span class="toc-number">1.0.64.</span> <span class="toc-text">// 实体可能不存在, 所以我们使用 ‘guard let’ 来判断，如果实体</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在我们的-core-data-模型中不存在的话，我们就抛出错误"><span class="toc-number">1.0.65.</span> <span class="toc-text">// 在我们的 core data 模型中不存在的话，我们就抛出错误</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#下一步，我们想使用反射-API-来读取bookmark对象的属性然后把它写入到NSManagedObject实例中。"><span class="toc-number">1.0.66.</span> <span class="toc-text">下一步，我们想使用反射 API 来读取bookmark对象的属性然后把它写入到NSManagedObject实例中。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建-Mirror"><span class="toc-number">1.0.67.</span> <span class="toc-text">// 创建 Mirror</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#确保我们是在分析一个-struct"><span class="toc-number">1.0.68.</span> <span class="toc-text">// 确保我们是在分析一个 struct</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#我们通过测试displayStyle属性的方式来确保这是一个struct。"><span class="toc-number">1.0.69.</span> <span class="toc-text">我们通过测试displayStyle属性的方式来确保这是一个struct。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#所以现在我们有了一个可以让我们读取属性的Mirror，也有了一个可以用来设置属性的NSManagedObject。因为mirror提供了读取所有children的方式，所以我们可以遍历它们并保存它们的值。方式如下："><span class="toc-number">1.0.70.</span> <span class="toc-text">所以现在我们有了一个可以让我们读取属性的Mirror，也有了一个可以用来设置属性的NSManagedObject。因为mirror提供了读取所有children的方式，所以我们可以遍历它们并保存它们的值。方式如下：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#太棒了！但是，如果我们试图编译它，它会失败。原因是setValueForKey需要一个AnyObject-类型的对象，而我们的children属性只返回一个-String-Any-类型的tuple。也就是说value是Any类型但是我们需要AnyObject类型的。为了解决这个问题，我们要测试value的AnyObject协议一致性。这也意味着如果得到的属性的类型不符合AnyObject协议（比如enum-，我们就可以抛出一个错误。"><span class="toc-number">1.0.71.</span> <span class="toc-text">太棒了！但是，如果我们试图编译它，它会失败。原因是setValueForKey需要一个AnyObject?类型的对象，而我们的children属性只返回一个(String?, Any)类型的tuple。也就是说value是Any类型但是我们需要AnyObject类型的。为了解决这个问题，我们要测试value的AnyObject协议一致性。这也意味着如果得到的属性的类型不符合AnyObject协议（比如enum)，我们就可以抛出一个错误。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#现在，只有在child是AnyObject类型的时候我们才会调用setValueForKey方法。"><span class="toc-number">1.0.72.</span> <span class="toc-text">现在，只有在child是AnyObject类型的时候我们才会调用setValueForKey方法。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#然后唯一剩下的事情就是返回NSManagedObject。完整的代码如下："><span class="toc-number">1.0.73.</span> <span class="toc-text">然后唯一剩下的事情就是返回NSManagedObject。完整的代码如下：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#搞定，我们现在已经把struct转换为NSManagedObject了。"><span class="toc-number">1.0.74.</span> <span class="toc-text">搞定，我们现在已经把struct转换为NSManagedObject了。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#那么，速度如何呢？这个方法可以在生产中应用么？我做了一些测试："><span class="toc-number">1.0.75.</span> <span class="toc-text">那么，速度如何呢？这个方法可以在生产中应用么？我做了一些测试：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建2000个NSManagedObject"><span class="toc-number">1.0.76.</span> <span class="toc-text">创建2000个NSManagedObject</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#原生-0-062seconds"><span class="toc-number">1.0.77.</span> <span class="toc-text">原生:0.062seconds</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反射-0-207seconds"><span class="toc-number">1.0.78.</span> <span class="toc-text">反射:0.207seconds</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#这里的原生是指创建一个NSManagedObject，然后通过setValueForKey设置属性值。如果你在Core-Data内创建一个NSManagedObject子类然后把值直接设置到属性上（没有了动态setValueForKey的开销），速度可能更快。"><span class="toc-number">1.0.79.</span> <span class="toc-text">这里的原生是指创建一个NSManagedObject，然后通过setValueForKey设置属性值。如果你在Core Data内创建一个NSManagedObject子类然后把值直接设置到属性上（没有了动态setValueForKey的开销），速度可能更快。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#所以正如你所见，使用反射使创建NSManagedObject的性能下降了3-5倍。当你在数量有限的项目上使用这个方法，或者你不关心处理速度时，这是没问题的。但是当你需要反射大量的struct时，这个方法可能会大大降低你-app-的性能。"><span class="toc-number">1.0.80.</span> <span class="toc-text">所以正如你所见，使用反射使创建NSManagedObject的性能下降了3.5倍。当你在数量有限的项目上使用这个方法，或者你不关心处理速度时，这是没问题的。但是当你需要反射大量的struct时，这个方法可能会大大降低你 app 的性能。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#我们之前已经讨论过，创建Mirror还有其他的选项。这些选项是非常有用的，比如，你想自己定义mirror中对象的哪些部分是可访问的。对于这种情况Mirror-Struct提供了其他的构造器。"><span class="toc-number">1.0.81.</span> <span class="toc-text">我们之前已经讨论过，创建Mirror还有其他的选项。这些选项是非常有用的，比如，你想自己定义mirror中对象的哪些部分是可访问的。对于这种情况Mirror Struct提供了其他的构造器。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第一个特殊init是为Collection量身定做的："><span class="toc-number">1.0.82.</span> <span class="toc-text">第一个特殊init是为Collection量身定做的：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#与之前的init-reflecting-相比，这个构造器允许我们定义更多反射处理的细节。"><span class="toc-number">1.0.83.</span> <span class="toc-text">与之前的init(reflecting:)相比，这个构造器允许我们定义更多反射处理的细节。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#它只对Collection有效"><span class="toc-number">1.0.84.</span> <span class="toc-text">它只对Collection有效</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#我们可以设定被反射的对象以及对象的children（Collection的内容）"><span class="toc-number">1.0.85.</span> <span class="toc-text">我们可以设定被反射的对象以及对象的children（Collection的内容）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#class或者struct"><span class="toc-number">1.0.86.</span> <span class="toc-text">class或者struct</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第二个可以在class或者struct上使用。"><span class="toc-number">1.0.87.</span> <span class="toc-text">第二个可以在class或者struct上使用。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#有意思的是，这里是由你指定对象的children（即属性），指定的方式是通过一个DictionaryLiteral，它有点像字典，可以直接用作函数参数。如果我们为Bookmark-struct实现这个构造器，它看起来是这样的："><span class="toc-number">1.0.88.</span> <span class="toc-text">有意思的是，这里是由你指定对象的children（即属性），指定的方式是通过一个DictionaryLiteral，它有点像字典，可以直接用作函数参数。如果我们为Bookmark struct实现这个构造器，它看起来是这样的：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#如果现在我们做另外一个性能测试，会发现性能甚至略微有所提升："><span class="toc-number">1.0.89.</span> <span class="toc-text">如果现在我们做另外一个性能测试，会发现性能甚至略微有所提升：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建2000个NSManagedObject-1"><span class="toc-number">1.0.90.</span> <span class="toc-text">创建2000个NSManagedObject</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#原生-0-062seconds-1"><span class="toc-number">1.0.91.</span> <span class="toc-text">原生:0.062seconds</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反射-0-207seconds-1"><span class="toc-number">1.0.92.</span> <span class="toc-text">反射:0.207seconds</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反射-0-203seconds"><span class="toc-number">1.0.93.</span> <span class="toc-text">反射:0.203seconds</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#但这个工作几乎没有任何价值，因为它与我们之前反射struct成员变量的初衷是相违背的。"><span class="toc-number">1.0.94.</span> <span class="toc-text">但这个工作几乎没有任何价值，因为它与我们之前反射struct成员变量的初衷是相违背的。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#所以留下来让我们思考的问题是什么呢？好的反射用例又是什么呢？很显然，如果你在很多NSManagedObject上使用反射，它会大大降低你代码的性能。同时如果只有一个或者两个struct，根据自己掌握的struct领域的知识编写一个序列化的方法会更容易，更高性能且更不容易让人困惑。"><span class="toc-number">1.0.95.</span> <span class="toc-text">所以留下来让我们思考的问题是什么呢？好的反射用例又是什么呢？很显然，如果你在很多NSManagedObject上使用反射，它会大大降低你代码的性能。同时如果只有一个或者两个struct，根据自己掌握的struct领域的知识编写一个序列化的方法会更容易，更高性能且更不容易让人困惑。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#而本文展示反射技巧可以当你在有很多复杂的struct，且偶尔想对它们中的一部分进行存储时使用。"><span class="toc-number">1.0.96.</span> <span class="toc-text">而本文展示反射技巧可以当你在有很多复杂的struct，且偶尔想对它们中的一部分进行存储时使用。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#例子如下："><span class="toc-number">1.0.97.</span> <span class="toc-text">例子如下：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#记住上一次选择"><span class="toc-number">1.0.98.</span> <span class="toc-text">记住上一次选择</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在重新启动时存储AST打开的项目"><span class="toc-number">1.0.99.</span> <span class="toc-text">在重新启动时存储AST打开的项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在特殊处理时做临时存储"><span class="toc-number">1.0.100.</span> <span class="toc-text">在特殊处理时做临时存储</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#当然除此之外，反射当然还有其他的使用场景："><span class="toc-number">1.0.101.</span> <span class="toc-text">当然除此之外，反射当然还有其他的使用场景：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#遍历tuples"><span class="toc-number">1.0.102.</span> <span class="toc-text">遍历tuples</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对类做分析"><span class="toc-number">1.0.103.</span> <span class="toc-text">对类做分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#运行时分析对象的一致性"><span class="toc-number">1.0.104.</span> <span class="toc-text">运行时分析对象的一致性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自动生成详细日志-调试信息（即外部生成对象）"><span class="toc-number">1.0.105.</span> <span class="toc-text">自动生成详细日志 / 调试信息（即外部生成对象）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反射-API-主要做为Playground的一个工具。符合反射-API-的对象可以很轻松滴就在Playground的侧边栏中以分层的方式展示出来。因此，尽管它的性能不是最优的，在Playground之外仍然有很多有趣的应用场景，这些应用场景我们在用例章节中都讲解过。"><span class="toc-number">1.0.106.</span> <span class="toc-text">反射 API 主要做为Playground的一个工具。符合反射 API 的对象可以很轻松滴就在Playground的侧边栏中以分层的方式展示出来。因此，尽管它的性能不是最优的，在Playground之外仍然有很多有趣的应用场景，这些应用场景我们在用例章节中都讲解过。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反射-API-的源文件注释非常详细，我强烈建议每个人都去看看。"><span class="toc-number">1.0.107.</span> <span class="toc-text">反射 API 的源文件注释非常详细，我强烈建议每个人都去看看。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#同时，GitHub-上的CoreValue项目展示了关于这个技术更详尽的实现，它可以让你很轻松滴把struct编码成CoreData，或者把CoreData解码成struct。"><span class="toc-number">1.0.108.</span> <span class="toc-text">同时，GitHub 上的CoreValue项目展示了关于这个技术更详尽的实现，它可以让你很轻松滴把struct编码成CoreData，或者把CoreData解码成struct。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1、实际上，Any是一个空的协议，所有的东西都隐式滴符合这个协议。"><span class="toc-number">1.0.109.</span> <span class="toc-text">1、实际上，Any是一个空的协议，所有的东西都隐式滴符合这个协议。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、更确切地说，是一个空的可选类型。"><span class="toc-number">1.0.110.</span> <span class="toc-text">2、更确切地说，是一个空的可选类型。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、我对注释稍微做了简化。"><span class="toc-number">1.0.111.</span> <span class="toc-text">3、我对注释稍微做了简化。</span></a></li></ol></li></ol></li></ol>
 </div>
-<style>
-    .left-col .switch-btn {
-        display: none;
-    }
-    .left-col .switch-area {
-        display: none;
-    }
-</style>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
 <script>
     var valueHide = "隐藏目录";
     var valueShow = "显示目录";
+
     if ($(".left-col").is(":hidden")) {
         $("#tocButton").attr("value", valueShow);
     }
@@ -448,19 +453,17 @@
         if ($("#toc").is(":hidden")) {
             $("#tocButton").attr("value", valueHide);
             $("#toc").slideDown(320);
-            $(".switch-btn, .switch-area").fadeOut(300);
         }
         else {
             $("#tocButton").attr("value", valueShow);
             $("#toc").slideUp(350);
-            $(".switch-btn, .switch-area").fadeIn(500);
         }
     })
     if ($(".toc").length < 1) {
         $("#toc, #tocButton").hide();
-        $(".switch-btn, .switch-area").show();
     }
 </script>
+
 
 
 
@@ -474,69 +477,68 @@
 	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
 	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
 </div>
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 
 
 
 
     
-        <section class="changyan" id="comments">
-  <!--<div id="uyan_frame"></div>-->
-  <div id="SOHUCS"></div>
-  <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js"></script>
-  <script type="text/javascript">
-    window.changyan.api.config({
-      appid: 'xxxx',
-      conf: 'xxxxxxxxx'
-    });
-  </script>
-</section>
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'luuman',
+      repo: 'luuman.github.io',
+      oauth: {
+        client_id: 'null',
+        client_secret: 'null',
+      },
+    })
+    gitment.render('gitments')
+</script>
     
 
 
 
     <div class="scroll" id="post-nav-button">
         
-            <a  href="/2017/06/14/Swift利用反射机制(Mirror)获取类的属性列表与值/" title="上一篇: Swift利用反射机制(Mirror)获取类的属性列表与值">
+            <a href="/2017/06/14/tableView cell 中如果有文本框点击自动滚动不被键盘挡住/" title="上一篇: tableView cell 中如果有文本框点击自动滚动不被键盘挡住">
                 <i class="fa fa-angle-left"></i>
             </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a  href="/2017/06/14/tableView cell 中如果有文本框点击自动滚动不被键盘挡住/" title="下一篇: tableView cell 中如果有文本框点击自动滚动不被键盘挡住">
+            <a href="/2017/06/14/UIScrollView与AutoLayout或Masonry结合使用/" title="下一篇: UIScrollView与AutoLayout或Masonry结合使用">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/Observer监听RunLoop状态变化(kCFRunLoopBeforeWaiting,kCFRunLoopAfterWaiting等)/">Observer监听RunLoop状态变化(kCFRunLoopBeforeWaiting,kCFRunLoopAfterWaiting等)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/深入理解RunLoop/">深入理解RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与NSURLConnection/">RunLoop与NSURLConnection</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与PerformSelector/">RunLoop与PerformSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与Timer以及常用Mode/">RunLoop与Timer以及常用Mode</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与线程与GCD的关系/">RunLoop与线程与GCD的关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop的内部逻辑/">RunLoop的内部逻辑</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时(一)/">RunTime运行时(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时(三)/">RunTime运行时(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时(二)/">RunTime运行时(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之动态替换和改变方法实现/">RunTime运行时之动态替换和改变方法实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之动态添加方法/">RunTime运行时之动态添加方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之成员变量和属性/">RunTime运行时之成员变量和属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之改变私有属性的值/">RunTime运行时之改变私有属性的值</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/Runtime运行时之Class常用方法/">Runtime运行时之Class常用方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/SpriteKitSwiftGamePanda/">用SpriteKit写的熊猫跑酷小游戏</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与AutoreleasePool/">RunLoop与AutoreleasePool</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/实例化讲解RunLoop/">实例化讲解RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/离屏渲染浅析/">离屏渲染</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/iOS 设置视图半透明而子控件不透明/">iOS 设置视图半透明而子控件不透明</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Xcode控制台调试常用命令/">Xcode控制台调试常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift枚举相关值/">Swift枚举相关值</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/UIScrollView与AutoLayout或Masonry结合使用/">UIScrollView与AutoLayout或Masonry结合使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift中有个双问号操作符/">Swift中有个双问号操作符</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift利用反射机制(Mirror)获取类的属性列表与值/">Swift利用反射机制(Mirror)获取类的属性列表与值</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift反射API及其用法/">Swift反射API及其用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/tableView cell 中如果有文本框点击自动滚动不被键盘挡住/">tableView cell 中如果有文本框点击自动滚动不被键盘挡住</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/使用Swift Package Manager管理项目(the package has an unsupported layout)/">使用Swift Package Manager管理项目(the package has an unsupported layout)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/基于Perfect的Swift3.1服务器开发案例/">基于Perfect的Swift3.1服务器开发案例</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/如何创建一个纯 Swift 模块/">如何创建一个纯 Swift 模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift之Defer/">Swift之Defer</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/iOS clang编译OC成C++文件/">iOS clang编译OC成C++文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/calayer-uiview-uiwindow/">UIView,UIWindow,CALayer之间的区别联系</a></li></ul>
-    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之动态替换和改变方法实现/">RunTime运行时之动态替换和改变方法实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/Observer监听RunLoop状态变化(kCFRunLoopBeforeWaiting,kCFRunLoopAfterWaiting等)/">Observer监听RunLoop状态变化(kCFRunLoopBeforeWaiting,kCFRunLoopAfterWaiting等)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与NSURLConnection/">RunLoop与NSURLConnection</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与Timer以及常用Mode/">RunLoop与Timer以及常用Mode</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与线程与GCD的关系/">RunLoop与线程与GCD的关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop的内部逻辑/">RunLoop的内部逻辑</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时(一)/">RunTime运行时(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时(三)/">RunTime运行时(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时(二)/">RunTime运行时(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与PerformSelector/">RunLoop与PerformSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之动态添加方法/">RunTime运行时之动态添加方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之改变私有属性的值/">RunTime运行时之改变私有属性的值</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之成员变量和属性/">RunTime运行时之成员变量和属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/Runtime运行时之Class常用方法/">Runtime运行时之Class常用方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/SpriteKitSwiftGamePanda/">用SpriteKit写的熊猫跑酷小游戏</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与AutoreleasePool/">RunLoop与AutoreleasePool</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/深入理解RunLoop/">深入理解RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/实例化讲解RunLoop/">实例化讲解RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/离屏渲染浅析/">离屏渲染</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/tableView cell 中如果有文本框点击自动滚动不被键盘挡住/">tableView cell 中如果有文本框点击自动滚动不被键盘挡住</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift反射API及其用法/">Swift反射API及其用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/UIScrollView与AutoLayout或Masonry结合使用/">UIScrollView与AutoLayout或Masonry结合使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift之Defer/">Swift之Defer</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Xcode控制台调试常用命令/">Xcode控制台调试常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift利用反射机制(Mirror)获取类的属性列表与值/">Swift利用反射机制(Mirror)获取类的属性列表与值</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/iOS 设置视图半透明而子控件不透明/">iOS 设置视图半透明而子控件不透明</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift枚举相关值/">Swift枚举相关值</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/使用Swift Package Manager管理项目(the package has an unsupported layout)/">使用Swift Package Manager管理项目(the package has an unsupported layout)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/基于Perfect的Swift3.1服务器开发案例/">基于Perfect的Swift3.1服务器开发案例</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/如何创建一个纯 Swift 模块/">如何创建一个纯 Swift 模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift中有个双问号操作符/">Swift中有个双问号操作符</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/iOS clang编译OC成C++文件/">iOS clang编译OC成C++文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/calayer-uiview-uiwindow/">UIView,UIWindow,CALayer之间的区别联系</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");
-        // $(".post-list-item a").attr("target","_blank");
+        $(".post-list-item a").attr("target","_blank");
         $("#post-nav-button > a:nth-child(2)").click(function() {
             $(".fa-bars, .fa-times").toggle();
             $(".post-list").toggle(300);
             if ($(".toc").length > 0) {
                 $("#toc, #tocButton").toggle(200, function() {
                     if ($(".switch-area").is(":visible")) {
-                        $("#toc, .switch-btn, .switch-area").toggle();
                         $("#tocButton").attr("value", valueHide);
                         }
                     })
             }
             else {
-                $(".switch-btn, .switch-area").fadeToggle(300);
             }
         })
     </script>
 
 
 
-
     <script>
         
     </script>
-
 </div>
       <footer id="footer">
     <div class="outer">
@@ -545,14 +547,14 @@
                 &copy; 2017 飘金
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank">Hexo</a><a href="https://github.com/maochunguang" target="_blank">Blog</a> by tommy
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" >极客到访数: 
+                        <span id="site-visit" >海贼到访数: 
                             <span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
@@ -573,12 +575,12 @@
 </footer>
 
     </div>
-    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
 <script src="/js/main.js"></script>
 
     <script>
         $(document).ready(function() {
-            var backgroundnum = 4;
+            var backgroundnum = 24;
             var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
             $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
             $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
@@ -586,30 +588,6 @@
     </script>
 
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'xxxxx', 'auto');
-ga('send', 'pageview');
-
-</script>
-<!-- End Google Analytics -->
-
-
-
-	<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "//hm.baidu.com/hm.js?xxxxxx";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-	</script>
 
 
 
@@ -636,6 +614,7 @@ ga('send', 'pageview');
             var title = a.attr('title');
             if (title == undefined || title == "") return;
             a.data('title', title).removeAttr('title').hover(
+
             function() {
                 var offset = a.offset();
                 $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({

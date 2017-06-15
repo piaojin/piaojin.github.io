@@ -2,12 +2,6 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="baidu-site-verification" content="L6Lm9d5Crl"/>
-   
-    <meta name="keywords" content="iOS,Swift" />
-  
-  
-  
   
   <title>Swift之Defer | 飘金的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -29,7 +23,7 @@
     <link rel="icon" href="/img/favicon.png">
   
   
-  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
   
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
@@ -43,6 +37,7 @@
     <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
   <script>
       var yiliaConfig = {
+          rootUrl: '/',
           fancybox: true,
           animate: true,
           isHome: false,
@@ -60,69 +55,19 @@
     <div class="overlay"></div>
 <div class="intrude-less">
     <header id="header" class="inner">
-        <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
         <a href="/" class="profilepic">
             
-            <img lazy-src="/img/piaojin.png" class="js-avatar">
+            <img lazy-src="/img/head.jpg" class="js-avatar">
             
         </a>
+
         <hgroup>
-          <h1 class="header-author"><a href="/">飘金</a></h1>
+          <h1 class="header-author"><a href="/" title="Hi Mate">飘金</a></h1>
         </hgroup>
+
         
         <p class="header-subtitle">会炒菜的猿</p>
         
-        
-            <form>
-                <input type="text" class="st-default-search-input search" id="local-search-input" placeholder=" Search...">
-            </form>
-            <div id="local-search-result"></div>
-        
-        
-            <script type="text/javascript">
-                (function() {
-                    'use strict';
-                    function getMatchData(keyword, data) {
-                        var matchData = [];
-                        for(var i =0;i<data.length;i++){
-                            if(data[i].title.toLowerCase().indexOf(keyword)>=0) 
-                                matchData.push(data[i])
-                        }
-                        return matchData;
-                    }
-                    var $input = $('#local-search-input');
-                    var $resultContent = $('#local-search-result');
-                    $input.keyup(function(){
-                        $.ajax({
-                            url: '/search.json',
-                            dataType: "json",
-                            success: function( json ) {
-                                var str='<ul class=\"search-result-list\">';                
-                                var keyword = $input.val().trim().toLowerCase();
-                                $resultContent.innerHTML = "";
-                                if ($input.val().trim().length <= 0) {
-                                    $resultContent.empty();
-                                    $('#switch-area').show();
-                                    return;
-                                }
-                                var results = getMatchData(keyword, json);
-                                if(results.length === 0){
-                                    $resultContent.empty();
-                                    $('#switch-area').show();
-                                    return;
-                                } 
-                                for(var i =0; i<results.length; i++){
-                                    str += "<li><a href='"+ results[i].url +"' class='search-result-title'>"+ results[i].title +"</a></li>";
-                                }
-                                str += "</ul>";
-                                $resultContent.empty();
-                                $resultContent.append(str);
-                                $('#switch-area').hide();
-                            }
-                        });
-                    });
-                })();
-            </script>
         
         
             <div id="switch-btn" class="switch-btn">
@@ -148,6 +93,7 @@
                         </div>
                         
                     </div>
+                    
                 </div>
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
@@ -164,32 +110,44 @@
                 </div>
             </div>
         
+
         <div id="switch-area" class="switch-area">
             <div class="switch-wrap">
                 <section class="switch-part switch-part1">
                     <nav class="header-menu">
                         <ul>
                         
-                            <li><a  href="/archives/">所有文章</a></li>
+                            <li><a href="/Home">博客首页</a></li>
                         
-                            <li><a  href="https://github.com/piaojin">github</a></li>
+                            <li><a href="/works">作品展示</a></li>
                         
-                            <li><a  href="http://www.jianshu.com/u/da7864faa1be">简书</a></li>
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
                         
                         </ul>
                     </nav>
                     <nav class="header-nav">
                         <ul class="social">
                             
-                                <a class="fl github"  target="_blank" href="https://github.com/piaojin" title="github">github</a>
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
                             
-                                <a class="fl weibo"  target="_blank" href="http://www.jianshu.com/u/da7864faa1be" title="weibo">weibo</a>
+                                <a class="fl github" target="_blank" href="https://github.com/luuman" title="github">github</a>
                             
-                                <a class="fl rss"  target="_blank" href="/atom.xml" title="rss">rss</a>
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
                             
                         </ul>
                     </nav>
                 </section>
+                
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
@@ -198,46 +156,43 @@
                 </section>
                 
                 
+                
                 <section class="switch-part switch-part3">
                     <div id="js-friends">
                     
-                      <a target="_blank"  class="main-nav-link switch-friends-link" href="http://blog.csdn.net/baidu_21483933">csdn</a>
-                    
-                      <a target="_blank"  class="main-nav-link switch-friends-link" href="https://segmentfault.com/blog/maocg_web">segmentfault</a>
-                    
-                      <a target="_blank"  class="main-nav-link switch-friends-link" href="http://www.jianshu.com/u/da7864faa1be">简书</a>
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://luuman.github.io/">name</a>
                     
                     </div>
                 </section>
                 
+
                 
                 
                 <section class="switch-part switch-part4">
                 
-                    <div id="js-aboutme">爱动漫,爱编程,爱睡觉,爱老婆,爱的太多了!</div>
+                    <div id="js-aboutme">纯海迷、爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
                 </section>
                 
             </div>
         </div>
-    </header>
+    </header>                
 </div>
-
     </div>
     <div class="mid-col">
       <nav id="mobile-nav">
       <div class="overlay">
           <div class="slider-trigger"></div>
-          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">飘金</a></h1>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">飘金</a></h1>
       </div>
     <div class="intrude-less">
         <header id="header" class="inner">
             <a href="/" class="profilepic">
                 
-                    <img lazy-src="/img/piaojin.png" class="js-avatar">
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
                 
             </a>
             <hgroup>
-              <h1 class="header-author"><a href="/" title="回到主页">飘金</a></h1>
+              <h1 class="header-author"><a href="/" title="Me">飘金</a></h1>
             </hgroup>
             
             <p class="header-subtitle">会炒菜的猿</p>
@@ -245,11 +200,13 @@
             <nav class="header-menu">
                 <ul>
                 
-                    <li><a href="/archives/">所有文章</a></li>
+                    <li><a href="/Home">博客首页</a></li>
                 
-                    <li><a href="https://github.com/piaojin">github</a></li>
+                    <li><a href="/works">作品展示</a></li>
                 
-                    <li><a href="http://www.jianshu.com/u/da7864faa1be">简书</a></li>
+                    <li><a href="/about">留言打卡</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
                 
                 <div class="clearfix"></div>
                 </ul>
@@ -257,11 +214,19 @@
             <nav class="header-nav">
                 <div class="social">
                     
-                        <a class="github" target="_blank" href="https://github.com/piaojin" title="github">github</a>
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
                     
-                        <a class="weibo" target="_blank" href="http://www.jianshu.com/u/da7864faa1be" title="weibo">weibo</a>
+                        <a class="github" target="_blank" href="https://github.com/luuman" title="github">github</a>
                     
-                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
                     
                 </div>
             </nav>
@@ -271,10 +236,9 @@
       <div class="body-wrap"><article id="post-Swift之Defer" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a  href="/2017/06/14/Swift之Defer/" class="article-date">
+      <a href="/2017/06/14/Swift之Defer/" class="article-date">
       <time datetime="2017-06-14T06:23:47.000Z" itemprop="datePublished">2017-06-14</time>
 </a>
-
     </div>
   
   <div class="article-inner">
@@ -289,7 +253,6 @@
       Swift之Defer
     </h1>
   
-
 
       </header>
       
@@ -318,19 +281,68 @@
 <h3 id="分析代码"><a href="#分析代码" class="headerlink" title="分析代码:"></a>分析代码:</h3><h3 id="定位到目录并打开指定文件夹-倘若打开文件夹失败则结束函数。"><a href="#定位到目录并打开指定文件夹-倘若打开文件夹失败则结束函数。" class="headerlink" title="定位到目录并打开指定文件夹,倘若打开文件夹失败则结束函数。"></a>定位到目录并打开指定文件夹,倘若打开文件夹失败则结束函数。</h3><h3 id="主要到defer的用法，这条语句并不会马上执行，而是被推入栈中，直到函数结束时才再次被调用。"><a href="#主要到defer的用法，这条语句并不会马上执行，而是被推入栈中，直到函数结束时才再次被调用。" class="headerlink" title="主要到defer的用法，这条语句并不会马上执行，而是被推入栈中，直到函数结束时才再次被调用。"></a>主要到defer的用法，这条语句并不会马上执行，而是被推入栈中，直到函数结束时才再次被调用。</h3><h3 id="打开文件，倘若失败则结束函数。"><a href="#打开文件，倘若失败则结束函数。" class="headerlink" title="打开文件，倘若失败则结束函数。"></a>打开文件，倘若失败则结束函数。</h3><h3 id="defer内容关闭文件，这条语句一样不会被马上执行，而是推入栈中，此时它位于defer-closeDirectory-语句的上方，直到函数结束时才再次被调用。"><a href="#defer内容关闭文件，这条语句一样不会被马上执行，而是推入栈中，此时它位于defer-closeDirectory-语句的上方，直到函数结束时才再次被调用。" class="headerlink" title="defer内容关闭文件，这条语句一样不会被马上执行，而是推入栈中，此时它位于defer{closeDirectory()}语句的上方，直到函数结束时才再次被调用。"></a>defer内容关闭文件，这条语句一样不会被马上执行，而是推入栈中，此时它位于defer{closeDirectory()}语句的上方，直到函数结束时才再次被调用。</h3><h3 id="倘若一切都顺利，函数运行到最后了，开始从栈中依次弹出方才推入的defer语句，首先是closeFile-其次是closeDirectory-。确实当我们处理完文件，需要先关闭文件，再关闭文件夹。"><a href="#倘若一切都顺利，函数运行到最后了，开始从栈中依次弹出方才推入的defer语句，首先是closeFile-其次是closeDirectory-。确实当我们处理完文件，需要先关闭文件，再关闭文件夹。" class="headerlink" title="倘若一切都顺利，函数运行到最后了，开始从栈中依次弹出方才推入的defer语句，首先是closeFile(),其次是closeDirectory()。确实当我们处理完文件，需要先关闭文件，再关闭文件夹。"></a>倘若一切都顺利，函数运行到最后了，开始从栈中依次弹出方才推入的defer语句，首先是closeFile(),其次是closeDirectory()。确实当我们处理完文件，需要先关闭文件，再关闭文件夹。</h3><h3 id="现在试想一种情况，我们已经打开文件夹，并且推closeDirectory-到栈中，执行第三步openFile-操作的时候出错了！那么下面所有操作就无法进行下去，结束整个函数了！前文说到函数结束时开始执行defer栈中的内容，关闭文件夹。会有人说怎么不关闭文件，拜托失败了就意味着文件没被打开，何来关闭一说。"><a href="#现在试想一种情况，我们已经打开文件夹，并且推closeDirectory-到栈中，执行第三步openFile-操作的时候出错了！那么下面所有操作就无法进行下去，结束整个函数了！前文说到函数结束时开始执行defer栈中的内容，关闭文件夹。会有人说怎么不关闭文件，拜托失败了就意味着文件没被打开，何来关闭一说。" class="headerlink" title="现在试想一种情况，我们已经打开文件夹，并且推closeDirectory()到栈中，执行第三步openFile()操作的时候出错了！那么下面所有操作就无法进行下去，结束整个函数了！前文说到函数结束时开始执行defer栈中的内容，关闭文件夹。会有人说怎么不关闭文件，拜托失败了就意味着文件没被打开，何来关闭一说。"></a>现在试想一种情况，我们已经打开文件夹，并且推closeDirectory()到栈中，执行第三步openFile()操作的时候出错了！那么下面所有操作就无法进行下去，结束整个函数了！前文说到函数结束时开始执行defer栈中的内容，关闭文件夹。会有人说怎么不关闭文件，拜托失败了就意味着文件没被打开，何来关闭一说。</h3><h3 id="最后必须说下defer的作用域，这点灰常重要。"><a href="#最后必须说下defer的作用域，这点灰常重要。" class="headerlink" title="最后必须说下defer的作用域，这点灰常重要。"></a>最后必须说下defer的作用域，这点灰常重要。</h3><h3 id="注意作用域，其次是调用顺序——即一个作用域结束，该作用域中的defer语句自下而上调用。"><a href="#注意作用域，其次是调用顺序——即一个作用域结束，该作用域中的defer语句自下而上调用。" class="headerlink" title="注意作用域，其次是调用顺序——即一个作用域结束，该作用域中的defer语句自下而上调用。"></a>注意作用域，其次是调用顺序——即一个作用域结束，该作用域中的defer语句自下而上调用。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">func lookforSomething(name:String)throws&#123;</div><div class="line">//这里是作用域1整个函数作用域print(&quot;1-1&quot;)ifname ==&quot;&quot;&#123;//这里是作用域2 if的作用域print(&quot;2-1&quot;)defer&#123;print(&quot;2-2&quot;)    &#125;print(&quot;2-3&quot;)  &#125;print(&quot;1-2&quot;)defer&#123;print(&quot;1-3&quot;)  &#125;print(&quot;1-4&quot;)ifname ==&quot;hello&quot;&#123;//作用域3print(&quot;3-1&quot;)defer&#123;print(&quot;3-2&quot;)    &#125;print(&quot;3-3&quot;)defer&#123;print(&quot;3-4&quot;)    &#125;  &#125;&#125;//有兴趣的看看依次输出什么//try! lookforSomething(&quot;&quot;)//调出 debug Area 快捷键 shift+ command + ytry! lookforSomething(&quot;hello&quot;)</div></pre></td></tr></table></figure>
 <h3 id="其实先前有个地方说的不准确，并不是函数结束时开始执行defer栈推出操作，而是每当一个作用域结束就进行该作用域defer执行。"><a href="#其实先前有个地方说的不准确，并不是函数结束时开始执行defer栈推出操作，而是每当一个作用域结束就进行该作用域defer执行。" class="headerlink" title="其实先前有个地方说的不准确，并不是函数结束时开始执行defer栈推出操作，而是每当一个作用域结束就进行该作用域defer执行。"></a>其实先前有个地方说的不准确，并不是函数结束时开始执行defer栈推出操作，而是每当一个作用域结束就进行该作用域defer执行。</h3>
       
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
     </div>
     
   </div>
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a  href="/2017/06/14/Swift之Defer/">Swift之Defer</a></p>
-        <p><span>文章作者:</span><a  href="/" title="访问 飘金 的个人博客">飘金</a></p>
+        <p><span>本文标题:</span><a href="/2017/06/14/Swift之Defer/">Swift之Defer</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 飘金 的个人博客">飘金</a></p>
         <p><span>发布时间:</span>2017年06月14日 - 14时23分</p>
         <p><span>最后更新:</span>2017年06月14日 - 22时11分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/06/14/Swift之Defer/" title="Swift之Defer">http://yoursite.com/2017/06/14/Swift之Defer/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/06/14/Swift之Defer/　　作者: 飘金" title=""></span>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/06/14/Swift之Defer/　　作者: 飘金" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
             <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
@@ -341,23 +353,22 @@
 
 <nav id="article-nav">
   
-    <a  href="/2017/06/14/如何创建一个纯 Swift 模块/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/06/14/UIScrollView与AutoLayout或Masonry结合使用/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          如何创建一个纯 Swift 模块
+          UIScrollView与AutoLayout或Masonry结合使用
         
       </div>
     </a>
   
   
-    <a  href="/2017/06/13/iOS clang编译OC成C++文件/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">iOS clang编译OC成C++文件</div>
+    <a href="/2017/06/14/Xcode控制台调试常用命令/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Xcode控制台调试常用命令</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
 </nav>
-
 
   
 </article>
@@ -366,19 +377,13 @@
     <strong class="toc-title">文章目录</strong>
     <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Swift2-0中加入了defer新语法声明。defer译为延缓、推迟之意。那么在Swift2-0中它将被应用于什么位置呢？比如，读取某目录下的文件内容并处理数据，你需要首先定位到文件目录，打开文件夹，读取文件内容以及处理数据，关闭文件以及文件夹。倘若一切顺利，只需按照设定好的程序流程走一轮即可；不过考虑事情要面面俱到，倘若中间某个环节失败，比如读取文件内容失败、处理数据失败等等，还需要进行一些后续收尾工作，即关闭文件或关闭文件夹-当然就算顺利执行，也是要关闭的-。"><span class="toc-number">1.</span> <span class="toc-text">Swift2.0中加入了defer新语法声明。defer译为延缓、推迟之意。那么在Swift2.0中它将被应用于什么位置呢？比如，读取某目录下的文件内容并处理数据，你需要首先定位到文件目录，打开文件夹，读取文件内容以及处理数据，关闭文件以及文件夹。倘若一切顺利，只需按照设定好的程序流程走一轮即可；不过考虑事情要面面俱到，倘若中间某个环节失败，比如读取文件内容失败、处理数据失败等等，还需要进行一些后续收尾工作，即关闭文件或关闭文件夹(当然就算顺利执行，也是要关闭的)。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#先谈谈defer的基础语法，声明方式如下"><span class="toc-number">2.</span> <span class="toc-text">先谈谈defer的基础语法，声明方式如下:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可以看到声明方式非常简单-defer关键字打头，紧跟-程序块-大括号中添加延迟处理代码。平常应用方式如下"><span class="toc-number">3.</span> <span class="toc-text">可以看到声明方式非常简单,defer关键字打头，紧跟{}程序块,大括号中添加延迟处理代码。平常应用方式如下:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分析代码"><span class="toc-number">4.</span> <span class="toc-text">分析代码:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定位到目录并打开指定文件夹-倘若打开文件夹失败则结束函数。"><span class="toc-number">5.</span> <span class="toc-text">定位到目录并打开指定文件夹,倘若打开文件夹失败则结束函数。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主要到defer的用法，这条语句并不会马上执行，而是被推入栈中，直到函数结束时才再次被调用。"><span class="toc-number">6.</span> <span class="toc-text">主要到defer的用法，这条语句并不会马上执行，而是被推入栈中，直到函数结束时才再次被调用。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打开文件，倘若失败则结束函数。"><span class="toc-number">7.</span> <span class="toc-text">打开文件，倘若失败则结束函数。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#defer内容关闭文件，这条语句一样不会被马上执行，而是推入栈中，此时它位于defer-closeDirectory-语句的上方，直到函数结束时才再次被调用。"><span class="toc-number">8.</span> <span class="toc-text">defer内容关闭文件，这条语句一样不会被马上执行，而是推入栈中，此时它位于defer{closeDirectory()}语句的上方，直到函数结束时才再次被调用。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#倘若一切都顺利，函数运行到最后了，开始从栈中依次弹出方才推入的defer语句，首先是closeFile-其次是closeDirectory-。确实当我们处理完文件，需要先关闭文件，再关闭文件夹。"><span class="toc-number">9.</span> <span class="toc-text">倘若一切都顺利，函数运行到最后了，开始从栈中依次弹出方才推入的defer语句，首先是closeFile(),其次是closeDirectory()。确实当我们处理完文件，需要先关闭文件，再关闭文件夹。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#现在试想一种情况，我们已经打开文件夹，并且推closeDirectory-到栈中，执行第三步openFile-操作的时候出错了！那么下面所有操作就无法进行下去，结束整个函数了！前文说到函数结束时开始执行defer栈中的内容，关闭文件夹。会有人说怎么不关闭文件，拜托失败了就意味着文件没被打开，何来关闭一说。"><span class="toc-number">10.</span> <span class="toc-text">现在试想一种情况，我们已经打开文件夹，并且推closeDirectory()到栈中，执行第三步openFile()操作的时候出错了！那么下面所有操作就无法进行下去，结束整个函数了！前文说到函数结束时开始执行defer栈中的内容，关闭文件夹。会有人说怎么不关闭文件，拜托失败了就意味着文件没被打开，何来关闭一说。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最后必须说下defer的作用域，这点灰常重要。"><span class="toc-number">11.</span> <span class="toc-text">最后必须说下defer的作用域，这点灰常重要。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注意作用域，其次是调用顺序——即一个作用域结束，该作用域中的defer语句自下而上调用。"><span class="toc-number">12.</span> <span class="toc-text">注意作用域，其次是调用顺序——即一个作用域结束，该作用域中的defer语句自下而上调用。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其实先前有个地方说的不准确，并不是函数结束时开始执行defer栈推出操作，而是每当一个作用域结束就进行该作用域defer执行。"><span class="toc-number">13.</span> <span class="toc-text">其实先前有个地方说的不准确，并不是函数结束时开始执行defer栈推出操作，而是每当一个作用域结束就进行该作用域defer执行。</span></a></li></ol>
 </div>
-<style>
-    .left-col .switch-btn {
-        display: none;
-    }
-    .left-col .switch-area {
-        display: none;
-    }
-</style>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
 <script>
     var valueHide = "隐藏目录";
     var valueShow = "显示目录";
+
     if ($(".left-col").is(":hidden")) {
         $("#tocButton").attr("value", valueShow);
     }
@@ -386,19 +391,17 @@
         if ($("#toc").is(":hidden")) {
             $("#tocButton").attr("value", valueHide);
             $("#toc").slideDown(320);
-            $(".switch-btn, .switch-area").fadeOut(300);
         }
         else {
             $("#tocButton").attr("value", valueShow);
             $("#toc").slideUp(350);
-            $(".switch-btn, .switch-area").fadeIn(500);
         }
     })
     if ($(".toc").length < 1) {
         $("#toc, #tocButton").hide();
-        $(".switch-btn, .switch-area").show();
     }
 </script>
+
 
 
 
@@ -412,69 +415,68 @@
 	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
 	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
 </div>
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 
 
 
 
     
-        <section class="changyan" id="comments">
-  <!--<div id="uyan_frame"></div>-->
-  <div id="SOHUCS"></div>
-  <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js"></script>
-  <script type="text/javascript">
-    window.changyan.api.config({
-      appid: 'xxxx',
-      conf: 'xxxxxxxxx'
-    });
-  </script>
-</section>
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'luuman',
+      repo: 'luuman.github.io',
+      oauth: {
+        client_id: 'null',
+        client_secret: 'null',
+      },
+    })
+    gitment.render('gitments')
+</script>
     
 
 
 
     <div class="scroll" id="post-nav-button">
         
-            <a  href="/2017/06/14/如何创建一个纯 Swift 模块/" title="上一篇: 如何创建一个纯 Swift 模块">
+            <a href="/2017/06/14/UIScrollView与AutoLayout或Masonry结合使用/" title="上一篇: UIScrollView与AutoLayout或Masonry结合使用">
                 <i class="fa fa-angle-left"></i>
             </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a  href="/2017/06/13/iOS clang编译OC成C++文件/" title="下一篇: iOS clang编译OC成C++文件">
+            <a href="/2017/06/14/Xcode控制台调试常用命令/" title="下一篇: Xcode控制台调试常用命令">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/Observer监听RunLoop状态变化(kCFRunLoopBeforeWaiting,kCFRunLoopAfterWaiting等)/">Observer监听RunLoop状态变化(kCFRunLoopBeforeWaiting,kCFRunLoopAfterWaiting等)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/深入理解RunLoop/">深入理解RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与NSURLConnection/">RunLoop与NSURLConnection</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与PerformSelector/">RunLoop与PerformSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与Timer以及常用Mode/">RunLoop与Timer以及常用Mode</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与线程与GCD的关系/">RunLoop与线程与GCD的关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop的内部逻辑/">RunLoop的内部逻辑</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时(一)/">RunTime运行时(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时(三)/">RunTime运行时(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时(二)/">RunTime运行时(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之动态替换和改变方法实现/">RunTime运行时之动态替换和改变方法实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之动态添加方法/">RunTime运行时之动态添加方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之成员变量和属性/">RunTime运行时之成员变量和属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之改变私有属性的值/">RunTime运行时之改变私有属性的值</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/Runtime运行时之Class常用方法/">Runtime运行时之Class常用方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/SpriteKitSwiftGamePanda/">用SpriteKit写的熊猫跑酷小游戏</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与AutoreleasePool/">RunLoop与AutoreleasePool</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/实例化讲解RunLoop/">实例化讲解RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/离屏渲染浅析/">离屏渲染</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/iOS 设置视图半透明而子控件不透明/">iOS 设置视图半透明而子控件不透明</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Xcode控制台调试常用命令/">Xcode控制台调试常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift枚举相关值/">Swift枚举相关值</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/UIScrollView与AutoLayout或Masonry结合使用/">UIScrollView与AutoLayout或Masonry结合使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift中有个双问号操作符/">Swift中有个双问号操作符</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift利用反射机制(Mirror)获取类的属性列表与值/">Swift利用反射机制(Mirror)获取类的属性列表与值</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift反射API及其用法/">Swift反射API及其用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/tableView cell 中如果有文本框点击自动滚动不被键盘挡住/">tableView cell 中如果有文本框点击自动滚动不被键盘挡住</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/使用Swift Package Manager管理项目(the package has an unsupported layout)/">使用Swift Package Manager管理项目(the package has an unsupported layout)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/基于Perfect的Swift3.1服务器开发案例/">基于Perfect的Swift3.1服务器开发案例</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/如何创建一个纯 Swift 模块/">如何创建一个纯 Swift 模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift之Defer/">Swift之Defer</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/iOS clang编译OC成C++文件/">iOS clang编译OC成C++文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/calayer-uiview-uiwindow/">UIView,UIWindow,CALayer之间的区别联系</a></li></ul>
-    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之动态替换和改变方法实现/">RunTime运行时之动态替换和改变方法实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/Observer监听RunLoop状态变化(kCFRunLoopBeforeWaiting,kCFRunLoopAfterWaiting等)/">Observer监听RunLoop状态变化(kCFRunLoopBeforeWaiting,kCFRunLoopAfterWaiting等)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与NSURLConnection/">RunLoop与NSURLConnection</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与Timer以及常用Mode/">RunLoop与Timer以及常用Mode</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与线程与GCD的关系/">RunLoop与线程与GCD的关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop的内部逻辑/">RunLoop的内部逻辑</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时(一)/">RunTime运行时(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时(三)/">RunTime运行时(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时(二)/">RunTime运行时(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与PerformSelector/">RunLoop与PerformSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之动态添加方法/">RunTime运行时之动态添加方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之改变私有属性的值/">RunTime运行时之改变私有属性的值</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之成员变量和属性/">RunTime运行时之成员变量和属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/Runtime运行时之Class常用方法/">Runtime运行时之Class常用方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/SpriteKitSwiftGamePanda/">用SpriteKit写的熊猫跑酷小游戏</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与AutoreleasePool/">RunLoop与AutoreleasePool</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/深入理解RunLoop/">深入理解RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/实例化讲解RunLoop/">实例化讲解RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/离屏渲染浅析/">离屏渲染</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/tableView cell 中如果有文本框点击自动滚动不被键盘挡住/">tableView cell 中如果有文本框点击自动滚动不被键盘挡住</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift反射API及其用法/">Swift反射API及其用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/UIScrollView与AutoLayout或Masonry结合使用/">UIScrollView与AutoLayout或Masonry结合使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift之Defer/">Swift之Defer</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Xcode控制台调试常用命令/">Xcode控制台调试常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift利用反射机制(Mirror)获取类的属性列表与值/">Swift利用反射机制(Mirror)获取类的属性列表与值</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/iOS 设置视图半透明而子控件不透明/">iOS 设置视图半透明而子控件不透明</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift枚举相关值/">Swift枚举相关值</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/使用Swift Package Manager管理项目(the package has an unsupported layout)/">使用Swift Package Manager管理项目(the package has an unsupported layout)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/基于Perfect的Swift3.1服务器开发案例/">基于Perfect的Swift3.1服务器开发案例</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/如何创建一个纯 Swift 模块/">如何创建一个纯 Swift 模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift中有个双问号操作符/">Swift中有个双问号操作符</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/iOS clang编译OC成C++文件/">iOS clang编译OC成C++文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/calayer-uiview-uiwindow/">UIView,UIWindow,CALayer之间的区别联系</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");
-        // $(".post-list-item a").attr("target","_blank");
+        $(".post-list-item a").attr("target","_blank");
         $("#post-nav-button > a:nth-child(2)").click(function() {
             $(".fa-bars, .fa-times").toggle();
             $(".post-list").toggle(300);
             if ($(".toc").length > 0) {
                 $("#toc, #tocButton").toggle(200, function() {
                     if ($(".switch-area").is(":visible")) {
-                        $("#toc, .switch-btn, .switch-area").toggle();
                         $("#tocButton").attr("value", valueHide);
                         }
                     })
             }
             else {
-                $(".switch-btn, .switch-area").fadeToggle(300);
             }
         })
     </script>
 
 
 
-
     <script>
         
     </script>
-
 </div>
       <footer id="footer">
     <div class="outer">
@@ -483,14 +485,14 @@
                 &copy; 2017 飘金
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank">Hexo</a><a href="https://github.com/maochunguang" target="_blank">Blog</a> by tommy
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" >极客到访数: 
+                        <span id="site-visit" >海贼到访数: 
                             <span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
@@ -511,12 +513,12 @@
 </footer>
 
     </div>
-    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
 <script src="/js/main.js"></script>
 
     <script>
         $(document).ready(function() {
-            var backgroundnum = 4;
+            var backgroundnum = 24;
             var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
             $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
             $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
@@ -524,30 +526,6 @@
     </script>
 
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'xxxxx', 'auto');
-ga('send', 'pageview');
-
-</script>
-<!-- End Google Analytics -->
-
-
-
-	<script>
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "//hm.baidu.com/hm.js?xxxxxx";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-	</script>
 
 
 
@@ -574,6 +552,7 @@ ga('send', 'pageview');
             var title = a.attr('title');
             if (title == undefined || title == "") return;
             a.data('title', title).removeAttr('title').hover(
+
             function() {
                 var offset = a.offset();
                 $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
