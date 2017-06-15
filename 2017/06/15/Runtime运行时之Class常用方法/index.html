@@ -1,11 +1,99 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
+<!doctype html>
+
+
+
   
-  <title>Runtime运行时之Class常用方法 | 飘金的博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Runtime运行时之Class常用方法">
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,Swift" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Runtime运行时之Class常用方法">
 <meta name="keywords" content="iOS,Swift">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Runtime运行时之Class常用方法">
@@ -16,265 +104,244 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Runtime运行时之Class常用方法">
 <meta name="twitter:description" content="Runtime运行时之Class常用方法">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/15/Runtime运行时之Class常用方法/"/>
+
+
+
+
+
+  <title>Runtime运行时之Class常用方法 | 飘金的博客</title>
   
-    <link rel="alternative" href="/atom.xml" title="飘金的博客" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/img/favicon.png">
-  
-  
-      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  
-  
-      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  
-  <!-- 加载特效 -->
-    <script src="/js/pace.js"></script>
-    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
-  <script>
-      var yiliaConfig = {
-          rootUrl: '/',
-          fancybox: true,
-          animate: true,
-          isHome: false,
-          isPost: true,
-          isArchive: false,
-          isTag: false,
-          isCategory: false,
-          open_in_new: false
-      }
-  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </head>
-<body>
-  <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-    <header id="header" class="inner">
-        <a href="/" class="profilepic">
-            
-            <img lazy-src="/img/head.jpg" class="js-avatar">
-            
-        </a>
 
-        <hgroup>
-          <h1 class="header-author"><a href="/" title="Hi Mate">飘金</a></h1>
-        </hgroup>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-        
-        <p class="header-subtitle">会炒菜的猿</p>
-        
-        
-        
-            <div id="switch-btn" class="switch-btn">
-                <div class="icon">
-                    <div class="icon-ctn">
-                        <div class="icon-wrap icon-house" data-idx="0">
-                            <div class="birdhouse"></div>
-                            <div class="birdhouse_holes"></div>
-                        </div>
-                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
-                            <div class="ribbon"></div>
-                        </div>
-                        
-                        <div class="icon-wrap icon-link hide" data-idx="2">
-                            <div class="loopback_l"></div>
-                            <div class="loopback_r"></div>
-                        </div>
-                        
-                        
-                        <div class="icon-wrap icon-me hide" data-idx="3">
-                            <div class="user"></div>
-                            <div class="shoulder"></div>
-                        </div>
-                        
-                    </div>
-                    
-                </div>
-                <div class="tips-box hide">
-                    <div class="tips-arrow"></div>
-                    <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
-                        
-                        <li>友情链接</li>
-                        
-                        
-                        <li>关于我</li>
-                        
-                    </ul>
-                </div>
-            </div>
-        
+  
+  
+    
+  
 
-        <div id="switch-area" class="switch-area">
-            <div class="switch-wrap">
-                <section class="switch-part switch-part1">
-                    <nav class="header-menu">
-                        <ul>
-                        
-                            <li><a href="/Home">博客首页</a></li>
-                        
-                            <li><a href="/works">作品展示</a></li>
-                        
-                            <li><a href="/about">留言打卡</a></li>
-                        
-                            <li><a href="/FrontEndGuide">前端导航</a></li>
-                        
-                        </ul>
-                    </nav>
-                    <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
-                            
-                                <a class="fl github" target="_blank" href="https://github.com/luuman" title="github">github</a>
-                            
-                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
-                            
-                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
-                            
-                                <a class="fl google" target="_blank" href="#" title="google">google</a>
-                            
-                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
-                            
-                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
-                            
-                        </ul>
-                    </nav>
-                </section>
-                
-                
-                <section class="switch-part switch-part2">
-                    <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
-                    </div>
-                </section>
-                
-                
-                
-                <section class="switch-part switch-part3">
-                    <div id="js-friends">
-                    
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://luuman.github.io/">name</a>
-                    
-                    </div>
-                </section>
-                
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
 
-                
-                
-                <section class="switch-part switch-part4">
-                
-                    <div id="js-aboutme">纯海迷、爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
-                </section>
-                
-            </div>
-        </div>
-    </header>                
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">飘金的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">会炒菜的猿</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-      <div class="overlay">
-          <div class="slider-trigger"></div>
-          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">飘金</a></h1>
-      </div>
-    <div class="intrude-less">
-        <header id="header" class="inner">
-            <a href="/" class="profilepic">
-                
-                    <img lazy-src="/img/head.jpg" class="js-avatar">
-                
-            </a>
-            <hgroup>
-              <h1 class="header-author"><a href="/" title="Me">飘金</a></h1>
-            </hgroup>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
             
-            <p class="header-subtitle">会炒菜的猿</p>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            <nav class="header-menu">
-                <ul>
-                
-                    <li><a href="/Home">博客首页</a></li>
-                
-                    <li><a href="/works">作品展示</a></li>
-                
-                    <li><a href="/about">留言打卡</a></li>
-                
-                    <li><a href="/FrontEndGuide">前端导航</a></li>
-                
-                <div class="clearfix"></div>
-                </ul>
-            </nav>
-            <nav class="header-nav">
-                <div class="social">
-                    
-                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
-                    
-                        <a class="github" target="_blank" href="https://github.com/luuman" title="github">github</a>
-                    
-                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
-                    
-                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
-                    
-                        <a class="google" target="_blank" href="#" title="google">google</a>
-                    
-                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
-                    
-                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
-                    
-                </div>
-            </nav>
-        </header>                
-    </div>
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
 </nav>
-      <div class="body-wrap"><article id="post-Runtime运行时之Class常用方法" class="article article-type-post" itemscope itemprop="blogPost">
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
   
-    <div class="article-meta">
-      <a href="/2017/06/15/Runtime运行时之Class常用方法/" class="article-date">
-      <time datetime="2017-06-15T06:23:47.000Z" itemprop="datePublished">2017-06-15</time>
-</a>
-    </div>
+
   
-  <div class="article-inner">
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/15/Runtime运行时之Class常用方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="飘金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="飘金的博客">
+    </span>
+
     
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
-  
-    <h1 class="article-title" itemprop="name">
-      Runtime运行时之Class常用方法
-    </h1>
-  
-
-      </header>
-      
-      <div class="article-info article-info-post">
         
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-    </div>
-
-
+          <h1 class="post-title" itemprop="name headline">Runtime运行时之Class常用方法</h1>
         
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-    </div>
 
-        <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-15T14:23:47+08:00">
+                2017-06-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         <p>Runtime运行时之Class常用方法<br><a id="more"></a></p>
 <h2 id="注-此篇中记录的是以class开头的runtime函数"><a href="#注-此篇中记录的是以class开头的runtime函数" class="headerlink" title="注: 此篇中记录的是以class开头的runtime函数"></a>注: 此篇中记录的是以class开头的runtime函数</h2><blockquote>
 <h2 id="一、创建对象"><a href="#一、创建对象" class="headerlink" title="一、创建对象"></a>一、创建对象</h2></blockquote>
@@ -458,297 +525,404 @@
 </ul>
 
       
+    </div>
+
+    <div>
       
-        <div class="page-reward">
-          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
-          <div class="hide_box"></div>
-          <div class="shang_box">
-            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
-            <div class="shang_tit">
-              <p>纯属好玩</p>
-            </div>
-            <div class="shang_payimg">
-              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
-            </div>
-              <div class="pay_explain">扫码打赏，你说多少就多少</div>
-            <div class="shang_payselect">
-              
-                <div class="pay_item checked" data-id="alipay">
-                  <span class="radiobox"></span>
-                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
-                </div>
-              
-              
-                <div class="pay_item" data-id="wechat">
-                  <span class="radiobox"></span>
-                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
-                </div>
-              
-            </div>
-            <div class="shang_info">
-              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
-            </div>
+        
+
+      
+    </div>
+
+    <div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------本文结束😘<i class="fa fa-paw"></i>感谢阅读------</div>
+    
+</div>
+    
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/15/SpriteKitSwiftGamePanda/" rel="next" title="用SpriteKit写的熊猫跑酷小游戏">
+                <i class="fa fa-chevron-left"></i> 用SpriteKit写的熊猫跑酷小游戏
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/15/RunTime运行时之成员变量和属性/" rel="prev" title="RunTime运行时之成员变量和属性">
+                RunTime运行时之成员变量和属性 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
-        <script type="text/javascript">
-          $(".pay_item").click(function(){
-            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
-            var dataid=$(this).attr('data-id');
-            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
-            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
-          });
-          function dashangToggle(){
-            
-            $(".hide_box").fadeToggle();
-            $(".shang_box").fadeToggle();
-          }
-        </script>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
       
     </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
     
   </div>
-  
-    
-    <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/06/15/Runtime运行时之Class常用方法/">Runtime运行时之Class常用方法</a></p>
-        <p><span>文章作者:</span><a href="/" title="访问 飘金 的个人博客">飘金</a></p>
-        <p><span>发布时间:</span>2017年06月15日 - 14时23分</p>
-        <p><span>最后更新:</span>2017年06月14日 - 22时21分</p>
-        <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/06/15/Runtime运行时之Class常用方法/" title="Runtime运行时之Class常用方法">http://yoursite.com/2017/06/15/Runtime运行时之Class常用方法/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/06/15/Runtime运行时之Class常用方法/　　作者: 飘金" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
-            <script src="/js/clipboard.min.js"></script>
-            <script> var clipboard = new Clipboard('.copy-path'); </script>
-        </p>
-        <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
-        </p>
-    </div>
 
 
-
-<nav id="article-nav">
-  
-    <a href="/2017/06/15/RunTime运行时之改变私有属性的值/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          RunTime运行时之改变私有属性的值
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/06/15/SpriteKitSwiftGamePanda/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">用SpriteKit写的熊猫跑酷小游戏</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-    <div id="toc" class="toc-article">
-    <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#注-此篇中记录的是以class开头的runtime函数"><span class="toc-number">1.</span> <span class="toc-text">注: 此篇中记录的是以class开头的runtime函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、创建对象"><span class="toc-number">2.</span> <span class="toc-text">一、创建对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建一个对象"><span class="toc-number">3.</span> <span class="toc-text">创建一个对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cls-类型"><span class="toc-number">3.1.</span> <span class="toc-text">cls: 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#extraBytes-分配的内存大小"><span class="toc-number">3.2.</span> <span class="toc-text">extraBytes: 分配的内存大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值-cls类型的实例对象"><span class="toc-number">3.3.</span> <span class="toc-text">返回值: cls类型的实例对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子"><span class="toc-number">3.4.</span> <span class="toc-text">例子:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、类名、父类、实例变量、成员变量、属性、实例方法、类方法、方法实现"><span class="toc-number">4.</span> <span class="toc-text">二、类名、父类、实例变量、成员变量、属性、实例方法、类方法、方法实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#获取指定类的类名-char-类型字符串"><span class="toc-number">4.1.</span> <span class="toc-text">获取指定类的类名 (char *类型字符串)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cls-类型-1"><span class="toc-number">4.2.</span> <span class="toc-text">cls: 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值-类名-char-类型的字符串"><span class="toc-number">4.3.</span> <span class="toc-text">返回值: 类名 - char  类型的字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-1"><span class="toc-number">4.4.</span> <span class="toc-text">例子:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取指定类的父类型-Class类型"><span class="toc-number">4.5.</span> <span class="toc-text">获取指定类的父类型 (Class类型)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cls-类型-2"><span class="toc-number">4.6.</span> <span class="toc-text">cls: 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值-父类型-Class类型"><span class="toc-number">4.7.</span> <span class="toc-text">返回值: 父类型 Class类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-2"><span class="toc-number">4.8.</span> <span class="toc-text">例子:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取一个指定类型的实例占用内存大小-size-t-类型"><span class="toc-number">4.9.</span> <span class="toc-text">获取一个指定类型的实例占用内存大小 (size_t 类型)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cls-类型-3"><span class="toc-number">4.10.</span> <span class="toc-text">cls: 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值-cls类型的一个实例对象占用内存大小"><span class="toc-number">4.11.</span> <span class="toc-text">返回值: cls类型的一个实例对象占用内存大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-3"><span class="toc-number">4.12.</span> <span class="toc-text">例子:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取一个类中-指定名称的实例成员变量的信息"><span class="toc-number">4.13.</span> <span class="toc-text">获取一个类中, 指定名称的实例成员变量的信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cls-类型-4"><span class="toc-number">4.14.</span> <span class="toc-text">cls: 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#name-成员变量名（属性带-“-”）"><span class="toc-number">4.15.</span> <span class="toc-text">name: 成员变量名（属性带 “_”）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值-成员变量信息"><span class="toc-number">4.16.</span> <span class="toc-text">返回值: 成员变量信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-4"><span class="toc-number">4.17.</span> <span class="toc-text">例子:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取属性的信息-不用打"><span class="toc-number">4.18.</span> <span class="toc-text">获取属性的信息, 不用打_</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cls-类"><span class="toc-number">4.19.</span> <span class="toc-text">cls: 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#name-属性名"><span class="toc-number">4.20.</span> <span class="toc-text">name: 属性名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值-属性信息"><span class="toc-number">4.21.</span> <span class="toc-text">返回值: 属性信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-5"><span class="toc-number">4.22.</span> <span class="toc-text">例子:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取对象方法信息-“-“-方法"><span class="toc-number">4.23.</span> <span class="toc-text">获取对象方法信息 ( “-“ 方法)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cls-类-1"><span class="toc-number">4.24.</span> <span class="toc-text">cls: 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#name-方法"><span class="toc-number">4.25.</span> <span class="toc-text">name: 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值-对象方法信息-Method类型"><span class="toc-number">4.26.</span> <span class="toc-text">返回值: 对象方法信息 - * ### Method类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-6"><span class="toc-number">4.27.</span> <span class="toc-text">例子:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取类方法的信息-“-”-方法"><span class="toc-number">4.28.</span> <span class="toc-text">获取类方法的信息 ( “+” 方法 )</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cls-类-2"><span class="toc-number">4.29.</span> <span class="toc-text">cls: 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#name-方法-1"><span class="toc-number">4.30.</span> <span class="toc-text">name: 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值-对象方法信息-Method类型-1"><span class="toc-number">4.31.</span> <span class="toc-text">返回值: 对象方法信息 - ### Method类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-7"><span class="toc-number">4.32.</span> <span class="toc-text">例子:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取方法的具体实现-IMP"><span class="toc-number">4.33.</span> <span class="toc-text">获取方法的具体实现 (IMP)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cls-类-3"><span class="toc-number">4.34.</span> <span class="toc-text">cls: 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#name-方法-2"><span class="toc-number">4.35.</span> <span class="toc-text">name: 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值-方法的具体实现-IMP类型"><span class="toc-number">4.36.</span> <span class="toc-text">返回值: 方法的具体实现 ### IMP类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-8"><span class="toc-number">4.37.</span> <span class="toc-text">例子:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取方法的具体实现-返回值类型为struct"><span class="toc-number">4.38.</span> <span class="toc-text">获取方法的具体实现, 返回值类型为struct</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cls-类-4"><span class="toc-number">4.39.</span> <span class="toc-text">cls: 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#name-方法-3"><span class="toc-number">4.40.</span> <span class="toc-text">name: 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值-方法的具体实现-struct-IMP类型"><span class="toc-number">4.41.</span> <span class="toc-text">返回值: 方法的具体实现 ### struct IMP类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-9"><span class="toc-number">4.42.</span> <span class="toc-text">例子:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、成员变量列表、属性列表、方法列表、协议列表"><span class="toc-number">5.</span> <span class="toc-text">三、成员变量列表、属性列表、方法列表、协议列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#获取成员变量列表"><span class="toc-number">5.1.</span> <span class="toc-text">获取成员变量列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cls-类-5"><span class="toc-number">5.2.</span> <span class="toc-text">cls: 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#outCount-无符号整形变量的指针-用于获取成员变量数量"><span class="toc-number">5.3.</span> <span class="toc-text">*outCount: 无符号整形变量的指针, 用于获取成员变量数量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值-成员变量列表"><span class="toc-number">5.4.</span> <span class="toc-text">返回值: 成员变量列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-10"><span class="toc-number">5.5.</span> <span class="toc-text">例子:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取属性列表"><span class="toc-number">5.6.</span> <span class="toc-text">获取属性列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cls-类型-5"><span class="toc-number">5.7.</span> <span class="toc-text">cls: 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#outCount-无符号整形变量的指针-用于获取属性数量"><span class="toc-number">5.8.</span> <span class="toc-text">*outCount: 无符号整形变量的指针, 用于获取属性数量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值-属性列表"><span class="toc-number">5.9.</span> <span class="toc-text">返回值: 属性列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-11"><span class="toc-number">5.10.</span> <span class="toc-text">例子:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取方法列表"><span class="toc-number">5.11.</span> <span class="toc-text">获取方法列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cls-类-6"><span class="toc-number">5.12.</span> <span class="toc-text">cls: 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#outCount-无符号整形变量的指针-用于获取方法数量"><span class="toc-number">5.13.</span> <span class="toc-text">*outCount: 无符号整形变量的指针, 用于获取方法数量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值-方法列表"><span class="toc-number">5.14.</span> <span class="toc-text">返回值: 方法列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-12"><span class="toc-number">5.15.</span> <span class="toc-text">例子:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取协议列表"><span class="toc-number">5.16.</span> <span class="toc-text">获取协议列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cls-类-7"><span class="toc-number">5.17.</span> <span class="toc-text">cls: 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#outCount-无符号整形变量的指针-用于获取协议数量"><span class="toc-number">5.18.</span> <span class="toc-text">*outCount: 无符号整形变量的指针, 用于获取协议数量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值-协议列表"><span class="toc-number">5.19.</span> <span class="toc-text">返回值: 协议列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-13"><span class="toc-number">5.20.</span> <span class="toc-text">例子:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、add-成员变量、属性、方法、协议"><span class="toc-number">6.</span> <span class="toc-text">四、add: 成员变量、属性、方法、协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加成员变量-添加成员变量只能在运行时创建的类，且不能为元类"><span class="toc-number">6.1.</span> <span class="toc-text">添加成员变量(添加成员变量只能在运行时创建的类，且不能为元类)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cls-类-8"><span class="toc-number">6.2.</span> <span class="toc-text">cls: 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#name-成员变量名"><span class="toc-number">6.3.</span> <span class="toc-text">name: 成员变量名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#size-大小"><span class="toc-number">6.4.</span> <span class="toc-text">size: 大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#alignment-对齐方式"><span class="toc-number">6.5.</span> <span class="toc-text">alignment: 对齐方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#types-参数类型"><span class="toc-number">6.6.</span> <span class="toc-text">types: 参数类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值-YES-添加成功-NO-添加失败"><span class="toc-number">6.7.</span> <span class="toc-text">返回值: YES: 添加成功 NO: 添加失败</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-14"><span class="toc-number">6.8.</span> <span class="toc-text">例子:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加属性"><span class="toc-number">6.9.</span> <span class="toc-text">添加属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cls-类-9"><span class="toc-number">6.10.</span> <span class="toc-text">cls: 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#name-属性名-1"><span class="toc-number">6.11.</span> <span class="toc-text">name: 属性名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#attributes-参数"><span class="toc-number">6.12.</span> <span class="toc-text">attributes: 参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#attributeCount-参数数量"><span class="toc-number">6.13.</span> <span class="toc-text">attributeCount: 参数数量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值-YES-添加成功-NO-添加失败-1"><span class="toc-number">6.14.</span> <span class="toc-text">返回值: YES: 添加成功  NO: 添加失败</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-15"><span class="toc-number">6.15.</span> <span class="toc-text">例子:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加方法"><span class="toc-number">6.16.</span> <span class="toc-text">添加方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cls-类型-6"><span class="toc-number">6.17.</span> <span class="toc-text">cls: 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#name-方法-4"><span class="toc-number">6.18.</span> <span class="toc-text">name: 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#imp-方法实现"><span class="toc-number">6.19.</span> <span class="toc-text">imp: 方法实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#types-类型"><span class="toc-number">6.20.</span> <span class="toc-text">types: 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值-YES-添加成功-NO-添加失败-2"><span class="toc-number">6.21.</span> <span class="toc-text">返回值: YES: 添加成功 NO: 添加失败</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-16"><span class="toc-number">6.22.</span> <span class="toc-text">例子:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加协议"><span class="toc-number">6.23.</span> <span class="toc-text">添加协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cls-类-10"><span class="toc-number">6.24.</span> <span class="toc-text">cls: 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#protocol-协议"><span class="toc-number">6.25.</span> <span class="toc-text">protocol: 协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值-YES-添加成功-NO-添加失败-3"><span class="toc-number">6.26.</span> <span class="toc-text">返回值: YES: 添加成功 NO: 添加失败</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-17"><span class="toc-number">6.27.</span> <span class="toc-text">例子:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、replace-属性、方法"><span class="toc-number">7.</span> <span class="toc-text">五、replace: 属性、方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#替换属性的信息-如果没有原属性会新建一个属性"><span class="toc-number">7.1.</span> <span class="toc-text">替换属性的信息(如果没有原属性会新建一个属性)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cls-类-11"><span class="toc-number">7.2.</span> <span class="toc-text">cls: 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#name-属性名-2"><span class="toc-number">7.3.</span> <span class="toc-text">name: 属性名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#attributes-类型"><span class="toc-number">7.4.</span> <span class="toc-text">attributes: 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#attributeCount-类型数量"><span class="toc-number">7.5.</span> <span class="toc-text">attributeCount: 类型数量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#无返回值"><span class="toc-number">7.6.</span> <span class="toc-text">无返回值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-18"><span class="toc-number">7.7.</span> <span class="toc-text">例子:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#替代方法的实现"><span class="toc-number">7.8.</span> <span class="toc-text">替代方法的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cls-类-12"><span class="toc-number">7.9.</span> <span class="toc-text">cls: 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#name-被替代的方法"><span class="toc-number">7.10.</span> <span class="toc-text">name: 被替代的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#imp-替代方法"><span class="toc-number">7.11.</span> <span class="toc-text">imp: 替代方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#types-类型-1"><span class="toc-number">7.12.</span> <span class="toc-text">types: 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值-IMP"><span class="toc-number">7.13.</span> <span class="toc-text">返回值: IMP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-19"><span class="toc-number">7.14.</span> <span class="toc-text">例子:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、Class-判断"><span class="toc-number">8.</span> <span class="toc-text">六、Class 判断</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#判断类是否有实现指定方法"><span class="toc-number">8.1.</span> <span class="toc-text">判断类是否有实现指定方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cls-类-13"><span class="toc-number">8.2.</span> <span class="toc-text">cls: 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sel-方法"><span class="toc-number">8.3.</span> <span class="toc-text">sel: 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值-YES-已经实现-NO-没有实现"><span class="toc-number">8.4.</span> <span class="toc-text">返回值: YES: 已经实现 NO: 没有实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-20"><span class="toc-number">8.5.</span> <span class="toc-text">例子:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看类是否为元类"><span class="toc-number">8.6.</span> <span class="toc-text">查看类是否为元类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cls-类-14"><span class="toc-number">8.7.</span> <span class="toc-text">cls: 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值-YES-是元类-NO-不是元类"><span class="toc-number">8.8.</span> <span class="toc-text">返回值: YES: 是元类 NO: 不是元类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-21"><span class="toc-number">8.9.</span> <span class="toc-text">例子:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看类是否遵循指定协议"><span class="toc-number">8.10.</span> <span class="toc-text">查看类是否遵循指定协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cls-类-15"><span class="toc-number">8.11.</span> <span class="toc-text">cls: 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#protocol-协议-1"><span class="toc-number">8.12.</span> <span class="toc-text">protocol: 协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#返回值-YES-已经遵循指定协议-NO-没有遵循指定协议"><span class="toc-number">8.13.</span> <span class="toc-text">返回值: YES: 已经遵循指定协议 NO: 没有遵循指定协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-22"><span class="toc-number">8.14.</span> <span class="toc-text">例子:</span></a></li></ol></li></ol>
-</div>
-<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
-
-<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-<script>
-    var valueHide = "隐藏目录";
-    var valueShow = "显示目录";
-
-    if ($(".left-col").is(":hidden")) {
-        $("#tocButton").attr("value", valueShow);
-    }
-    $("#tocButton").click(function() {
-        if ($("#toc").is(":hidden")) {
-            $("#tocButton").attr("value", valueHide);
-            $("#toc").slideDown(320);
-        }
-        else {
-            $("#tocButton").attr("value", valueShow);
-            $("#toc").slideUp(350);
-        }
-    })
-    if ($(".toc").length < 1) {
-        $("#toc, #tocButton").hide();
-    }
-</script>
-
-
-
-
-
-<div class="bdsharebuttonbox">
-	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
-	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
-	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
-	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
-	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
-	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
-</div>
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-
-
-
-
-    
-        <div id="gitments"></div>
-<script src="/js/gitment.browser.js"></script>
-<script>
-    var gitment = new Gitment({
-      id: window.location.pathname,
-      owner: 'luuman',
-      repo: 'luuman.github.io',
-      oauth: {
-        client_id: 'null',
-        client_secret: 'null',
-      },
-    })
-    gitment.render('gitments')
-</script>
-    
-
-
-
-    <div class="scroll" id="post-nav-button">
-        
-            <a href="/2017/06/15/RunTime运行时之改变私有属性的值/" title="上一篇: RunTime运行时之改变私有属性的值">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-        
-            <a href="/2017/06/15/SpriteKitSwiftGamePanda/" title="下一篇: 用SpriteKit写的熊猫跑酷小游戏">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        
-    </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之动态替换和改变方法实现/">RunTime运行时之动态替换和改变方法实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与AutoreleasePool/">RunLoop与AutoreleasePool</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与PerformSelector/">RunLoop与PerformSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与Timer以及常用Mode/">RunLoop与Timer以及常用Mode</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与线程与GCD的关系/">RunLoop与线程与GCD的关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop的内部逻辑/">RunLoop的内部逻辑</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时(一)/">RunTime运行时(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时(三)/">RunTime运行时(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时(二)/">RunTime运行时(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与NSURLConnection/">RunLoop与NSURLConnection</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之动态添加方法/">RunTime运行时之动态添加方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之成员变量和属性/">RunTime运行时之成员变量和属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之改变私有属性的值/">RunTime运行时之改变私有属性的值</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/Runtime运行时之Class常用方法/">Runtime运行时之Class常用方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/SpriteKitSwiftGamePanda/">用SpriteKit写的熊猫跑酷小游戏</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/Observer监听RunLoop状态变化(kCFRunLoopBeforeWaiting,kCFRunLoopAfterWaiting等)/">Observer监听RunLoop状态变化(kCFRunLoopBeforeWaiting,kCFRunLoopAfterWaiting等)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/深入理解RunLoop/">深入理解RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/实例化讲解RunLoop/">实例化讲解RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/离屏渲染浅析/">离屏渲染</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/iOS 设置视图半透明而子控件不透明/">iOS 设置视图半透明而子控件不透明</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift反射API及其用法/">Swift反射API及其用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/UIScrollView与AutoLayout或Masonry结合使用/">UIScrollView与AutoLayout或Masonry结合使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift之Defer/">Swift之Defer</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Xcode控制台调试常用命令/">Xcode控制台调试常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift利用反射机制(Mirror)获取类的属性列表与值/">Swift利用反射机制(Mirror)获取类的属性列表与值</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/tableView cell 中如果有文本框点击自动滚动不被键盘挡住/">tableView cell 中如果有文本框点击自动滚动不被键盘挡住</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift枚举相关值/">Swift枚举相关值</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/基于Perfect的Swift3.1服务器开发案例/">基于Perfect的Swift3.1服务器开发案例</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/如何创建一个纯 Swift 模块/">如何创建一个纯 Swift 模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/使用Swift Package Manager管理项目(the package has an unsupported layout)/">使用Swift Package Manager管理项目(the package has an unsupported layout)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift中有个双问号操作符/">Swift中有个双问号操作符</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/iOS clang编译OC成C++文件/">iOS clang编译OC成C++文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/calayer-uiview-uiwindow/">UIView,UIWindow,CALayer之间的区别联系</a></li></ul>
-    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-    <script>
-        $(".post-list").addClass("toc-article");
-        $(".post-list-item a").attr("target","_blank");
-        $("#post-nav-button > a:nth-child(2)").click(function() {
-            $(".fa-bars, .fa-times").toggle();
-            $(".post-list").toggle(300);
-            if ($(".toc").length > 0) {
-                $("#toc, #tocButton").toggle(200, function() {
-                    if ($(".switch-area").is(":visible")) {
-                        $("#tocButton").attr("value", valueHide);
-                        }
-                    })
-            }
-            else {
-            }
-        })
-    </script>
-
-
-
-    <script>
-        
-    </script>
-</div>
-      <footer id="footer">
-    <div class="outer">
-        <div id="footer-info">
-            <div class="footer-left">
-                &copy; 2017 飘金
-            </div>
-            <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
-            </div>
         </div>
         
-            <div class="visit">
-                
-                    <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" >海贼到访数: 
-                            <span id="busuanzi_value_site_uv"></span>
-                        </span>
-                    </span>
-                
-                
-                    <span>, </span>
-                
-                
-                    <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit">本页阅读量: 
-                            <span id="busuanzi_value_page_pv"></span>
-                        </span>
-                    </span>
-                
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="飘金" />
+          <p class="site-author-name" itemprop="name">飘金</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
             </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
         
-    </div>
-</footer>
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/piaojin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/da7864faa1be" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-piaojin"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#注-此篇中记录的是以class开头的runtime函数"><span class="nav-number">1.</span> <span class="nav-text">注: 此篇中记录的是以class开头的runtime函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、创建对象"><span class="nav-number">2.</span> <span class="nav-text">一、创建对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个对象"><span class="nav-number">3.</span> <span class="nav-text">创建一个对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类型"><span class="nav-number">3.1.</span> <span class="nav-text">cls: 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#extraBytes-分配的内存大小"><span class="nav-number">3.2.</span> <span class="nav-text">extraBytes: 分配的内存大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-cls类型的实例对象"><span class="nav-number">3.3.</span> <span class="nav-text">返回值: cls类型的实例对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">3.4.</span> <span class="nav-text">例子:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、类名、父类、实例变量、成员变量、属性、实例方法、类方法、方法实现"><span class="nav-number">4.</span> <span class="nav-text">二、类名、父类、实例变量、成员变量、属性、实例方法、类方法、方法实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取指定类的类名-char-类型字符串"><span class="nav-number">4.1.</span> <span class="nav-text">获取指定类的类名 (char *类型字符串)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类型-1"><span class="nav-number">4.2.</span> <span class="nav-text">cls: 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-类名-char-类型的字符串"><span class="nav-number">4.3.</span> <span class="nav-text">返回值: 类名 - char  类型的字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-1"><span class="nav-number">4.4.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取指定类的父类型-Class类型"><span class="nav-number">4.5.</span> <span class="nav-text">获取指定类的父类型 (Class类型)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类型-2"><span class="nav-number">4.6.</span> <span class="nav-text">cls: 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-父类型-Class类型"><span class="nav-number">4.7.</span> <span class="nav-text">返回值: 父类型 Class类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-2"><span class="nav-number">4.8.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取一个指定类型的实例占用内存大小-size-t-类型"><span class="nav-number">4.9.</span> <span class="nav-text">获取一个指定类型的实例占用内存大小 (size_t 类型)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类型-3"><span class="nav-number">4.10.</span> <span class="nav-text">cls: 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-cls类型的一个实例对象占用内存大小"><span class="nav-number">4.11.</span> <span class="nav-text">返回值: cls类型的一个实例对象占用内存大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-3"><span class="nav-number">4.12.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取一个类中-指定名称的实例成员变量的信息"><span class="nav-number">4.13.</span> <span class="nav-text">获取一个类中, 指定名称的实例成员变量的信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类型-4"><span class="nav-number">4.14.</span> <span class="nav-text">cls: 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name-成员变量名（属性带-“-”）"><span class="nav-number">4.15.</span> <span class="nav-text">name: 成员变量名（属性带 “_”）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-成员变量信息"><span class="nav-number">4.16.</span> <span class="nav-text">返回值: 成员变量信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-4"><span class="nav-number">4.17.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取属性的信息-不用打"><span class="nav-number">4.18.</span> <span class="nav-text">获取属性的信息, 不用打_</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类"><span class="nav-number">4.19.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name-属性名"><span class="nav-number">4.20.</span> <span class="nav-text">name: 属性名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-属性信息"><span class="nav-number">4.21.</span> <span class="nav-text">返回值: 属性信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-5"><span class="nav-number">4.22.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取对象方法信息-“-“-方法"><span class="nav-number">4.23.</span> <span class="nav-text">获取对象方法信息 ( “-“ 方法)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-1"><span class="nav-number">4.24.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name-方法"><span class="nav-number">4.25.</span> <span class="nav-text">name: 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-对象方法信息-Method类型"><span class="nav-number">4.26.</span> <span class="nav-text">返回值: 对象方法信息 - * ### Method类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-6"><span class="nav-number">4.27.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取类方法的信息-“-”-方法"><span class="nav-number">4.28.</span> <span class="nav-text">获取类方法的信息 ( “+” 方法 )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-2"><span class="nav-number">4.29.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name-方法-1"><span class="nav-number">4.30.</span> <span class="nav-text">name: 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-对象方法信息-Method类型-1"><span class="nav-number">4.31.</span> <span class="nav-text">返回值: 对象方法信息 - ### Method类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-7"><span class="nav-number">4.32.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取方法的具体实现-IMP"><span class="nav-number">4.33.</span> <span class="nav-text">获取方法的具体实现 (IMP)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-3"><span class="nav-number">4.34.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name-方法-2"><span class="nav-number">4.35.</span> <span class="nav-text">name: 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-方法的具体实现-IMP类型"><span class="nav-number">4.36.</span> <span class="nav-text">返回值: 方法的具体实现 ### IMP类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-8"><span class="nav-number">4.37.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取方法的具体实现-返回值类型为struct"><span class="nav-number">4.38.</span> <span class="nav-text">获取方法的具体实现, 返回值类型为struct</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-4"><span class="nav-number">4.39.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name-方法-3"><span class="nav-number">4.40.</span> <span class="nav-text">name: 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-方法的具体实现-struct-IMP类型"><span class="nav-number">4.41.</span> <span class="nav-text">返回值: 方法的具体实现 ### struct IMP类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-9"><span class="nav-number">4.42.</span> <span class="nav-text">例子:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、成员变量列表、属性列表、方法列表、协议列表"><span class="nav-number">5.</span> <span class="nav-text">三、成员变量列表、属性列表、方法列表、协议列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取成员变量列表"><span class="nav-number">5.1.</span> <span class="nav-text">获取成员变量列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-5"><span class="nav-number">5.2.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#outCount-无符号整形变量的指针-用于获取成员变量数量"><span class="nav-number">5.3.</span> <span class="nav-text">*outCount: 无符号整形变量的指针, 用于获取成员变量数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-成员变量列表"><span class="nav-number">5.4.</span> <span class="nav-text">返回值: 成员变量列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-10"><span class="nav-number">5.5.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取属性列表"><span class="nav-number">5.6.</span> <span class="nav-text">获取属性列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类型-5"><span class="nav-number">5.7.</span> <span class="nav-text">cls: 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#outCount-无符号整形变量的指针-用于获取属性数量"><span class="nav-number">5.8.</span> <span class="nav-text">*outCount: 无符号整形变量的指针, 用于获取属性数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-属性列表"><span class="nav-number">5.9.</span> <span class="nav-text">返回值: 属性列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-11"><span class="nav-number">5.10.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取方法列表"><span class="nav-number">5.11.</span> <span class="nav-text">获取方法列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-6"><span class="nav-number">5.12.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#outCount-无符号整形变量的指针-用于获取方法数量"><span class="nav-number">5.13.</span> <span class="nav-text">*outCount: 无符号整形变量的指针, 用于获取方法数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-方法列表"><span class="nav-number">5.14.</span> <span class="nav-text">返回值: 方法列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-12"><span class="nav-number">5.15.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取协议列表"><span class="nav-number">5.16.</span> <span class="nav-text">获取协议列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-7"><span class="nav-number">5.17.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#outCount-无符号整形变量的指针-用于获取协议数量"><span class="nav-number">5.18.</span> <span class="nav-text">*outCount: 无符号整形变量的指针, 用于获取协议数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-协议列表"><span class="nav-number">5.19.</span> <span class="nav-text">返回值: 协议列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-13"><span class="nav-number">5.20.</span> <span class="nav-text">例子:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、add-成员变量、属性、方法、协议"><span class="nav-number">6.</span> <span class="nav-text">四、add: 成员变量、属性、方法、协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加成员变量-添加成员变量只能在运行时创建的类，且不能为元类"><span class="nav-number">6.1.</span> <span class="nav-text">添加成员变量(添加成员变量只能在运行时创建的类，且不能为元类)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-8"><span class="nav-number">6.2.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name-成员变量名"><span class="nav-number">6.3.</span> <span class="nav-text">name: 成员变量名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#size-大小"><span class="nav-number">6.4.</span> <span class="nav-text">size: 大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#alignment-对齐方式"><span class="nav-number">6.5.</span> <span class="nav-text">alignment: 对齐方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#types-参数类型"><span class="nav-number">6.6.</span> <span class="nav-text">types: 参数类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-YES-添加成功-NO-添加失败"><span class="nav-number">6.7.</span> <span class="nav-text">返回值: YES: 添加成功 NO: 添加失败</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-14"><span class="nav-number">6.8.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加属性"><span class="nav-number">6.9.</span> <span class="nav-text">添加属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-9"><span class="nav-number">6.10.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name-属性名-1"><span class="nav-number">6.11.</span> <span class="nav-text">name: 属性名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#attributes-参数"><span class="nav-number">6.12.</span> <span class="nav-text">attributes: 参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#attributeCount-参数数量"><span class="nav-number">6.13.</span> <span class="nav-text">attributeCount: 参数数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-YES-添加成功-NO-添加失败-1"><span class="nav-number">6.14.</span> <span class="nav-text">返回值: YES: 添加成功  NO: 添加失败</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-15"><span class="nav-number">6.15.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加方法"><span class="nav-number">6.16.</span> <span class="nav-text">添加方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类型-6"><span class="nav-number">6.17.</span> <span class="nav-text">cls: 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name-方法-4"><span class="nav-number">6.18.</span> <span class="nav-text">name: 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#imp-方法实现"><span class="nav-number">6.19.</span> <span class="nav-text">imp: 方法实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#types-类型"><span class="nav-number">6.20.</span> <span class="nav-text">types: 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-YES-添加成功-NO-添加失败-2"><span class="nav-number">6.21.</span> <span class="nav-text">返回值: YES: 添加成功 NO: 添加失败</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-16"><span class="nav-number">6.22.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加协议"><span class="nav-number">6.23.</span> <span class="nav-text">添加协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-10"><span class="nav-number">6.24.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#protocol-协议"><span class="nav-number">6.25.</span> <span class="nav-text">protocol: 协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-YES-添加成功-NO-添加失败-3"><span class="nav-number">6.26.</span> <span class="nav-text">返回值: YES: 添加成功 NO: 添加失败</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-17"><span class="nav-number">6.27.</span> <span class="nav-text">例子:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、replace-属性、方法"><span class="nav-number">7.</span> <span class="nav-text">五、replace: 属性、方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#替换属性的信息-如果没有原属性会新建一个属性"><span class="nav-number">7.1.</span> <span class="nav-text">替换属性的信息(如果没有原属性会新建一个属性)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-11"><span class="nav-number">7.2.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name-属性名-2"><span class="nav-number">7.3.</span> <span class="nav-text">name: 属性名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#attributes-类型"><span class="nav-number">7.4.</span> <span class="nav-text">attributes: 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#attributeCount-类型数量"><span class="nav-number">7.5.</span> <span class="nav-text">attributeCount: 类型数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无返回值"><span class="nav-number">7.6.</span> <span class="nav-text">无返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-18"><span class="nav-number">7.7.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#替代方法的实现"><span class="nav-number">7.8.</span> <span class="nav-text">替代方法的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-12"><span class="nav-number">7.9.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name-被替代的方法"><span class="nav-number">7.10.</span> <span class="nav-text">name: 被替代的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#imp-替代方法"><span class="nav-number">7.11.</span> <span class="nav-text">imp: 替代方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#types-类型-1"><span class="nav-number">7.12.</span> <span class="nav-text">types: 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-IMP"><span class="nav-number">7.13.</span> <span class="nav-text">返回值: IMP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-19"><span class="nav-number">7.14.</span> <span class="nav-text">例子:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、Class-判断"><span class="nav-number">8.</span> <span class="nav-text">六、Class 判断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#判断类是否有实现指定方法"><span class="nav-number">8.1.</span> <span class="nav-text">判断类是否有实现指定方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-13"><span class="nav-number">8.2.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sel-方法"><span class="nav-number">8.3.</span> <span class="nav-text">sel: 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-YES-已经实现-NO-没有实现"><span class="nav-number">8.4.</span> <span class="nav-text">返回值: YES: 已经实现 NO: 没有实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-20"><span class="nav-number">8.5.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看类是否为元类"><span class="nav-number">8.6.</span> <span class="nav-text">查看类是否为元类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-14"><span class="nav-number">8.7.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-YES-是元类-NO-不是元类"><span class="nav-number">8.8.</span> <span class="nav-text">返回值: YES: 是元类 NO: 不是元类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-21"><span class="nav-number">8.9.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看类是否遵循指定协议"><span class="nav-number">8.10.</span> <span class="nav-text">查看类是否遵循指定协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-15"><span class="nav-number">8.11.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#protocol-协议-1"><span class="nav-number">8.12.</span> <span class="nav-text">protocol: 协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-YES-已经遵循指定协议-NO-没有遵循指定协议"><span class="nav-number">8.13.</span> <span class="nav-text">返回值: YES: 已经遵循指定协议 NO: 没有遵循指定协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-22"><span class="nav-number">8.14.</span> <span class="nav-text">例子:</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
 
     </div>
-    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-<script src="/js/main.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            var backgroundnum = 24;
-            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
-            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
-            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
-        })
-    </script>
+  </aside>
 
 
+        
+      </div>
+    </main>
 
-
-
-<div class="scroll" id="scroll">
-    <a href="#"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">飘金</span>
 </div>
-<script>
-    $(document).ready(function() {
-        if ($("#comments").length < 1) {
-            $("#scroll > a:nth-child(2)").hide();
-        };
-    })
-</script>
 
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
 
-  <script language="javascript">
-    $(function() {
-        $("a[title]").each(function() {
-            var a = $(this);
-            var title = a.attr('title');
-            if (title == undefined || title == "") return;
-            a.data('title', title).removeAttr('title').hover(
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
 
-            function() {
-                var offset = a.offset();
-                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
-                    top: offset.top - a.outerHeight() - 15,
-                    left: offset.left + a.outerWidth()/2 + 1
-                }).fadeIn(function() {
-                    var pop = $(this);
-                    setTimeout(function() {
-                        pop.remove();
-                    }, pop.text().length * 800);
-                });
-            }, function() {
-                $("#anchortitlecontainer").remove();
-            });
-        });
-    });
-</script>
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
 
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
 
   </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/title.js"></script>
