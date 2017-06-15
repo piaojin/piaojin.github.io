@@ -1,11 +1,99 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
+<!doctype html>
+
+
+
   
-  <title>深入理解RunLoop | 飘金的博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="深入理解RunLoop">
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,Swift" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="深入理解RunLoop">
 <meta name="keywords" content="iOS,Swift">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入理解RunLoop">
@@ -16,265 +104,244 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解RunLoop">
 <meta name="twitter:description" content="深入理解RunLoop">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/15/深入理解RunLoop/"/>
+
+
+
+
+
+  <title>深入理解RunLoop | 飘金的博客</title>
   
-    <link rel="alternative" href="/atom.xml" title="飘金的博客" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/img/favicon.png">
-  
-  
-      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  
-  
-      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  
-  <!-- 加载特效 -->
-    <script src="/js/pace.js"></script>
-    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
-  <script>
-      var yiliaConfig = {
-          rootUrl: '/',
-          fancybox: true,
-          animate: true,
-          isHome: false,
-          isPost: true,
-          isArchive: false,
-          isTag: false,
-          isCategory: false,
-          open_in_new: false
-      }
-  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </head>
-<body>
-  <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-    <header id="header" class="inner">
-        <a href="/" class="profilepic">
-            
-            <img lazy-src="/img/head.jpg" class="js-avatar">
-            
-        </a>
 
-        <hgroup>
-          <h1 class="header-author"><a href="/" title="Hi Mate">飘金</a></h1>
-        </hgroup>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-        
-        <p class="header-subtitle">会炒菜的猿</p>
-        
-        
-        
-            <div id="switch-btn" class="switch-btn">
-                <div class="icon">
-                    <div class="icon-ctn">
-                        <div class="icon-wrap icon-house" data-idx="0">
-                            <div class="birdhouse"></div>
-                            <div class="birdhouse_holes"></div>
-                        </div>
-                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
-                            <div class="ribbon"></div>
-                        </div>
-                        
-                        <div class="icon-wrap icon-link hide" data-idx="2">
-                            <div class="loopback_l"></div>
-                            <div class="loopback_r"></div>
-                        </div>
-                        
-                        
-                        <div class="icon-wrap icon-me hide" data-idx="3">
-                            <div class="user"></div>
-                            <div class="shoulder"></div>
-                        </div>
-                        
-                    </div>
-                    
-                </div>
-                <div class="tips-box hide">
-                    <div class="tips-arrow"></div>
-                    <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
-                        
-                        <li>友情链接</li>
-                        
-                        
-                        <li>关于我</li>
-                        
-                    </ul>
-                </div>
-            </div>
-        
+  
+  
+    
+  
 
-        <div id="switch-area" class="switch-area">
-            <div class="switch-wrap">
-                <section class="switch-part switch-part1">
-                    <nav class="header-menu">
-                        <ul>
-                        
-                            <li><a href="/Home">博客首页</a></li>
-                        
-                            <li><a href="/works">作品展示</a></li>
-                        
-                            <li><a href="/about">留言打卡</a></li>
-                        
-                            <li><a href="/FrontEndGuide">前端导航</a></li>
-                        
-                        </ul>
-                    </nav>
-                    <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
-                            
-                                <a class="fl github" target="_blank" href="https://github.com/luuman" title="github">github</a>
-                            
-                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
-                            
-                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
-                            
-                                <a class="fl google" target="_blank" href="#" title="google">google</a>
-                            
-                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
-                            
-                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
-                            
-                        </ul>
-                    </nav>
-                </section>
-                
-                
-                <section class="switch-part switch-part2">
-                    <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
-                    </div>
-                </section>
-                
-                
-                
-                <section class="switch-part switch-part3">
-                    <div id="js-friends">
-                    
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://luuman.github.io/">name</a>
-                    
-                    </div>
-                </section>
-                
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
 
-                
-                
-                <section class="switch-part switch-part4">
-                
-                    <div id="js-aboutme">纯海迷、爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
-                </section>
-                
-            </div>
-        </div>
-    </header>                
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">飘金的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">会炒菜的猿</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-      <div class="overlay">
-          <div class="slider-trigger"></div>
-          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">飘金</a></h1>
-      </div>
-    <div class="intrude-less">
-        <header id="header" class="inner">
-            <a href="/" class="profilepic">
-                
-                    <img lazy-src="/img/head.jpg" class="js-avatar">
-                
-            </a>
-            <hgroup>
-              <h1 class="header-author"><a href="/" title="Me">飘金</a></h1>
-            </hgroup>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
             
-            <p class="header-subtitle">会炒菜的猿</p>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            <nav class="header-menu">
-                <ul>
-                
-                    <li><a href="/Home">博客首页</a></li>
-                
-                    <li><a href="/works">作品展示</a></li>
-                
-                    <li><a href="/about">留言打卡</a></li>
-                
-                    <li><a href="/FrontEndGuide">前端导航</a></li>
-                
-                <div class="clearfix"></div>
-                </ul>
-            </nav>
-            <nav class="header-nav">
-                <div class="social">
-                    
-                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
-                    
-                        <a class="github" target="_blank" href="https://github.com/luuman" title="github">github</a>
-                    
-                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
-                    
-                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
-                    
-                        <a class="google" target="_blank" href="#" title="google">google</a>
-                    
-                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
-                    
-                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
-                    
-                </div>
-            </nav>
-        </header>                
-    </div>
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
 </nav>
-      <div class="body-wrap"><article id="post-深入理解RunLoop" class="article article-type-post" itemscope itemprop="blogPost">
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
   
-    <div class="article-meta">
-      <a href="/2017/06/15/深入理解RunLoop/" class="article-date">
-      <time datetime="2017-06-15T06:23:47.000Z" itemprop="datePublished">2017-06-15</time>
-</a>
-    </div>
+
   
-  <div class="article-inner">
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/15/深入理解RunLoop/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="飘金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="飘金的博客">
+    </span>
+
     
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
-  
-    <h1 class="article-title" itemprop="name">
-      深入理解RunLoop
-    </h1>
-  
-
-      </header>
-      
-      <div class="article-info article-info-post">
         
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/iOS/">iOS</a>
-    </div>
-
-
+          <h1 class="post-title" itemprop="name headline">深入理解RunLoop</h1>
         
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-    </div>
 
-        <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-15T14:23:47+08:00">
+                2017-06-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         <p>深入理解RunLoop<br><a id="more"></a><br>转自<a href="http://blog.ibireme.com/2015/05/18/runloop" target="_blank" rel="external">http://blog.ibireme.com/2015/05/18/runloop</a><br>深入理解RunLoop<br>RunLoop 是 iOS 和 OSX 开发中非常基础的一个概念，这篇文章将从 CFRunLoop 的源码入手，介绍 RunLoop 的概念以及底层实现原理。之后会介绍一下在 iOS 中，苹果是如何利用 RunLoop 实现自动释放池、延迟回调、触摸事件、屏幕刷新等功能的.<br>RunLoop 的概念<br>RunLoop 与线程的关系<br>RunLoop 对外的接口<br>RunLoop 的 Mode<br>RunLoop 的内部逻辑<br>RunLoop 的底层实现<br>苹果用 RunLoop 实现的功能<br>AutoreleasePool<br>事件响应<br>手势识别<br>界面更新<br>定时器<br>PerformSelecter<br>关于GCD<br>关于网络请求<br>RunLoop 的实际应用举例<br>AFNetworking<br>AsyncDisplayKit<br>RunLoop 的概念<br>一般来讲，一个线程一次只能执行一个任务，执行完成后线程就会退出。如果我们需要一个机制，让线程能随时处理事件但并不退出，通常的代码逻辑是这样的：<br>functionloop(){<br>initialize();<br>do{<br>varmessage=get_next_message();<br>process_message(message);<br>}while(message!=quit);<br>}<br>这种模型通常被称作Event Loop。 Event Loop 在很多系统和框架里都有实现，比如 Node.js 的事件处理，比如 Windows 程序的消息循环，再比如 OSX/iOS 里的 RunLoop。实现这种模型的关键点在于：如何管理事件/消息，如何让线程在没有处理消息时休眠以避免资源占用、在有消息到来时立刻被唤醒。<br>所以，RunLoop 实际上就是一个对象，这个对象管理了其需要处理的事件和消息，并提供了一个入口函数来执行上面 Event Loop 的逻辑。线程执行了这个函数后，就会一直处于这个函数内部 “接受消息-&gt;等待-&gt;处理” 的循环中，直到这个循环结束（比如传入 quit 的消息），函数返回。<br>OSX/iOS 系统中，提供了两个这样的对象：NSRunLoop 和 CFRunLoopRef。<br>CFRunLoopRef 是在 CoreFoundation 框架内的，它提供了纯 C 函数的 API，所有这些 API 都是线程安全的。<br>NSRunLoop 是基于 CFRunLoopRef 的封装，提供了面向对象的 API，但是这些 API 不是线程安全的。<br>CFRunLoopRef 的代码是开源的，你可以在这里<a href="http://opensource.apple.com/tarballs/CF/下载到整个" target="_blank" rel="external">http://opensource.apple.com/tarballs/CF/下载到整个</a> CoreFoundation 的源码来查看。<br>(Update: Swift 开源后，苹果又维护了一个跨平台的 CoreFoundation 版本：<a href="https://github.com/apple/swift-corelibs-foundation/，这个版本的源码可能和现有" target="_blank" rel="external">https://github.com/apple/swift-corelibs-foundation/，这个版本的源码可能和现有</a> iOS 系统中的实现略不一样，但更容易编译，而且已经适配了 Linux/Windows。)<br>RunLoop 与线程的关系<br>首先，iOS 开发中能遇到两个线程对象: pthread_t 和 NSThread。过去苹果有份文档标明了 NSThread 只是 pthread_t 的封装，但那份文档已经失效了，现在它们也有可能都是直接包装自最底层的 mach thread。苹果并没有提供这两个对象相互转换的接口，但不管怎么样，可以肯定的是 pthread_t 和 NSThread 是一一对应的。比如，你可以通过 pthread_main_thread_np() 或 [NSThread mainThread] 来获取主线程；也可以通过 pthread_self() 或 [NSThread currentThread] 来获取当前线程。CFRunLoop 是基于 pthread 来管理的。<br>苹果不允许直接创建 RunLoop，它只提供了两个自动获取的函数：CFRunLoopGetMain() 和 CFRunLoopGetCurrent()。 这两个函数内部的逻辑大概是下面这样:<br>/// 全局的Dictionary，key 是 pthread_t， value 是 CFRunLoopRef<br>staticCFMutableDictionaryRefloopsDic;<br>/// 访问 loopsDic 时的锁<br>staticCFSpinLock_tloopsLock;<br>/// 获取一个 pthread 对应的 RunLoop。<br>CFRunLoopRef_CFRunLoopGet(pthread_tthread){<br>OSSpinLockLock(&amp;loopsLock);<br>if(!loopsDic){<br>// 第一次进入时，初始化全局Dic，并先为主线程创建一个 RunLoop。<br>loopsDic=CFDictionaryCreateMutable();<br>CFRunLoopRefmainLoop=_CFRunLoopCreate();<br>CFDictionarySetValue(loopsDic,pthread_main_thread_np(),mainLoop);<br>}<br>/// 直接从 Dictionary 里获取。<br>CFRunLoopRefloop=CFDictionaryGetValue(loopsDic,thread));<br>if(!loop){<br>/// 取不到时，创建一个<br>loop=_CFRunLoopCreate();<br>CFDictionarySetValue(loopsDic,thread,loop);<br>/// 注册一个回调，当线程销毁时，顺便也销毁其对应的 RunLoop。<br>_CFSetTSD(…,thread,loop,__CFFinalizeRunLoop);<br>}<br>OSSpinLockUnLock(&amp;loopsLock);<br>returnloop;<br>}<br>CFRunLoopRefCFRunLoopGetMain(){<br>return_CFRunLoopGet(pthread_main_thread_np());<br>}<br>CFRunLoopRefCFRunLoopGetCurrent(){<br>return_CFRunLoopGet(pthread_self());<br>}<br>从上面的代码可以看出，线程和 RunLoop 之间是一一对应的，其关系是保存在一个全局的 Dictionary 里。线程刚创建时并没有 RunLoop，如果你不主动获取，那它一直都不会有。RunLoop 的创建是发生在第一次获取时，RunLoop 的销毁是发生在线程结束时。你只能在一个线程的内部获取其 RunLoop（主线程除外）。<br>RunLoop 对外的接口<br>在 CoreFoundation 里面关于 RunLoop 有5个类:<br>CFRunLoopRef<br>CFRunLoopModeRef<br>CFRunLoopSourceRef<br>CFRunLoopTimerRef<br>CFRunLoopObserverRef<br>其中 CFRunLoopModeRef 类并没有对外暴露，只是通过 CFRunLoopRef 的接口进行了封装。他们的关系如下:</p>
 <p>一个 RunLoop 包含若干个 Mode，每个 Mode 又包含若干个 Source/Timer/Observer。每次调用 RunLoop 的主函数时，只能指定其中一个 Mode，这个Mode被称作 CurrentMode。如果需要切换 Mode，只能退出 Loop，再重新指定一个 Mode 进入。这样做主要是为了分隔开不同组的 Source/Timer/Observer，让其互不影响。<br>CFRunLoopSourceRef是事件产生的地方。Source有两个版本：Source0 和 Source1。<br>• Source0 只包含了一个回调（函数指针），它并不能主动触发事件。使用时，你需要先调用 CFRunLoopSourceSignal(source)，将这个 Source 标记为待处理，然后手动调用 CFRunLoopWakeUp(runloop) 来唤醒 RunLoop，让其处理这个事件。<br>• Source1 包含了一个 mach_port 和一个回调（函数指针），被用于通过内核和其他线程相互发送消息。这种 Source 能主动唤醒 RunLoop 的线程，其原理在下面会讲到。<br>CFRunLoopTimerRef是基于时间的触发器，它和 NSTimer 是toll-free bridged 的，可以混用。其包含一个时间长度和一个回调（函数指针）。当其加入到 RunLoop 时，RunLoop会注册对应的时间点，当时间点到时，RunLoop会被唤醒以执行那个回调。<br>CFRunLoopObserverRef是观察者，每个 Observer 都包含了一个回调（函数指针），当 RunLoop 的状态发生变化时，观察者就能通过回调接受到这个变化。可以观测的时间点有以下几个：<br>typedefCF_OPTIONS(CFOptionFlags,CFRunLoopActivity){<br>kCFRunLoopEntry=(1UL&lt;&lt;0),// 即将进入Loop<br>kCFRunLoopBeforeTimers=(1UL&lt;&lt;1),// 即将处理 Timer<br>kCFRunLoopBeforeSources=(1UL&lt;&lt;2),// 即将处理 Source<br>kCFRunLoopBeforeWaiting=(1UL&lt;&lt;5),// 即将进入休眠<br>kCFRunLoopAfterWaiting=(1UL&lt;&lt;6),// 刚从休眠中唤醒<br>kCFRunLoopExit=(1UL&lt;&lt;7),// 即将退出Loop<br>};<br>上面的 Source/Timer/Observer 被统称为mode item，一个 item 可以被同时加入多个 mode。但一个 item 被重复加入同一个 mode 时是不会有效果的。如果一个 mode 中一个 item 都没有，则 RunLoop 会直接退出，不进入循环。<br>RunLoop 的 Mode<br>CFRunLoopMode 和 CFRunLoop 的结构大致如下：<br>struct<strong>CFRunLoopMode{<br>CFStringRef_name;// Mode Name, 例如 @”kCFRunLoopDefaultMode”<br>CFMutableSetRef_sources0;// Set<br>CFMutableSetRef_sources1;// Set<br>CFMutableArrayRef_observers;// Array<br>CFMutableArrayRef_timers;// Array<br>…<br>};<br>struct</strong>CFRunLoop{<br>CFMutableSetRef_commonModes;// Set<br>CFMutableSetRef_commonModeItems;// Set<br>CFRunLoopModeRef_currentMode;// Current Runloop Mode<br>CFMutableSetRef_modes;// Set<br>…<br>};<br>这里有个概念叫 “CommonModes”：一个 Mode 可以将自己标记为”Common”属性（通过将其 ModeName 添加到 RunLoop 的 “commonModes” 中）。每当 RunLoop 的内容发生变化时，RunLoop 都会自动将 _commonModeItems 里的 Source/Observer/Timer 同步到具有 “Common” 标记的所有Mode里。<br>应用场景举例：主线程的 RunLoop 里有两个预置的 Mode：kCFRunLoopDefaultMode 和 UITrackingRunLoopMode。这两个 Mode 都已经被标记为”Common”属性。DefaultMode 是 App 平时所处的状态，TrackingRunLoopMode 是追踪 ScrollView 滑动时的状态。当你创建一个 Timer 并加到 DefaultMode 时，Timer 会得到重复回调，但此时滑动一个TableView时，RunLoop 会将 mode 切换为 TrackingRunLoopMode，这时 Timer 就不会被回调，并且也不会影响到滑动操作。<br>有时你需要一个 Timer，在两个 Mode 中都能得到回调，一种办法就是将这个 Timer 分别加入这两个 Mode。还有一种方式，就是将 Timer 加入到顶层的 RunLoop 的 “commonModeItems” 中。”commonModeItems” 被 RunLoop 自动更新到所有具有”Common”属性的 Mode 里去。<br>CFRunLoop对外暴露的管理 Mode 接口只有下面2个:<br>1<br>2CFRunLoopAddCommonMode(CFRunLoopRefrunloop,CFStringRefmodeName);<br>CFRunLoopRunInMode(CFStringRefmodeName,…);<br>Mode 暴露的管理 mode item 的接口有下面几个：<br>CFRunLoopAddSource(CFRunLoopRefrl,CFRunLoopSourceRefsource,CFStringRefmodeName);<br>CFRunLoopAddObserver(CFRunLoopRefrl,CFRunLoopObserverRefobserver,CFStringRefmodeName);<br>CFRunLoopAddTimer(CFRunLoopRefrl,CFRunLoopTimerReftimer,CFStringRefmode);<br>CFRunLoopRemoveSource(CFRunLoopRefrl,CFRunLoopSourceRefsource,CFStringRefmodeName);<br>CFRunLoopRemoveObserver(CFRunLoopRefrl,CFRunLoopObserverRefobserver,CFStringRefmodeName);<br>CFRunLoopRemoveTimer(CFRunLoopRefrl,CFRunLoopTimerReftimer,CFStringRefmode);<br>你只能通过 mode name 来操作内部的 mode，当你传入一个新的 mode name 但 RunLoop 内部没有对应 mode 时，RunLoop会自动帮你创建对应的 CFRunLoopModeRef。对于一个 RunLoop 来说，其内部的 mode 只能增加不能删除。<br>苹果公开提供的 Mode 有两个：kCFRunLoopDefaultMode (NSDefaultRunLoopMode) 和 UITrackingRunLoopMode，你可以用这两个 Mode Name 来操作其对应的 Mode。<br>同时苹果还提供了一个操作 Common 标记的字符串：kCFRunLoopCommonModes (NSRunLoopCommonModes)，你可以用这个字符串来操作 Common Items，或标记一个 Mode 为 “Common”。使用时注意区分这个字符串和其他 mode name。<br>RunLoop 的内部逻辑<br>根据苹果在文档里的说明，RunLoop 内部的逻辑大致如下:</p>
 <p>其内部代码整理如下 （太长了不想看可以直接跳过去，后面会有说明）：<br>/// 用DefaultMode启动<br>voidCFRunLoopRun(void){<br>CFRunLoopRunSpecific(CFRunLoopGetCurrent(),kCFRunLoopDefaultMode,1.0e10,false);<br>}<br>/// 用指定的Mode启动，允许设置RunLoop超时时间<br>intCFRunLoopRunInMode(CFStringRefmodeName,CFTimeIntervalseconds,BooleanstopAfterHandle){<br>returnCFRunLoopRunSpecific(CFRunLoopGetCurrent(),modeName,seconds,returnAfterSourceHandled);<br>}<br>/// RunLoop的实现<br>intCFRunLoopRunSpecific(runloop,modeName,seconds,stopAfterHandle){<br>/// 首先根据modeName找到对应mode<br>CFRunLoopModeRefcurrentMode=<strong>CFRunLoopFindMode(runloop,modeName,false);<br>/// 如果mode里没有source/timer/observer, 直接返回。<br>if(</strong>CFRunLoopModeIsEmpty(currentMode))return;<br>/// 1. 通知 Observers: RunLoop 即将进入 loop。<br><strong>CFRunLoopDoObservers(runloop,currentMode,kCFRunLoopEntry);<br>/// 内部函数，进入loop
@@ -295,297 +362,343 @@
 <p>NSURLConnectionLoader 中的 RunLoop 通过一些基于 mach port 的 Source 接收来自底层 CFSocket 的通知。当收到通知后，其会在合适的时机向 CFMultiplexerSource 等 Source0 发送通知，同时唤醒 Delegate 线程的 RunLoop 来让其处理这些通知。CFMultiplexerSource 会在 Delegate 线程的 RunLoop 对 Delegate 执行实际的回调。<br>RunLoop 的实际应用举例<br>AFNetworking<br>AFURLConnectionOperation这个类是基于 NSURLConnection 构建的，其希望能在后台线程接收 Delegate 回调。为此 AFNetworking 单独创建了一个线程，并在这个线程中启动了一个 RunLoop：<br>+(void)networkRequestThreadEntryPoint:(id)__unusedobject{<br>@autoreleasepool{<br>[[NSThreadcurrentThread]setName:@”AFNetworking”];<br>NSRunLoop <em>runLoop=[NSRunLoopcurrentRunLoop];<br>[runLoopaddPort:[NSMachPortport]forMode:NSDefaultRunLoopMode];<br>[runLooprun];<br>}<br>}<br>+(NSThread </em>)networkRequestThread{<br>staticNSThread *_networkRequestThread=nil;<br>staticdispatch_once_toncePredicate;<br>dispatch_once(&amp;oncePredicate,^{<br>_networkRequestThread=[[NSThreadalloc]initWithTarget:selfselector:@selector(networkRequestThreadEntryPoint:)object:nil];<br>[_networkRequestThreadstart];<br>});<br>return_networkRequestThread;<br>}<br>RunLoop 启动前内部必须要有至少一个 Timer/Observer/Source，所以 AFNetworking 在 [runLoop run] 之前先创建了一个新的 NSMachPort 添加进去了。通常情况下，调用者需要持有这个 NSMachPort (mach_port) 并在外部线程通过这个 port 发送消息到 loop 内；但此处添加 port 只是为了让 RunLoop 不至于退出，并没有用于实际的发送消息。<br>-(void)start{<br>[self.locklock];<br>if([selfisCancelled]){<br>[selfperformSelector:@selector(cancelConnection)onThread:[[selfclass]networkRequestThread]withObject:nilwaitUntilDone:NOmodes:[self.runLoopModesallObjects]];<br>}elseif([selfisReady]){<br>self.state=AFOperationExecutingState;<br>[selfperformSelector:@selector(operationDidStart)onThread:[[selfclass]networkRequestThread]withObject:nilwaitUntilDone:NOmodes:[self.runLoopModesallObjects]];<br>}<br>[self.lockunlock];<br>}<br>当需要这个后台线程执行任务时，AFNetworking 通过调用 [NSObject performSelector:onThread:..] 将这个任务扔到了后台线程的 RunLoop 中。<br>AsyncDisplayKit<br>AsyncDisplayKit是 Facebook 推出的用于保持界面流畅性的框架，其原理大致如下：<br>UI 线程中一旦出现繁重的任务就会导致界面卡顿，这类任务通常分为3类：排版，绘制，UI对象操作。<br>排版通常包括计算视图大小、计算文本高度、重新计算子式图的排版等操作。<br>绘制一般有文本绘制 (例如 CoreText)、图片绘制 (例如预先解压)、元素绘制 (Quartz)等操作。<br>UI对象操作通常包括 UIView/CALayer 等 UI 对象的创建、设置属性和销毁。<br>其中前两类操作可以通过各种方法扔到后台线程执行，而最后一类操作只能在主线程完成，并且有时后面的操作需要依赖前面操作的结果 （例如TextView创建时可能需要提前计算出文本的大小）。ASDK 所做的，就是尽量将能放入后台的任务放入后台，不能的则尽量推迟 (例如视图的创建、属性的调整)。<br>为此，ASDK 创建了一个名为 ASDisplayNode 的对象，并在内部封装了 UIView/CALayer，它具有和 UIView/CALayer 相似的属性，例如 frame、backgroundColor等。所有这些属性都可以在后台线程更改，开发者可以只通过 Node 来操作其内部的 UIView/CALayer，这样就可以将排版和绘制放入了后台线程。但是无论怎么操作，这些属性总需要在某个时刻同步到主线程的 UIView/CALayer 去。<br>ASDK 仿照 QuartzCore/UIKit 框架的模式，实现了一套类似的界面更新的机制：即在主线程的 RunLoop 中添加一个 Observer，监听了 kCFRunLoopBeforeWaiting 和 kCFRunLoopExit 事件，在收到回调时，遍历所有之前放入队列的待处理的任务，然后一一执行。<br>具体的代码可以看这里：_ASAsyncTransactionGroup。<br>最后<br>好长时间没写博客了喵～前几天给博客搬了个家，从越来越慢的 AWS 迁到了 Linode，然后很认真的换了一套新的博客主题，排版看着还说得过去吧～</p>
 
       
+    </div>
+
+    <div>
       
-        <div class="page-reward">
-          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
-          <div class="hide_box"></div>
-          <div class="shang_box">
-            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
-            <div class="shang_tit">
-              <p>纯属好玩</p>
-            </div>
-            <div class="shang_payimg">
-              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
-            </div>
-              <div class="pay_explain">扫码打赏，你说多少就多少</div>
-            <div class="shang_payselect">
-              
-                <div class="pay_item checked" data-id="alipay">
-                  <span class="radiobox"></span>
-                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
-                </div>
-              
-              
-                <div class="pay_item" data-id="wechat">
-                  <span class="radiobox"></span>
-                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
-                </div>
-              
-            </div>
-            <div class="shang_info">
-              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
-            </div>
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/15/RunLoop与AutoreleasePool/" rel="next" title="RunLoop与AutoreleasePool">
+                <i class="fa fa-chevron-left"></i> RunLoop与AutoreleasePool
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/15/Observer监听RunLoop状态变化(kCFRunLoopBeforeWaiting,kCFRunLoopAfterWaiting等)/" rel="prev" title="Observer监听RunLoop状态变化(kCFRunLoopBeforeWaiting,kCFRunLoopAfterWaiting等)">
+                Observer监听RunLoop状态变化(kCFRunLoopBeforeWaiting,kCFRunLoopAfterWaiting等) <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
-        <script type="text/javascript">
-          $(".pay_item").click(function(){
-            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
-            var dataid=$(this).attr('data-id');
-            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
-            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
-          });
-          function dashangToggle(){
-            
-            $(".hide_box").fadeToggle();
-            $(".shang_box").fadeToggle();
-          }
-        </script>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
       
     </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
     
   </div>
-  
-    
-    <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/06/15/深入理解RunLoop/">深入理解RunLoop</a></p>
-        <p><span>文章作者:</span><a href="/" title="访问 飘金 的个人博客">飘金</a></p>
-        <p><span>发布时间:</span>2017年06月15日 - 14时23分</p>
-        <p><span>最后更新:</span>2017年06月14日 - 22时24分</p>
-        <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/06/15/深入理解RunLoop/" title="深入理解RunLoop">http://yoursite.com/2017/06/15/深入理解RunLoop/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/06/15/深入理解RunLoop/　　作者: 飘金" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
-            <script src="/js/clipboard.min.js"></script>
-            <script> var clipboard = new Clipboard('.copy-path'); </script>
-        </p>
-        <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
-        </p>
-    </div>
 
 
-
-<nav id="article-nav">
-  
-    <a href="/2017/06/15/Observer监听RunLoop状态变化(kCFRunLoopBeforeWaiting,kCFRunLoopAfterWaiting等)/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Observer监听RunLoop状态变化(kCFRunLoopBeforeWaiting,kCFRunLoopAfterWaiting等)
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/06/15/RunLoop与PerformSelector/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">RunLoop与PerformSelector</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-    <div id="toc" class="toc-article">
-    <strong class="toc-title">文章目录</strong>
-    
-</div>
-<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
-
-<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-<script>
-    var valueHide = "隐藏目录";
-    var valueShow = "显示目录";
-
-    if ($(".left-col").is(":hidden")) {
-        $("#tocButton").attr("value", valueShow);
-    }
-    $("#tocButton").click(function() {
-        if ($("#toc").is(":hidden")) {
-            $("#tocButton").attr("value", valueHide);
-            $("#toc").slideDown(320);
-        }
-        else {
-            $("#tocButton").attr("value", valueShow);
-            $("#toc").slideUp(350);
-        }
-    })
-    if ($(".toc").length < 1) {
-        $("#toc, #tocButton").hide();
-    }
-</script>
-
-
-
-
-
-<div class="bdsharebuttonbox">
-	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
-	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
-	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
-	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
-	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
-	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
-</div>
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-
-
-
-
-    
-        <div id="gitments"></div>
-<script src="/js/gitment.browser.js"></script>
-<script>
-    var gitment = new Gitment({
-      id: window.location.pathname,
-      owner: 'luuman',
-      repo: 'luuman.github.io',
-      oauth: {
-        client_id: 'null',
-        client_secret: 'null',
-      },
-    })
-    gitment.render('gitments')
-</script>
-    
-
-
-
-    <div class="scroll" id="post-nav-button">
-        
-            <a href="/2017/06/15/Observer监听RunLoop状态变化(kCFRunLoopBeforeWaiting,kCFRunLoopAfterWaiting等)/" title="上一篇: Observer监听RunLoop状态变化(kCFRunLoopBeforeWaiting,kCFRunLoopAfterWaiting等)">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-        
-            <a href="/2017/06/15/RunLoop与PerformSelector/" title="下一篇: RunLoop与PerformSelector">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        
-    </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/Observer监听RunLoop状态变化(kCFRunLoopBeforeWaiting,kCFRunLoopAfterWaiting等)/">Observer监听RunLoop状态变化(kCFRunLoopBeforeWaiting,kCFRunLoopAfterWaiting等)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/深入理解RunLoop/">深入理解RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与PerformSelector/">RunLoop与PerformSelector</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与NSURLConnection/">RunLoop与NSURLConnection</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与Timer以及常用Mode/">RunLoop与Timer以及常用Mode</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop的内部逻辑/">RunLoop的内部逻辑</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与线程与GCD的关系/">RunLoop与线程与GCD的关系</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时(一)/">RunTime运行时(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时(三)/">RunTime运行时(三)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时(二)/">RunTime运行时(二)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之动态替换和改变方法实现/">RunTime运行时之动态替换和改变方法实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之动态添加方法/">RunTime运行时之动态添加方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之成员变量和属性/">RunTime运行时之成员变量和属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunTime运行时之改变私有属性的值/">RunTime运行时之改变私有属性的值</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/Runtime运行时之Class常用方法/">Runtime运行时之Class常用方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/SpriteKitSwiftGamePanda/">用SpriteKit写的熊猫跑酷小游戏</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/RunLoop与AutoreleasePool/">RunLoop与AutoreleasePool</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/15/实例化讲解RunLoop/">实例化讲解RunLoop</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/离屏渲染浅析/">离屏渲染</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/iOS 设置视图半透明而子控件不透明/">iOS 设置视图半透明而子控件不透明</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift反射API及其用法/">Swift反射API及其用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/UIScrollView与AutoLayout或Masonry结合使用/">UIScrollView与AutoLayout或Masonry结合使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Xcode控制台调试常用命令/">Xcode控制台调试常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift利用反射机制(Mirror)获取类的属性列表与值/">Swift利用反射机制(Mirror)获取类的属性列表与值</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift之Defer/">Swift之Defer</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift枚举相关值/">Swift枚举相关值</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/tableView cell 中如果有文本框点击自动滚动不被键盘挡住/">tableView cell 中如果有文本框点击自动滚动不被键盘挡住</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/使用Swift Package Manager管理项目(the package has an unsupported layout)/">使用Swift Package Manager管理项目(the package has an unsupported layout)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/基于Perfect的Swift3.1服务器开发案例/">基于Perfect的Swift3.1服务器开发案例</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/如何创建一个纯 Swift 模块/">如何创建一个纯 Swift 模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/14/Swift中有个双问号操作符/">Swift中有个双问号操作符</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/iOS clang编译OC成C++文件/">iOS clang编译OC成C++文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/06/13/calayer-uiview-uiwindow/">UIView,UIWindow,CALayer之间的区别联系</a></li></ul>
-    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-    <script>
-        $(".post-list").addClass("toc-article");
-        $(".post-list-item a").attr("target","_blank");
-        $("#post-nav-button > a:nth-child(2)").click(function() {
-            $(".fa-bars, .fa-times").toggle();
-            $(".post-list").toggle(300);
-            if ($(".toc").length > 0) {
-                $("#toc, #tocButton").toggle(200, function() {
-                    if ($(".switch-area").is(":visible")) {
-                        $("#tocButton").attr("value", valueHide);
-                        }
-                    })
-            }
-            else {
-            }
-        })
-    </script>
-
-
-
-    <script>
-        
-    </script>
-</div>
-      <footer id="footer">
-    <div class="outer">
-        <div id="footer-info">
-            <div class="footer-left">
-                &copy; 2017 飘金
-            </div>
-            <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
-            </div>
         </div>
         
-            <div class="visit">
-                
-                    <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" >海贼到访数: 
-                            <span id="busuanzi_value_site_uv"></span>
-                        </span>
-                    </span>
-                
-                
-                    <span>, </span>
-                
-                
-                    <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit">本页阅读量: 
-                            <span id="busuanzi_value_page_pv"></span>
-                        </span>
-                    </span>
-                
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="飘金" />
+          <p class="site-author-name" itemprop="name">飘金</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
             </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
         
-    </div>
-</footer>
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
 
     </div>
-    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-<script src="/js/main.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            var backgroundnum = 24;
-            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
-            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
-            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
-        })
-    </script>
+  </aside>
 
 
+        
+      </div>
+    </main>
 
-
-
-<div class="scroll" id="scroll">
-    <a href="#"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">飘金</span>
 </div>
-<script>
-    $(document).ready(function() {
-        if ($("#comments").length < 1) {
-            $("#scroll > a:nth-child(2)").hide();
-        };
-    })
-</script>
 
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
 
-  <script language="javascript">
-    $(function() {
-        $("a[title]").each(function() {
-            var a = $(this);
-            var title = a.attr('title');
-            if (title == undefined || title == "") return;
-            a.data('title', title).removeAttr('title').hover(
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
 
-            function() {
-                var offset = a.offset();
-                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
-                    top: offset.top - a.outerHeight() - 15,
-                    left: offset.left + a.outerWidth()/2 + 1
-                }).fadeIn(function() {
-                    var pop = $(this);
-                    setTimeout(function() {
-                        pop.remove();
-                    }, pop.text().length * 800);
-                });
-            }, function() {
-                $("#anchortitlecontainer").remove();
-            });
-        });
-    });
-</script>
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
 
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
 
   </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>
