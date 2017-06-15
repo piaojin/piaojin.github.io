@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>iOS,Swift-RunLoop与PerformSelector | 飘金的博客</title>
+  <title>iOS,Swift-用SpriteKit写的熊猫跑酷小游戏 | 飘金的博客</title>
 
   <!-- keywords -->
   
@@ -11,17 +11,17 @@
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="RunLoop与PerformSelector">
+  <meta name="description" content="用SpriteKit写的熊猫跑酷小游戏">
 <meta name="keywords" content="iOS,Swift">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RunLoop与PerformSelector">
-<meta property="og:url" content="http://yoursite.com/2017/06/15/RunLoop与PerformSelector/index.html">
+<meta property="og:title" content="用SpriteKit写的熊猫跑酷小游戏">
+<meta property="og:url" content="http://yoursite.com/2017/06/15/SpriteKitSwiftGamePanda/index.html">
 <meta property="og:site_name" content="飘金的博客">
-<meta property="og:description" content="RunLoop与PerformSelector">
-<meta property="og:updated_time" content="2017-06-14T14:25:04.000Z">
+<meta property="og:description" content="用SpriteKit写的熊猫跑酷小游戏">
+<meta property="og:updated_time" content="2017-06-15T00:59:15.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RunLoop与PerformSelector">
-<meta name="twitter:description" content="RunLoop与PerformSelector">
+<meta name="twitter:title" content="用SpriteKit写的熊猫跑酷小游戏">
+<meta name="twitter:description" content="用SpriteKit写的熊猫跑酷小游戏">
   
     <link rel="alternative" href="/atom.xml" title="飘金的博客" type="application/atom+xml">
   
@@ -215,10 +215,10 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-RunLoop与PerformSelector" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-SpriteKitSwiftGamePanda" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/06/15/RunLoop与PerformSelector/" class="article-date">
+      <a href="/2017/06/15/SpriteKitSwiftGamePanda/" class="article-date">
   	<time datetime="2017-06-15T06:23:47.000Z" itemprop="datePublished">2017-06-15</time>
 </a>
     </div>
@@ -232,7 +232,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      RunLoop与PerformSelector
+      用SpriteKit写的熊猫跑酷小游戏
       
     </h1>
   
@@ -254,8 +254,8 @@
         
           
 <div class="counter-tag counter">
-    <span id="/2017/06/15/RunLoop与PerformSelector/" class="leancloud_visitors post-title-link"
-          style="font-size: 12px" data-flag-title="RunLoop与PerformSelector">
+    <span id="/2017/06/15/SpriteKitSwiftGamePanda/" class="leancloud_visitors post-title-link"
+          style="font-size: 12px" data-flag-title="用SpriteKit写的熊猫跑酷小游戏">
          &nbsp;
         view
     </span>
@@ -268,8 +268,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>RunLoop与PerformSelector<br><a id="more"></a></p>
-<h1 id="PerformSelecter"><a href="#PerformSelecter" class="headerlink" title="PerformSelecter"></a>PerformSelecter</h1><h1 id="当调用-NSObject-的-performSelecter-afterDelay-后，实际上其内部会创建一个-Timer-并添加到当前线程的-RunLoop-中。所以如果当前线程没有-RunLoop，则这个方法会失效。"><a href="#当调用-NSObject-的-performSelecter-afterDelay-后，实际上其内部会创建一个-Timer-并添加到当前线程的-RunLoop-中。所以如果当前线程没有-RunLoop，则这个方法会失效。" class="headerlink" title="当调用 NSObject 的 performSelecter:afterDelay: 后，实际上其内部会创建一个 Timer 并添加到当前线程的 RunLoop 中。所以如果当前线程没有 RunLoop，则这个方法会失效。"></a>当调用 NSObject 的 performSelecter:afterDelay: 后，实际上其内部会创建一个 Timer 并添加到当前线程的 RunLoop 中。所以如果当前线程没有 RunLoop，则这个方法会失效。</h1><h1 id="当调用-performSelector-onThread-时，实际上其会创建一个-Timer-加到对应的线程去，同样的，如果对应线程没有-RunLoop-该方法也会失效。"><a href="#当调用-performSelector-onThread-时，实际上其会创建一个-Timer-加到对应的线程去，同样的，如果对应线程没有-RunLoop-该方法也会失效。" class="headerlink" title="当调用 performSelector:onThread: 时，实际上其会创建一个 Timer 加到对应的线程去，同样的，如果对应线程没有 RunLoop 该方法也会失效。"></a>当调用 performSelector:onThread: 时，实际上其会创建一个 Timer 加到对应的线程去，同样的，如果对应线程没有 RunLoop 该方法也会失效。</h1><h1 id="其他的performSelector系列方法是类似的"><a href="#其他的performSelector系列方法是类似的" class="headerlink" title="其他的performSelector系列方法是类似的"></a>其他的performSelector系列方法是类似的</h1><h2 id="直接上代码"><a href="#直接上代码" class="headerlink" title="直接上代码"></a>直接上代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">@implementation ViewController</div><div class="line"></div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">[super viewDidLoad];</div><div class="line"></div><div class="line">[self tryPerformSelectorOnMianThread];</div><div class="line"></div><div class="line">__weak typeof(self) weakSelf = self;</div><div class="line">//backGroundThread并不会被调用到,这是因为，在调用performSelector:onThread: withObject: waitUntilDone的时候，系统会给我们创建一个Timer的source，加到对应的RunLoop上去，然而这个时候我们没有RunLoop</div><div class="line">dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</div><div class="line">[weakSelf tryPerformSelectorOnbackGroundThread1];</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//在tryPerformSelectorOnbackGroundThread1上我们添加个RunLoop,此时backGroundThread2就可以被调用到</div><div class="line">dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</div><div class="line">[weakSelf tryPerformSelectorOnbackGroundThread2];</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//那么为什么主线程中的perfom selector却能够正常调用呢？通过上面的例子相信你已经猜到了，主线程的RunLoop是一直存在的，所以我们在主线程中执行的时候，无需再添加RunLoop。</div><div class="line">//小结:当perform selector在后台线程中执行的时候，这个线程必须有一个开启的runLoop</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)tryPerformSelectorOnMianThread&#123;</div><div class="line">[self performSelector:@selector(mainThreadMethod) withObject:nil];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)tryPerformSelectorOnbackGroundThread1&#123;</div><div class="line">//backGroundThread并不会被调用到,这是因为，在调用performSelector:onThread: withObject: waitUntilDone的时候，系统会给我们创建一个Timer的source，加到对应的RunLoop上去，然而这个时候我们没有RunLoop</div><div class="line">[self performSelector:@selector(backGroundThread1) onThread:[NSThread currentThread] withObject:nil waitUntilDone:NO];</div><div class="line">//默认是会在MainRunLoop中去执行,故他可以调用到backGroundThread</div><div class="line">//    [self performSelector:@selector(backGroundThread1) withObject:nil];</div><div class="line">[self tryPerformSelectorOnbackGroundThread2];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)tryPerformSelectorOnbackGroundThread2&#123;</div><div class="line">//在tryPerformSelectorOnbackGroundThread1上我们添加个RunLoop,此时backGroundThread2就可以被调用到</div><div class="line">[self performSelector:@selector(backGroundThread2) onThread:[NSThread currentThread] withObject:nil waitUntilDone:NO];</div><div class="line">[[NSRunLoop currentRunLoop] run];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)mainThreadMethod&#123;</div><div class="line">NSLog(@&quot;execute %s&quot;,__func__);</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)backGroundThread1&#123;</div><div class="line">NSLog(@&quot;currentThread:%@&quot;,[NSThread currentThread]);</div><div class="line">NSLog(@&quot;backGroundThread1 --&gt; execute %s&quot;,__FUNCTION__);</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)backGroundThread2&#123;</div><div class="line">NSLog(@&quot;currentThread:%@&quot;,[NSThread currentThread]);</div><div class="line">NSLog(@&quot;backGroundThread2 --&gt; execute %s&quot;,__FUNCTION__);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <p>用SpriteKit写的熊猫跑酷小游戏<br><a id="more"></a></p>
+<h3 id="刚开始有参考一些别人的"><a href="#刚开始有参考一些别人的" class="headerlink" title="刚开始有参考一些别人的"></a>刚开始有参考一些别人的</h3><p><a href="https://github.com/piaojin/SpriteKitSwiftGamePanda" target="_blank" rel="external">上gitHub下载代码</a></p>
 
       
     </div>
@@ -279,18 +279,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/06/15/RunLoop与NSURLConnection/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/06/15/Runtime运行时之Class常用方法/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">&lt;</strong>
       <div class="article-nav-title">
         
-          RunLoop与NSURLConnection
+          Runtime运行时之Class常用方法
         
       </div>
     </a>
   
   
-    <a href="/2017/06/15/RunLoop与Timer以及常用Mode/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">RunLoop与Timer以及常用Mode</div>
+    <a href="/2017/06/15/RunLoop与AutoreleasePool/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">RunLoop与AutoreleasePool</div>
       <strong class="article-nav-caption">&gt;</strong>
     </a>
   
@@ -300,7 +300,7 @@
 </article>
 
 
-<div class="ds-share share" data-thread-key="RunLoop与PerformSelector" data-title="RunLoop与PerformSelector" data-url="http://yoursite.com/2017/06/15/RunLoop与PerformSelector/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="RunLoop与PerformSelector">
+<div class="ds-share share" data-thread-key="SpriteKitSwiftGamePanda" data-title="用SpriteKit写的熊猫跑酷小游戏" data-url="http://yoursite.com/2017/06/15/SpriteKitSwiftGamePanda/"  data-images="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg" data-content="用SpriteKit写的熊猫跑酷小游戏">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
@@ -319,7 +319,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="RunLoop与PerformSelector" data-title="RunLoop与PerformSelector" data-url="http://yoursite.com/2017/06/15/RunLoop与PerformSelector/"></div>
+	<div class="ds-thread" data-thread-key="SpriteKitSwiftGamePanda" data-title="用SpriteKit写的熊猫跑酷小游戏" data-url="http://yoursite.com/2017/06/15/SpriteKitSwiftGamePanda/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
