@@ -93,17 +93,17 @@
 
 
 
-<meta name="description" content="UIScrollView与AutoLayout或Masonry结合使用">
+<meta name="description" content="XUIScrollView与AutoLayout或Masonry结合使用">
 <meta name="keywords" content="iOS,Swift">
 <meta property="og:type" content="article">
 <meta property="og:title" content="UIScrollView与AutoLayout或Masonry结合使用">
 <meta property="og:url" content="http://yoursite.com/2017/06/14/UIScrollView与AutoLayout或Masonry结合使用/index.html">
 <meta property="og:site_name" content="飘金的博客">
-<meta property="og:description" content="UIScrollView与AutoLayout或Masonry结合使用">
-<meta property="og:updated_time" content="2017-06-14T14:09:19.000Z">
+<meta property="og:description" content="XUIScrollView与AutoLayout或Masonry结合使用">
+<meta property="og:updated_time" content="2017-06-16T13:55:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UIScrollView与AutoLayout或Masonry结合使用">
-<meta name="twitter:description" content="UIScrollView与AutoLayout或Masonry结合使用">
+<meta name="twitter:description" content="XUIScrollView与AutoLayout或Masonry结合使用">
 
 
 
@@ -342,8 +342,8 @@
       
 
       
-        <p>UIScrollView与AutoLayout或Masonry结合使用<br><a id="more"></a></p>
-<h3 id="当你用xib的方式去拖拽一个UIScrollView-设置好约束后会发现一大片红-在里面添加一个view设置好上下左右的约束后一切OK-但是当UIScrollView里面的子控件很多时-界面很容易乱掉-并不会达到我们想要的布局效果"><a href="#当你用xib的方式去拖拽一个UIScrollView-设置好约束后会发现一大片红-在里面添加一个view设置好上下左右的约束后一切OK-但是当UIScrollView里面的子控件很多时-界面很容易乱掉-并不会达到我们想要的布局效果" class="headerlink" title="当你用xib的方式去拖拽一个UIScrollView,设置好约束后会发现一大片红,在里面添加一个view设置好上下左右的约束后一切OK,但是当UIScrollView里面的子控件很多时,界面很容易乱掉,并不会达到我们想要的布局效果."></a>当你用xib的方式去拖拽一个UIScrollView,设置好约束后会发现一大片红,在里面添加一个view设置好上下左右的约束后一切OK,但是当UIScrollView里面的子控件很多时,界面很容易乱掉,并不会达到我们想要的布局效果.</h3><h3 id="技巧是现在UIScrollView的里面添加一个上下左右都与UIScrollView为0的bgView-在添加其他若干子控件的时候都添加到这个bgView里面即可-这样就不会错乱"><a href="#技巧是现在UIScrollView的里面添加一个上下左右都与UIScrollView为0的bgView-在添加其他若干子控件的时候都添加到这个bgView里面即可-这样就不会错乱" class="headerlink" title="技巧是现在UIScrollView的里面添加一个上下左右都与UIScrollView为0的bgView,在添加其他若干子控件的时候都添加到这个bgView里面即可,这样就不会错乱."></a>技巧是现在UIScrollView的里面添加一个上下左右都与UIScrollView为0的bgView,在添加其他若干子控件的时候都添加到这个bgView里面即可,这样就不会错乱.</h3><h3 id="如果是用Masonry代码也是一样"><a href="#如果是用Masonry代码也是一样" class="headerlink" title="如果是用Masonry代码也是一样"></a>如果是用Masonry代码也是一样</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">_scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];</div><div class="line">[self.view addSubview:_scrollView];</div><div class="line"></div><div class="line">_scrollView.contentSize = CGSizeMake(0, _scrollView.frame.size.height);</div><div class="line"></div><div class="line">_bgView = [[UIView alloc] initWithFrame:self.view.bounds];</div><div class="line">[_scrollView addSubview:_bgView];</div><div class="line"></div><div class="line">//接下来子控件都能是添加到_bgView里面</div></pre></td></tr></table></figure>
+        <p><center style="color:#FF7F50">XUIScrollView与AutoLayout或Masonry结合使用</center><br><a id="more"></a></p>
+<h3 id="当你用xib的方式去拖拽一个UIScrollView-设置好约束后会发现一大片红-在里面添加一个view设置好上下左右的约束后一切OK-但是当UIScrollView里面的子控件很多时-界面很容易乱掉-并不会达到我们想要的布局效果"><a href="#当你用xib的方式去拖拽一个UIScrollView-设置好约束后会发现一大片红-在里面添加一个view设置好上下左右的约束后一切OK-但是当UIScrollView里面的子控件很多时-界面很容易乱掉-并不会达到我们想要的布局效果" class="headerlink" title="当你用xib的方式去拖拽一个UIScrollView,设置好约束后会发现一大片红,在里面添加一个view设置好上下左右的约束后一切OK,但是当UIScrollView里面的子控件很多时,界面很容易乱掉,并不会达到我们想要的布局效果."></a>当你用xib的方式去拖拽一个UIScrollView,设置好约束后会发现一大片红,在里面添加一个view设置好上下左右的约束后一切OK,但是当UIScrollView里面的子控件很多时,界面很容易乱掉,并不会达到我们想要的布局效果.</h3><h3 id="技巧是现在UIScrollView的里面添加一个上下左右都与UIScrollView为0的bgView-在添加其他若干子控件的时候都添加到这个bgView里面即可-这样就不会错乱"><a href="#技巧是现在UIScrollView的里面添加一个上下左右都与UIScrollView为0的bgView-在添加其他若干子控件的时候都添加到这个bgView里面即可-这样就不会错乱" class="headerlink" title="技巧是现在UIScrollView的里面添加一个上下左右都与UIScrollView为0的bgView,在添加其他若干子控件的时候都添加到这个bgView里面即可,这样就不会错乱."></a>技巧是现在UIScrollView的里面添加一个上下左右都与UIScrollView为0的bgView,在添加其他若干子控件的时候都添加到这个bgView里面即可,这样就不会错乱.</h3><h3 id="如果是用Masonry代码也是一样"><a href="#如果是用Masonry代码也是一样" class="headerlink" title="如果是用Masonry代码也是一样"></a>如果是用Masonry代码也是一样</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">_scrollView = [[<span class="built_in">UIScrollView</span> alloc] initWithFrame:<span class="keyword">self</span>.view.bounds];</div><div class="line">[<span class="keyword">self</span>.view addSubview:_scrollView];</div><div class="line"></div><div class="line">_scrollView.contentSize = <span class="built_in">CGSizeMake</span>(<span class="number">0</span>, _scrollView.frame.size.height);</div><div class="line"></div><div class="line">_bgView = [[<span class="built_in">UIView</span> alloc] initWithFrame:<span class="keyword">self</span>.view.bounds];</div><div class="line">[_scrollView addSubview:_bgView];</div><div class="line"></div><div class="line"><span class="comment">//接下来子控件都能是添加到_bgView里面</span></div></pre></td></tr></table></figure>
 
       
     </div>
@@ -396,8 +396,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/14/Swift反射API及其用法/" rel="next" title="Swift反射API及其用法">
-                <i class="fa fa-chevron-left"></i> Swift反射API及其用法
+              <a href="/2017/06/14/Xcode控制台调试常用命令/" rel="next" title="Xcode控制台调试常用命令">
+                <i class="fa fa-chevron-left"></i> Xcode控制台调试常用命令
               </a>
             
           </div>
@@ -406,8 +406,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/14/Swift之Defer/" rel="prev" title="Swift之Defer">
-                Swift之Defer <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/14/Swift枚举相关值/" rel="prev" title="Swift枚举相关值">
+                Swift枚举相关值 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

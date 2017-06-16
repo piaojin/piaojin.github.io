@@ -100,7 +100,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/06/14/离屏渲染浅析/index.html">
 <meta property="og:site_name" content="飘金的博客">
 <meta property="og:description" content="离屏渲染">
-<meta property="og:updated_time" content="2017-06-14T14:03:16.000Z">
+<meta property="og:updated_time" content="2017-06-16T13:56:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="离屏渲染">
 <meta name="twitter:description" content="离屏渲染">
@@ -342,7 +342,7 @@
       
 
       
-        <p>离屏渲染<br><a id="more"></a></p>
+        <p><center style="color:#FF7F50">离屏渲染</center><br><a id="more"></a></p>
 <blockquote>
 <h1 id="GPU渲染机制："><a href="#GPU渲染机制：" class="headerlink" title="GPU渲染机制："></a>GPU渲染机制：</h1></blockquote>
 <h2 id="CPU-计算好显示内容提交到-GPU，GPU-渲染完成后将渲染结果放入帧缓冲区，随后视频控制器会按照-VSync-信号逐行读取帧缓冲区的数据，经过可能的数模转换传递给显示器显示。"><a href="#CPU-计算好显示内容提交到-GPU，GPU-渲染完成后将渲染结果放入帧缓冲区，随后视频控制器会按照-VSync-信号逐行读取帧缓冲区的数据，经过可能的数模转换传递给显示器显示。" class="headerlink" title="CPU 计算好显示内容提交到 GPU，GPU 渲染完成后将渲染结果放入帧缓冲区，随后视频控制器会按照 VSync 信号逐行读取帧缓冲区的数据，经过可能的数模转换传递给显示器显示。"></a>CPU 计算好显示内容提交到 GPU，GPU 渲染完成后将渲染结果放入帧缓冲区，随后视频控制器会按照 VSync 信号逐行读取帧缓冲区的数据，经过可能的数模转换传递给显示器显示。</h2><blockquote>
@@ -352,7 +352,7 @@
 <li><h2 id="Off-Screen-Rendering"><a href="#Off-Screen-Rendering" class="headerlink" title="Off-Screen Rendering"></a>Off-Screen Rendering</h2><h3 id="意为离屏渲染，指的是GPU在当前屏幕缓冲区以外新开辟一个缓冲区进行渲染操作。"><a href="#意为离屏渲染，指的是GPU在当前屏幕缓冲区以外新开辟一个缓冲区进行渲染操作。" class="headerlink" title="意为离屏渲染，指的是GPU在当前屏幕缓冲区以外新开辟一个缓冲区进行渲染操作。"></a>意为离屏渲染，指的是GPU在当前屏幕缓冲区以外新开辟一个缓冲区进行渲染操作。</h3></li>
 </ul>
 <blockquote>
-<p>特殊的离屏渲染：<br>如果将不在GPU的当前屏幕缓冲区中进行的渲染都称为离屏渲染，那么就还有另一种特殊的“离屏渲染”方式： CPU渲染。<br>如果我们重写了drawRect方法，并且使用任何Core Graphics的技术进行了绘制操作，就涉及到了CPU渲染。整个渲染过程由CPU在App内 同步地<br>完成，渲染得到的bitmap最后再交由GPU用于显示。<br>备注：CoreGraphic通常是线程安全的，所以可以进行异步绘制，显示的时候再放回主线程，一个简单的异步绘制过程大致如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">- (void)display &#123;</div><div class="line">dispatch_async(backgroundQueue, ^&#123;</div><div class="line">CGContextRef ctx = CGBitmapContextCreate(...);</div><div class="line">// draw in context...</div><div class="line">CGImageRef img = CGBitmapContextCreateImage(ctx);</div><div class="line">CFRelease(ctx);</div><div class="line">dispatch_async(mainQueue, ^&#123;</div><div class="line">layer.contents = img;</div><div class="line">&#125;);</div><div class="line">&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>特殊的离屏渲染：<br>如果将不在GPU的当前屏幕缓冲区中进行的渲染都称为离屏渲染，那么就还有另一种特殊的“离屏渲染”方式： CPU渲染。<br>如果我们重写了drawRect方法，并且使用任何Core Graphics的技术进行了绘制操作，就涉及到了CPU渲染。整个渲染过程由CPU在App内 同步地<br>完成，渲染得到的bitmap最后再交由GPU用于显示。<br>备注：CoreGraphic通常是线程安全的，所以可以进行异步绘制，显示的时候再放回主线程，一个简单的异步绘制过程大致如下<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)display &#123;</div><div class="line"><span class="built_in">dispatch_async</span>(backgroundQueue, ^&#123;</div><div class="line"><span class="built_in">CGContextRef</span> ctx = <span class="built_in">CGBitmapContextCreate</span>(...);</div><div class="line"><span class="comment">// draw in context...</span></div><div class="line"><span class="built_in">CGImageRef</span> img = <span class="built_in">CGBitmapContextCreateImage</span>(ctx);</div><div class="line"><span class="built_in">CFRelease</span>(ctx);</div><div class="line"><span class="built_in">dispatch_async</span>(mainQueue, ^&#123;</div><div class="line">layer.contents = img;</div><div class="line">&#125;);</div><div class="line">&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h2 id="离屏渲染的触发方式"><a href="#离屏渲染的触发方式" class="headerlink" title="离屏渲染的触发方式"></a>离屏渲染的触发方式</h2></blockquote>
 <h2 id="设置了以下属性时，都会触发离屏绘制："><a href="#设置了以下属性时，都会触发离屏绘制：" class="headerlink" title="设置了以下属性时，都会触发离屏绘制："></a>设置了以下属性时，都会触发离屏绘制：</h2><ul>
 <li><h2 id="shouldRasterize（光栅化）"><a href="#shouldRasterize（光栅化）" class="headerlink" title="shouldRasterize（光栅化）"></a>shouldRasterize（光栅化）</h2></li>
@@ -431,8 +431,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/14/使用Swift Package Manager管理项目(the package has an unsupported layout)/" rel="next" title="使用Swift Package Manager管理项目(the package has an unsupported layout)">
-                <i class="fa fa-chevron-left"></i> 使用Swift Package Manager管理项目(the package has an unsupported layout)
+              <a href="/2017/06/14/iOS 设置视图半透明而子控件不透明/" rel="next" title="iOS 设置视图半透明而子控件不透明">
+                <i class="fa fa-chevron-left"></i> iOS 设置视图半透明而子控件不透明
               </a>
             
           </div>

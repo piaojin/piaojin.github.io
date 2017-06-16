@@ -100,7 +100,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/06/14/tableView cell 中如果有文本框点击自动滚动不被键盘挡住/index.html">
 <meta property="og:site_name" content="飘金的博客">
 <meta property="og:description" content="tableView cell 中如果有文本框点击自动滚动不被键盘挡住">
-<meta property="og:updated_time" content="2017-06-14T14:14:46.000Z">
+<meta property="og:updated_time" content="2017-06-16T13:39:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tableView cell 中如果有文本框点击自动滚动不被键盘挡住">
 <meta name="twitter:description" content="tableView cell 中如果有文本框点击自动滚动不被键盘挡住">
@@ -342,7 +342,7 @@
       
 
       
-        <p>tableView cell 中如果有文本框点击自动滚动不被键盘挡住<br><a id="more"></a></p>
+        <p><center style="color:#FF7F50">tableView cell 中如果有文本框点击自动滚动不被键盘挡住</center><br><a id="more"></a></p>
 <h1 id="tableView-cell-中如果有文本框点击自动滚动不被键盘挡住"><a href="#tableView-cell-中如果有文本框点击自动滚动不被键盘挡住" class="headerlink" title="tableView cell 中如果有文本框点击自动滚动不被键盘挡住"></a>tableView cell 中如果有文本框点击自动滚动不被键盘挡住</h1><h3 id="tableView-是继承UIscrollView-所以自然有setContentOffset方法-该方法可以设置tableView的偏移量-那么通过该方法可以设置偏移量让cell不被键盘挡住"><a href="#tableView-是继承UIscrollView-所以自然有setContentOffset方法-该方法可以设置tableView的偏移量-那么通过该方法可以设置偏移量让cell不被键盘挡住" class="headerlink" title="tableView 是继承UIscrollView,所以自然有setContentOffset方法,该方法可以设置tableView的偏移量,那么通过该方法可以设置偏移量让cell不被键盘挡住."></a>tableView 是继承UIscrollView,所以自然有setContentOffset方法,该方法可以设置tableView的偏移量,那么通过该方法可以设置偏移量让cell不被键盘挡住.</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">WeakSelf</div><div class="line">[UIView animateWithDuration:0.3 animations:^&#123;</div><div class="line">[weakSelf.tableView setContentOffset:CGPointMake(0, cell.frame.origin.y)];</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
 <h3 id="其中cell-frame-origin-y可以根据需要调节"><a href="#其中cell-frame-origin-y可以根据需要调节" class="headerlink" title="其中cell.frame.origin.y可以根据需要调节"></a>其中cell.frame.origin.y可以根据需要调节</h3>
       
@@ -396,8 +396,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/14/如何创建一个纯 Swift 模块/" rel="next" title="如何创建一个纯 Swift 模块">
-                <i class="fa fa-chevron-left"></i> 如何创建一个纯 Swift 模块
+              <a href="/2017/06/14/使用Swift Package Manager管理项目(the package has an unsupported layout)/" rel="next" title="使用Swift Package Manager管理项目(the package has an unsupported layout)">
+                <i class="fa fa-chevron-left"></i> 使用Swift Package Manager管理项目(the package has an unsupported layout)
               </a>
             
           </div>
@@ -406,8 +406,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/14/基于Perfect的Swift3.1服务器开发案例/" rel="prev" title="基于Perfect的Swift3.1服务器开发案例">
-                基于Perfect的Swift3.1服务器开发案例 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/14/Swift反射API及其用法/" rel="prev" title="Swift反射API及其用法">
+                Swift反射API及其用法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

@@ -100,7 +100,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/06/14/Swift中有个双问号操作符/index.html">
 <meta property="og:site_name" content="飘金的博客">
 <meta property="og:description" content="Swift中有个双问号操作符">
-<meta property="og:updated_time" content="2017-06-14T14:10:43.000Z">
+<meta property="og:updated_time" content="2017-06-16T13:56:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift中有个双问号操作符">
 <meta name="twitter:description" content="Swift中有个双问号操作符">
@@ -342,11 +342,11 @@
       
 
       
-        <p>Swift中有个双问号操作符<br><a id="more"></a></p>
-<h3 id="Swift中有个双问号操作符-，可以用来快速对nil进行条件判断-今天来补充下双问号的用法，对于不期望某个optional值为nil时func返回nil-或者-因为其值为nil而停止了后续业务的情况下，我们可以用”-”在optionalValue为nil时做赋值保险操作（“-”操作后返回值为非optional）"><a href="#Swift中有个双问号操作符-，可以用来快速对nil进行条件判断-今天来补充下双问号的用法，对于不期望某个optional值为nil时func返回nil-或者-因为其值为nil而停止了后续业务的情况下，我们可以用”-”在optionalValue为nil时做赋值保险操作（“-”操作后返回值为非optional）" class="headerlink" title="Swift中有个双问号操作符(??)，可以用来快速对nil进行条件判断,今天来补充下双问号的用法，对于不期望某个optional值为nil时func返回nil 或者 因为其值为nil而停止了后续业务的情况下，我们可以用”??”在optionalValue为nil时做赋值保险操作（“??”操作后返回值为非optional）"></a>Swift中有个双问号操作符(??)，可以用来快速对nil进行条件判断,今天来补充下双问号的用法，对于不期望某个optional值为nil时func返回nil 或者 因为其值为nil而停止了后续业务的情况下，我们可以用”??”在optionalValue为nil时做赋值保险操作（“??”操作后返回值为非optional）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">用法：newValue = optionalValue ?? value</div></pre></td></tr></table></figure>
-<h3 id="若optionalValue非nil时，newValue的值为optionalValue的值，若optionalValue为nil时，newValue的值为value的值"><a href="#若optionalValue非nil时，newValue的值为optionalValue的值，若optionalValue为nil时，newValue的值为value的值" class="headerlink" title="若optionalValue非nil时，newValue的值为optionalValue的值，若optionalValue为nil时，newValue的值为value的值"></a>若optionalValue非nil时，newValue的值为optionalValue的值，若optionalValue为nil时，newValue的值为value的值</h3><h3 id="简单明了直接上例子：self-objectForKey-key-为nil时，object的值为0"><a href="#简单明了直接上例子：self-objectForKey-key-为nil时，object的值为0" class="headerlink" title="简单明了直接上例子：self.objectForKey(key)为nil时，object的值为0"></a>简单明了直接上例子：self.objectForKey(key)为nil时，object的值为0</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">func validIntValueForKey(key: String) -&gt; Int &#123;</div><div class="line"></div><div class="line">let object = self.objectForKey(key) ?? Int(0)</div><div class="line"></div><div class="line">//do something</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="例子：赋default值"><a href="#例子：赋default值" class="headerlink" title="例子：赋default值"></a>例子：赋default值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">versionNameLabel.text = NSBundle.mainBundle().objectForInfoDictionaryKey(kCFBundleVersionKey as String) as? String ?? &quot;版本号读取失败&quot;</div></pre></td></tr></table></figure>
-<h3 id="例子：若为nil-赋值为String数组"><a href="#例子：若为nil-赋值为String数组" class="headerlink" title="例子：若为nil 赋值为String数组"></a>例子：若为nil 赋值为String数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let businessNameList = user.businessList?.flatMap&#123; $0.businessName &#125; ?? [&quot;无场馆&quot;]</div></pre></td></tr></table></figure>
+        <p><center style="color:#FF7F50">Swift中有个双问号操作符</center><br><a id="more"></a></p>
+<h3 id="Swift中有个双问号操作符-，可以用来快速对nil进行条件判断-今天来补充下双问号的用法，对于不期望某个optional值为nil时func返回nil-或者-因为其值为nil而停止了后续业务的情况下，我们可以用”-”在optionalValue为nil时做赋值保险操作（“-”操作后返回值为非optional）"><a href="#Swift中有个双问号操作符-，可以用来快速对nil进行条件判断-今天来补充下双问号的用法，对于不期望某个optional值为nil时func返回nil-或者-因为其值为nil而停止了后续业务的情况下，我们可以用”-”在optionalValue为nil时做赋值保险操作（“-”操作后返回值为非optional）" class="headerlink" title="Swift中有个双问号操作符(??)，可以用来快速对nil进行条件判断,今天来补充下双问号的用法，对于不期望某个optional值为nil时func返回nil 或者 因为其值为nil而停止了后续业务的情况下，我们可以用”??”在optionalValue为nil时做赋值保险操作（“??”操作后返回值为非optional）"></a>Swift中有个双问号操作符(??)，可以用来快速对nil进行条件判断,今天来补充下双问号的用法，对于不期望某个optional值为nil时func返回nil 或者 因为其值为nil而停止了后续业务的情况下，我们可以用”??”在optionalValue为nil时做赋值保险操作（“??”操作后返回值为非optional）</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">用法：newValue = optionalValue ?? value</div></pre></td></tr></table></figure>
+<h3 id="若optionalValue非nil时，newValue的值为optionalValue的值，若optionalValue为nil时，newValue的值为value的值"><a href="#若optionalValue非nil时，newValue的值为optionalValue的值，若optionalValue为nil时，newValue的值为value的值" class="headerlink" title="若optionalValue非nil时，newValue的值为optionalValue的值，若optionalValue为nil时，newValue的值为value的值"></a>若optionalValue非nil时，newValue的值为optionalValue的值，若optionalValue为nil时，newValue的值为value的值</h3><h3 id="简单明了直接上例子：self-objectForKey-key-为nil时，object的值为0"><a href="#简单明了直接上例子：self-objectForKey-key-为nil时，object的值为0" class="headerlink" title="简单明了直接上例子：self.objectForKey(key)为nil时，object的值为0"></a>简单明了直接上例子：self.objectForKey(key)为nil时，object的值为0</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">func validIntValueForKey(key: String) -&gt; Int &#123;</div><div class="line"></div><div class="line">let object = <span class="keyword">self</span>.objectForKey(key) ?? Int(<span class="number">0</span>)</div><div class="line"></div><div class="line"><span class="comment">//do something</span></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="例子：赋default值"><a href="#例子：赋default值" class="headerlink" title="例子：赋default值"></a>例子：赋default值</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">versionNameLabel.text = <span class="built_in">NSBundle</span>.mainBundle().objectForInfoDictionaryKey(kCFBundleVersionKey as String) as? String ?? <span class="string">"版本号读取失败"</span></div></pre></td></tr></table></figure>
+<h3 id="例子：若为nil-赋值为String数组"><a href="#例子：若为nil-赋值为String数组" class="headerlink" title="例子：若为nil 赋值为String数组"></a>例子：若为nil 赋值为String数组</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let businessNameList = user.businessList?.flatMap&#123; $<span class="number">0.</span>businessName &#125; ?? [<span class="string">"无场馆"</span>]</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -399,8 +399,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/14/Xcode控制台调试常用命令/" rel="next" title="Xcode控制台调试常用命令">
-                <i class="fa fa-chevron-left"></i> Xcode控制台调试常用命令
+              <a href="/2017/06/13/iOS clang编译OC成C++文件/" rel="next" title="iOS clang编译OC成C++文件">
+                <i class="fa fa-chevron-left"></i> iOS clang编译OC成C++文件
               </a>
             
           </div>
@@ -409,8 +409,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/14/使用Swift Package Manager管理项目(the package has an unsupported layout)/" rel="prev" title="使用Swift Package Manager管理项目(the package has an unsupported layout)">
-                使用Swift Package Manager管理项目(the package has an unsupported layout) <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/14/如何创建一个纯 Swift 模块/" rel="prev" title="如何创建一个纯 Swift 模块">
+                如何创建一个纯 Swift 模块 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
