@@ -1,0 +1,759 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="isa指针">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="isa指针">
+<meta property="og:url" content="http://yoursite.com/2017/06/14/isa指针/index.html">
+<meta property="og:site_name" content="飘金的博客">
+<meta property="og:description" content="isa指针">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/449095-3e972ec16703c54d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240/q/100">
+<meta property="og:updated_time" content="2017-06-21T08:36:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="isa指针">
+<meta name="twitter:description" content="isa指针">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/449095-3e972ec16703c54d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240/q/100">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/14/isa指针/"/>
+
+
+
+
+
+  <title>isa指针 | 飘金的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">飘金的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">会炒菜的猿</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/14/isa指针/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="飘金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="飘金的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">isa指针</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-14T14:23:47+08:00">
+                2017-06-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><center style="color:#FF7F50">isa指针</center><br><a id="more"></a></p>
+<h2 id="一-isa指针"><a href="#一-isa指针" class="headerlink" title="一.isa指针"></a>一.isa指针</h2><h4 id="要认识什么是isa指针，我们得先明确一点："><a href="#要认识什么是isa指针，我们得先明确一点：" class="headerlink" title="要认识什么是isa指针，我们得先明确一点："></a>要认识什么是isa指针，我们得先明确一点：</h4><h4 id="在Objective-C中，任何类的定义都是对象。类和类的实例（对象）没有任何本质上的区别。任何对象都有isa指针。"><a href="#在Objective-C中，任何类的定义都是对象。类和类的实例（对象）没有任何本质上的区别。任何对象都有isa指针。" class="headerlink" title="在Objective-C中，任何类的定义都是对象。类和类的实例（对象）没有任何本质上的区别。任何对象都有isa指针。"></a>在Objective-C中，任何类的定义都是对象。类和类的实例（对象）没有任何本质上的区别。任何对象都有isa指针。</h4><h4 id="那么什么是类呢？在xcode中用快捷键Shift＋Cmd＋O-打开文件objc-h-能看到类的定义："><a href="#那么什么是类呢？在xcode中用快捷键Shift＋Cmd＋O-打开文件objc-h-能看到类的定义：" class="headerlink" title="那么什么是类呢？在xcode中用快捷键Shift＋Cmd＋O 打开文件objc.h 能看到类的定义："></a>那么什么是类呢？在xcode中用快捷键Shift＋Cmd＋O 打开文件objc.h 能看到类的定义：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">#if !OBJC_TYPES_DEFINED</div><div class="line">/// An opaque type that represents an Objective-C class.</div><div class="line">typedef struct objc_class *Class;//这边说明Class也是一个对象(objc_class *)</div><div class="line"></div><div class="line">/// Represents an instance of a class.</div><div class="line">struct objc_object &#123;</div><div class="line">Class isa  OBJC_ISA_AVAILABILITY;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">/// A pointer to an instance of a class.</div><div class="line">typedef struct objc_object *id;</div><div class="line">#endif</div><div class="line"></div><div class="line">struct objc_class &#123;</div><div class="line">Class isa  OBJC_ISA_AVAILABILITY;</div><div class="line"></div><div class="line">#if !__OBJC2__</div><div class="line">Class super_class                                        OBJC2_UNAVAILABLE;</div><div class="line">const char *name                                         OBJC2_UNAVAILABLE;</div><div class="line">long version                                             OBJC2_UNAVAILABLE;</div><div class="line">long info                                                OBJC2_UNAVAILABLE;</div><div class="line">long instance_size                                       OBJC2_UNAVAILABLE;</div><div class="line">struct objc_ivar_list *ivars                             OBJC2_UNAVAILABLE;</div><div class="line">struct objc_method_list **methodLists                    OBJC2_UNAVAILABLE;</div><div class="line">struct objc_cache *cache                                 OBJC2_UNAVAILABLE;</div><div class="line">struct objc_protocol_list *protocols                     OBJC2_UNAVAILABLE;</div><div class="line">#endif</div><div class="line"></div><div class="line">&#125; OBJC2_UNAVAILABLE;</div><div class="line">/* Use `Class` instead of `struct objc_class *` */</div><div class="line"></div><div class="line">#endif</div></pre></td></tr></table></figure>
+<h3 id="可以看出"><a href="#可以看出" class="headerlink" title="可以看出:"></a>可以看出:</h3><h3 id="Class-是一个-objc-class-结构类型的指针-id是一个-objc-object-结构类型的指针"><a href="#Class-是一个-objc-class-结构类型的指针-id是一个-objc-object-结构类型的指针" class="headerlink" title="Class 是一个 objc_class 结构类型的指针, id是一个 objc_object 结构类型的指针."></a>Class 是一个 objc_class 结构类型的指针, id是一个 objc_object 结构类型的指针.</h3><h3 id="稍微解释一下各个参数的意思："><a href="#稍微解释一下各个参数的意思：" class="headerlink" title="稍微解释一下各个参数的意思："></a>稍微解释一下各个参数的意思：</h3><h3 id="isa：是一个Class-类型的指针-每个实例对象有个isa的指针-他指向对象的类，而Class里也有个isa的指针-指向meteClass-元类-。元类保存了类方法的列表。当类方法被调用时，先会从本身查找类方法的实现，如果没有，元类会向他父类查找该方法。同时注意的是：元类（meteClass）也是类，它也是对象。元类也有isa指针-它的isa指针最终指向的是一个根元类-root-meteClass-根元类的isa指针指向本身，这样形成了一个封闭的内循环。"><a href="#isa：是一个Class-类型的指针-每个实例对象有个isa的指针-他指向对象的类，而Class里也有个isa的指针-指向meteClass-元类-。元类保存了类方法的列表。当类方法被调用时，先会从本身查找类方法的实现，如果没有，元类会向他父类查找该方法。同时注意的是：元类（meteClass）也是类，它也是对象。元类也有isa指针-它的isa指针最终指向的是一个根元类-root-meteClass-根元类的isa指针指向本身，这样形成了一个封闭的内循环。" class="headerlink" title="isa：是一个Class 类型的指针. 每个实例对象有个isa的指针,他指向对象的类，而Class里也有个isa的指针, 指向meteClass(元类)。元类保存了类方法的列表。当类方法被调用时，先会从本身查找类方法的实现，如果没有，元类会向他父类查找该方法。同时注意的是：元类（meteClass）也是类，它也是对象。元类也有isa指针,它的isa指针最终指向的是一个根元类(root meteClass).根元类的isa指针指向本身，这样形成了一个封闭的内循环。"></a>isa：是一个Class 类型的指针. 每个实例对象有个isa的指针,他指向对象的类，而Class里也有个isa的指针, 指向meteClass(元类)。元类保存了类方法的列表。当类方法被调用时，先会从本身查找类方法的实现，如果没有，元类会向他父类查找该方法。同时注意的是：元类（meteClass）也是类，它也是对象。元类也有isa指针,它的isa指针最终指向的是一个根元类(root meteClass).根元类的isa指针指向本身，这样形成了一个封闭的内循环。</h3><ul>
+<li><h4 id="super-class：父类，如果该类已经是最顶层的根类-那么它为NULL。"><a href="#super-class：父类，如果该类已经是最顶层的根类-那么它为NULL。" class="headerlink" title="super_class：父类，如果该类已经是最顶层的根类,那么它为NULL。"></a>super_class：父类，如果该类已经是最顶层的根类,那么它为NULL。</h4></li>
+<li><h4 id="version：类的版本信息-默认为0"><a href="#version：类的版本信息-默认为0" class="headerlink" title="version：类的版本信息,默认为0"></a>version：类的版本信息,默认为0</h4></li>
+<li><h4 id="info：供运行期使用的一些位标识。"><a href="#info：供运行期使用的一些位标识。" class="headerlink" title="info：供运行期使用的一些位标识。"></a>info：供运行期使用的一些位标识。</h4></li>
+<li><h4 id="instance-size：该类的实例变量大小"><a href="#instance-size：该类的实例变量大小" class="headerlink" title="instance_size：该类的实例变量大小"></a>instance_size：该类的实例变量大小</h4></li>
+<li><h4 id="ivars：成员变量的数组"><a href="#ivars：成员变量的数组" class="headerlink" title="ivars：成员变量的数组"></a>ivars：成员变量的数组</h4></li>
+</ul>
+<h3 id="再来看看各个类实例变量的继承关系："><a href="#再来看看各个类实例变量的继承关系：" class="headerlink" title="再来看看各个类实例变量的继承关系："></a>再来看看各个类实例变量的继承关系：</h3><p><img src="http://upload-images.jianshu.io/upload_images/449095-3e972ec16703c54d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240/q/100" alt=""></p>
+<h3 id="每一个对象本质上都是一个类的实例。其中类定义了成员变量和成员方法的列表。对象通过对象的isa指针指向类。"><a href="#每一个对象本质上都是一个类的实例。其中类定义了成员变量和成员方法的列表。对象通过对象的isa指针指向类。" class="headerlink" title="每一个对象本质上都是一个类的实例。其中类定义了成员变量和成员方法的列表。对象通过对象的isa指针指向类。"></a>每一个对象本质上都是一个类的实例。其中类定义了成员变量和成员方法的列表。对象通过对象的isa指针指向类。</h3><h3 id="每一个类本质上都是一个对象，类其实是元类（meteClass）的实例。元类定义了类方法的列表。类通过类的isa指针指向元类。"><a href="#每一个类本质上都是一个对象，类其实是元类（meteClass）的实例。元类定义了类方法的列表。类通过类的isa指针指向元类。" class="headerlink" title="每一个类本质上都是一个对象，类其实是元类（meteClass）的实例。元类定义了类方法的列表。类通过类的isa指针指向元类。"></a>每一个类本质上都是一个对象，类其实是元类（meteClass）的实例。元类定义了类方法的列表。类通过类的isa指针指向元类。</h3><h3 id="所有的元类最终继承一个根元类，根元类isa指针指向本身，形成一个封闭的内循环。"><a href="#所有的元类最终继承一个根元类，根元类isa指针指向本身，形成一个封闭的内循环。" class="headerlink" title="所有的元类最终继承一个根元类，根元类isa指针指向本身，形成一个封闭的内循环。"></a>所有的元类最终继承一个根元类，根元类isa指针指向本身，形成一个封闭的内循环。</h3>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------本文结束😘<i class="fa fa-paw"></i>感谢阅读------</div>
+    
+</div>
+    
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/14/Swift反射API及其用法/" rel="next" title="Swift反射API及其用法">
+                <i class="fa fa-chevron-left"></i> Swift反射API及其用法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/14/离屏渲染浅析/" rel="prev" title="离屏渲染">
+                离屏渲染 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="飘金" />
+          <p class="site-author-name" itemprop="name">飘金</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/piaojin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/da7864faa1be" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-piaojin"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-isa指针"><span class="nav-number">1.</span> <span class="nav-text">一.isa指针</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#要认识什么是isa指针，我们得先明确一点："><span class="nav-number">1.0.1.</span> <span class="nav-text">要认识什么是isa指针，我们得先明确一点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在Objective-C中，任何类的定义都是对象。类和类的实例（对象）没有任何本质上的区别。任何对象都有isa指针。"><span class="nav-number">1.0.2.</span> <span class="nav-text">在Objective-C中，任何类的定义都是对象。类和类的实例（对象）没有任何本质上的区别。任何对象都有isa指针。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#那么什么是类呢？在xcode中用快捷键Shift＋Cmd＋O-打开文件objc-h-能看到类的定义："><span class="nav-number">1.0.3.</span> <span class="nav-text">那么什么是类呢？在xcode中用快捷键Shift＋Cmd＋O 打开文件objc.h 能看到类的定义：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可以看出"><span class="nav-number">1.1.</span> <span class="nav-text">可以看出:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class-是一个-objc-class-结构类型的指针-id是一个-objc-object-结构类型的指针"><span class="nav-number">1.2.</span> <span class="nav-text">Class 是一个 objc_class 结构类型的指针, id是一个 objc_object 结构类型的指针.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#稍微解释一下各个参数的意思："><span class="nav-number">1.3.</span> <span class="nav-text">稍微解释一下各个参数的意思：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isa：是一个Class-类型的指针-每个实例对象有个isa的指针-他指向对象的类，而Class里也有个isa的指针-指向meteClass-元类-。元类保存了类方法的列表。当类方法被调用时，先会从本身查找类方法的实现，如果没有，元类会向他父类查找该方法。同时注意的是：元类（meteClass）也是类，它也是对象。元类也有isa指针-它的isa指针最终指向的是一个根元类-root-meteClass-根元类的isa指针指向本身，这样形成了一个封闭的内循环。"><span class="nav-number">1.4.</span> <span class="nav-text">isa：是一个Class 类型的指针. 每个实例对象有个isa的指针,他指向对象的类，而Class里也有个isa的指针, 指向meteClass(元类)。元类保存了类方法的列表。当类方法被调用时，先会从本身查找类方法的实现，如果没有，元类会向他父类查找该方法。同时注意的是：元类（meteClass）也是类，它也是对象。元类也有isa指针,它的isa指针最终指向的是一个根元类(root meteClass).根元类的isa指针指向本身，这样形成了一个封闭的内循环。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#super-class：父类，如果该类已经是最顶层的根类-那么它为NULL。"><span class="nav-number">1.4.1.</span> <span class="nav-text">super_class：父类，如果该类已经是最顶层的根类,那么它为NULL。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#version：类的版本信息-默认为0"><span class="nav-number">1.4.2.</span> <span class="nav-text">version：类的版本信息,默认为0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#info：供运行期使用的一些位标识。"><span class="nav-number">1.4.3.</span> <span class="nav-text">info：供运行期使用的一些位标识。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#instance-size：该类的实例变量大小"><span class="nav-number">1.4.4.</span> <span class="nav-text">instance_size：该类的实例变量大小</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ivars：成员变量的数组"><span class="nav-number">1.4.5.</span> <span class="nav-text">ivars：成员变量的数组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#再来看看各个类实例变量的继承关系："><span class="nav-number">1.5.</span> <span class="nav-text">再来看看各个类实例变量的继承关系：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#每一个对象本质上都是一个类的实例。其中类定义了成员变量和成员方法的列表。对象通过对象的isa指针指向类。"><span class="nav-number">1.6.</span> <span class="nav-text">每一个对象本质上都是一个类的实例。其中类定义了成员变量和成员方法的列表。对象通过对象的isa指针指向类。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#每一个类本质上都是一个对象，类其实是元类（meteClass）的实例。元类定义了类方法的列表。类通过类的isa指针指向元类。"><span class="nav-number">1.7.</span> <span class="nav-text">每一个类本质上都是一个对象，类其实是元类（meteClass）的实例。元类定义了类方法的列表。类通过类的isa指针指向元类。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#所有的元类最终继承一个根元类，根元类isa指针指向本身，形成一个封闭的内循环。"><span class="nav-number">1.8.</span> <span class="nav-text">所有的元类最终继承一个根元类，根元类isa指针指向本身，形成一个封闭的内循环。</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">飘金</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/title.js"></script>

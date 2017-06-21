@@ -93,17 +93,17 @@
 
 
 
-<meta name="description" content="Swift中有个双问号操作符">
+<meta name="description" content="iOS监听tableView组头切换事件">
 <meta name="keywords" content="iOS,Swift">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Swift中有个双问号操作符">
-<meta property="og:url" content="http://yoursite.com/2017/06/14/Swift中有个双问号操作符/index.html">
+<meta property="og:title" content="iOS监听tableView组头切换事件">
+<meta property="og:url" content="http://yoursite.com/2017/06/14/iOS监听tableView组头切换事件/index.html">
 <meta property="og:site_name" content="飘金的博客">
-<meta property="og:description" content="Swift中有个双问号操作符">
-<meta property="og:updated_time" content="2017-06-16T13:56:53.000Z">
+<meta property="og:description" content="iOS监听tableView组头切换事件">
+<meta property="og:updated_time" content="2017-06-21T08:32:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Swift中有个双问号操作符">
-<meta name="twitter:description" content="Swift中有个双问号操作符">
+<meta name="twitter:title" content="iOS监听tableView组头切换事件">
+<meta name="twitter:description" content="iOS监听tableView组头切换事件">
 
 
 
@@ -131,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/06/14/Swift中有个双问号操作符/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/14/iOS监听tableView组头切换事件/"/>
 
 
 
 
 
-  <title>Swift中有个双问号操作符 | 飘金的博客</title>
+  <title>iOS监听tableView组头切换事件 | 飘金的博客</title>
   
 
 
@@ -256,7 +256,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/14/Swift中有个双问号操作符/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/14/iOS监听tableView组头切换事件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="飘金">
@@ -273,7 +273,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Swift中有个双问号操作符</h1>
+          <h1 class="post-title" itemprop="name headline">iOS监听tableView组头切换事件</h1>
         
 
         <div class="post-meta">
@@ -342,11 +342,7 @@
       
 
       
-        <p><center style="color:#FF7F50">Swift中有个双问号操作符</center><br><a id="more"></a></p>
-<h3 id="Swift中有个双问号操作符-，可以用来快速对nil进行条件判断-今天来补充下双问号的用法，对于不期望某个optional值为nil时func返回nil-或者-因为其值为nil而停止了后续业务的情况下，我们可以用”-”在optionalValue为nil时做赋值保险操作（“-”操作后返回值为非optional）"><a href="#Swift中有个双问号操作符-，可以用来快速对nil进行条件判断-今天来补充下双问号的用法，对于不期望某个optional值为nil时func返回nil-或者-因为其值为nil而停止了后续业务的情况下，我们可以用”-”在optionalValue为nil时做赋值保险操作（“-”操作后返回值为非optional）" class="headerlink" title="Swift中有个双问号操作符(??)，可以用来快速对nil进行条件判断,今天来补充下双问号的用法，对于不期望某个optional值为nil时func返回nil 或者 因为其值为nil而停止了后续业务的情况下，我们可以用”??”在optionalValue为nil时做赋值保险操作（“??”操作后返回值为非optional）"></a>Swift中有个双问号操作符(??)，可以用来快速对nil进行条件判断,今天来补充下双问号的用法，对于不期望某个optional值为nil时func返回nil 或者 因为其值为nil而停止了后续业务的情况下，我们可以用”??”在optionalValue为nil时做赋值保险操作（“??”操作后返回值为非optional）</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">用法：newValue = optionalValue ?? value</div></pre></td></tr></table></figure>
-<h3 id="若optionalValue非nil时，newValue的值为optionalValue的值，若optionalValue为nil时，newValue的值为value的值"><a href="#若optionalValue非nil时，newValue的值为optionalValue的值，若optionalValue为nil时，newValue的值为value的值" class="headerlink" title="若optionalValue非nil时，newValue的值为optionalValue的值，若optionalValue为nil时，newValue的值为value的值"></a>若optionalValue非nil时，newValue的值为optionalValue的值，若optionalValue为nil时，newValue的值为value的值</h3><h3 id="简单明了直接上例子：self-objectForKey-key-为nil时，object的值为0"><a href="#简单明了直接上例子：self-objectForKey-key-为nil时，object的值为0" class="headerlink" title="简单明了直接上例子：self.objectForKey(key)为nil时，object的值为0"></a>简单明了直接上例子：self.objectForKey(key)为nil时，object的值为0</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">func validIntValueForKey(key: String) -&gt; Int &#123;</div><div class="line"></div><div class="line">let object = <span class="keyword">self</span>.objectForKey(key) ?? Int(<span class="number">0</span>)</div><div class="line"></div><div class="line"><span class="comment">//do something</span></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="例子：赋default值"><a href="#例子：赋default值" class="headerlink" title="例子：赋default值"></a>例子：赋default值</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">versionNameLabel.text = <span class="built_in">NSBundle</span>.mainBundle().objectForInfoDictionaryKey(kCFBundleVersionKey as String) as? String ?? <span class="string">"版本号读取失败"</span></div></pre></td></tr></table></figure>
-<h3 id="例子：若为nil-赋值为String数组"><a href="#例子：若为nil-赋值为String数组" class="headerlink" title="例子：若为nil 赋值为String数组"></a>例子：若为nil 赋值为String数组</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">let businessNameList = user.businessList?.flatMap&#123; $<span class="number">0.</span>businessName &#125; ?? [<span class="string">"无场馆"</span>]</div></pre></td></tr></table></figure>
+        <p><center style="color:#FF7F50">iOS监听tableView组头切换事件</center><br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div></pre></td><td class="code"><pre><div class="line">- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section 组头将要出现的时候系统会调用；</div><div class="line"></div><div class="line">- (void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section 组头出现的时候系统会调用；</div><div class="line"></div><div class="line">利用以上两个方法可以判断出组头被顶出和组头又下拉回来事件，还有其他的组头相关动作可以监听需自己去编写。</div><div class="line"></div><div class="line">_currentSection：当前显示的组头</div><div class="line"></div><div class="line">_isUpScroll：是否是上拉滚动</div><div class="line"></div><div class="line">_isFirstLoad：是否第一次加载tableView</div><div class="line"></div><div class="line">_oldY:滚动的偏移量</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section&#123;</div><div class="line"></div><div class="line">if(!_isUpScroll &amp;&amp; (_currentSection - section) == 1)&#123;</div><div class="line"></div><div class="line">//最上面组头（不一定是第一个组头，指最近刚被顶出去的组头）又被拉回来</div><div class="line"></div><div class="line">_currentSection = section;</div><div class="line"></div><div class="line">NSLog(@&quot;willDisplayHeaderView显示第%ld组&quot;,(long)section);</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)tableView:(UITableView *)tableView didEndDisplayingHeaderView:(UIView *)view forSection:(NSInteger)section&#123;</div><div class="line"></div><div class="line">if(!_isFirstLoad &amp;&amp; _isUpScroll)&#123;</div><div class="line"></div><div class="line">_currentSection = section + 1;</div><div class="line"></div><div class="line">//最上面的组头被顶出去</div><div class="line"></div><div class="line">NSLog(@&quot;didEndDisplayingHeaderView显示第%ld组&quot;,(long)section + 1);</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">- (void)scrollViewDidScroll:(UIScrollView *)scrollView&#123;</div><div class="line"></div><div class="line">if ([scrollView isEqual: self.tableView]) &#123;</div><div class="line"></div><div class="line">if (self.tableView.contentOffset.y &gt; _oldY) &#123;</div><div class="line"></div><div class="line">// 上滑</div><div class="line"></div><div class="line">_isUpScroll = YES;</div><div class="line"></div><div class="line">NSLog(@&quot;上滑&quot;);</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">else&#123;</div><div class="line"></div><div class="line">// 下滑</div><div class="line"></div><div class="line">_isUpScroll = NO;</div><div class="line"></div><div class="line">NSLog(@&quot;下滑&quot;);</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">_isFirstLoad = NO;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView&#123;</div><div class="line"></div><div class="line">// 获取开始拖拽时tableview偏移量</div><div class="line"></div><div class="line">_oldY = self.tableView.contentOffset.y;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -399,8 +395,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/14/iOS多线程之概念篇/" rel="next" title="iOS多线程之概念篇">
-                <i class="fa fa-chevron-left"></i> iOS多线程之概念篇
+              <a href="/2017/06/14/Swift枚举相关值/" rel="next" title="Swift枚举相关值">
+                <i class="fa fa-chevron-left"></i> Swift枚举相关值
               </a>
             
           </div>
@@ -409,8 +405,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/14/iOS多线程/" rel="prev" title="iOS多线程">
-                iOS多线程 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/14/iOS多线程之概念篇/" rel="prev" title="iOS多线程之概念篇">
+                iOS多线程之概念篇 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -458,17 +454,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -550,22 +537,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Swift中有个双问号操作符-，可以用来快速对nil进行条件判断-今天来补充下双问号的用法，对于不期望某个optional值为nil时func返回nil-或者-因为其值为nil而停止了后续业务的情况下，我们可以用”-”在optionalValue为nil时做赋值保险操作（“-”操作后返回值为非optional）"><span class="nav-number">1.</span> <span class="nav-text">Swift中有个双问号操作符(??)，可以用来快速对nil进行条件判断,今天来补充下双问号的用法，对于不期望某个optional值为nil时func返回nil 或者 因为其值为nil而停止了后续业务的情况下，我们可以用”??”在optionalValue为nil时做赋值保险操作（“??”操作后返回值为非optional）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#若optionalValue非nil时，newValue的值为optionalValue的值，若optionalValue为nil时，newValue的值为value的值"><span class="nav-number">2.</span> <span class="nav-text">若optionalValue非nil时，newValue的值为optionalValue的值，若optionalValue为nil时，newValue的值为value的值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单明了直接上例子：self-objectForKey-key-为nil时，object的值为0"><span class="nav-number">3.</span> <span class="nav-text">简单明了直接上例子：self.objectForKey(key)为nil时，object的值为0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子：赋default值"><span class="nav-number">4.</span> <span class="nav-text">例子：赋default值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子：若为nil-赋值为String数组"><span class="nav-number">5.</span> <span class="nav-text">例子：若为nil 赋值为String数组</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
