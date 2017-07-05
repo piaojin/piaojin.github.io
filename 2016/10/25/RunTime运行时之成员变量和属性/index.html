@@ -1,0 +1,790 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,Swift" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="RunTime运行时之成员变量和属性">
+<meta name="keywords" content="iOS,Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RunTime运行时之成员变量和属性">
+<meta property="og:url" content="http://yoursite.com/2016/10/25/RunTime运行时之成员变量和属性/index.html">
+<meta property="og:site_name" content="飘金的博客">
+<meta property="og:description" content="RunTime运行时之成员变量和属性">
+<meta property="og:updated_time" content="2017-07-05T08:01:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RunTime运行时之成员变量和属性">
+<meta name="twitter:description" content="RunTime运行时之成员变量和属性">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/25/RunTime运行时之成员变量和属性/"/>
+
+
+
+
+
+  <title>RunTime运行时之成员变量和属性 | 飘金的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">飘金的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">会炒菜的猿</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/25/RunTime运行时之成员变量和属性/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="飘金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="飘金的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">RunTime运行时之成员变量和属性</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-25T14:23:47+08:00">
+                2016-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><center style="color:#FF7F50">RunTime运行时之成员变量和属性</center><br><a id="more"></a></p>
+<h3 id="名词解析"><a href="#名词解析" class="headerlink" title="名词解析"></a>名词解析</h3><blockquote>
+<h3 id="成员变量"><a href="#成员变量" class="headerlink" title="成员变量"></a>成员变量</h3></blockquote>
+<ul>
+<li><h3 id="1、定义："><a href="#1、定义：" class="headerlink" title="1、定义："></a>1、定义：</h3><h3 id="Ivar-实例变量类型，是一个指向objc-ivar结构体的指针"><a href="#Ivar-实例变量类型，是一个指向objc-ivar结构体的指针" class="headerlink" title="Ivar: 实例变量类型，是一个指向objc_ivar结构体的指针"></a>Ivar: 实例变量类型，是一个指向objc_ivar结构体的指针</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typedef struct objc_ivar *Ivar;</div></pre></td></tr></table></figure>
+</li>
+<li><h3 id="2、操作函数："><a href="#2、操作函数：" class="headerlink" title="2、操作函数："></a>2、操作函数：</h3></li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取所有成员变量</span></div><div class="line">class_copyIvarList</div><div class="line"><span class="comment">// 获取成员变量名</span></div><div class="line">ivar_getName</div><div class="line"><span class="comment">// 获取成员变量类型编码</span></div><div class="line">ivar_getTypeEncoding</div><div class="line"><span class="comment">// 获取指定名称的成员变量</span></div><div class="line">class_getInstanceVariable</div><div class="line"><span class="comment">// 获取某个对象成员变量的值</span></div><div class="line">object_getIvar</div><div class="line"><span class="comment">// 设置某个对象成员变量的值</span></div><div class="line">object_setIvar</div></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="3、使用实例："><a href="#3、使用实例：" class="headerlink" title="3、使用实例："></a>3、使用实例：</h3>Model的头文件声明如下：<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Model</span> : <span class="title">NSObject</span> </span>&#123;</div><div class="line"><span class="built_in">NSString</span> * _str1;</div><div class="line">&#125;</div><div class="line"><span class="keyword">@property</span> <span class="built_in">NSString</span> * str2;</div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="built_in">NSDictionary</span> * dict1;</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="获取其成员变量："><a href="#获取其成员变量：" class="headerlink" title="获取其成员变量："></a>获取其成员变量：</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> outCount = <span class="number">0</span>;</div><div class="line">Ivar * ivars = class_copyIvarList([Model <span class="keyword">class</span>], &amp;outCount);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; outCount; i ++) &#123;</div><div class="line">Ivar ivar = ivars[i];</div><div class="line"><span class="keyword">const</span> <span class="keyword">char</span> * name = ivar_getName(ivar);</div><div class="line"><span class="keyword">const</span> <span class="keyword">char</span> * type = ivar_getTypeEncoding(ivar);</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"类型为 %s 的 %s "</span>,type, name);</div><div class="line">&#125;</div><div class="line">free(ivars);</div></pre></td></tr></table></figure>
+<h3 id="打印结果："><a href="#打印结果：" class="headerlink" title="打印结果："></a>打印结果：</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">runtimeIvar[<span class="number">602</span>:<span class="number">16885</span>] 类型为 <span class="string">@"NSString"</span> 的 _str1 </div><div class="line">runtimeIvar[<span class="number">602</span>:<span class="number">16885</span>] 类型为 <span class="string">@"NSString"</span> 的 _str2 </div><div class="line">runtimeIvar[<span class="number">602</span>:<span class="number">16885</span>] 类型为 <span class="string">@"NSDictionary"</span> 的 _dict1</div></pre></td></tr></table></figure>
+<blockquote>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3></blockquote>
+<ul>
+<li><h3 id="1、定义：-1"><a href="#1、定义：-1" class="headerlink" title="1、定义："></a>1、定义：</h3><p>objc_property_t：声明的属性的类型，是一个指向objc_property结构体的指针</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typedef struct objc_property *objc_property_t;</div></pre></td></tr></table></figure>
+</li>
+<li><h3 id="2、操作函数：-1"><a href="#2、操作函数：-1" class="headerlink" title="2、操作函数："></a>2、操作函数：</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取所有属性</span></div><div class="line">class_copyPropertyList</div><div class="line">说明：使用class_copyPropertyList并不会获取无<span class="keyword">@property</span>声明的成员变量</div><div class="line"></div><div class="line"><span class="comment">// 获取属性名</span></div><div class="line">property_getName</div><div class="line"><span class="comment">// 获取属性特性描述字符串</span></div><div class="line">property_getAttributes</div><div class="line"><span class="comment">// 获取所有属性特性</span></div><div class="line">property_copyAttributeList</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><h3 id="property-getAttributes函数返回objc-property-attribute-t结构体列表，objc-property-attribute-t结构体包含name和value，常用的属性如下："><a href="#property-getAttributes函数返回objc-property-attribute-t结构体列表，objc-property-attribute-t结构体包含name和value，常用的属性如下：" class="headerlink" title="property_getAttributes函数返回objc_property_attribute_t结构体列表，objc_property_attribute_t结构体包含name和value，常用的属性如下："></a>property_getAttributes函数返回objc_property_attribute_t结构体列表，objc_property_attribute_t结构体包含name和value，常用的属性如下：</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">属性类型  name值：T  value：变化</div><div class="line">编码类型  name值：C(<span class="keyword">copy</span>) &amp;(<span class="keyword">strong</span>) W(<span class="keyword">weak</span>) 空(<span class="keyword">assign</span>) 等 value：无</div><div class="line">非/原子性 name值：空(atomic) N(Nonatomic)  value：无</div><div class="line">变量名称  name值：V  value：变化</div></pre></td></tr></table></figure>
+<h3 id="使用property-getAttributes获得的描述是property-copyAttributeList能获取到的所有的name和value的总体描述，如-T-”NSDictionary”-C-N-V-dict1"><a href="#使用property-getAttributes获得的描述是property-copyAttributeList能获取到的所有的name和value的总体描述，如-T-”NSDictionary”-C-N-V-dict1" class="headerlink" title="使用property_getAttributes获得的描述是property_copyAttributeList能获取到的所有的name和value的总体描述，如 T@”NSDictionary”,C,N,V_dict1"></a>使用property_getAttributes获得的描述是property_copyAttributeList能获取到的所有的name和value的总体描述，如 T@”NSDictionary”,C,N,V_dict1</h3><blockquote>
+<h3 id="3、使用实例：-1"><a href="#3、使用实例：-1" class="headerlink" title="3、使用实例："></a>3、使用实例：</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> outCount = <span class="number">0</span>;</div><div class="line">objc_property_t * properties = class_copyPropertyList([Model <span class="keyword">class</span>], &amp;outCount);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; outCount; i ++) &#123;</div><div class="line">objc_property_t property = properties[i];</div><div class="line"><span class="comment">//属性名</span></div><div class="line"><span class="keyword">const</span> <span class="keyword">char</span> * name = property_getName(property);</div><div class="line"><span class="comment">//属性描述</span></div><div class="line"><span class="keyword">const</span> <span class="keyword">char</span> * propertyAttr = property_getAttributes(property);</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"属性描述为 %s 的 %s "</span>, propertyAttr, name);</div><div class="line"></div><div class="line"><span class="comment">//属性的特性</span></div><div class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> attrCount = <span class="number">0</span>;</div><div class="line">objc_property_attribute_t * attrs = property_copyAttributeList(property, &amp;attrCount);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">unsigned</span> <span class="keyword">int</span> j = <span class="number">0</span>; j &lt; attrCount; j ++) &#123;</div><div class="line">objc_property_attribute_t attr = attrs[j];</div><div class="line"><span class="keyword">const</span> <span class="keyword">char</span> * name = attr.name;</div><div class="line"><span class="keyword">const</span> <span class="keyword">char</span> * value = attr.value;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"属性的描述：%s 值：%s"</span>, name, value);</div><div class="line">&#125;</div><div class="line">free(attrs);</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"\n"</span>);</div><div class="line">&#125;</div><div class="line">free(properties);</div></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="打印结果：-1"><a href="#打印结果：-1" class="headerlink" title="打印结果："></a>打印结果：</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">runtimeIvar[<span class="number">661</span>:<span class="number">27041</span>] 属性描述为 T<span class="string">@"NSString"</span>,&amp;,V_str2 的 str2 </div><div class="line">runtimeIvar[<span class="number">661</span>:<span class="number">27041</span>] 属性的描述：T 值：<span class="string">@"NSString"</span></div><div class="line">runtimeIvar[<span class="number">661</span>:<span class="number">27041</span>] 属性的描述：&amp; 值：</div><div class="line">runtimeIvar[<span class="number">661</span>:<span class="number">27041</span>] 属性的描述：V 值：_str2</div><div class="line">runtimeIvar[<span class="number">661</span>:<span class="number">27041</span>] </div><div class="line">runtimeIvar[<span class="number">661</span>:<span class="number">27041</span>] 属性描述为 T<span class="string">@"NSDictionary"</span>,C,N,V_dict1 的 dict1 </div><div class="line">runtimeIvar[<span class="number">661</span>:<span class="number">27041</span>] 属性的描述：T 值：<span class="string">@"NSDictionary"</span></div><div class="line">runtimeIvar[<span class="number">661</span>:<span class="number">27041</span>] 属性的描述：C 值：</div><div class="line">runtimeIvar[<span class="number">661</span>:<span class="number">27041</span>] 属性的描述：N 值：</div><div class="line">runtimeIvar[<span class="number">661</span>:<span class="number">27041</span>] 属性的描述：V 值：_dict1</div><div class="line">runtimeIvar[<span class="number">661</span>:<span class="number">27041</span>]</div></pre></td></tr></table></figure>
+<blockquote>
+<h3 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a>应用实例</h3></blockquote>
+<ul>
+<li><h3 id="1、Json到Model的转化"><a href="#1、Json到Model的转化" class="headerlink" title="1、Json到Model的转化"></a>1、Json到Model的转化</h3></li>
+</ul>
+<p>在开发中相信最常用的就是接口数据需要转化成Model了（当然如果你是直接从Dict取值的话。。。），很多开发者也都使用著名的第三方库如JsonModel、Mantle或MJExtension等，如果只用而不知其所以然，那真和“搬砖”没啥区别了，下面我们使用runtime去解析json来给Model赋值。</p>
+<p>原理描述：用runtime提供的函数遍历Model自身所有属性，如果属性在json中有对应的值，则将其赋值。<br>核心方法：在NSObject的分类中添加方法：<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">instancetype</span>)initWithDict:(<span class="built_in">NSDictionary</span> *)dict &#123;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">self</span> init]) &#123;</div><div class="line"><span class="comment">//(1)获取类的属性及属性对应的类型</span></div><div class="line"><span class="built_in">NSMutableArray</span> * keys = [<span class="built_in">NSMutableArray</span> array];</div><div class="line"><span class="built_in">NSMutableArray</span> * attributes = [<span class="built_in">NSMutableArray</span> array];</div><div class="line"><span class="comment">/*</span></div><div class="line">* 例子</div><div class="line">* name = value3 attribute = T@"NSString",C,N,V_value3</div><div class="line">* name = value4 attribute = T^i,N,V_value4</div><div class="line">*/</div><div class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> outCount;</div><div class="line">objc_property_t * properties = class_copyPropertyList([<span class="keyword">self</span> <span class="keyword">class</span>], &amp;outCount);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; outCount; i ++) &#123;</div><div class="line">objc_property_t property = properties[i];</div><div class="line"><span class="comment">//通过property_getName函数获得属性的名字</span></div><div class="line"><span class="built_in">NSString</span> * propertyName = [<span class="built_in">NSString</span> stringWithCString:property_getName(property) encoding:<span class="built_in">NSUTF8StringEncoding</span>];</div><div class="line">[keys addObject:propertyName];</div><div class="line"><span class="comment">//通过property_getAttributes函数可以获得属性的名字和@encode编码</span></div><div class="line"><span class="built_in">NSString</span> * propertyAttribute = [<span class="built_in">NSString</span> stringWithCString:property_getAttributes(property) encoding:<span class="built_in">NSUTF8StringEncoding</span>];</div><div class="line">[attributes addObject:propertyAttribute];</div><div class="line">&#125;</div><div class="line"><span class="comment">//立即释放properties指向的内存</span></div><div class="line">free(properties);</div><div class="line"></div><div class="line"><span class="comment">//(2)根据类型给属性赋值</span></div><div class="line"><span class="keyword">for</span> (<span class="built_in">NSString</span> * key <span class="keyword">in</span> keys) &#123;</div><div class="line"><span class="keyword">if</span> ([dict valueForKey:key] == <span class="literal">nil</span>) <span class="keyword">continue</span>;</div><div class="line">[<span class="keyword">self</span> setValue:[dict valueForKey:key] forKey:key];</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> <span class="keyword">self</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="读者可以进一步思考："><a href="#读者可以进一步思考：" class="headerlink" title="读者可以进一步思考："></a>读者可以进一步思考：</h3><h3 id="1、如何识别基本数据类型的属性并处理"><a href="#1、如何识别基本数据类型的属性并处理" class="headerlink" title="1、如何识别基本数据类型的属性并处理"></a>1、如何识别基本数据类型的属性并处理</h3><h3 id="2、空（nil，null）值的处理"><a href="#2、空（nil，null）值的处理" class="headerlink" title="2、空（nil，null）值的处理"></a>2、空（nil，null）值的处理</h3><h3 id="3、json中嵌套json（Dict或Array）的处理"><a href="#3、json中嵌套json（Dict或Array）的处理" class="headerlink" title="3、json中嵌套json（Dict或Array）的处理"></a>3、json中嵌套json（Dict或Array）的处理</h3><p>尝试解决以上问题，你也能写出属于自己的功能完备的Json转Model库。</p>
+<blockquote>
+<h3 id="2、快速归档"><a href="#2、快速归档" class="headerlink" title="2、快速归档"></a>2、快速归档</h3></blockquote>
+<h3 id="有时候我们要对一些信息进行归档，如用户信息类UserInfo，这将需要重写initWithCoder和encodeWithCoder方法，并对每个属性进行encode和decode操作。那么问题来了：当属性只有几个的时候可以轻松写完，如果有几十个属性呢？那不得写到天荒地老？。。。"><a href="#有时候我们要对一些信息进行归档，如用户信息类UserInfo，这将需要重写initWithCoder和encodeWithCoder方法，并对每个属性进行encode和decode操作。那么问题来了：当属性只有几个的时候可以轻松写完，如果有几十个属性呢？那不得写到天荒地老？。。。" class="headerlink" title="有时候我们要对一些信息进行归档，如用户信息类UserInfo，这将需要重写initWithCoder和encodeWithCoder方法，并对每个属性进行encode和decode操作。那么问题来了：当属性只有几个的时候可以轻松写完，如果有几十个属性呢？那不得写到天荒地老？。。。"></a>有时候我们要对一些信息进行归档，如用户信息类UserInfo，这将需要重写initWithCoder和encodeWithCoder方法，并对每个属性进行encode和decode操作。那么问题来了：当属性只有几个的时候可以轻松写完，如果有几十个属性呢？那不得写到天荒地老？。。。</h3><h3 id="原理描述：用runtime提供的函数遍历Model自身所有属性，并对属性进行encode和decode操作。"><a href="#原理描述：用runtime提供的函数遍历Model自身所有属性，并对属性进行encode和decode操作。" class="headerlink" title="原理描述：用runtime提供的函数遍历Model自身所有属性，并对属性进行encode和decode操作。"></a>原理描述：用runtime提供的函数遍历Model自身所有属性，并对属性进行encode和decode操作。</h3><h3 id="核心方法：在Model的基类中重写方法："><a href="#核心方法：在Model的基类中重写方法：" class="headerlink" title="核心方法：在Model的基类中重写方法："></a>核心方法：在Model的基类中重写方法：</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">id</span>)initWithCoder:(<span class="built_in">NSCoder</span> *)aDecoder &#123;</div><div class="line"><span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> init]) &#123;</div><div class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> outCount;</div><div class="line">Ivar * ivars = class_copyIvarList([<span class="keyword">self</span> <span class="keyword">class</span>], &amp;outCount);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; outCount; i ++) &#123;</div><div class="line">Ivar ivar = ivars[i];</div><div class="line"><span class="built_in">NSString</span> * key = [<span class="built_in">NSString</span> stringWithUTF8String:ivar_getName(ivar)];</div><div class="line">[<span class="keyword">self</span> setValue:[aDecoder decodeObjectForKey:key] forKey:key];</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> <span class="keyword">self</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)encodeWithCoder:(<span class="built_in">NSCoder</span> *)aCoder &#123;</div><div class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> outCount;</div><div class="line">Ivar * ivars = class_copyIvarList([<span class="keyword">self</span> <span class="keyword">class</span>], &amp;outCount);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; outCount; i ++) &#123;</div><div class="line">Ivar ivar = ivars[i];</div><div class="line"><span class="built_in">NSString</span> * key = [<span class="built_in">NSString</span> stringWithUTF8String:ivar_getName(ivar)];</div><div class="line">[aCoder encodeObject:[<span class="keyword">self</span> valueForKey:key] forKey:key];</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<h3 id="3、访问私有变量"><a href="#3、访问私有变量" class="headerlink" title="3、访问私有变量"></a>3、访问私有变量</h3></blockquote>
+<h3 id="我们知道，OC中没有真正意义上的私有变量和方法，要让成员变量私有，要放在m文件中声明，不对外暴露。如果我们知道这个成员变量的名称，可以通过runtime获取成员变量，再通过getIvar来获取它的值。"><a href="#我们知道，OC中没有真正意义上的私有变量和方法，要让成员变量私有，要放在m文件中声明，不对外暴露。如果我们知道这个成员变量的名称，可以通过runtime获取成员变量，再通过getIvar来获取它的值。" class="headerlink" title="我们知道，OC中没有真正意义上的私有变量和方法，要让成员变量私有，要放在m文件中声明，不对外暴露。如果我们知道这个成员变量的名称，可以通过runtime获取成员变量，再通过getIvar来获取它的值。"></a>我们知道，OC中没有真正意义上的私有变量和方法，要让成员变量私有，要放在m文件中声明，不对外暴露。如果我们知道这个成员变量的名称，可以通过runtime获取成员变量，再通过getIvar来获取它的值。</h3><p>方法：<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Ivar ivar = class_getInstanceVariable([Model <span class="keyword">class</span>], <span class="string">"_str1"</span>);</div><div class="line"><span class="built_in">NSString</span> * str1 = object_getIvar(model, ivar);</div></pre></td></tr></table></figure></p>
+<h3 id="欢迎大家交流探讨。"><a href="#欢迎大家交流探讨。" class="headerlink" title="欢迎大家交流探讨。"></a>欢迎大家交流探讨。</h3>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------本文结束😘<i class="fa fa-paw"></i>感谢阅读------</div>
+    
+</div>
+    
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/25/iOS多线程/" rel="next" title="iOS多线程">
+                <i class="fa fa-chevron-left"></i> iOS多线程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/25/iOS多线程之概念篇/" rel="prev" title="iOS多线程之概念篇">
+                iOS多线程之概念篇 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="飘金" />
+          <p class="site-author-name" itemprop="name">飘金</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/piaojin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/da7864faa1be" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-piaojin"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#名词解析"><span class="nav-number">1.</span> <span class="nav-text">名词解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#成员变量"><span class="nav-number">2.</span> <span class="nav-text">成员变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1、定义："><span class="nav-number">3.</span> <span class="nav-text">1、定义：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ivar-实例变量类型，是一个指向objc-ivar结构体的指针"><span class="nav-number">4.</span> <span class="nav-text">Ivar: 实例变量类型，是一个指向objc_ivar结构体的指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、操作函数："><span class="nav-number">5.</span> <span class="nav-text">2、操作函数：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、使用实例："><span class="nav-number">6.</span> <span class="nav-text">3、使用实例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取其成员变量："><span class="nav-number">7.</span> <span class="nav-text">获取其成员变量：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打印结果："><span class="nav-number">8.</span> <span class="nav-text">打印结果：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性"><span class="nav-number">9.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1、定义：-1"><span class="nav-number">10.</span> <span class="nav-text">1、定义：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、操作函数：-1"><span class="nav-number">11.</span> <span class="nav-text">2、操作函数：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说明："><span class="nav-number">12.</span> <span class="nav-text">说明：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#property-getAttributes函数返回objc-property-attribute-t结构体列表，objc-property-attribute-t结构体包含name和value，常用的属性如下："><span class="nav-number">13.</span> <span class="nav-text">property_getAttributes函数返回objc_property_attribute_t结构体列表，objc_property_attribute_t结构体包含name和value，常用的属性如下：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用property-getAttributes获得的描述是property-copyAttributeList能获取到的所有的name和value的总体描述，如-T-”NSDictionary”-C-N-V-dict1"><span class="nav-number">14.</span> <span class="nav-text">使用property_getAttributes获得的描述是property_copyAttributeList能获取到的所有的name和value的总体描述，如 T@”NSDictionary”,C,N,V_dict1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、使用实例：-1"><span class="nav-number">15.</span> <span class="nav-text">3、使用实例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打印结果：-1"><span class="nav-number">16.</span> <span class="nav-text">打印结果：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用实例"><span class="nav-number">17.</span> <span class="nav-text">应用实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Json到Model的转化"><span class="nav-number">18.</span> <span class="nav-text">1、Json到Model的转化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读者可以进一步思考："><span class="nav-number">19.</span> <span class="nav-text">读者可以进一步思考：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1、如何识别基本数据类型的属性并处理"><span class="nav-number">20.</span> <span class="nav-text">1、如何识别基本数据类型的属性并处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、空（nil，null）值的处理"><span class="nav-number">21.</span> <span class="nav-text">2、空（nil，null）值的处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、json中嵌套json（Dict或Array）的处理"><span class="nav-number">22.</span> <span class="nav-text">3、json中嵌套json（Dict或Array）的处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、快速归档"><span class="nav-number">23.</span> <span class="nav-text">2、快速归档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有时候我们要对一些信息进行归档，如用户信息类UserInfo，这将需要重写initWithCoder和encodeWithCoder方法，并对每个属性进行encode和decode操作。那么问题来了：当属性只有几个的时候可以轻松写完，如果有几十个属性呢？那不得写到天荒地老？。。。"><span class="nav-number">24.</span> <span class="nav-text">有时候我们要对一些信息进行归档，如用户信息类UserInfo，这将需要重写initWithCoder和encodeWithCoder方法，并对每个属性进行encode和decode操作。那么问题来了：当属性只有几个的时候可以轻松写完，如果有几十个属性呢？那不得写到天荒地老？。。。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原理描述：用runtime提供的函数遍历Model自身所有属性，并对属性进行encode和decode操作。"><span class="nav-number">25.</span> <span class="nav-text">原理描述：用runtime提供的函数遍历Model自身所有属性，并对属性进行encode和decode操作。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#核心方法：在Model的基类中重写方法："><span class="nav-number">26.</span> <span class="nav-text">核心方法：在Model的基类中重写方法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、访问私有变量"><span class="nav-number">27.</span> <span class="nav-text">3、访问私有变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我们知道，OC中没有真正意义上的私有变量和方法，要让成员变量私有，要放在m文件中声明，不对外暴露。如果我们知道这个成员变量的名称，可以通过runtime获取成员变量，再通过getIvar来获取它的值。"><span class="nav-number">28.</span> <span class="nav-text">我们知道，OC中没有真正意义上的私有变量和方法，要让成员变量私有，要放在m文件中声明，不对外暴露。如果我们知道这个成员变量的名称，可以通过runtime获取成员变量，再通过getIvar来获取它的值。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#欢迎大家交流探讨。"><span class="nav-number">29.</span> <span class="nav-text">欢迎大家交流探讨。</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">飘金</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/title.js"></script>

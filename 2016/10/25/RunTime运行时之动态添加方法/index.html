@@ -1,0 +1,760 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,Swift" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="RunTime运行时之动态添加方法">
+<meta name="keywords" content="iOS,Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RunTime运行时之动态添加方法">
+<meta property="og:url" content="http://yoursite.com/2016/10/25/RunTime运行时之动态添加方法/index.html">
+<meta property="og:site_name" content="飘金的博客">
+<meta property="og:description" content="RunTime运行时之动态添加方法">
+<meta property="og:updated_time" content="2017-07-05T08:01:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RunTime运行时之动态添加方法">
+<meta name="twitter:description" content="RunTime运行时之动态添加方法">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/25/RunTime运行时之动态添加方法/"/>
+
+
+
+
+
+  <title>RunTime运行时之动态添加方法 | 飘金的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">飘金的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">会炒菜的猿</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/25/RunTime运行时之动态添加方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="飘金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="飘金的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">RunTime运行时之动态添加方法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-25T14:23:47+08:00">
+                2016-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><center style="color:#FF7F50">RunTime运行时之动态添加方法</center><br><a id="more"></a><br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">"ViewController.h"</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">"Person.h"</span></span></div></pre></td></tr></table></figure></p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* </span></div><div class="line">1：</div><div class="line">Runtime(动态添加方法):OC都是懒加载机制,只要一个方法实现了,就会马上添加到方法列表中.</div><div class="line">app:免费版,收费版</div><div class="line">QQ,微博,直播等等应用,都有会员机制</div><div class="line">performSelector：去执行某个方法。performSelector withObject ：object为前面方法的参数</div><div class="line"></div><div class="line">2：</div><div class="line">美团有个面试题?有没有使用过performSelector,什么时候使用?动态添加方法的时候使用过?怎么动态添加方法?用runtime?为什么要动态添加方法?</div><div class="line">*/</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">[<span class="keyword">super</span> viewDidLoad];</div><div class="line"></div><div class="line"><span class="comment">//    _cmd:当前方法的方法编号</span></div><div class="line"></div><div class="line">Person *p = [[Person alloc] init];</div><div class="line"></div><div class="line"><span class="comment">// 执行某个方法</span></div><div class="line"><span class="comment">//    [p performSelector:@selector(eat)];</span></div><div class="line"></div><div class="line">[p performSelector:<span class="keyword">@selector</span>(run:) withObject:@<span class="number">10</span>];</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="meta">#import <span class="meta-string">"Person.h"</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">&lt;objc/message.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Person</span></span></div><div class="line"></div><div class="line"><span class="comment">// 没有返回值,也没有参数</span></div><div class="line"><span class="comment">// void,(id,SEL)</span></div><div class="line"><span class="keyword">void</span> aaa(<span class="keyword">id</span> <span class="keyword">self</span>, SEL _cmd, <span class="built_in">NSNumber</span> *meter) &#123;</div><div class="line"></div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"跑了%@"</span>, meter);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="任何方法默认都有两个隐式参数-self-cmd（-cmd代表方法编号，打印结果为当前执行的方法名）"><a href="#任何方法默认都有两个隐式参数-self-cmd（-cmd代表方法编号，打印结果为当前执行的方法名）" class="headerlink" title="任何方法默认都有两个隐式参数,self,_cmd（_cmd代表方法编号，打印结果为当前执行的方法名）"></a>任何方法默认都有两个隐式参数,self,_cmd（_cmd代表方法编号，打印结果为当前执行的方法名）</h3><h3 id="什么时候调用-只要一个对象调用了一个未实现的方法就会调用这个方法-进行处理"><a href="#什么时候调用-只要一个对象调用了一个未实现的方法就会调用这个方法-进行处理" class="headerlink" title="什么时候调用:只要一个对象调用了一个未实现的方法就会调用这个方法,进行处理"></a>什么时候调用:只要一个对象调用了一个未实现的方法就会调用这个方法,进行处理</h3><h3 id="作用-动态添加方法-处理未实现"><a href="#作用-动态添加方法-处理未实现" class="headerlink" title="作用:动态添加方法,处理未实现"></a>作用:动态添加方法,处理未实现</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">+ (<span class="built_in">BOOL</span>)resolveInstanceMethod:(SEL)sel</div><div class="line">&#123;</div><div class="line"><span class="comment">// [NSStringFromSelector(sel) isEqualToString:@"eat"];</span></div><div class="line"><span class="keyword">if</span> (sel == <span class="built_in">NSSelectorFromString</span>(<span class="string">@"run:"</span>)) &#123;</div><div class="line"><span class="comment">// eat</span></div><div class="line"><span class="comment">// class: 给哪个类添加方法</span></div><div class="line"><span class="comment">// SEL: 添加哪个方法</span></div><div class="line"><span class="comment">// IMP: 方法实现 =&gt; 函数 =&gt; 函数入口 =&gt; 函数名</span></div><div class="line"><span class="comment">// type: 方法类型：void用v来表示，id参数用@来表示，SEL用:来表示</span></div><div class="line"><span class="comment">//aaa不会生成方法列表</span></div><div class="line">class_addMethod(<span class="keyword">self</span>, sel, (IMP)aaa, <span class="string">"v@:@"</span>);</div><div class="line"></div><div class="line"><span class="keyword">return</span> <span class="literal">YES</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">return</span> [<span class="keyword">super</span> resolveInstanceMethod:sel];</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//- (void)test</span></div><div class="line"><span class="comment">//&#123;</span></div><div class="line"><span class="comment">//    // [NSStringFromSelector(sel) isEqualToString:@"eat"];</span></div><div class="line"><span class="comment">//    if (sel == NSSelectorFromString(@"eat")) &#123;</span></div><div class="line"><span class="comment">//        // eat</span></div><div class="line"><span class="comment">//        // class: 给哪个类添加方法</span></div><div class="line"><span class="comment">//        // SEL: 添加哪个方法</span></div><div class="line"><span class="comment">//        // IMP: 方法实现 =&gt; 函数 =&gt; 函数入口 =&gt; 函数名</span></div><div class="line"><span class="comment">//        // type: 方法类型</span></div><div class="line"><span class="comment">//        class_addMethod(self, sel, (IMP)aaa, "v@:");</span></div><div class="line"><span class="comment">//        </span></div><div class="line"><span class="comment">//        return YES;</span></div><div class="line"><span class="comment">//    &#125;</span></div><div class="line"><span class="comment">//    </span></div><div class="line"><span class="comment">//    return [super resolveInstanceMethod:sel];</span></div><div class="line"><span class="comment">//&#125;</span></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<h3 id="3-动态添加方法"><a href="#3-动态添加方法" class="headerlink" title="3.动态添加方法"></a>3.动态添加方法</h3><ul>
+<li><p>开发使用场景：如果一个类方法非常多，加载类到内存的时候也比较耗费资源，需要给每个方法生成映射表，可以使用动态给某个类，添加方法解决。</p>
+</li>
+<li><p>经典面试题：有没有使用performSelector，其实主要想问你有没有动态添加过方法。</p>
+</li>
+<li><p>简单使用</p>
+</li>
+</ul>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line"></div><div class="line">[<span class="keyword">super</span> viewDidLoad];</div><div class="line"></div><div class="line"><span class="comment">// Do any additional setup after loading the view, typically from a nib.</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">Person *p = [[Person alloc] init];</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 默认person，没有实现eat方法，可以通过performSelector调用，但是会报错。</span></div><div class="line"></div><div class="line"><span class="comment">// 动态添加方法就不会报错</span></div><div class="line"></div><div class="line">[p performSelector:<span class="keyword">@selector</span>(eat)];</div><div class="line"></div><div class="line">&#125;</div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Person</span></span></div><div class="line"></div><div class="line"><span class="comment">// void(*)()</span></div><div class="line"></div><div class="line"><span class="comment">// 默认方法都有两个隐式参数，</span></div><div class="line"></div><div class="line"><span class="keyword">void</span> eat(<span class="keyword">id</span> <span class="keyword">self</span>,SEL sel)</div><div class="line"></div><div class="line">&#123;</div><div class="line"></div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@ %@"</span>,<span class="keyword">self</span>,<span class="built_in">NSStringFromSelector</span>(sel));</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="当一个对象调用未实现的方法，会调用这个方法处理-并且会把对应的方法列表传过来"><a href="#当一个对象调用未实现的方法，会调用这个方法处理-并且会把对应的方法列表传过来" class="headerlink" title="当一个对象调用未实现的方法，会调用这个方法处理,并且会把对应的方法列表传过来."></a>当一个对象调用未实现的方法，会调用这个方法处理,并且会把对应的方法列表传过来.</h3><h3 id="刚好可以用来判断，未实现的方法是不是我们想要动态添加的方法"><a href="#刚好可以用来判断，未实现的方法是不是我们想要动态添加的方法" class="headerlink" title="刚好可以用来判断，未实现的方法是不是我们想要动态添加的方法"></a>刚好可以用来判断，未实现的方法是不是我们想要动态添加的方法</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">+ (<span class="built_in">BOOL</span>)resolveInstanceMethod:(SEL)sel</div><div class="line"></div><div class="line">&#123;</div><div class="line"><span class="keyword">if</span> (sel == <span class="keyword">@selector</span>(eat)) &#123;</div><div class="line"></div><div class="line"><span class="comment">// 动态添加eat方法</span></div><div class="line"><span class="comment">// 第一个参数：给哪个类添加方法</span></div><div class="line"></div><div class="line"><span class="comment">// 第二个参数：添加方法的方法编号</span></div><div class="line"></div><div class="line"><span class="comment">// 第三个参数：添加方法的函数实现（函数地址）</span></div><div class="line"></div><div class="line"><span class="comment">// 第四个参数：函数的类型，(返回值+参数类型) v:void @:对象-&gt;self :表示SEL-&gt;_cmd</span></div><div class="line"></div><div class="line">class_addMethod(<span class="keyword">self</span>, <span class="keyword">@selector</span>(eat), eat, <span class="string">"v@:"</span>);</div><div class="line"><span class="keyword">return</span> <span class="literal">YES</span>;</div><div class="line"></div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> [<span class="keyword">super</span> resolveInstanceMethod:sel];</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------本文结束😘<i class="fa fa-paw"></i>感谢阅读------</div>
+    
+</div>
+    
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/25/深入理解RunLoop/" rel="next" title="深入理解RunLoop">
+                <i class="fa fa-chevron-left"></i> 深入理解RunLoop
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/25/RunLoop与PerformSelector/" rel="prev" title="RunLoop与PerformSelector">
+                RunLoop与PerformSelector <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="飘金" />
+          <p class="site-author-name" itemprop="name">飘金</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/piaojin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/da7864faa1be" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-piaojin"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#任何方法默认都有两个隐式参数-self-cmd（-cmd代表方法编号，打印结果为当前执行的方法名）"><span class="nav-number">1.</span> <span class="nav-text">任何方法默认都有两个隐式参数,self,_cmd（_cmd代表方法编号，打印结果为当前执行的方法名）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么时候调用-只要一个对象调用了一个未实现的方法就会调用这个方法-进行处理"><span class="nav-number">2.</span> <span class="nav-text">什么时候调用:只要一个对象调用了一个未实现的方法就会调用这个方法,进行处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用-动态添加方法-处理未实现"><span class="nav-number">3.</span> <span class="nav-text">作用:动态添加方法,处理未实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-动态添加方法"><span class="nav-number">4.</span> <span class="nav-text">3.动态添加方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#当一个对象调用未实现的方法，会调用这个方法处理-并且会把对应的方法列表传过来"><span class="nav-number">5.</span> <span class="nav-text">当一个对象调用未实现的方法，会调用这个方法处理,并且会把对应的方法列表传过来.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#刚好可以用来判断，未实现的方法是不是我们想要动态添加的方法"><span class="nav-number">6.</span> <span class="nav-text">刚好可以用来判断，未实现的方法是不是我们想要动态添加的方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">飘金</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/title.js"></script>

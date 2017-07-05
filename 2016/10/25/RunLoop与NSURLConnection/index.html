@@ -1,0 +1,756 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,Swift" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="RunLoop与NSURLConnection">
+<meta name="keywords" content="iOS,Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RunLoop与NSURLConnection">
+<meta property="og:url" content="http://yoursite.com/2016/10/25/RunLoop与NSURLConnection/index.html">
+<meta property="og:site_name" content="飘金的博客">
+<meta property="og:description" content="RunLoop与NSURLConnection">
+<meta property="og:image" content="http://blog.ibireme.com/wp-content/uploads/2015/05/RunLoop_network.png">
+<meta property="og:updated_time" content="2017-07-05T07:59:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RunLoop与NSURLConnection">
+<meta name="twitter:description" content="RunLoop与NSURLConnection">
+<meta name="twitter:image" content="http://blog.ibireme.com/wp-content/uploads/2015/05/RunLoop_network.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/25/RunLoop与NSURLConnection/"/>
+
+
+
+
+
+  <title>RunLoop与NSURLConnection | 飘金的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">飘金的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">会炒菜的猿</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/25/RunLoop与NSURLConnection/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="飘金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="飘金的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">RunLoop与NSURLConnection</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-25T14:23:47+08:00">
+                2016-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><center style="color:#FF7F50">RunLoop与NSURLConnection</center><br><a id="more"></a></p>
+<h2 id="iOS-中，关于网络请求的接口自下至上有如下几层"><a href="#iOS-中，关于网络请求的接口自下至上有如下几层" class="headerlink" title="iOS 中，关于网络请求的接口自下至上有如下几层:"></a>iOS 中，关于网络请求的接口自下至上有如下几层:</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">CFSocket</span></div><div class="line"><span class="built_in">CFNetwork</span>       -&gt;ASIHttpRequest</div><div class="line"><span class="built_in">NSURLConnection</span> -&gt;AFNetworking</div><div class="line"><span class="built_in">NSURLSession</span>    -&gt;AFNetworking2, Alamofire</div></pre></td></tr></table></figure>
+<h3 id="•-CFSocket-是最底层的接口，只负责-socket-通信。"><a href="#•-CFSocket-是最底层的接口，只负责-socket-通信。" class="headerlink" title="• CFSocket 是最底层的接口，只负责 socket 通信。"></a>• CFSocket 是最底层的接口，只负责 socket 通信。</h3><h3 id="•-CFNetwork-是基于-CFSocket-等接口的上层封装，ASIHttpRequest-工作于这一层。"><a href="#•-CFNetwork-是基于-CFSocket-等接口的上层封装，ASIHttpRequest-工作于这一层。" class="headerlink" title="• CFNetwork 是基于 CFSocket 等接口的上层封装，ASIHttpRequest 工作于这一层。"></a>• CFNetwork 是基于 CFSocket 等接口的上层封装，ASIHttpRequest 工作于这一层。</h3><h3 id="•-NSURLConnection-是基于-CFNetwork-的更高层的封装，提供面向对象的接口，AFNetworking-工作于这一层。"><a href="#•-NSURLConnection-是基于-CFNetwork-的更高层的封装，提供面向对象的接口，AFNetworking-工作于这一层。" class="headerlink" title="• NSURLConnection 是基于 CFNetwork 的更高层的封装，提供面向对象的接口，AFNetworking 工作于这一层。"></a>• NSURLConnection 是基于 CFNetwork 的更高层的封装，提供面向对象的接口，AFNetworking 工作于这一层。</h3><h3 id="•-NSURLSession-是-iOS7-中新增的接口，表面上是和-NSURLConnection-并列的，但底层仍然用到了-NSURLConnection-的部分功能-比如-com-apple-NSURLConnectionLoader-线程-，AFNetworking2-和-Alamofire-工作于这一层。"><a href="#•-NSURLSession-是-iOS7-中新增的接口，表面上是和-NSURLConnection-并列的，但底层仍然用到了-NSURLConnection-的部分功能-比如-com-apple-NSURLConnectionLoader-线程-，AFNetworking2-和-Alamofire-工作于这一层。" class="headerlink" title="• NSURLSession 是 iOS7 中新增的接口，表面上是和 NSURLConnection 并列的，但底层仍然用到了 NSURLConnection 的部分功能 (比如 com.apple.NSURLConnectionLoader 线程)，AFNetworking2 和 Alamofire 工作于这一层。"></a>• NSURLSession 是 iOS7 中新增的接口，表面上是和 NSURLConnection 并列的，但底层仍然用到了 NSURLConnection 的部分功能 (比如 com.apple.NSURLConnectionLoader 线程)，AFNetworking2 和 Alamofire 工作于这一层。</h3><h2 id="下面主要介绍下-NSURLConnection-的工作过程。"><a href="#下面主要介绍下-NSURLConnection-的工作过程。" class="headerlink" title="下面主要介绍下 NSURLConnection 的工作过程。"></a>下面主要介绍下 NSURLConnection 的工作过程。</h2><h3 id="通常使用-NSURLConnection-时，你会传入一个-Delegate，当调用了-connection-start-后，这个-Delegate-就会不停收到事件回调。实际上，start-这个函数的内部会会获取-CurrentRunLoop，然后在其中的-DefaultMode-添加了4个-Source0-即需要手动触发的Source-。CFMultiplexerSource-是负责各种-Delegate-回调的，CFHTTPCookieStorage-是处理各种-Cookie-的。"><a href="#通常使用-NSURLConnection-时，你会传入一个-Delegate，当调用了-connection-start-后，这个-Delegate-就会不停收到事件回调。实际上，start-这个函数的内部会会获取-CurrentRunLoop，然后在其中的-DefaultMode-添加了4个-Source0-即需要手动触发的Source-。CFMultiplexerSource-是负责各种-Delegate-回调的，CFHTTPCookieStorage-是处理各种-Cookie-的。" class="headerlink" title="通常使用 NSURLConnection 时，你会传入一个 Delegate，当调用了 [connection start] 后，这个 Delegate 就会不停收到事件回调。实际上，start 这个函数的内部会会获取 CurrentRunLoop，然后在其中的 DefaultMode 添加了4个 Source0 (即需要手动触发的Source)。CFMultiplexerSource 是负责各种 Delegate 回调的，CFHTTPCookieStorage 是处理各种 Cookie 的。"></a>通常使用 NSURLConnection 时，你会传入一个 Delegate，当调用了 [connection start] 后，这个 Delegate 就会不停收到事件回调。实际上，start 这个函数的内部会会获取 CurrentRunLoop，然后在其中的 DefaultMode 添加了4个 Source0 (即需要手动触发的Source)。CFMultiplexerSource 是负责各种 Delegate 回调的，CFHTTPCookieStorage 是处理各种 Cookie 的。</h3><h3 id="当开始网络传输时，我们可以看到-NSURLConnection-创建了两个新线程：com-apple-NSURLConnectionLoader-和-com-apple-CFSocket-private。其中-CFSocket-线程是处理底层-socket-连接的。NSURLConnectionLoader-这个线程内部会使用-RunLoop-来接收底层-socket-的事件，并通过之前添加的-Source0-通知到上层的-Delegate。"><a href="#当开始网络传输时，我们可以看到-NSURLConnection-创建了两个新线程：com-apple-NSURLConnectionLoader-和-com-apple-CFSocket-private。其中-CFSocket-线程是处理底层-socket-连接的。NSURLConnectionLoader-这个线程内部会使用-RunLoop-来接收底层-socket-的事件，并通过之前添加的-Source0-通知到上层的-Delegate。" class="headerlink" title="当开始网络传输时，我们可以看到 NSURLConnection 创建了两个新线程：com.apple.NSURLConnectionLoader 和 com.apple.CFSocket.private。其中 CFSocket 线程是处理底层 socket 连接的。NSURLConnectionLoader 这个线程内部会使用 RunLoop 来接收底层 socket 的事件，并通过之前添加的 Source0 通知到上层的 Delegate。"></a>当开始网络传输时，我们可以看到 NSURLConnection 创建了两个新线程：com.apple.NSURLConnectionLoader 和 com.apple.CFSocket.private。其中 CFSocket 线程是处理底层 socket 连接的。NSURLConnectionLoader 这个线程内部会使用 RunLoop 来接收底层 socket 的事件，并通过之前添加的 Source0 通知到上层的 Delegate。</h3><p><img src="http://blog.ibireme.com/wp-content/uploads/2015/05/RunLoop_network.png" alt=""></p>
+<h2 id="NSURLConnectionLoader-中的-RunLoop-通过一些基于-mach-port-的-Source-接收来自底层-CFSocket-的通知。当收到通知后，其会在合适的时机向-CFMultiplexerSource-等-Source0-发送通知，同时唤醒-Delegate-线程的-RunLoop-来让其处理这些通知。CFMultiplexerSource-会在-Delegate-线程的-RunLoop-对-Delegate-执行实际的回调。"><a href="#NSURLConnectionLoader-中的-RunLoop-通过一些基于-mach-port-的-Source-接收来自底层-CFSocket-的通知。当收到通知后，其会在合适的时机向-CFMultiplexerSource-等-Source0-发送通知，同时唤醒-Delegate-线程的-RunLoop-来让其处理这些通知。CFMultiplexerSource-会在-Delegate-线程的-RunLoop-对-Delegate-执行实际的回调。" class="headerlink" title="NSURLConnectionLoader 中的 RunLoop 通过一些基于 mach port 的 Source 接收来自底层 CFSocket 的通知。当收到通知后，其会在合适的时机向 CFMultiplexerSource 等 Source0 发送通知，同时唤醒 Delegate 线程的 RunLoop 来让其处理这些通知。CFMultiplexerSource 会在 Delegate 线程的 RunLoop 对 Delegate 执行实际的回调。"></a>NSURLConnectionLoader 中的 RunLoop 通过一些基于 mach port 的 Source 接收来自底层 CFSocket 的通知。当收到通知后，其会在合适的时机向 CFMultiplexerSource 等 Source0 发送通知，同时唤醒 Delegate 线程的 RunLoop 来让其处理这些通知。CFMultiplexerSource 会在 Delegate 线程的 RunLoop 对 Delegate 执行实际的回调。</h2><blockquote>
+<h2 id="RunLoop-的实际应用举例"><a href="#RunLoop-的实际应用举例" class="headerlink" title="RunLoop 的实际应用举例"></a>RunLoop 的实际应用举例</h2></blockquote>
+<h3 id="AFNetworking"><a href="#AFNetworking" class="headerlink" title="AFNetworking"></a>AFNetworking</h3><h3 id="AFURLConnectionOperation-这个类是基于-NSURLConnection-构建的，其希望能在后台线程接收-Delegate-回调。为此-AFNetworking-单独创建了一个线程，并在这个线程中启动了一个-RunLoop："><a href="#AFURLConnectionOperation-这个类是基于-NSURLConnection-构建的，其希望能在后台线程接收-Delegate-回调。为此-AFNetworking-单独创建了一个线程，并在这个线程中启动了一个-RunLoop：" class="headerlink" title="AFURLConnectionOperation 这个类是基于 NSURLConnection 构建的，其希望能在后台线程接收 Delegate 回调。为此 AFNetworking 单独创建了一个线程，并在这个线程中启动了一个 RunLoop："></a>AFURLConnectionOperation 这个类是基于 NSURLConnection 构建的，其希望能在后台线程接收 Delegate 回调。为此 AFNetworking 单独创建了一个线程，并在这个线程中启动了一个 RunLoop：</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">+ (<span class="keyword">void</span>)networkRequestThreadEntryPoint:(<span class="keyword">id</span>)__unused object &#123;</div><div class="line"><span class="keyword">@autoreleasepool</span> &#123;</div><div class="line">[[<span class="built_in">NSThread</span> currentThread] setName:<span class="string">@"AFNetworking"</span>];</div><div class="line"><span class="built_in">NSRunLoop</span> *runLoop = [<span class="built_in">NSRunLoop</span> currentRunLoop];</div><div class="line">[runLoop addPort:[<span class="built_in">NSMachPort</span> port] forMode:<span class="built_in">NSDefaultRunLoopMode</span>];</div><div class="line">[runLoop run];</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (<span class="built_in">NSThread</span> *)networkRequestThread &#123;</div><div class="line"><span class="keyword">static</span> <span class="built_in">NSThread</span> *_networkRequestThread = <span class="literal">nil</span>;</div><div class="line"><span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> oncePredicate;</div><div class="line"><span class="built_in">dispatch_once</span>(&amp;oncePredicate, ^&#123;</div><div class="line">_networkRequestThread = [[<span class="built_in">NSThread</span> alloc] initWithTarget:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(networkRequestThreadEntryPoint:) object:<span class="literal">nil</span>];</div><div class="line">[_networkRequestThread start];</div><div class="line">&#125;);</div><div class="line"><span class="keyword">return</span> _networkRequestThread;</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (<span class="keyword">void</span>)networkRequestThreadEntryPoint:(<span class="keyword">id</span>)__unused object &#123;</div><div class="line"><span class="keyword">@autoreleasepool</span> &#123;</div><div class="line">[[<span class="built_in">NSThread</span> currentThread] setName:<span class="string">@"AFNetworking"</span>];</div><div class="line"><span class="built_in">NSRunLoop</span> *runLoop = [<span class="built_in">NSRunLoop</span> currentRunLoop];</div><div class="line">[runLoop addPort:[<span class="built_in">NSMachPort</span> port] forMode:<span class="built_in">NSDefaultRunLoopMode</span>];</div><div class="line">[runLoop run];</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (<span class="built_in">NSThread</span> *)networkRequestThread &#123;</div><div class="line"><span class="keyword">static</span> <span class="built_in">NSThread</span> *_networkRequestThread = <span class="literal">nil</span>;</div><div class="line"><span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> oncePredicate;</div><div class="line"><span class="built_in">dispatch_once</span>(&amp;oncePredicate, ^&#123;</div><div class="line">_networkRequestThread = [[<span class="built_in">NSThread</span> alloc] initWithTarget:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(networkRequestThreadEntryPoint:) object:<span class="literal">nil</span>];</div><div class="line">[_networkRequestThread start];</div><div class="line">&#125;);</div><div class="line"><span class="keyword">return</span> _networkRequestThread;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="RunLoop-启动前内部必须要有至少一个-Timer-Observer-Source，所以-AFNetworking-在-runLoop-run-之前先创建了一个新的-NSMachPort-添加进去了。通常情况下，调用者需要持有这个-NSMachPort-mach-port-并在外部线程通过这个-port-发送消息到-loop-内；但此处添加-port-只是为了让-RunLoop-不至于退出，并没有用于实际的发送消息。"><a href="#RunLoop-启动前内部必须要有至少一个-Timer-Observer-Source，所以-AFNetworking-在-runLoop-run-之前先创建了一个新的-NSMachPort-添加进去了。通常情况下，调用者需要持有这个-NSMachPort-mach-port-并在外部线程通过这个-port-发送消息到-loop-内；但此处添加-port-只是为了让-RunLoop-不至于退出，并没有用于实际的发送消息。" class="headerlink" title="RunLoop 启动前内部必须要有至少一个 Timer/Observer/Source，所以 AFNetworking 在 [runLoop run] 之前先创建了一个新的 NSMachPort 添加进去了。通常情况下，调用者需要持有这个 NSMachPort (mach_port) 并在外部线程通过这个 port 发送消息到 loop 内；但此处添加 port 只是为了让 RunLoop 不至于退出，并没有用于实际的发送消息。"></a>RunLoop 启动前内部必须要有至少一个 Timer/Observer/Source，所以 AFNetworking 在 [runLoop run] 之前先创建了一个新的 NSMachPort 添加进去了。通常情况下，调用者需要持有这个 NSMachPort (mach_port) 并在外部线程通过这个 port 发送消息到 loop 内；但此处添加 port 只是为了让 RunLoop 不至于退出，并没有用于实际的发送消息。</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)start &#123;</div><div class="line">[<span class="keyword">self</span>.lock lock];</div><div class="line"><span class="keyword">if</span> ([<span class="keyword">self</span> isCancelled]) &#123;</div><div class="line">[<span class="keyword">self</span> performSelector:<span class="keyword">@selector</span>(cancelConnection) onThread:[[<span class="keyword">self</span> <span class="keyword">class</span>] networkRequestThread] withObject:<span class="literal">nil</span> waitUntilDone:<span class="literal">NO</span> modes:[<span class="keyword">self</span>.runLoopModes allObjects]];</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> ([<span class="keyword">self</span> isReady]) &#123;</div><div class="line"><span class="keyword">self</span>.state = AFOperationExecutingState;</div><div class="line">[<span class="keyword">self</span> performSelector:<span class="keyword">@selector</span>(operationDidStart) onThread:[[<span class="keyword">self</span> <span class="keyword">class</span>] networkRequestThread] withObject:<span class="literal">nil</span> waitUntilDone:<span class="literal">NO</span> modes:[<span class="keyword">self</span>.runLoopModes allObjects]];</div><div class="line">&#125;</div><div class="line">[<span class="keyword">self</span>.lock unlock];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)start &#123;</div><div class="line">[<span class="keyword">self</span>.lock lock];</div><div class="line"><span class="keyword">if</span> ([<span class="keyword">self</span> isCancelled]) &#123;</div><div class="line">[<span class="keyword">self</span> performSelector:<span class="keyword">@selector</span>(cancelConnection) onThread:[[<span class="keyword">self</span> <span class="keyword">class</span>] networkRequestThread] withObject:<span class="literal">nil</span> waitUntilDone:<span class="literal">NO</span> modes:[<span class="keyword">self</span>.runLoopModes allObjects]];</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> ([<span class="keyword">self</span> isReady]) &#123;</div><div class="line"><span class="keyword">self</span>.state = AFOperationExecutingState;</div><div class="line">[<span class="keyword">self</span> performSelector:<span class="keyword">@selector</span>(operationDidStart) onThread:[[<span class="keyword">self</span> <span class="keyword">class</span>] networkRequestThread] withObject:<span class="literal">nil</span> waitUntilDone:<span class="literal">NO</span> modes:[<span class="keyword">self</span>.runLoopModes allObjects]];</div><div class="line">&#125;</div><div class="line">[<span class="keyword">self</span>.lock unlock];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="当需要这个后台线程执行任务时，AFNetworking-通过调用-NSObject-performSelector-onThread-将这个任务扔到了后台线程的-RunLoop-中。"><a href="#当需要这个后台线程执行任务时，AFNetworking-通过调用-NSObject-performSelector-onThread-将这个任务扔到了后台线程的-RunLoop-中。" class="headerlink" title="当需要这个后台线程执行任务时，AFNetworking 通过调用 [NSObject performSelector:onThread:..] 将这个任务扔到了后台线程的 RunLoop 中。"></a>当需要这个后台线程执行任务时，AFNetworking 通过调用 [NSObject performSelector:onThread:..] 将这个任务扔到了后台线程的 RunLoop 中。</h3>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------本文结束😘<i class="fa fa-paw"></i>感谢阅读------</div>
+    
+</div>
+    
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/25/RunLoop与AutoreleasePool/" rel="next" title="RunLoop与AutoreleasePool">
+                <i class="fa fa-chevron-left"></i> RunLoop与AutoreleasePool
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/25/深入理解RunLoop/" rel="prev" title="深入理解RunLoop">
+                深入理解RunLoop <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="飘金" />
+          <p class="site-author-name" itemprop="name">飘金</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/piaojin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/da7864faa1be" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-piaojin"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS-中，关于网络请求的接口自下至上有如下几层"><span class="nav-number">1.</span> <span class="nav-text">iOS 中，关于网络请求的接口自下至上有如下几层:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#•-CFSocket-是最底层的接口，只负责-socket-通信。"><span class="nav-number">1.1.</span> <span class="nav-text">• CFSocket 是最底层的接口，只负责 socket 通信。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#•-CFNetwork-是基于-CFSocket-等接口的上层封装，ASIHttpRequest-工作于这一层。"><span class="nav-number">1.2.</span> <span class="nav-text">• CFNetwork 是基于 CFSocket 等接口的上层封装，ASIHttpRequest 工作于这一层。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#•-NSURLConnection-是基于-CFNetwork-的更高层的封装，提供面向对象的接口，AFNetworking-工作于这一层。"><span class="nav-number">1.3.</span> <span class="nav-text">• NSURLConnection 是基于 CFNetwork 的更高层的封装，提供面向对象的接口，AFNetworking 工作于这一层。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#•-NSURLSession-是-iOS7-中新增的接口，表面上是和-NSURLConnection-并列的，但底层仍然用到了-NSURLConnection-的部分功能-比如-com-apple-NSURLConnectionLoader-线程-，AFNetworking2-和-Alamofire-工作于这一层。"><span class="nav-number">1.4.</span> <span class="nav-text">• NSURLSession 是 iOS7 中新增的接口，表面上是和 NSURLConnection 并列的，但底层仍然用到了 NSURLConnection 的部分功能 (比如 com.apple.NSURLConnectionLoader 线程)，AFNetworking2 和 Alamofire 工作于这一层。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下面主要介绍下-NSURLConnection-的工作过程。"><span class="nav-number">2.</span> <span class="nav-text">下面主要介绍下 NSURLConnection 的工作过程。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通常使用-NSURLConnection-时，你会传入一个-Delegate，当调用了-connection-start-后，这个-Delegate-就会不停收到事件回调。实际上，start-这个函数的内部会会获取-CurrentRunLoop，然后在其中的-DefaultMode-添加了4个-Source0-即需要手动触发的Source-。CFMultiplexerSource-是负责各种-Delegate-回调的，CFHTTPCookieStorage-是处理各种-Cookie-的。"><span class="nav-number">2.1.</span> <span class="nav-text">通常使用 NSURLConnection 时，你会传入一个 Delegate，当调用了 [connection start] 后，这个 Delegate 就会不停收到事件回调。实际上，start 这个函数的内部会会获取 CurrentRunLoop，然后在其中的 DefaultMode 添加了4个 Source0 (即需要手动触发的Source)。CFMultiplexerSource 是负责各种 Delegate 回调的，CFHTTPCookieStorage 是处理各种 Cookie 的。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#当开始网络传输时，我们可以看到-NSURLConnection-创建了两个新线程：com-apple-NSURLConnectionLoader-和-com-apple-CFSocket-private。其中-CFSocket-线程是处理底层-socket-连接的。NSURLConnectionLoader-这个线程内部会使用-RunLoop-来接收底层-socket-的事件，并通过之前添加的-Source0-通知到上层的-Delegate。"><span class="nav-number">2.2.</span> <span class="nav-text">当开始网络传输时，我们可以看到 NSURLConnection 创建了两个新线程：com.apple.NSURLConnectionLoader 和 com.apple.CFSocket.private。其中 CFSocket 线程是处理底层 socket 连接的。NSURLConnectionLoader 这个线程内部会使用 RunLoop 来接收底层 socket 的事件，并通过之前添加的 Source0 通知到上层的 Delegate。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSURLConnectionLoader-中的-RunLoop-通过一些基于-mach-port-的-Source-接收来自底层-CFSocket-的通知。当收到通知后，其会在合适的时机向-CFMultiplexerSource-等-Source0-发送通知，同时唤醒-Delegate-线程的-RunLoop-来让其处理这些通知。CFMultiplexerSource-会在-Delegate-线程的-RunLoop-对-Delegate-执行实际的回调。"><span class="nav-number">3.</span> <span class="nav-text">NSURLConnectionLoader 中的 RunLoop 通过一些基于 mach port 的 Source 接收来自底层 CFSocket 的通知。当收到通知后，其会在合适的时机向 CFMultiplexerSource 等 Source0 发送通知，同时唤醒 Delegate 线程的 RunLoop 来让其处理这些通知。CFMultiplexerSource 会在 Delegate 线程的 RunLoop 对 Delegate 执行实际的回调。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RunLoop-的实际应用举例"><span class="nav-number">4.</span> <span class="nav-text">RunLoop 的实际应用举例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AFNetworking"><span class="nav-number">4.1.</span> <span class="nav-text">AFNetworking</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AFURLConnectionOperation-这个类是基于-NSURLConnection-构建的，其希望能在后台线程接收-Delegate-回调。为此-AFNetworking-单独创建了一个线程，并在这个线程中启动了一个-RunLoop："><span class="nav-number">4.2.</span> <span class="nav-text">AFURLConnectionOperation 这个类是基于 NSURLConnection 构建的，其希望能在后台线程接收 Delegate 回调。为此 AFNetworking 单独创建了一个线程，并在这个线程中启动了一个 RunLoop：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RunLoop-启动前内部必须要有至少一个-Timer-Observer-Source，所以-AFNetworking-在-runLoop-run-之前先创建了一个新的-NSMachPort-添加进去了。通常情况下，调用者需要持有这个-NSMachPort-mach-port-并在外部线程通过这个-port-发送消息到-loop-内；但此处添加-port-只是为了让-RunLoop-不至于退出，并没有用于实际的发送消息。"><span class="nav-number">4.3.</span> <span class="nav-text">RunLoop 启动前内部必须要有至少一个 Timer/Observer/Source，所以 AFNetworking 在 [runLoop run] 之前先创建了一个新的 NSMachPort 添加进去了。通常情况下，调用者需要持有这个 NSMachPort (mach_port) 并在外部线程通过这个 port 发送消息到 loop 内；但此处添加 port 只是为了让 RunLoop 不至于退出，并没有用于实际的发送消息。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#当需要这个后台线程执行任务时，AFNetworking-通过调用-NSObject-performSelector-onThread-将这个任务扔到了后台线程的-RunLoop-中。"><span class="nav-number">4.4.</span> <span class="nav-text">当需要这个后台线程执行任务时，AFNetworking 通过调用 [NSObject performSelector:onThread:..] 将这个任务扔到了后台线程的 RunLoop 中。</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">飘金</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/title.js"></script>

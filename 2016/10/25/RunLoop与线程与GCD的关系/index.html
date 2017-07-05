@@ -1,0 +1,752 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,Swift" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="RunLoop与线程与GCD的关系">
+<meta name="keywords" content="iOS,Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RunLoop与线程与GCD的关系">
+<meta property="og:url" content="http://yoursite.com/2016/10/25/RunLoop与线程与GCD的关系/index.html">
+<meta property="og:site_name" content="飘金的博客">
+<meta property="og:description" content="RunLoop与线程与GCD的关系">
+<meta property="og:updated_time" content="2017-07-05T07:59:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RunLoop与线程与GCD的关系">
+<meta name="twitter:description" content="RunLoop与线程与GCD的关系">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/25/RunLoop与线程与GCD的关系/"/>
+
+
+
+
+
+  <title>RunLoop与线程与GCD的关系 | 飘金的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">飘金的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">会炒菜的猿</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/25/RunLoop与线程与GCD的关系/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="飘金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="飘金的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">RunLoop与线程与GCD的关系</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-25T14:23:47+08:00">
+                2016-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><center style="color:#FF7F50">RunLoop与线程与GCD的关系</center><br><a id="more"></a></p>
+<h3 id="首先，iOS-开发中能遇到两个线程对象-pthread-t-和-NSThread。过去苹果有份文档标明了-NSThread-只是-pthread-t-的封装，但那份文档已经失效了，现在它们也有可能都是直接包装自最底层的-mach-thread。苹果并没有提供这两个对象相互转换的接口，但不管怎么样，可以肯定的是-pthread-t-和-NSThread-是一一对应的。比如，你可以通过-pthread-main-thread-np-或-NSThread-mainThread-来获取主线程；也可以通过-pthread-self-或-NSThread-currentThread-来获取当前线程。CFRunLoop-是基于-pthread-来管理的。"><a href="#首先，iOS-开发中能遇到两个线程对象-pthread-t-和-NSThread。过去苹果有份文档标明了-NSThread-只是-pthread-t-的封装，但那份文档已经失效了，现在它们也有可能都是直接包装自最底层的-mach-thread。苹果并没有提供这两个对象相互转换的接口，但不管怎么样，可以肯定的是-pthread-t-和-NSThread-是一一对应的。比如，你可以通过-pthread-main-thread-np-或-NSThread-mainThread-来获取主线程；也可以通过-pthread-self-或-NSThread-currentThread-来获取当前线程。CFRunLoop-是基于-pthread-来管理的。" class="headerlink" title="首先，iOS 开发中能遇到两个线程对象: pthread_t 和 NSThread。过去苹果有份文档标明了 NSThread 只是 pthread_t 的封装，但那份文档已经失效了，现在它们也有可能都是直接包装自最底层的 mach thread。苹果并没有提供这两个对象相互转换的接口，但不管怎么样，可以肯定的是 pthread_t 和 NSThread 是一一对应的。比如，你可以通过 pthread_main_thread_np() 或 [NSThread mainThread] 来获取主线程；也可以通过 pthread_self() 或 [NSThread currentThread] 来获取当前线程。CFRunLoop 是基于 pthread 来管理的。"></a>首先，iOS 开发中能遇到两个线程对象: pthread_t 和 NSThread。过去苹果有份文档标明了 NSThread 只是 pthread_t 的封装，但那份文档已经失效了，现在它们也有可能都是直接包装自最底层的 mach thread。苹果并没有提供这两个对象相互转换的接口，但不管怎么样，可以肯定的是 pthread_t 和 NSThread 是一一对应的。比如，你可以通过 pthread_main_thread_np() 或 [NSThread mainThread] 来获取主线程；也可以通过 pthread_self() 或 [NSThread currentThread] 来获取当前线程。CFRunLoop 是基于 pthread 来管理的。</h3><h3 id="苹果不允许直接创建-RunLoop，它只提供了两个自动获取的函数：CFRunLoopGetMain-和-CFRunLoopGetCurrent-。-这两个函数内部的逻辑大概是下面这样"><a href="#苹果不允许直接创建-RunLoop，它只提供了两个自动获取的函数：CFRunLoopGetMain-和-CFRunLoopGetCurrent-。-这两个函数内部的逻辑大概是下面这样" class="headerlink" title="苹果不允许直接创建 RunLoop，它只提供了两个自动获取的函数：CFRunLoopGetMain() 和 CFRunLoopGetCurrent()。 这两个函数内部的逻辑大概是下面这样:"></a>苹果不允许直接创建 RunLoop，它只提供了两个自动获取的函数：CFRunLoopGetMain() 和 CFRunLoopGetCurrent()。 这两个函数内部的逻辑大概是下面这样:</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/// 全局的Dictionary，key 是 pthread_t， value 是 CFRunLoopRef</span></div><div class="line"><span class="keyword">static</span> <span class="built_in">CFMutableDictionaryRef</span> loopsDic;</div><div class="line"><span class="comment">/// 访问 loopsDic 时的锁</span></div><div class="line"><span class="keyword">static</span> <span class="built_in">CFSpinLock_t</span> loopsLock;</div><div class="line"></div><div class="line"><span class="comment">/// 获取一个 pthread 对应的 RunLoop。</span></div><div class="line"><span class="built_in">CFRunLoopRef</span> _CFRunLoopGet(pthread_t thread) &#123;</div><div class="line">OSSpinLockLock(&amp;loopsLock);</div><div class="line"></div><div class="line"><span class="keyword">if</span> (!loopsDic) &#123;</div><div class="line"><span class="comment">// 第一次进入时，初始化全局Dic，并先为主线程创建一个 RunLoop。</span></div><div class="line">loopsDic = <span class="built_in">CFDictionaryCreateMutable</span>();</div><div class="line"><span class="built_in">CFRunLoopRef</span> mainLoop = _CFRunLoopCreate();</div><div class="line"><span class="built_in">CFDictionarySetValue</span>(loopsDic, pthread_main_thread_np(), mainLoop);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/// 直接从 Dictionary 里获取。</span></div><div class="line"><span class="built_in">CFRunLoopRef</span> loop = <span class="built_in">CFDictionaryGetValue</span>(loopsDic, thread));</div><div class="line"></div><div class="line"><span class="keyword">if</span> (!loop) &#123;</div><div class="line"><span class="comment">/// 取不到时，创建一个</span></div><div class="line">loop = _CFRunLoopCreate();</div><div class="line"><span class="built_in">CFDictionarySetValue</span>(loopsDic, thread, loop);</div><div class="line"><span class="comment">/// 注册一个回调，当线程销毁时，顺便也销毁其对应的 RunLoop。</span></div><div class="line">_CFSetTSD(..., thread, loop, __CFFinalizeRunLoop);</div><div class="line">&#125;</div><div class="line"></div><div class="line">OSSpinLockUnLock(&amp;loopsLock);</div><div class="line"><span class="keyword">return</span> loop;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">CFRunLoopRef</span> <span class="built_in">CFRunLoopGetMain</span>() &#123;</div><div class="line"><span class="keyword">return</span> _CFRunLoopGet(pthread_main_thread_np());</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">CFRunLoopRef</span> <span class="built_in">CFRunLoopGetCurrent</span>() &#123;</div><div class="line"><span class="keyword">return</span> _CFRunLoopGet(pthread_self());</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/// 全局的Dictionary，key 是 pthread_t， value 是 CFRunLoopRef</span></div><div class="line"><span class="keyword">static</span> <span class="built_in">CFMutableDictionaryRef</span> loopsDic;</div><div class="line"><span class="comment">/// 访问 loopsDic 时的锁</span></div><div class="line"><span class="keyword">static</span> <span class="built_in">CFSpinLock_t</span> loopsLock;</div><div class="line"></div><div class="line"><span class="comment">/// 获取一个 pthread 对应的 RunLoop。</span></div><div class="line"><span class="built_in">CFRunLoopRef</span> _CFRunLoopGet(pthread_t thread) &#123;</div><div class="line">OSSpinLockLock(&amp;loopsLock);</div><div class="line"></div><div class="line"><span class="keyword">if</span> (!loopsDic) &#123;</div><div class="line"><span class="comment">// 第一次进入时，初始化全局Dic，并先为主线程创建一个 RunLoop。</span></div><div class="line">loopsDic = <span class="built_in">CFDictionaryCreateMutable</span>();</div><div class="line"><span class="built_in">CFRunLoopRef</span> mainLoop = _CFRunLoopCreate();</div><div class="line"><span class="built_in">CFDictionarySetValue</span>(loopsDic, pthread_main_thread_np(), mainLoop);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/// 直接从 Dictionary 里获取。</span></div><div class="line"><span class="built_in">CFRunLoopRef</span> loop = <span class="built_in">CFDictionaryGetValue</span>(loopsDic, thread));</div><div class="line"></div><div class="line"><span class="keyword">if</span> (!loop) &#123;</div><div class="line"><span class="comment">/// 取不到时，创建一个</span></div><div class="line">loop = _CFRunLoopCreate();</div><div class="line"><span class="built_in">CFDictionarySetValue</span>(loopsDic, thread, loop);</div><div class="line"><span class="comment">/// 注册一个回调，当线程销毁时，顺便也销毁其对应的 RunLoop。</span></div><div class="line">_CFSetTSD(..., thread, loop, __CFFinalizeRunLoop);</div><div class="line">&#125;</div><div class="line"></div><div class="line">OSSpinLockUnLock(&amp;loopsLock);</div><div class="line"><span class="keyword">return</span> loop;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">CFRunLoopRef</span> <span class="built_in">CFRunLoopGetMain</span>() &#123;</div><div class="line"><span class="keyword">return</span> _CFRunLoopGet(pthread_main_thread_np());</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">CFRunLoopRef</span> <span class="built_in">CFRunLoopGetCurrent</span>() &#123;</div><div class="line"><span class="keyword">return</span> _CFRunLoopGet(pthread_self());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="从上面的代码可以看出，线程和-RunLoop-之间是一一对应的，其关系是保存在一个全局的-Dictionary-里。线程刚创建时并没有-RunLoop，如果你不主动获取，那它一直都不会有。RunLoop-的创建是发生在第一次获取时，RunLoop-的销毁是发生在线程结束时。你只能在一个线程的内部获取其-RunLoop（主线程除外）。"><a href="#从上面的代码可以看出，线程和-RunLoop-之间是一一对应的，其关系是保存在一个全局的-Dictionary-里。线程刚创建时并没有-RunLoop，如果你不主动获取，那它一直都不会有。RunLoop-的创建是发生在第一次获取时，RunLoop-的销毁是发生在线程结束时。你只能在一个线程的内部获取其-RunLoop（主线程除外）。" class="headerlink" title="从上面的代码可以看出，线程和 RunLoop 之间是一一对应的，其关系是保存在一个全局的 Dictionary 里。线程刚创建时并没有 RunLoop，如果你不主动获取，那它一直都不会有。RunLoop 的创建是发生在第一次获取时，RunLoop 的销毁是发生在线程结束时。你只能在一个线程的内部获取其 RunLoop（主线程除外）。"></a>从上面的代码可以看出，线程和 RunLoop 之间是一一对应的，其关系是保存在一个全局的 Dictionary 里。线程刚创建时并没有 RunLoop，如果你不主动获取，那它一直都不会有。RunLoop 的创建是发生在第一次获取时，RunLoop 的销毁是发生在线程结束时。你只能在一个线程的内部获取其 RunLoop（主线程除外）。</h2><h2 id="关于GCD"><a href="#关于GCD" class="headerlink" title="关于GCD"></a>关于GCD</h2><h2 id="实际上-RunLoop-底层也会用到-GCD-的东西-但同时-GCD-提供的某些接口也用到了-RunLoop，-例如-dispatch-async-。"><a href="#实际上-RunLoop-底层也会用到-GCD-的东西-但同时-GCD-提供的某些接口也用到了-RunLoop，-例如-dispatch-async-。" class="headerlink" title="实际上 RunLoop 底层也会用到 GCD 的东西,但同时 GCD 提供的某些接口也用到了 RunLoop， 例如 dispatch_async()。"></a>实际上 RunLoop 底层也会用到 GCD 的东西,但同时 GCD 提供的某些接口也用到了 RunLoop， 例如 dispatch_async()。</h2><h2 id="当调用-dispatch-async-dispatch-get-main-queue-block-时，libDispatch-会向主线程的-RunLoop-发送消息，RunLoop会被唤醒，并从消息中取得这个-block，并在回调-CFRUNLOOP-IS-SERVICING-THE-MAIN-DISPATCH-QUEUE-里执行这个-block。但这个逻辑仅限于-dispatch-到主线程，dispatch-到其他线程仍然是由-libDispatch-处理的。"><a href="#当调用-dispatch-async-dispatch-get-main-queue-block-时，libDispatch-会向主线程的-RunLoop-发送消息，RunLoop会被唤醒，并从消息中取得这个-block，并在回调-CFRUNLOOP-IS-SERVICING-THE-MAIN-DISPATCH-QUEUE-里执行这个-block。但这个逻辑仅限于-dispatch-到主线程，dispatch-到其他线程仍然是由-libDispatch-处理的。" class="headerlink" title="当调用 dispatch_async(dispatch_get_main_queue(), block) 时，libDispatch 会向主线程的 RunLoop 发送消息，RunLoop会被唤醒，并从消息中取得这个 block，并在回调 CFRUNLOOP_IS_SERVICING_THE_MAIN_DISPATCH_QUEUE() 里执行这个 block。但这个逻辑仅限于 dispatch 到主线程，dispatch 到其他线程仍然是由 libDispatch 处理的。"></a>当调用 dispatch_async(dispatch_get_main_queue(), block) 时，libDispatch 会向主线程的 RunLoop 发送消息，RunLoop会被唤醒，并从消息中取得这个 block，并在回调 <strong>CFRUNLOOP_IS_SERVICING_THE_MAIN_DISPATCH_QUEUE</strong>() 里执行这个 block。但这个逻辑仅限于 dispatch 到主线程，dispatch 到其他线程仍然是由 libDispatch 处理的。</h2><h2 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例:"></a>代码示例:</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">"ViewController.h"</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">"PJThread.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></div><div class="line"></div><div class="line"><span class="comment">//创建一个NSRunLoop属性,用于在线程执行完后能在访问他的内容</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>)<span class="built_in">NSRunLoop</span> *threadRunLoop;</div><div class="line"></div><div class="line"><span class="comment">//GCD方式</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>)<span class="built_in">NSRunLoop</span> *threadRunLoop2;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">[<span class="keyword">super</span> viewDidLoad];</div><div class="line"></div><div class="line">__<span class="keyword">weak</span> <span class="keyword">typeof</span>(<span class="keyword">self</span>) weakSelf = <span class="keyword">self</span>;</div><div class="line"><span class="comment">//PJThread为自定义的继承NSThread的线程,被销毁时会打印"线程销毁了!"</span></div><div class="line">PJThread *pjThread = [[PJThread alloc] initWithBlock:^&#123;</div><div class="line"><span class="comment">//线程刚创建时并没有 RunLoop，如果你不主动获取，那它一直都不会有。RunLoop 的创建是发生在第一次获取时,这边会创建一个与pjThread对应的线程.你只能在一个线程的内部获取其 RunLoop（主线程除外）</span></div><div class="line">weakSelf.threadRunLoop = [<span class="built_in">NSRunLoop</span> currentRunLoop];</div><div class="line"><span class="comment">//为了能让线程被销毁weakSelf.threadRunLoop就不循环执行(即不调用run)</span></div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"在线程block内打印:%@"</span>,weakSelf.threadRunLoop);</div><div class="line">&#125;];</div><div class="line"></div><div class="line">[pjThread start];</div><div class="line"></div><div class="line"><span class="comment">//到这边时线程已经执行结束,被销毁,他所对应的runLoop也会被销毁</span></div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"在线程执行后打印:%@"</span>,<span class="keyword">self</span>.threadRunLoop);</div><div class="line"></div><div class="line"><span class="comment">//和PJThread是一样的效果</span></div><div class="line"><span class="built_in">dispatch_async</span>(dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>), ^&#123;</div><div class="line">weakSelf.threadRunLoop2 = [<span class="built_in">NSRunLoop</span> currentRunLoop];</div><div class="line"><span class="comment">//为了能让线程被销毁weakSelf.threadRunLoop2就不循环执行(即不调用run)</span></div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"在dispatch_async block内打印:%@"</span>,weakSelf.threadRunLoop2);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"在线程dispatch_async执行后打印:%@"</span>,<span class="keyword">self</span>.threadRunLoop2);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<h2 id="PJThread代码"><a href="#PJThread代码" class="headerlink" title="PJThread代码:"></a>PJThread代码:</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">"PJThread.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">PJThread</span></span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)dealloc&#123;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"线程销毁了!"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<h3 id="最终的打印效果"><a href="#最终的打印效果" class="headerlink" title="最终的打印效果:"></a>最终的打印效果:</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="number">2017</span><span class="number">-06</span><span class="number">-10</span> <span class="number">14</span>:<span class="number">35</span>:<span class="number">37.966179</span> RunLoopTest[<span class="number">11826</span>:<span class="number">3392880</span>] 在线程执行后打印:(null)</div><div class="line"><span class="number">2017</span><span class="number">-06</span><span class="number">-10</span> <span class="number">14</span>:<span class="number">35</span>:<span class="number">37.966392</span> RunLoopTest[<span class="number">11826</span>:<span class="number">3392880</span>] 在线程<span class="built_in">dispatch_async</span>执行后打印:(null)</div><div class="line"><span class="number">2017</span><span class="number">-06</span><span class="number">-10</span> <span class="number">14</span>:<span class="number">35</span>:<span class="number">37.967431</span> RunLoopTest[<span class="number">11826</span>:<span class="number">3392903</span>] 在<span class="built_in">dispatch_async</span> block内打印:&lt;<span class="built_in">CFRunLoop</span> <span class="number">0x17017d040</span> [<span class="number">0x1aa9abbb8</span>]&gt;&#123;wakeup port = <span class="number">0x5f03</span>, stopped = <span class="literal">false</span>, ignoreWakeUps = <span class="literal">true</span>, </div><div class="line">current mode = (none),</div><div class="line">common modes = &lt;<span class="built_in">CFBasicHash</span> <span class="number">0x1700520f0</span> [<span class="number">0x1aa9abbb8</span>]&gt;&#123;type = <span class="keyword">mutable</span> set, count = <span class="number">1</span>,</div><div class="line">entries =&gt;</div><div class="line"><span class="number">2</span> : &lt;<span class="built_in">CFString</span> <span class="number">0x1a486d470</span> [<span class="number">0x1aa9abbb8</span>]&gt;&#123;contents = <span class="string">"kCFRunLoopDefaultMode"</span>&#125;</div><div class="line">&#125;</div><div class="line">,</div><div class="line">common mode items = (null),</div><div class="line">modes = &lt;<span class="built_in">CFBasicHash</span> <span class="number">0x170052510</span> [<span class="number">0x1aa9abbb8</span>]&gt;&#123;type = <span class="keyword">mutable</span> set, count = <span class="number">1</span>,</div><div class="line">entries =&gt;</div><div class="line"><span class="number">2</span> : &lt;<span class="built_in">CFRunLoopMode</span> <span class="number">0x170187df0</span> [<span class="number">0x1aa9abbb8</span>]&gt;&#123;name = kCFRunLoopDefaultMode, port set = <span class="number">0x6003</span>, queue = <span class="number">0x17017d100</span>, source = <span class="number">0x1701c6bd0</span> (not fired), timer port = <span class="number">0x6203</span>, </div><div class="line">sources0 = (null),</div><div class="line">sources1 = (null),</div><div class="line">observers = (null),</div><div class="line">timers = (null),</div><div class="line">currently <span class="number">518769338</span> (<span class="number">12655688486437</span>) / soft deadline <span class="keyword">in</span>: <span class="number">7.68613809e+11</span> sec (@ <span class="number">-1</span>) / hard deadline <span class="keyword">in</span>: <span class="number">7.68613809e+11</span> sec (@ <span class="number">-1</span>)</div><div class="line">&#125;,</div><div class="line"></div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"><span class="number">2017</span><span class="number">-06</span><span class="number">-10</span> <span class="number">14</span>:<span class="number">35</span>:<span class="number">37.967823</span> RunLoopTest[<span class="number">11826</span>:<span class="number">3392920</span>] 在线程block内打印:&lt;<span class="built_in">CFRunLoop</span> <span class="number">0x17417c740</span> [<span class="number">0x1aa9abbb8</span>]&gt;&#123;wakeup port = <span class="number">0x5c03</span>, stopped = <span class="literal">false</span>, ignoreWakeUps = <span class="literal">true</span>, </div><div class="line">current mode = (none),</div><div class="line">common modes = &lt;<span class="built_in">CFBasicHash</span> <span class="number">0x1740533e0</span> [<span class="number">0x1aa9abbb8</span>]&gt;&#123;type = <span class="keyword">mutable</span> set, count = <span class="number">1</span>,</div><div class="line">entries =&gt;</div><div class="line"><span class="number">2</span> : &lt;<span class="built_in">CFString</span> <span class="number">0x1a486d470</span> [<span class="number">0x1aa9abbb8</span>]&gt;&#123;contents = <span class="string">"kCFRunLoopDefaultMode"</span>&#125;</div><div class="line">&#125;</div><div class="line">,</div><div class="line">common mode items = (null),</div><div class="line">modes = &lt;<span class="built_in">CFBasicHash</span> <span class="number">0x1740532f0</span> [<span class="number">0x1aa9abbb8</span>]&gt;&#123;type = <span class="keyword">mutable</span> set, count = <span class="number">1</span>,</div><div class="line">entries =&gt;</div><div class="line"><span class="number">2</span> : &lt;<span class="built_in">CFRunLoopMode</span> <span class="number">0x174187c50</span> [<span class="number">0x1aa9abbb8</span>]&gt;&#123;name = kCFRunLoopDefaultMode, port set = <span class="number">0x5d03</span>, queue = <span class="number">0x17417c800</span>, source = <span class="number">0x1741c6630</span> (not fired), timer port = <span class="number">0x6303</span>, </div><div class="line">sources0 = (null),</div><div class="line">sources1 = (null),</div><div class="line">observers = (null),</div><div class="line">timers = (null),</div><div class="line">currently <span class="number">518769338</span> (<span class="number">12655688502251</span>) / soft deadline <span class="keyword">in</span>: <span class="number">7.68613809e+11</span> sec (@ <span class="number">-1</span>) / hard deadline <span class="keyword">in</span>: <span class="number">7.68613809e+11</span> sec (@ <span class="number">-1</span>)</div><div class="line">&#125;,</div><div class="line"></div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"><span class="number">2017</span><span class="number">-06</span><span class="number">-10</span> <span class="number">14</span>:<span class="number">35</span>:<span class="number">37.970469</span> RunLoopTest[<span class="number">11826</span>:<span class="number">3392920</span>] 线程销毁了!</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------本文结束😘<i class="fa fa-paw"></i>感谢阅读------</div>
+    
+</div>
+    
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/25/实例化讲解RunLoop/" rel="next" title="实例化讲解RunLoop">
+                <i class="fa fa-chevron-left"></i> 实例化讲解RunLoop
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/25/Runtime运行时之Class常用方法/" rel="prev" title="Runtime运行时之Class常用方法">
+                Runtime运行时之Class常用方法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="飘金" />
+          <p class="site-author-name" itemprop="name">飘金</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/piaojin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/da7864faa1be" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-piaojin"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#首先，iOS-开发中能遇到两个线程对象-pthread-t-和-NSThread。过去苹果有份文档标明了-NSThread-只是-pthread-t-的封装，但那份文档已经失效了，现在它们也有可能都是直接包装自最底层的-mach-thread。苹果并没有提供这两个对象相互转换的接口，但不管怎么样，可以肯定的是-pthread-t-和-NSThread-是一一对应的。比如，你可以通过-pthread-main-thread-np-或-NSThread-mainThread-来获取主线程；也可以通过-pthread-self-或-NSThread-currentThread-来获取当前线程。CFRunLoop-是基于-pthread-来管理的。"><span class="nav-number">1.</span> <span class="nav-text">首先，iOS 开发中能遇到两个线程对象: pthread_t 和 NSThread。过去苹果有份文档标明了 NSThread 只是 pthread_t 的封装，但那份文档已经失效了，现在它们也有可能都是直接包装自最底层的 mach thread。苹果并没有提供这两个对象相互转换的接口，但不管怎么样，可以肯定的是 pthread_t 和 NSThread 是一一对应的。比如，你可以通过 pthread_main_thread_np() 或 [NSThread mainThread] 来获取主线程；也可以通过 pthread_self() 或 [NSThread currentThread] 来获取当前线程。CFRunLoop 是基于 pthread 来管理的。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#苹果不允许直接创建-RunLoop，它只提供了两个自动获取的函数：CFRunLoopGetMain-和-CFRunLoopGetCurrent-。-这两个函数内部的逻辑大概是下面这样"><span class="nav-number">2.</span> <span class="nav-text">苹果不允许直接创建 RunLoop，它只提供了两个自动获取的函数：CFRunLoopGetMain() 和 CFRunLoopGetCurrent()。 这两个函数内部的逻辑大概是下面这样:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从上面的代码可以看出，线程和-RunLoop-之间是一一对应的，其关系是保存在一个全局的-Dictionary-里。线程刚创建时并没有-RunLoop，如果你不主动获取，那它一直都不会有。RunLoop-的创建是发生在第一次获取时，RunLoop-的销毁是发生在线程结束时。你只能在一个线程的内部获取其-RunLoop（主线程除外）。"><span class="nav-number"></span> <span class="nav-text">从上面的代码可以看出，线程和 RunLoop 之间是一一对应的，其关系是保存在一个全局的 Dictionary 里。线程刚创建时并没有 RunLoop，如果你不主动获取，那它一直都不会有。RunLoop 的创建是发生在第一次获取时，RunLoop 的销毁是发生在线程结束时。你只能在一个线程的内部获取其 RunLoop（主线程除外）。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于GCD"><span class="nav-number"></span> <span class="nav-text">关于GCD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实际上-RunLoop-底层也会用到-GCD-的东西-但同时-GCD-提供的某些接口也用到了-RunLoop，-例如-dispatch-async-。"><span class="nav-number"></span> <span class="nav-text">实际上 RunLoop 底层也会用到 GCD 的东西,但同时 GCD 提供的某些接口也用到了 RunLoop， 例如 dispatch_async()。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#当调用-dispatch-async-dispatch-get-main-queue-block-时，libDispatch-会向主线程的-RunLoop-发送消息，RunLoop会被唤醒，并从消息中取得这个-block，并在回调-CFRUNLOOP-IS-SERVICING-THE-MAIN-DISPATCH-QUEUE-里执行这个-block。但这个逻辑仅限于-dispatch-到主线程，dispatch-到其他线程仍然是由-libDispatch-处理的。"><span class="nav-number"></span> <span class="nav-text">当调用 dispatch_async(dispatch_get_main_queue(), block) 时，libDispatch 会向主线程的 RunLoop 发送消息，RunLoop会被唤醒，并从消息中取得这个 block，并在回调 CFRUNLOOP_IS_SERVICING_THE_MAIN_DISPATCH_QUEUE() 里执行这个 block。但这个逻辑仅限于 dispatch 到主线程，dispatch 到其他线程仍然是由 libDispatch 处理的。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码示例"><span class="nav-number"></span> <span class="nav-text">代码示例:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PJThread代码"><span class="nav-number"></span> <span class="nav-text">PJThread代码:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最终的打印效果"><span class="nav-number">1.</span> <span class="nav-text">最终的打印效果:</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">飘金</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/title.js"></script>

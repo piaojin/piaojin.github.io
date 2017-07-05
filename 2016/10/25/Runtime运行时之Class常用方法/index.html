@@ -1,0 +1,928 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,Swift" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Runtime运行时之Class常用方法">
+<meta name="keywords" content="iOS,Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Runtime运行时之Class常用方法">
+<meta property="og:url" content="http://yoursite.com/2016/10/25/Runtime运行时之Class常用方法/index.html">
+<meta property="og:site_name" content="飘金的博客">
+<meta property="og:description" content="Runtime运行时之Class常用方法">
+<meta property="og:updated_time" content="2017-07-05T08:00:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Runtime运行时之Class常用方法">
+<meta name="twitter:description" content="Runtime运行时之Class常用方法">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/25/Runtime运行时之Class常用方法/"/>
+
+
+
+
+
+  <title>Runtime运行时之Class常用方法 | 飘金的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">飘金的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">会炒菜的猿</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/25/Runtime运行时之Class常用方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="飘金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="飘金的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Runtime运行时之Class常用方法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-25T14:23:47+08:00">
+                2016-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><center style="color:#FF7F50">Runtime运行时之Class常用方法</center><br><a id="more"></a></p>
+<h2 id="注-此篇中记录的是以class开头的runtime函数"><a href="#注-此篇中记录的是以class开头的runtime函数" class="headerlink" title="注: 此篇中记录的是以class开头的runtime函数"></a>注: 此篇中记录的是以class开头的runtime函数</h2><blockquote>
+<h2 id="一、创建对象"><a href="#一、创建对象" class="headerlink" title="一、创建对象"></a>一、创建对象</h2></blockquote>
+<h2 id="创建一个对象"><a href="#创建一个对象" class="headerlink" title="创建一个对象"></a>创建一个对象</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">id</span> class_createInstance(Class cls, size_t extraBytes)</div></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="cls-类型"><a href="#cls-类型" class="headerlink" title="cls: 类型"></a>cls: 类型</h3></li>
+<li><h3 id="extraBytes-分配的内存大小"><a href="#extraBytes-分配的内存大小" class="headerlink" title="extraBytes: 分配的内存大小"></a>extraBytes: 分配的内存大小</h3></li>
+<li><h3 id="返回值-cls类型的实例对象"><a href="#返回值-cls类型的实例对象" class="headerlink" title="返回值: cls类型的实例对象"></a>返回值: cls类型的实例对象</h3><h3 id="例子"><a href="#例子" class="headerlink" title="例子:"></a>例子:</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">size_t size = class_getInstanceSize([Person <span class="keyword">class</span>]);</div><div class="line">Person *person = class_createInstance([Person <span class="keyword">class</span>], size);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<h2 id="二、类名、父类、实例变量、成员变量、属性、实例方法、类方法、方法实现"><a href="#二、类名、父类、实例变量、成员变量、属性、实例方法、类方法、方法实现" class="headerlink" title="二、类名、父类、实例变量、成员变量、属性、实例方法、类方法、方法实现"></a>二、类名、父类、实例变量、成员变量、属性、实例方法、类方法、方法实现</h2></blockquote>
+<h3 id="获取指定类的类名-char-类型字符串"><a href="#获取指定类的类名-char-类型字符串" class="headerlink" title="获取指定类的类名 (char *类型字符串)"></a>获取指定类的类名 (char *类型字符串)</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> <span class="keyword">char</span> *class_getName(Class cls)</div></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="cls-类型-1"><a href="#cls-类型-1" class="headerlink" title="cls: 类型"></a>cls: 类型</h3></li>
+<li><h3 id="返回值-类名-char-类型的字符串"><a href="#返回值-类名-char-类型的字符串" class="headerlink" title="返回值: 类名 - char  类型的字符串"></a>返回值: 类名 - char <em> </em>类型的字符串</h3><h3 id="例子-1"><a href="#例子-1" class="headerlink" title="例子:"></a>例子:</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> <span class="keyword">char</span> *name = class_getName([Person <span class="keyword">class</span>])</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="获取指定类的父类型-Class类型"><a href="#获取指定类的父类型-Class类型" class="headerlink" title="获取指定类的父类型 (Class类型)"></a>获取指定类的父类型 (Class类型)</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Class class_getSuperclass(Class cls)</div></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="cls-类型-2"><a href="#cls-类型-2" class="headerlink" title="cls: 类型"></a>cls: 类型</h3></li>
+<li><h3 id="返回值-父类型-Class类型"><a href="#返回值-父类型-Class类型" class="headerlink" title="返回值: 父类型 Class类型"></a>返回值: 父类型 Class类型</h3><h3 id="例子-2"><a href="#例子-2" class="headerlink" title="例子:"></a>例子:</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Class <span class="keyword">class</span> = class_getSuperclass([Person <span class="keyword">class</span>]);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="获取一个指定类型的实例占用内存大小-size-t-类型"><a href="#获取一个指定类型的实例占用内存大小-size-t-类型" class="headerlink" title="获取一个指定类型的实例占用内存大小 (size_t 类型)"></a>获取一个指定类型的实例占用内存大小 (size_t 类型)</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">size_t class_getInstanceSize(Class cls)</div></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="cls-类型-3"><a href="#cls-类型-3" class="headerlink" title="cls: 类型"></a>cls: 类型</h3></li>
+<li><h3 id="返回值-cls类型的一个实例对象占用内存大小"><a href="#返回值-cls类型的一个实例对象占用内存大小" class="headerlink" title="返回值: cls类型的一个实例对象占用内存大小"></a>返回值: cls类型的一个实例对象占用内存大小</h3><h3 id="例子-3"><a href="#例子-3" class="headerlink" title="例子:"></a>例子:</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">size_t size = class_getInstanceSize([Person <span class="keyword">class</span>]);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="获取一个类中-指定名称的实例成员变量的信息"><a href="#获取一个类中-指定名称的实例成员变量的信息" class="headerlink" title="获取一个类中, 指定名称的实例成员变量的信息"></a>获取一个类中, 指定名称的实例成员变量的信息</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Ivar class_getInstanceVariable(Class cls, <span class="keyword">const</span> <span class="keyword">char</span> *name)</div></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="cls-类型-4"><a href="#cls-类型-4" class="headerlink" title="cls: 类型"></a>cls: 类型</h3></li>
+<li><h3 id="name-成员变量名（属性带-“-”）"><a href="#name-成员变量名（属性带-“-”）" class="headerlink" title="name: 成员变量名（属性带 “_”）"></a>name: 成员变量名（属性带 “_”）</h3></li>
+<li><h3 id="返回值-成员变量信息"><a href="#返回值-成员变量信息" class="headerlink" title="返回值: 成员变量信息"></a>返回值: 成员变量信息</h3><h3 id="例子-4"><a href="#例子-4" class="headerlink" title="例子:"></a>例子:</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Ivar ivar = class_getInstanceVariable([<span class="keyword">self</span> <span class="keyword">class</span>], <span class="string">"_person"</span>)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="获取属性的信息-不用打"><a href="#获取属性的信息-不用打" class="headerlink" title="获取属性的信息, 不用打_"></a>获取属性的信息, 不用打_</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">objc_property_t class_getProperty(Class cls, <span class="keyword">const</span> <span class="keyword">char</span> *name)</div></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="cls-类"><a href="#cls-类" class="headerlink" title="cls: 类"></a>cls: 类</h3></li>
+<li><h3 id="name-属性名"><a href="#name-属性名" class="headerlink" title="name: 属性名"></a>name: 属性名</h3></li>
+<li><h3 id="返回值-属性信息"><a href="#返回值-属性信息" class="headerlink" title="返回值: 属性信息"></a>返回值: 属性信息</h3><h3 id="例子-5"><a href="#例子-5" class="headerlink" title="例子:"></a>例子:</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">objc_property_t property = class_getProperty([<span class="keyword">self</span> <span class="keyword">class</span>], <span class="string">"person"</span>);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="获取对象方法信息-“-“-方法"><a href="#获取对象方法信息-“-“-方法" class="headerlink" title="获取对象方法信息 ( “-“ 方法)"></a>获取对象方法信息 ( “-“ 方法)</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Method class_getInstanceMethod(Class cls, SEL name)</div></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="cls-类-1"><a href="#cls-类-1" class="headerlink" title="cls: 类"></a>cls: 类</h3></li>
+<li><h3 id="name-方法"><a href="#name-方法" class="headerlink" title="name: 方法"></a>name: 方法</h3></li>
+<li><h3 id="返回值-对象方法信息-Method类型"><a href="#返回值-对象方法信息-Method类型" class="headerlink" title="返回值: 对象方法信息 - * ### Method类型"></a>返回值: 对象方法信息 - * ### Method类型</h3><h3 id="例子-6"><a href="#例子-6" class="headerlink" title="例子:"></a>例子:</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Method method = class_getInstanceMethod([<span class="keyword">self</span> <span class="keyword">class</span>], <span class="keyword">@selector</span>(methodName));</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="获取类方法的信息-“-”-方法"><a href="#获取类方法的信息-“-”-方法" class="headerlink" title="获取类方法的信息 ( “+” 方法 )"></a>获取类方法的信息 ( “+” 方法 )</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Method class_getClassMethod(Class cls, SEL name)</div></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="cls-类-2"><a href="#cls-类-2" class="headerlink" title="cls: 类"></a>cls: 类</h3></li>
+<li><h3 id="name-方法-1"><a href="#name-方法-1" class="headerlink" title="name: 方法"></a>name: 方法</h3></li>
+<li><h3 id="返回值-对象方法信息-Method类型-1"><a href="#返回值-对象方法信息-Method类型-1" class="headerlink" title="返回值: 对象方法信息 - ### Method类型"></a>返回值: 对象方法信息 - ### Method类型</h3><h3 id="例子-7"><a href="#例子-7" class="headerlink" title="例子:"></a>例子:</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Method method = class_getInstanceMethod([<span class="keyword">self</span> <span class="keyword">class</span>], <span class="keyword">@selector</span>(methodName));</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="获取方法的具体实现-IMP"><a href="#获取方法的具体实现-IMP" class="headerlink" title="获取方法的具体实现 (IMP)"></a>获取方法的具体实现 (IMP)</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">IMP class_getMethodImplementation(Class cls, SEL name)</div></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="cls-类-3"><a href="#cls-类-3" class="headerlink" title="cls: 类"></a>cls: 类</h3></li>
+<li><h3 id="name-方法-2"><a href="#name-方法-2" class="headerlink" title="name: 方法"></a>name: 方法</h3></li>
+<li><h3 id="返回值-方法的具体实现-IMP类型"><a href="#返回值-方法的具体实现-IMP类型" class="headerlink" title="返回值: 方法的具体实现 ### IMP类型"></a>返回值: 方法的具体实现 ### IMP类型</h3><h3 id="例子-8"><a href="#例子-8" class="headerlink" title="例子:"></a>例子:</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">IMP imp = class_getMethodImplementation([<span class="keyword">self</span> <span class="keyword">class</span>], <span class="keyword">@selector</span>(methodName));</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="获取方法的具体实现-返回值类型为struct"><a href="#获取方法的具体实现-返回值类型为struct" class="headerlink" title="获取方法的具体实现, 返回值类型为struct"></a>获取方法的具体实现, 返回值类型为struct</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">IMP class_getMethodImplementation_stret(Class cls, SEL name)</div></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="cls-类-4"><a href="#cls-类-4" class="headerlink" title="cls: 类"></a>cls: 类</h3></li>
+<li><h3 id="name-方法-3"><a href="#name-方法-3" class="headerlink" title="name: 方法"></a>name: 方法</h3></li>
+<li><h3 id="返回值-方法的具体实现-struct-IMP类型"><a href="#返回值-方法的具体实现-struct-IMP类型" class="headerlink" title="返回值: 方法的具体实现 ### struct IMP类型"></a>返回值: 方法的具体实现 ### struct IMP类型</h3><h3 id="例子-9"><a href="#例子-9" class="headerlink" title="例子:"></a>例子:</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">IMP imp = class_getMethodImplementation_stret([<span class="keyword">self</span> <span class="keyword">class</span>], <span class="keyword">@selector</span>(methodName));</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<h2 id="三、成员变量列表、属性列表、方法列表、协议列表"><a href="#三、成员变量列表、属性列表、方法列表、协议列表" class="headerlink" title="三、成员变量列表、属性列表、方法列表、协议列表"></a>三、成员变量列表、属性列表、方法列表、协议列表</h2></blockquote>
+<h3 id="获取成员变量列表"><a href="#获取成员变量列表" class="headerlink" title="获取成员变量列表"></a>获取成员变量列表</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Ivar *class_copyIvarList(Class cls, <span class="keyword">unsigned</span> <span class="keyword">int</span> *outCount)</div></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="cls-类-5"><a href="#cls-类-5" class="headerlink" title="cls: 类"></a>cls: 类</h3></li>
+<li><h3 id="outCount-无符号整形变量的指针-用于获取成员变量数量"><a href="#outCount-无符号整形变量的指针-用于获取成员变量数量" class="headerlink" title="*outCount: 无符号整形变量的指针, 用于获取成员变量数量"></a>*outCount: 无符号整形变量的指针, 用于获取成员变量数量</h3></li>
+<li><h3 id="返回值-成员变量列表"><a href="#返回值-成员变量列表" class="headerlink" title="返回值: 成员变量列表"></a>返回值: 成员变量列表</h3><h3 id="例子-10"><a href="#例子-10" class="headerlink" title="例子:"></a>例子:</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> count;</div><div class="line">Ivar *ivarList = class_copyIvarList([<span class="keyword">self</span> <span class="keyword">class</span>], &amp;count);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line">Ivar ivar = ivarList[i];</div><div class="line"><span class="comment">// 获取成员属性名</span></div><div class="line"><span class="built_in">NSString</span> *name = [<span class="built_in">NSString</span> stringWithUTF8String:ivar_getName(ivar)];</div><div class="line"><span class="built_in">NSString</span> *type = [<span class="built_in">NSString</span> stringWithUTF8String:ivar_getTypeEncoding(ivar)];</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@%@"</span>, type, name);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="获取属性列表"><a href="#获取属性列表" class="headerlink" title="获取属性列表"></a>获取属性列表</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">objc_property_t *class_copyPropertyList(Class cls, <span class="keyword">unsigned</span> <span class="keyword">int</span> *outCount)</div></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="cls-类型-5"><a href="#cls-类型-5" class="headerlink" title="cls: 类型"></a>cls: 类型</h3></li>
+<li><h3 id="outCount-无符号整形变量的指针-用于获取属性数量"><a href="#outCount-无符号整形变量的指针-用于获取属性数量" class="headerlink" title="*outCount: 无符号整形变量的指针, 用于获取属性数量"></a>*outCount: 无符号整形变量的指针, 用于获取属性数量</h3></li>
+<li><h3 id="返回值-属性列表"><a href="#返回值-属性列表" class="headerlink" title="返回值: 属性列表"></a>返回值: 属性列表</h3><h3 id="例子-11"><a href="#例子-11" class="headerlink" title="例子:"></a>例子:</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> count;</div><div class="line">objc_property_t *propertyList = class_copyPropertyList([<span class="keyword">self</span> <span class="keyword">class</span>], &amp;count);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line">objc_property_t property = propertyList[i];</div><div class="line"><span class="comment">// 获取成员属性名</span></div><div class="line"><span class="built_in">NSString</span> *name = [<span class="built_in">NSString</span> stringWithUTF8String:property_getName(property)];</div><div class="line"><span class="built_in">NSString</span> *type = [<span class="built_in">NSString</span> stringWithUTF8String:property_getAttributes(property)];</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@%@"</span>, type, name);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="获取方法列表"><a href="#获取方法列表" class="headerlink" title="获取方法列表"></a>获取方法列表</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Method *class_copyMethodList(Class cls, <span class="keyword">unsigned</span> <span class="keyword">int</span> *outCount)</div></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="cls-类-6"><a href="#cls-类-6" class="headerlink" title="cls: 类"></a>cls: 类</h3></li>
+<li><h3 id="outCount-无符号整形变量的指针-用于获取方法数量"><a href="#outCount-无符号整形变量的指针-用于获取方法数量" class="headerlink" title="*outCount: 无符号整形变量的指针, 用于获取方法数量"></a>*outCount: 无符号整形变量的指针, 用于获取方法数量</h3></li>
+<li><h3 id="返回值-方法列表"><a href="#返回值-方法列表" class="headerlink" title="返回值: 方法列表"></a>返回值: 方法列表</h3><h3 id="例子-12"><a href="#例子-12" class="headerlink" title="例子:"></a>例子:</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> count;</div><div class="line">Method *methodList = class_copyMethodList([<span class="keyword">self</span> <span class="keyword">class</span>], &amp;count);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line">Method method = methodList[i];</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%s%s"</span>, __func__, sel_getName(method_getName(method)));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="获取协议列表"><a href="#获取协议列表" class="headerlink" title="获取协议列表"></a>获取协议列表</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Protocol *__<span class="keyword">unsafe_unretained</span> *class_copyProtocolList(Class cls, <span class="keyword">unsigned</span> <span class="keyword">int</span> *outCount)</div></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="cls-类-7"><a href="#cls-类-7" class="headerlink" title="cls: 类"></a>cls: 类</h3></li>
+<li><h3 id="outCount-无符号整形变量的指针-用于获取协议数量"><a href="#outCount-无符号整形变量的指针-用于获取协议数量" class="headerlink" title="*outCount: 无符号整形变量的指针, 用于获取协议数量"></a>*outCount: 无符号整形变量的指针, 用于获取协议数量</h3></li>
+<li><h3 id="返回值-协议列表"><a href="#返回值-协议列表" class="headerlink" title="返回值: 协议列表"></a>返回值: 协议列表</h3><h3 id="例子-13"><a href="#例子-13" class="headerlink" title="例子:"></a>例子:</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> count;</div><div class="line">Protocol *protocolList = class_copyProtocolList(<span class="keyword">class</span>,&amp;count);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line">Protocol *protocol = protocolList[i];</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%s%s"</span>, __func__, [<span class="keyword">self</span> protocol_getName:protocol]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<h2 id="四、add-成员变量、属性、方法、协议"><a href="#四、add-成员变量、属性、方法、协议" class="headerlink" title="四、add: 成员变量、属性、方法、协议"></a>四、add: 成员变量、属性、方法、协议</h2></blockquote>
+<h3 id="添加成员变量-添加成员变量只能在运行时创建的类，且不能为元类"><a href="#添加成员变量-添加成员变量只能在运行时创建的类，且不能为元类" class="headerlink" title="添加成员变量(添加成员变量只能在运行时创建的类，且不能为元类)"></a>添加成员变量(添加成员变量只能在运行时创建的类，且不能为元类)</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">BOOL</span> class_addIvar(Class cls, <span class="keyword">const</span> <span class="keyword">char</span> *name, size_t size, uint8_t alignment, <span class="keyword">const</span> <span class="keyword">char</span> *types)</div></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="cls-类-8"><a href="#cls-类-8" class="headerlink" title="cls: 类"></a>cls: 类</h3></li>
+<li><h3 id="name-成员变量名"><a href="#name-成员变量名" class="headerlink" title="name: 成员变量名"></a>name: 成员变量名</h3></li>
+<li><h3 id="size-大小"><a href="#size-大小" class="headerlink" title="size: 大小"></a>size: 大小</h3></li>
+<li><h3 id="alignment-对齐方式"><a href="#alignment-对齐方式" class="headerlink" title="alignment: 对齐方式"></a>alignment: 对齐方式</h3></li>
+<li><h3 id="types-参数类型"><a href="#types-参数类型" class="headerlink" title="types: 参数类型"></a>types: 参数类型</h3></li>
+<li><h3 id="返回值-YES-添加成功-NO-添加失败"><a href="#返回值-YES-添加成功-NO-添加失败" class="headerlink" title="返回值: YES: 添加成功 NO: 添加失败"></a>返回值: YES: 添加成功 NO: 添加失败</h3><h3 id="例子-14"><a href="#例子-14" class="headerlink" title="例子:"></a>例子:</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (class_addIvar([Person <span class="keyword">class</span>], <span class="string">"country"</span>, <span class="keyword">sizeof</span>(<span class="built_in">NSString</span> *), <span class="number">0</span>, <span class="string">"@"</span>)) &#123;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%sadd ivar success"</span>, __func__);</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%sadd ivar fail"</span>, __func__);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="添加属性"><a href="#添加属性" class="headerlink" title="添加属性"></a>添加属性</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">BOOL</span> class_addProperty(Class cls, <span class="keyword">const</span> <span class="keyword">char</span> *name, <span class="keyword">const</span> objc_property_attribute_t *attributes, <span class="keyword">unsigned</span> <span class="keyword">int</span> attributeCount)</div></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="cls-类-9"><a href="#cls-类-9" class="headerlink" title="cls: 类"></a>cls: 类</h3></li>
+<li><h3 id="name-属性名-1"><a href="#name-属性名-1" class="headerlink" title="name: 属性名"></a>name: 属性名</h3></li>
+<li><h3 id="attributes-参数"><a href="#attributes-参数" class="headerlink" title="attributes: 参数"></a>attributes: 参数</h3></li>
+<li><h3 id="attributeCount-参数数量"><a href="#attributeCount-参数数量" class="headerlink" title="attributeCount: 参数数量"></a>attributeCount: 参数数量</h3></li>
+<li><h3 id="返回值-YES-添加成功-NO-添加失败-1"><a href="#返回值-YES-添加成功-NO-添加失败-1" class="headerlink" title="返回值: YES: 添加成功  NO: 添加失败"></a>返回值: YES: 添加成功  NO: 添加失败</h3><h3 id="例子-15"><a href="#例子-15" class="headerlink" title="例子:"></a>例子:</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">objc_property_attribute_t type = &#123; <span class="string">"T"</span>, <span class="string">"@\"NSString\""</span> &#125;;</div><div class="line">objc_property_attribute_t ownership = &#123; <span class="string">"&amp;"</span>, <span class="string">"N"</span> &#125;; <span class="comment">// C = copy</span></div><div class="line">objc_property_attribute_t backingivar  = &#123; <span class="string">"V"</span>, <span class="string">""</span> &#125;;</div><div class="line">objc_property_attribute_t attrs[] = &#123; type, ownership, backingivar &#125;;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (class_addProperty([_person <span class="keyword">class</span>], <span class="string">"country"</span>, attrs, <span class="number">3</span>)) &#123;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%sadd Property success"</span>, __func__);</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%sadd Property fail"</span>, __func__);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="添加方法"><a href="#添加方法" class="headerlink" title="添加方法"></a>添加方法</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">BOOL</span> class_addMethod(Class cls, SEL name, IMP imp, <span class="keyword">const</span> <span class="keyword">char</span> *types)</div></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="cls-类型-6"><a href="#cls-类型-6" class="headerlink" title="cls: 类型"></a>cls: 类型</h3></li>
+<li><h3 id="name-方法-4"><a href="#name-方法-4" class="headerlink" title="name: 方法"></a>name: 方法</h3></li>
+<li><h3 id="imp-方法实现"><a href="#imp-方法实现" class="headerlink" title="imp: 方法实现"></a>imp: 方法实现</h3></li>
+<li><h3 id="types-类型"><a href="#types-类型" class="headerlink" title="types: 类型"></a>types: 类型</h3></li>
+<li><h3 id="返回值-YES-添加成功-NO-添加失败-2"><a href="#返回值-YES-添加成功-NO-添加失败-2" class="headerlink" title="返回值: YES: 添加成功 NO: 添加失败"></a>返回值: YES: 添加成功 NO: 添加失败</h3><h3 id="例子-16"><a href="#例子-16" class="headerlink" title="例子:"></a>例子:</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (class_addMethod([<span class="keyword">self</span> <span class="keyword">class</span>], <span class="built_in">NSSelectorFromString</span>(<span class="string">@"runtimeTestMethod:"</span>), class_getMethodImplementation([<span class="keyword">self</span> <span class="keyword">class</span>], <span class="built_in">NSSelectorFromString</span>(<span class="string">@"runtimeTestMethod:"</span>)), <span class="string">"v@:@"</span>)) &#123;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%sadd method success"</span>, __func__);</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%sadd method fail"</span>, __func__);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="添加协议"><a href="#添加协议" class="headerlink" title="添加协议"></a>添加协议</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">BOOL class_addProtocol(Class cls, Protocol *protocol)</div></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="cls-类-10"><a href="#cls-类-10" class="headerlink" title="cls: 类"></a>cls: 类</h3></li>
+<li><h3 id="protocol-协议"><a href="#protocol-协议" class="headerlink" title="protocol: 协议"></a>protocol: 协议</h3></li>
+<li><h3 id="返回值-YES-添加成功-NO-添加失败-3"><a href="#返回值-YES-添加成功-NO-添加失败-3" class="headerlink" title="返回值: YES: 添加成功 NO: 添加失败"></a>返回值: YES: 添加成功 NO: 添加失败</h3><h3 id="例子-17"><a href="#例子-17" class="headerlink" title="例子:"></a>例子:</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (class_addProtocol([_person <span class="keyword">class</span>], <span class="class"><span class="keyword">@protocol</span>(<span class="title">RuntimeBaseProtocol</span>))) </span>&#123;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%sadd protocol success"</span>, __func__);</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%sadd protocol fail"</span>, __func__);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<h2 id="五、replace-属性、方法"><a href="#五、replace-属性、方法" class="headerlink" title="五、replace: 属性、方法"></a>五、replace: 属性、方法</h2></blockquote>
+<h3 id="替换属性的信息-如果没有原属性会新建一个属性"><a href="#替换属性的信息-如果没有原属性会新建一个属性" class="headerlink" title="替换属性的信息(如果没有原属性会新建一个属性)"></a>替换属性的信息(如果没有原属性会新建一个属性)</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> class_replaceProperty(Class cls, <span class="keyword">const</span> <span class="keyword">char</span> *name, <span class="keyword">const</span> objc_property_attribute_t *attributes, <span class="keyword">unsigned</span> <span class="keyword">int</span> attributeCount)</div></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="cls-类-11"><a href="#cls-类-11" class="headerlink" title="cls: 类"></a>cls: 类</h3></li>
+<li><h3 id="name-属性名-2"><a href="#name-属性名-2" class="headerlink" title="name: 属性名"></a>name: 属性名</h3></li>
+<li><h3 id="attributes-类型"><a href="#attributes-类型" class="headerlink" title="attributes: 类型"></a>attributes: 类型</h3></li>
+<li><h3 id="attributeCount-类型数量"><a href="#attributeCount-类型数量" class="headerlink" title="attributeCount: 类型数量"></a>attributeCount: 类型数量</h3></li>
+<li><h3 id="无返回值"><a href="#无返回值" class="headerlink" title="无返回值"></a>无返回值</h3><h3 id="例子-18"><a href="#例子-18" class="headerlink" title="例子:"></a>例子:</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">objc_property_attribute_t type = &#123; <span class="string">"T"</span>, <span class="string">"@\"NSString\""</span> &#125;;</div><div class="line">objc_property_attribute_t ownership = &#123; <span class="string">"C"</span>, <span class="string">""</span> &#125;; <span class="comment">// C = copy</span></div><div class="line">objc_property_attribute_t backingivar  = &#123; <span class="string">"V"</span>, <span class="string">""</span> &#125;;</div><div class="line">objc_property_attribute_t attrs[] = &#123; type, ownership, backingivar &#125;;</div><div class="line"></div><div class="line">class_replaceProperty([_person <span class="keyword">class</span>], <span class="string">"country"</span>, attrs, <span class="number">3</span>);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="替代方法的实现"><a href="#替代方法的实现" class="headerlink" title="替代方法的实现"></a>替代方法的实现</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">IMP class_replaceMethod(Class cls, SEL name, IMP imp, <span class="keyword">const</span> <span class="keyword">char</span> *types)</div></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="cls-类-12"><a href="#cls-类-12" class="headerlink" title="cls: 类"></a>cls: 类</h3></li>
+<li><h3 id="name-被替代的方法"><a href="#name-被替代的方法" class="headerlink" title="name: 被替代的方法"></a>name: 被替代的方法</h3></li>
+<li><h3 id="imp-替代方法"><a href="#imp-替代方法" class="headerlink" title="imp: 替代方法"></a>imp: 替代方法</h3></li>
+<li><h3 id="types-类型-1"><a href="#types-类型-1" class="headerlink" title="types: 类型"></a>types: 类型</h3></li>
+<li><h3 id="返回值-IMP"><a href="#返回值-IMP" class="headerlink" title="返回值: IMP"></a>返回值: IMP</h3><h3 id="例子-19"><a href="#例子-19" class="headerlink" title="例子:"></a>例子:</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">class_replaceMethod([_person <span class="keyword">class</span>], <span class="keyword">@selector</span>(method1), class_getMethodImplementation([_person <span class="keyword">class</span>], <span class="keyword">@selector</span>(method2)), <span class="string">"v@:"</span>);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<h2 id="六、Class-判断"><a href="#六、Class-判断" class="headerlink" title="六、Class 判断"></a>六、Class 判断</h2></blockquote>
+<h3 id="判断类是否有实现指定方法"><a href="#判断类是否有实现指定方法" class="headerlink" title="判断类是否有实现指定方法"></a>判断类是否有实现指定方法</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">BOOL</span> class_respondsToSelector(Class cls, SEL sel)</div></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="cls-类-13"><a href="#cls-类-13" class="headerlink" title="cls: 类"></a>cls: 类</h3></li>
+<li><h3 id="sel-方法"><a href="#sel-方法" class="headerlink" title="sel: 方法"></a>sel: 方法</h3></li>
+<li><h3 id="返回值-YES-已经实现-NO-没有实现"><a href="#返回值-YES-已经实现-NO-没有实现" class="headerlink" title="返回值: YES: 已经实现 NO: 没有实现"></a>返回值: YES: 已经实现 NO: 没有实现</h3><h3 id="例子-20"><a href="#例子-20" class="headerlink" title="例子:"></a>例子:</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (class_respondsToSelector([_person <span class="keyword">class</span>], <span class="keyword">@selector</span>(methodName))) &#123;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%s %@ exist"</span>, __func__, <span class="built_in">NSStringFromClass</span>(<span class="keyword">class</span>));</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%s %@ non-exist"</span>, __func__, <span class="built_in">NSStringFromClass</span>(<span class="keyword">class</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="查看类是否为元类"><a href="#查看类是否为元类" class="headerlink" title="查看类是否为元类"></a>查看类是否为元类</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">BOOL</span> class_isMetaClass(Class cls)</div></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="cls-类-14"><a href="#cls-类-14" class="headerlink" title="cls: 类"></a>cls: 类</h3></li>
+<li><h3 id="返回值-YES-是元类-NO-不是元类"><a href="#返回值-YES-是元类-NO-不是元类" class="headerlink" title="返回值: YES: 是元类 NO: 不是元类"></a>返回值: YES: 是元类 NO: 不是元类</h3><h3 id="例子-21"><a href="#例子-21" class="headerlink" title="例子:"></a>例子:</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (class_isMetaClass(<span class="keyword">class</span>)) &#123;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%s %@ isMetaClass"</span>, __func__, <span class="built_in">NSStringFromClass</span>(<span class="keyword">class</span>));</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%s %@ non-isMetaClass"</span>, __func__, <span class="built_in">NSStringFromClass</span>(<span class="keyword">class</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="查看类是否遵循指定协议"><a href="#查看类是否遵循指定协议" class="headerlink" title="查看类是否遵循指定协议"></a>查看类是否遵循指定协议</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">BOOL</span> class_conformsToProtocol(Class cls, Protocol *protocol)</div></pre></td></tr></table></figure>
+<ul>
+<li><h3 id="cls-类-15"><a href="#cls-类-15" class="headerlink" title="cls: 类"></a>cls: 类</h3></li>
+<li><h3 id="protocol-协议-1"><a href="#protocol-协议-1" class="headerlink" title="protocol: 协议"></a>protocol: 协议</h3></li>
+<li><h3 id="返回值-YES-已经遵循指定协议-NO-没有遵循指定协议"><a href="#返回值-YES-已经遵循指定协议-NO-没有遵循指定协议" class="headerlink" title="返回值: YES: 已经遵循指定协议 NO: 没有遵循指定协议"></a>返回值: YES: 已经遵循指定协议 NO: 没有遵循指定协议</h3><h3 id="例子-22"><a href="#例子-22" class="headerlink" title="例子:"></a>例子:</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (class_conformsToProtocol([Person <span class="keyword">class</span>], <span class="built_in">NSProtocolFromString</span>(<span class="string">@"RuntimeBaseProtocol"</span>))) &#123;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%s %@ conformsToProtocol %@"</span>, __func__, <span class="built_in">NSStringFromClass</span>(<span class="keyword">class</span>), <span class="built_in">NSStringFromProtocol</span>(protocol));</div><div class="line"><span class="keyword">return</span> <span class="literal">YES</span>;</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%s %@ non-conformsToProtocol %@"</span>, __func__, <span class="built_in">NSStringFromClass</span>(<span class="keyword">class</span>), <span class="built_in">NSStringFromProtocol</span>(protocol));</div><div class="line"><span class="keyword">return</span> <span class="literal">NO</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------本文结束😘<i class="fa fa-paw"></i>感谢阅读------</div>
+    
+</div>
+    
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/25/RunLoop与线程与GCD的关系/" rel="next" title="RunLoop与线程与GCD的关系">
+                <i class="fa fa-chevron-left"></i> RunLoop与线程与GCD的关系
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/25/RunLoop的内部逻辑/" rel="prev" title="RunLoop的内部逻辑">
+                RunLoop的内部逻辑 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="飘金" />
+          <p class="site-author-name" itemprop="name">飘金</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/piaojin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/da7864faa1be" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-piaojin"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#注-此篇中记录的是以class开头的runtime函数"><span class="nav-number">1.</span> <span class="nav-text">注: 此篇中记录的是以class开头的runtime函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、创建对象"><span class="nav-number">2.</span> <span class="nav-text">一、创建对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个对象"><span class="nav-number">3.</span> <span class="nav-text">创建一个对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类型"><span class="nav-number">3.1.</span> <span class="nav-text">cls: 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#extraBytes-分配的内存大小"><span class="nav-number">3.2.</span> <span class="nav-text">extraBytes: 分配的内存大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-cls类型的实例对象"><span class="nav-number">3.3.</span> <span class="nav-text">返回值: cls类型的实例对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">3.4.</span> <span class="nav-text">例子:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、类名、父类、实例变量、成员变量、属性、实例方法、类方法、方法实现"><span class="nav-number">4.</span> <span class="nav-text">二、类名、父类、实例变量、成员变量、属性、实例方法、类方法、方法实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取指定类的类名-char-类型字符串"><span class="nav-number">4.1.</span> <span class="nav-text">获取指定类的类名 (char *类型字符串)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类型-1"><span class="nav-number">4.2.</span> <span class="nav-text">cls: 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-类名-char-类型的字符串"><span class="nav-number">4.3.</span> <span class="nav-text">返回值: 类名 - char  类型的字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-1"><span class="nav-number">4.4.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取指定类的父类型-Class类型"><span class="nav-number">4.5.</span> <span class="nav-text">获取指定类的父类型 (Class类型)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类型-2"><span class="nav-number">4.6.</span> <span class="nav-text">cls: 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-父类型-Class类型"><span class="nav-number">4.7.</span> <span class="nav-text">返回值: 父类型 Class类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-2"><span class="nav-number">4.8.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取一个指定类型的实例占用内存大小-size-t-类型"><span class="nav-number">4.9.</span> <span class="nav-text">获取一个指定类型的实例占用内存大小 (size_t 类型)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类型-3"><span class="nav-number">4.10.</span> <span class="nav-text">cls: 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-cls类型的一个实例对象占用内存大小"><span class="nav-number">4.11.</span> <span class="nav-text">返回值: cls类型的一个实例对象占用内存大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-3"><span class="nav-number">4.12.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取一个类中-指定名称的实例成员变量的信息"><span class="nav-number">4.13.</span> <span class="nav-text">获取一个类中, 指定名称的实例成员变量的信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类型-4"><span class="nav-number">4.14.</span> <span class="nav-text">cls: 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name-成员变量名（属性带-“-”）"><span class="nav-number">4.15.</span> <span class="nav-text">name: 成员变量名（属性带 “_”）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-成员变量信息"><span class="nav-number">4.16.</span> <span class="nav-text">返回值: 成员变量信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-4"><span class="nav-number">4.17.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取属性的信息-不用打"><span class="nav-number">4.18.</span> <span class="nav-text">获取属性的信息, 不用打_</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类"><span class="nav-number">4.19.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name-属性名"><span class="nav-number">4.20.</span> <span class="nav-text">name: 属性名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-属性信息"><span class="nav-number">4.21.</span> <span class="nav-text">返回值: 属性信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-5"><span class="nav-number">4.22.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取对象方法信息-“-“-方法"><span class="nav-number">4.23.</span> <span class="nav-text">获取对象方法信息 ( “-“ 方法)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-1"><span class="nav-number">4.24.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name-方法"><span class="nav-number">4.25.</span> <span class="nav-text">name: 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-对象方法信息-Method类型"><span class="nav-number">4.26.</span> <span class="nav-text">返回值: 对象方法信息 - * ### Method类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-6"><span class="nav-number">4.27.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取类方法的信息-“-”-方法"><span class="nav-number">4.28.</span> <span class="nav-text">获取类方法的信息 ( “+” 方法 )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-2"><span class="nav-number">4.29.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name-方法-1"><span class="nav-number">4.30.</span> <span class="nav-text">name: 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-对象方法信息-Method类型-1"><span class="nav-number">4.31.</span> <span class="nav-text">返回值: 对象方法信息 - ### Method类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-7"><span class="nav-number">4.32.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取方法的具体实现-IMP"><span class="nav-number">4.33.</span> <span class="nav-text">获取方法的具体实现 (IMP)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-3"><span class="nav-number">4.34.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name-方法-2"><span class="nav-number">4.35.</span> <span class="nav-text">name: 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-方法的具体实现-IMP类型"><span class="nav-number">4.36.</span> <span class="nav-text">返回值: 方法的具体实现 ### IMP类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-8"><span class="nav-number">4.37.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取方法的具体实现-返回值类型为struct"><span class="nav-number">4.38.</span> <span class="nav-text">获取方法的具体实现, 返回值类型为struct</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-4"><span class="nav-number">4.39.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name-方法-3"><span class="nav-number">4.40.</span> <span class="nav-text">name: 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-方法的具体实现-struct-IMP类型"><span class="nav-number">4.41.</span> <span class="nav-text">返回值: 方法的具体实现 ### struct IMP类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-9"><span class="nav-number">4.42.</span> <span class="nav-text">例子:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、成员变量列表、属性列表、方法列表、协议列表"><span class="nav-number">5.</span> <span class="nav-text">三、成员变量列表、属性列表、方法列表、协议列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取成员变量列表"><span class="nav-number">5.1.</span> <span class="nav-text">获取成员变量列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-5"><span class="nav-number">5.2.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#outCount-无符号整形变量的指针-用于获取成员变量数量"><span class="nav-number">5.3.</span> <span class="nav-text">*outCount: 无符号整形变量的指针, 用于获取成员变量数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-成员变量列表"><span class="nav-number">5.4.</span> <span class="nav-text">返回值: 成员变量列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-10"><span class="nav-number">5.5.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取属性列表"><span class="nav-number">5.6.</span> <span class="nav-text">获取属性列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类型-5"><span class="nav-number">5.7.</span> <span class="nav-text">cls: 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#outCount-无符号整形变量的指针-用于获取属性数量"><span class="nav-number">5.8.</span> <span class="nav-text">*outCount: 无符号整形变量的指针, 用于获取属性数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-属性列表"><span class="nav-number">5.9.</span> <span class="nav-text">返回值: 属性列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-11"><span class="nav-number">5.10.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取方法列表"><span class="nav-number">5.11.</span> <span class="nav-text">获取方法列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-6"><span class="nav-number">5.12.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#outCount-无符号整形变量的指针-用于获取方法数量"><span class="nav-number">5.13.</span> <span class="nav-text">*outCount: 无符号整形变量的指针, 用于获取方法数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-方法列表"><span class="nav-number">5.14.</span> <span class="nav-text">返回值: 方法列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-12"><span class="nav-number">5.15.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取协议列表"><span class="nav-number">5.16.</span> <span class="nav-text">获取协议列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-7"><span class="nav-number">5.17.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#outCount-无符号整形变量的指针-用于获取协议数量"><span class="nav-number">5.18.</span> <span class="nav-text">*outCount: 无符号整形变量的指针, 用于获取协议数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-协议列表"><span class="nav-number">5.19.</span> <span class="nav-text">返回值: 协议列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-13"><span class="nav-number">5.20.</span> <span class="nav-text">例子:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、add-成员变量、属性、方法、协议"><span class="nav-number">6.</span> <span class="nav-text">四、add: 成员变量、属性、方法、协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加成员变量-添加成员变量只能在运行时创建的类，且不能为元类"><span class="nav-number">6.1.</span> <span class="nav-text">添加成员变量(添加成员变量只能在运行时创建的类，且不能为元类)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-8"><span class="nav-number">6.2.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name-成员变量名"><span class="nav-number">6.3.</span> <span class="nav-text">name: 成员变量名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#size-大小"><span class="nav-number">6.4.</span> <span class="nav-text">size: 大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#alignment-对齐方式"><span class="nav-number">6.5.</span> <span class="nav-text">alignment: 对齐方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#types-参数类型"><span class="nav-number">6.6.</span> <span class="nav-text">types: 参数类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-YES-添加成功-NO-添加失败"><span class="nav-number">6.7.</span> <span class="nav-text">返回值: YES: 添加成功 NO: 添加失败</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-14"><span class="nav-number">6.8.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加属性"><span class="nav-number">6.9.</span> <span class="nav-text">添加属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-9"><span class="nav-number">6.10.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name-属性名-1"><span class="nav-number">6.11.</span> <span class="nav-text">name: 属性名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#attributes-参数"><span class="nav-number">6.12.</span> <span class="nav-text">attributes: 参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#attributeCount-参数数量"><span class="nav-number">6.13.</span> <span class="nav-text">attributeCount: 参数数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-YES-添加成功-NO-添加失败-1"><span class="nav-number">6.14.</span> <span class="nav-text">返回值: YES: 添加成功  NO: 添加失败</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-15"><span class="nav-number">6.15.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加方法"><span class="nav-number">6.16.</span> <span class="nav-text">添加方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类型-6"><span class="nav-number">6.17.</span> <span class="nav-text">cls: 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name-方法-4"><span class="nav-number">6.18.</span> <span class="nav-text">name: 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#imp-方法实现"><span class="nav-number">6.19.</span> <span class="nav-text">imp: 方法实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#types-类型"><span class="nav-number">6.20.</span> <span class="nav-text">types: 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-YES-添加成功-NO-添加失败-2"><span class="nav-number">6.21.</span> <span class="nav-text">返回值: YES: 添加成功 NO: 添加失败</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-16"><span class="nav-number">6.22.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加协议"><span class="nav-number">6.23.</span> <span class="nav-text">添加协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-10"><span class="nav-number">6.24.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#protocol-协议"><span class="nav-number">6.25.</span> <span class="nav-text">protocol: 协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-YES-添加成功-NO-添加失败-3"><span class="nav-number">6.26.</span> <span class="nav-text">返回值: YES: 添加成功 NO: 添加失败</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-17"><span class="nav-number">6.27.</span> <span class="nav-text">例子:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、replace-属性、方法"><span class="nav-number">7.</span> <span class="nav-text">五、replace: 属性、方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#替换属性的信息-如果没有原属性会新建一个属性"><span class="nav-number">7.1.</span> <span class="nav-text">替换属性的信息(如果没有原属性会新建一个属性)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-11"><span class="nav-number">7.2.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name-属性名-2"><span class="nav-number">7.3.</span> <span class="nav-text">name: 属性名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#attributes-类型"><span class="nav-number">7.4.</span> <span class="nav-text">attributes: 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#attributeCount-类型数量"><span class="nav-number">7.5.</span> <span class="nav-text">attributeCount: 类型数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无返回值"><span class="nav-number">7.6.</span> <span class="nav-text">无返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-18"><span class="nav-number">7.7.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#替代方法的实现"><span class="nav-number">7.8.</span> <span class="nav-text">替代方法的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-12"><span class="nav-number">7.9.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name-被替代的方法"><span class="nav-number">7.10.</span> <span class="nav-text">name: 被替代的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#imp-替代方法"><span class="nav-number">7.11.</span> <span class="nav-text">imp: 替代方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#types-类型-1"><span class="nav-number">7.12.</span> <span class="nav-text">types: 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-IMP"><span class="nav-number">7.13.</span> <span class="nav-text">返回值: IMP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-19"><span class="nav-number">7.14.</span> <span class="nav-text">例子:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、Class-判断"><span class="nav-number">8.</span> <span class="nav-text">六、Class 判断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#判断类是否有实现指定方法"><span class="nav-number">8.1.</span> <span class="nav-text">判断类是否有实现指定方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-13"><span class="nav-number">8.2.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sel-方法"><span class="nav-number">8.3.</span> <span class="nav-text">sel: 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-YES-已经实现-NO-没有实现"><span class="nav-number">8.4.</span> <span class="nav-text">返回值: YES: 已经实现 NO: 没有实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-20"><span class="nav-number">8.5.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看类是否为元类"><span class="nav-number">8.6.</span> <span class="nav-text">查看类是否为元类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-14"><span class="nav-number">8.7.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-YES-是元类-NO-不是元类"><span class="nav-number">8.8.</span> <span class="nav-text">返回值: YES: 是元类 NO: 不是元类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-21"><span class="nav-number">8.9.</span> <span class="nav-text">例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看类是否遵循指定协议"><span class="nav-number">8.10.</span> <span class="nav-text">查看类是否遵循指定协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cls-类-15"><span class="nav-number">8.11.</span> <span class="nav-text">cls: 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#protocol-协议-1"><span class="nav-number">8.12.</span> <span class="nav-text">protocol: 协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-YES-已经遵循指定协议-NO-没有遵循指定协议"><span class="nav-number">8.13.</span> <span class="nav-text">返回值: YES: 已经遵循指定协议 NO: 没有遵循指定协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-22"><span class="nav-number">8.14.</span> <span class="nav-text">例子:</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">飘金</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/title.js"></script>

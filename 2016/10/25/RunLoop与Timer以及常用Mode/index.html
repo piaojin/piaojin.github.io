@@ -1,0 +1,749 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,Swift" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="RunLoop与Timer以及常用Mode">
+<meta name="keywords" content="iOS,Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RunLoop与Timer以及常用Mode">
+<meta property="og:url" content="http://yoursite.com/2016/10/25/RunLoop与Timer以及常用Mode/index.html">
+<meta property="og:site_name" content="飘金的博客">
+<meta property="og:description" content="RunLoop与Timer以及常用Mode">
+<meta property="og:updated_time" content="2017-07-05T07:58:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RunLoop与Timer以及常用Mode">
+<meta name="twitter:description" content="RunLoop与Timer以及常用Mode">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/25/RunLoop与Timer以及常用Mode/"/>
+
+
+
+
+
+  <title>RunLoop与Timer以及常用Mode | 飘金的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">飘金的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">会炒菜的猿</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/25/RunLoop与Timer以及常用Mode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="飘金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="飘金的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">RunLoop与Timer以及常用Mode</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-25T14:23:47+08:00">
+                2016-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><center style="color:#FF7F50">RunLoop与Timer以及常用Mode</center><br><a id="more"></a></p>
+<h2 id="创建一个新的项目就不说了-在主控制器上添加一个可以滑动的UI控件-这边我选择UITextView"><a href="#创建一个新的项目就不说了-在主控制器上添加一个可以滑动的UI控件-这边我选择UITextView" class="headerlink" title="创建一个新的项目就不说了,在主控制器上添加一个可以滑动的UI控件,这边我选择UITextView"></a>创建一个新的项目就不说了,在主控制器上添加一个可以滑动的UI控件,这边我选择UITextView</h2><h3 id="直接上代码-代码已经注释的很清楚了"><a href="#直接上代码-代码已经注释的很清楚了" class="headerlink" title="直接上代码,代码已经注释的很清楚了"></a>直接上代码,代码已经注释的很清楚了</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">[<span class="keyword">super</span> viewDidLoad];</div><div class="line">_finished = <span class="literal">NO</span>;</div><div class="line"><span class="comment">/*创建一个定时器(以这种方式创建的定时器会被自动添加到当前的RunLoop中并且自动开始计时,很显然当前的RunLoop的Mode是NSDefaultRunLoopMode)*/</span></div><div class="line"><span class="comment">//scheduledTimerWithTimeInterval开头设置的定时器都会自动添加到当前RunLoop的NSDefaultRunLoopMode下</span></div><div class="line"><span class="built_in">NSTimer</span> *timer1 = [<span class="built_in">NSTimer</span> scheduledTimerWithTimeInterval:<span class="number">1.0</span> target:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(timeMethod1) userInfo:<span class="literal">nil</span> repeats:<span class="literal">YES</span>];</div><div class="line"><span class="comment">//在界面上添加一个UITextView,里面设置足够多的文本以让它可以滑动,当我们滑动文本框的时候当前的的RunLoop的Mode会切换到UITrackingRunLoopMode用于处理UI的滚动等时间,这时timer因为是设置在NSDefaultRunLoopMode下才计时,故此时timer会暂停计时,知道处理完UI滚动等事件RunLoop再次切换回NSDefaultRunLoopMode这时timer才会继续计时.</span></div><div class="line"><span class="comment">//NSRunLoopCommonModes表示的是NSDefaultRunLoopMode或UITrackingRunLoopMode,也就是说如果把timer设置在NSRunLoopCommonModes下,当RunLoop的Mode为NSDefaultRunLoopMode或UITrackingRunLoopMode计时器都可以正常计时</span></div><div class="line"></div><div class="line"><span class="comment">//创建一个定时器,与上面定时器不同的是该定时器并不会自动添加到当前的RunLoop下,并且不会自动开始计时(可以运行一下,就知道timeMethod2)</span></div><div class="line"><span class="built_in">NSTimer</span> *timer2 = [<span class="built_in">NSTimer</span> timerWithTimeInterval:<span class="number">1.0</span> target:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(timeMethod2) userInfo:<span class="literal">nil</span> repeats:<span class="literal">YES</span>];</div><div class="line"><span class="comment">//如果我们手动开始计时,你回发现@"timeMethod2"只被打印一次就停止了,那时因为timer2并没有被添加到任何的RunLoop中</span></div><div class="line">[timer2 fire];</div><div class="line"></div><div class="line"><span class="comment">//在创建一个定时器,与timer2不同的是我们把timer3手动添加到当前NSRunLoop中,此时计时器就会自动开始计时无需手动调用[timer3 fire]</span></div><div class="line"><span class="built_in">NSTimer</span> *timer3 = [<span class="built_in">NSTimer</span> timerWithTimeInterval:<span class="number">1.0</span> target:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(timeMethod3) userInfo:<span class="literal">nil</span> repeats:<span class="literal">YES</span>];</div><div class="line">[[<span class="built_in">NSRunLoop</span> currentRunLoop] addTimer:timer3 forMode:<span class="built_in">NSDefaultRunLoopMode</span>];</div><div class="line">[timer3 fire];<span class="comment">//此时计时器就会自动开始计时无需手动调用</span></div><div class="line"></div><div class="line"><span class="comment">//上面timer1与timer3都是添加到当前的RunLoop中去,并且是在NSDefaultRunLoopMode下,此时只要滑动界面的UI,这两个定时器timer1与timer3都会暂停计时,为了让计时器在UI滚动时也可以正常计时,我们试着把计时器添加在当前RunLoopMode的UITrackingRunLoopMode模式下</span></div><div class="line"><span class="built_in">NSTimer</span> *timer4 = [<span class="built_in">NSTimer</span> timerWithTimeInterval:<span class="number">1.0</span> target:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(timeMethod4) userInfo:<span class="literal">nil</span> repeats:<span class="literal">YES</span>];</div><div class="line">[[<span class="built_in">NSRunLoop</span> currentRunLoop] addTimer:timer4 forMode:<span class="built_in">UITrackingRunLoopMode</span>];</div><div class="line"><span class="comment">//此时UI滚动时也timer4正常计时,现在在timeMethod4添加[NSThread sleepForTimeInterval:1.0];来模拟处理耗时操作,运行,在滑动UI你会发现虽然计时可以正常计时,但是明显感到了UI滚动时的卡顿,那时因为你在UITrackingRunLoopMode模式下处理了耗时的操作,此时的RunLoop纪要处理UI滚动也处理耗时操作自然会卡顿,显然不妥</span></div><div class="line"></div><div class="line"><span class="comment">//解决timer4的问题,创建一个定时器,并且把他放到子线程中去,子线程我们这边使用继承自NSThread的自定义线程PJThread</span></div><div class="line">PJThread *pjThread1 = [[PJThread alloc] initWithBlock:^&#123;</div><div class="line"><span class="built_in">NSTimer</span> *timer5 = [<span class="built_in">NSTimer</span> timerWithTimeInterval:<span class="number">1.0</span> target:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(timeMethod5) userInfo:<span class="literal">nil</span> repeats:<span class="literal">YES</span>];</div><div class="line">&#125;];</div><div class="line"><span class="comment">//线程跑起来</span></div><div class="line">[pjThread1 start];</div><div class="line"><span class="comment">//pjThread1执行后我们并没有看到"timeMethod5"被打印,并且打印出"PJThread 被销毁了!",说明pjThread1执行完就被销毁了,而timer5没有计时打印出"timeMethod5"是因为他没有被添加到任何RunLoop下</span></div><div class="line"></div><div class="line"><span class="comment">//解决pjThread1与timer5的问题,我们在创建pjThread2与timer6</span></div><div class="line">PJThread *pjThread2 = [[PJThread alloc] initWithBlock:^&#123;</div><div class="line"><span class="built_in">NSTimer</span> *timer6 = [<span class="built_in">NSTimer</span> timerWithTimeInterval:<span class="number">1.0</span> target:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(timeMethod6) userInfo:<span class="literal">nil</span> repeats:<span class="literal">YES</span>];</div><div class="line"><span class="comment">//[NSRunLoop currentRunLoop]会获取当前的RunLoop,**如果当前没有则会创建一个**</span></div><div class="line"><span class="built_in">NSRunLoop</span> *runLoop1 = [<span class="built_in">NSRunLoop</span> currentRunLoop];</div><div class="line"><span class="comment">//在NSRunLoopCommonModes下也是可以的,但是苹果官方推荐NSDefaultRunLoopMode,在runLoop1下已经不会受到UI滚动的影响了</span></div><div class="line">[runLoop1 addTimer:timer6 forMode:<span class="built_in">NSDefaultRunLoopMode</span>];</div><div class="line"><span class="comment">//run之后代码会一直死循环在此处不会往下执行,所以"runLoop1执行之后!"是不会被打印的</span></div><div class="line">[runLoop1 run];</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"runLoop1执行之后!"</span>);</div><div class="line">&#125;];</div><div class="line">[pjThread2 setName:<span class="string">@"pjThread2"</span>];</div><div class="line"><span class="comment">//线程跑起来</span></div><div class="line">[pjThread2 start];</div><div class="line"><span class="comment">//此时timer6可以正常计时了,并且pjThread2也没有被销毁了,滑动UI也不会卡顿了,timer6在UI滚动时也可以正常计时,处理耗时操作,这是因为[runLoop1 run]之后代码会一直死循环在此处不会往下执行,所以"runLoop1执行之后!"是不会被打印的,并且pjThread2也不会被销毁</span></div><div class="line"></div><div class="line">__<span class="keyword">weak</span> <span class="keyword">typeof</span>(<span class="keyword">self</span>) weakSelf = <span class="keyword">self</span>;</div><div class="line">PJThread *pjThread3 = [[PJThread alloc] initWithBlock:^&#123;</div><div class="line"><span class="built_in">NSTimer</span> *timer7 = [<span class="built_in">NSTimer</span> timerWithTimeInterval:<span class="number">1.0</span> target:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(timeMethod7) userInfo:<span class="literal">nil</span> repeats:<span class="literal">YES</span>];</div><div class="line"><span class="comment">//[NSRunLoop currentRunLoop]会获取当前的RunLoop,**如果当前没有则会创建一个**</span></div><div class="line"><span class="built_in">NSRunLoop</span> *runLoop2 = [<span class="built_in">NSRunLoop</span> currentRunLoop];</div><div class="line"><span class="comment">//在NSRunLoopCommonModes下也是可以的,但是苹果官方推荐NSDefaultRunLoopMode,在runLoop1下已经不会受到UI滚动的影响了</span></div><div class="line">[runLoop2 addTimer:timer7 forMode:<span class="built_in">NSDefaultRunLoopMode</span>];</div><div class="line"><span class="comment">//runUntilDate表示每隔多久执行一次runLoop,我们设置点击屏幕就让finished为真YES,看能不能达到退出循环打印"runLoop2执行之后!"(RunLoop执行速度很快,故设置0.01够了),实际运行时可以打印"runLoop2执行之后!",并且也打印"PJThread : pjThread3 被销毁了!"</span></div><div class="line"><span class="keyword">while</span>(!weakSelf.finished)&#123;</div><div class="line">[runLoop2 runUntilDate:[<span class="built_in">NSDate</span> dateWithTimeIntervalSinceReferenceDate:<span class="number">0.01</span>]];</div><div class="line">&#125;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"runLoop2执行之后!"</span>);</div><div class="line">&#125;];</div><div class="line">[pjThread3 setName:<span class="string">@"pjThread3"</span>];</div><div class="line"><span class="comment">//线程跑起来</span></div><div class="line">[pjThread3 start];</div><div class="line"></div><div class="line"><span class="comment">//到此暂时结束,线程和RunLoop的关系是非常密切的,一个线程要保持一致运行部退出需要RunLoop来帮助实现</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)timeMethod1&#123;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"timeMethod1"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)timeMethod2&#123;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"timeMethod2"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)timeMethod3&#123;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"timeMethod3"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)timeMethod4&#123;</div><div class="line">[<span class="built_in">NSThread</span> sleepForTimeInterval:<span class="number">1.0</span>];</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"timeMethod4"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)timeMethod5&#123;</div><div class="line">[<span class="built_in">NSThread</span> sleepForTimeInterval:<span class="number">1.0</span>];</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"timeMethod5"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)timeMethod6&#123;</div><div class="line">[<span class="built_in">NSThread</span> sleepForTimeInterval:<span class="number">1.0</span>];</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"timeMethod6"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)timeMethod7&#123;</div><div class="line">[<span class="built_in">NSThread</span> sleepForTimeInterval:<span class="number">1.0</span>];</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"timeMethod7"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:(<span class="built_in">UIEvent</span> *)event&#123;</div><div class="line"><span class="keyword">self</span>.finished = <span class="literal">YES</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------本文结束😘<i class="fa fa-paw"></i>感谢阅读------</div>
+    
+</div>
+    
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/25/iOS多线程之概念篇/" rel="next" title="iOS多线程之概念篇">
+                <i class="fa fa-chevron-left"></i> iOS多线程之概念篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/25/RunTime运行时(一)/" rel="prev" title="RunTime运行时(一)">
+                RunTime运行时(一) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="飘金" />
+          <p class="site-author-name" itemprop="name">飘金</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/piaojin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/da7864faa1be" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-piaojin"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个新的项目就不说了-在主控制器上添加一个可以滑动的UI控件-这边我选择UITextView"><span class="nav-number">1.</span> <span class="nav-text">创建一个新的项目就不说了,在主控制器上添加一个可以滑动的UI控件,这边我选择UITextView</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#直接上代码-代码已经注释的很清楚了"><span class="nav-number">1.1.</span> <span class="nav-text">直接上代码,代码已经注释的很清楚了</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">飘金</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/title.js"></script>

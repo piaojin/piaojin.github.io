@@ -1,0 +1,784 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,Swift,离屏渲染" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="离屏渲染">
+<meta name="keywords" content="iOS,Swift,离屏渲染">
+<meta property="og:type" content="article">
+<meta property="og:title" content="离屏渲染">
+<meta property="og:url" content="http://yoursite.com/2016/10/25/离屏渲染浅析/index.html">
+<meta property="og:site_name" content="飘金的博客">
+<meta property="og:description" content="离屏渲染">
+<meta property="og:updated_time" content="2017-07-05T08:01:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="离屏渲染">
+<meta name="twitter:description" content="离屏渲染">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/25/离屏渲染浅析/"/>
+
+
+
+
+
+  <title>离屏渲染 | 飘金的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">飘金的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">会炒菜的猿</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/25/离屏渲染浅析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="飘金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="飘金的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">离屏渲染</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-25T22:02:00+08:00">
+                2016-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><center style="color:#FF7F50">离屏渲染</center><br><a id="more"></a></p>
+<blockquote>
+<h1 id="GPU渲染机制："><a href="#GPU渲染机制：" class="headerlink" title="GPU渲染机制："></a>GPU渲染机制：</h1></blockquote>
+<h2 id="CPU-计算好显示内容提交到-GPU，GPU-渲染完成后将渲染结果放入帧缓冲区，随后视频控制器会按照-VSync-信号逐行读取帧缓冲区的数据，经过可能的数模转换传递给显示器显示。"><a href="#CPU-计算好显示内容提交到-GPU，GPU-渲染完成后将渲染结果放入帧缓冲区，随后视频控制器会按照-VSync-信号逐行读取帧缓冲区的数据，经过可能的数模转换传递给显示器显示。" class="headerlink" title="CPU 计算好显示内容提交到 GPU，GPU 渲染完成后将渲染结果放入帧缓冲区，随后视频控制器会按照 VSync 信号逐行读取帧缓冲区的数据，经过可能的数模转换传递给显示器显示。"></a>CPU 计算好显示内容提交到 GPU，GPU 渲染完成后将渲染结果放入帧缓冲区，随后视频控制器会按照 VSync 信号逐行读取帧缓冲区的数据，经过可能的数模转换传递给显示器显示。</h2><blockquote>
+<h1 id="GPU屏幕渲染有以下两种方式："><a href="#GPU屏幕渲染有以下两种方式：" class="headerlink" title="GPU屏幕渲染有以下两种方式："></a>GPU屏幕渲染有以下两种方式：</h1></blockquote>
+<ul>
+<li><h2 id="On-Screen-Rendering"><a href="#On-Screen-Rendering" class="headerlink" title="On-Screen Rendering"></a>On-Screen Rendering</h2><h3 id="意为当前屏幕渲染，指的是GPU的渲染操作是在当前用于显示的屏幕缓冲区中进行。"><a href="#意为当前屏幕渲染，指的是GPU的渲染操作是在当前用于显示的屏幕缓冲区中进行。" class="headerlink" title="意为当前屏幕渲染，指的是GPU的渲染操作是在当前用于显示的屏幕缓冲区中进行。"></a>意为当前屏幕渲染，指的是GPU的渲染操作是在当前用于显示的屏幕缓冲区中进行。</h3></li>
+<li><h2 id="Off-Screen-Rendering"><a href="#Off-Screen-Rendering" class="headerlink" title="Off-Screen Rendering"></a>Off-Screen Rendering</h2><h3 id="意为离屏渲染，指的是GPU在当前屏幕缓冲区以外新开辟一个缓冲区进行渲染操作。"><a href="#意为离屏渲染，指的是GPU在当前屏幕缓冲区以外新开辟一个缓冲区进行渲染操作。" class="headerlink" title="意为离屏渲染，指的是GPU在当前屏幕缓冲区以外新开辟一个缓冲区进行渲染操作。"></a>意为离屏渲染，指的是GPU在当前屏幕缓冲区以外新开辟一个缓冲区进行渲染操作。</h3></li>
+</ul>
+<blockquote>
+<p>特殊的离屏渲染：<br>如果将不在GPU的当前屏幕缓冲区中进行的渲染都称为离屏渲染，那么就还有另一种特殊的“离屏渲染”方式： CPU渲染。<br>如果我们重写了drawRect方法，并且使用任何Core Graphics的技术进行了绘制操作，就涉及到了CPU渲染。整个渲染过程由CPU在App内 同步地<br>完成，渲染得到的bitmap最后再交由GPU用于显示。<br>备注：CoreGraphic通常是线程安全的，所以可以进行异步绘制，显示的时候再放回主线程，一个简单的异步绘制过程大致如下<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)display &#123;</div><div class="line"><span class="built_in">dispatch_async</span>(backgroundQueue, ^&#123;</div><div class="line"><span class="built_in">CGContextRef</span> ctx = <span class="built_in">CGBitmapContextCreate</span>(...);</div><div class="line"><span class="comment">// draw in context...</span></div><div class="line"><span class="built_in">CGImageRef</span> img = <span class="built_in">CGBitmapContextCreateImage</span>(ctx);</div><div class="line"><span class="built_in">CFRelease</span>(ctx);</div><div class="line"><span class="built_in">dispatch_async</span>(mainQueue, ^&#123;</div><div class="line">layer.contents = img;</div><div class="line">&#125;);</div><div class="line">&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="离屏渲染的触发方式"><a href="#离屏渲染的触发方式" class="headerlink" title="离屏渲染的触发方式"></a>离屏渲染的触发方式</h2></blockquote>
+<h2 id="设置了以下属性时，都会触发离屏绘制："><a href="#设置了以下属性时，都会触发离屏绘制：" class="headerlink" title="设置了以下属性时，都会触发离屏绘制："></a>设置了以下属性时，都会触发离屏绘制：</h2><ul>
+<li><h2 id="shouldRasterize（光栅化）"><a href="#shouldRasterize（光栅化）" class="headerlink" title="shouldRasterize（光栅化）"></a>shouldRasterize（光栅化）</h2></li>
+<li><h2 id="masks（遮罩）"><a href="#masks（遮罩）" class="headerlink" title="masks（遮罩）"></a>masks（遮罩）</h2></li>
+<li><h2 id="shadows（阴影）"><a href="#shadows（阴影）" class="headerlink" title="shadows（阴影）"></a>shadows（阴影）</h2></li>
+<li><h2 id="edge"><a href="#edge" class="headerlink" title="edge"></a>edge</h2></li>
+<li><h2 id="antialiasing（抗锯齿）"><a href="#antialiasing（抗锯齿）" class="headerlink" title="antialiasing（抗锯齿）"></a>antialiasing（抗锯齿）</h2></li>
+<li><h2 id="group-opacity（不透明）"><a href="#group-opacity（不透明）" class="headerlink" title="group opacity（不透明）"></a>group opacity（不透明）</h2></li>
+<li><h2 id="复杂形状设置圆角等"><a href="#复杂形状设置圆角等" class="headerlink" title="复杂形状设置圆角等"></a>复杂形状设置圆角等</h2></li>
+<li><h2 id="渐变"><a href="#渐变" class="headerlink" title="渐变"></a>渐变</h2><blockquote>
+<p>其中shouldRasterize（光栅化）是比较特别的一种：<br>光栅化概念：将图转化为一个个栅格组成的图象。<br>光栅化特点：每个元素对应帧缓冲区中的一像素。shouldRasterize = YES在其他属性触发离屏渲染的同时，会将光栅化后的内容缓存起来，如果对应的layer及其sublayers没有发生改变，在下一帧的时候可以直接复用。shouldRasterize = YES，这将隐式的创建一个位图，各种阴影遮罩等效果也会保存到位图中并缓存起来，从而减少渲染的频度（不是矢量图）。相当于光栅化是把GPU的操作转到CPU上了，生成位图缓存，直接读取复用。当你使用光栅化时，你可以开启“Color Hits Green and Misses Red”来检查该场景下光栅化操作是否是一个好的选择。绿色表示缓存被复用，红色表示缓存在被重复创建。如果光栅化的层变红得太频繁那么光栅化对优化可能没有多少用处。位图缓存从内存中删除又重新创建得太过频繁，红色表明缓存重建得太迟。可以针对性的选择某个较小而较深的层结构进行光栅化，来尝试减少渲染时间。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h3><h3 id="对于经常变动的内容-这个时候不要开启-否则会造成性能的浪费"><a href="#对于经常变动的内容-这个时候不要开启-否则会造成性能的浪费" class="headerlink" title="对于经常变动的内容,这个时候不要开启,否则会造成性能的浪费"></a>对于经常变动的内容,这个时候不要开启,否则会造成性能的浪费</h3><h3 id="例如我们日程经常打交道的TableViewCell-因为TableViewCell的重绘是很频繁的（因为Cell的复用）-如果Cell的内容不断变化-则Cell需要不断重绘-如果此时设置了cell-layer可光栅化。则会造成大量的离屏渲染-降低图形性能。"><a href="#例如我们日程经常打交道的TableViewCell-因为TableViewCell的重绘是很频繁的（因为Cell的复用）-如果Cell的内容不断变化-则Cell需要不断重绘-如果此时设置了cell-layer可光栅化。则会造成大量的离屏渲染-降低图形性能。" class="headerlink" title="例如我们日程经常打交道的TableViewCell,因为TableViewCell的重绘是很频繁的（因为Cell的复用）,如果Cell的内容不断变化,则Cell需要不断重绘,如果此时设置了cell.layer可光栅化。则会造成大量的离屏渲染,降低图形性能。"></a>例如我们日程经常打交道的TableViewCell,因为TableViewCell的重绘是很频繁的（因为Cell的复用）,如果Cell的内容不断变化,则Cell需要不断重绘,如果此时设置了cell.layer可光栅化。则会造成大量的离屏渲染,降低图形性能。</h3><blockquote>
+<h2 id="离屏渲染的代价"><a href="#离屏渲染的代价" class="headerlink" title="离屏渲染的代价"></a>离屏渲染的代价</h2></blockquote>
+<h2 id="相比于当前屏幕渲染，离屏渲染的代价是很高的，主要体现在两个方面："><a href="#相比于当前屏幕渲染，离屏渲染的代价是很高的，主要体现在两个方面：" class="headerlink" title="相比于当前屏幕渲染，离屏渲染的代价是很高的，主要体现在两个方面："></a>相比于当前屏幕渲染，离屏渲染的代价是很高的，主要体现在两个方面：</h2><ul>
+<li><h2 id="创建新缓冲区"><a href="#创建新缓冲区" class="headerlink" title="创建新缓冲区"></a>创建新缓冲区</h2><h2 id="要想进行离屏渲染，首先要创建一个新的缓冲区。"><a href="#要想进行离屏渲染，首先要创建一个新的缓冲区。" class="headerlink" title="要想进行离屏渲染，首先要创建一个新的缓冲区。"></a>要想进行离屏渲染，首先要创建一个新的缓冲区。</h2></li>
+<li><h2 id="上下文切换"><a href="#上下文切换" class="headerlink" title="上下文切换"></a>上下文切换</h2><h2 id="离屏渲染的整个过程，需要多次切换上下文环境：先是从当前屏幕（On-Screen）切换到离屏（Off-Screen）；等到离屏渲染结束以后，将离屏缓冲区的渲染结果显示到屏幕上有需要将上下文环境从离屏切换到当前屏幕。而上下文环境的切换是要付出很大代价的。"><a href="#离屏渲染的整个过程，需要多次切换上下文环境：先是从当前屏幕（On-Screen）切换到离屏（Off-Screen）；等到离屏渲染结束以后，将离屏缓冲区的渲染结果显示到屏幕上有需要将上下文环境从离屏切换到当前屏幕。而上下文环境的切换是要付出很大代价的。" class="headerlink" title="离屏渲染的整个过程，需要多次切换上下文环境：先是从当前屏幕（On-Screen）切换到离屏（Off-Screen）；等到离屏渲染结束以后，将离屏缓冲区的渲染结果显示到屏幕上有需要将上下文环境从离屏切换到当前屏幕。而上下文环境的切换是要付出很大代价的。"></a>离屏渲染的整个过程，需要多次切换上下文环境：先是从当前屏幕（On-Screen）切换到离屏（Off-Screen）；等到离屏渲染结束以后，将离屏缓冲区的渲染结果显示到屏幕上有需要将上下文环境从离屏切换到当前屏幕。而上下文环境的切换是要付出很大代价的。</h2></li>
+</ul>
+<blockquote>
+<h2 id="为什么会使用离屏渲染"><a href="#为什么会使用离屏渲染" class="headerlink" title="为什么会使用离屏渲染"></a>为什么会使用离屏渲染</h2></blockquote>
+<h2 id="当使用圆角，阴影，遮罩的时候，图层属性的混合体被指定为在未预合成之前不能直接在屏幕中绘制，所以就需要屏幕外渲染被唤起。"><a href="#当使用圆角，阴影，遮罩的时候，图层属性的混合体被指定为在未预合成之前不能直接在屏幕中绘制，所以就需要屏幕外渲染被唤起。" class="headerlink" title="当使用圆角，阴影，遮罩的时候，图层属性的混合体被指定为在未预合成之前不能直接在屏幕中绘制，所以就需要屏幕外渲染被唤起。"></a>当使用圆角，阴影，遮罩的时候，图层属性的混合体被指定为在未预合成之前不能直接在屏幕中绘制，所以就需要屏幕外渲染被唤起。</h2><h2 id="屏幕外渲染并不意味着软件绘制，但是它意味着图层必须在被显示之前在一个屏幕外上下文中被渲染（不论CPU还是GPU）。"><a href="#屏幕外渲染并不意味着软件绘制，但是它意味着图层必须在被显示之前在一个屏幕外上下文中被渲染（不论CPU还是GPU）。" class="headerlink" title="屏幕外渲染并不意味着软件绘制，但是它意味着图层必须在被显示之前在一个屏幕外上下文中被渲染（不论CPU还是GPU）。"></a>屏幕外渲染并不意味着软件绘制，但是它意味着图层必须在被显示之前在一个屏幕外上下文中被渲染（不论CPU还是GPU）。</h2><h2 id="所以当使用离屏渲染的时候会很容易造成性能消耗，因为在OPENGL里离屏渲染会单独在内存中创建一个屏幕外缓冲区并进行渲染，而屏幕外缓冲区跟当前屏幕缓冲区上下文切换是很耗性能的。"><a href="#所以当使用离屏渲染的时候会很容易造成性能消耗，因为在OPENGL里离屏渲染会单独在内存中创建一个屏幕外缓冲区并进行渲染，而屏幕外缓冲区跟当前屏幕缓冲区上下文切换是很耗性能的。" class="headerlink" title="所以当使用离屏渲染的时候会很容易造成性能消耗，因为在OPENGL里离屏渲染会单独在内存中创建一个屏幕外缓冲区并进行渲染，而屏幕外缓冲区跟当前屏幕缓冲区上下文切换是很耗性能的。"></a>所以当使用离屏渲染的时候会很容易造成性能消耗，因为在OPENGL里离屏渲染会单独在内存中创建一个屏幕外缓冲区并进行渲染，而屏幕外缓冲区跟当前屏幕缓冲区上下文切换是很耗性能的。</h2><blockquote>
+<h2 id="iOS版本上的优化"><a href="#iOS版本上的优化" class="headerlink" title="iOS版本上的优化"></a>iOS版本上的优化</h2></blockquote>
+<h3 id="iOS-9-0-之前UIimageView跟UIButton设置圆角都会触发离屏渲染"><a href="#iOS-9-0-之前UIimageView跟UIButton设置圆角都会触发离屏渲染" class="headerlink" title="iOS 9.0 之前UIimageView跟UIButton设置圆角都会触发离屏渲染"></a>iOS 9.0 之前UIimageView跟UIButton设置圆角都会触发离屏渲染</h3><h3 id="iOS-9-0-之后UIButton设置圆角会触发离屏渲染，而UIImageView里png图片设置圆角不会触发离屏渲染了，如果设置其他阴影效果之类的还是会触发离屏渲染的。"><a href="#iOS-9-0-之后UIButton设置圆角会触发离屏渲染，而UIImageView里png图片设置圆角不会触发离屏渲染了，如果设置其他阴影效果之类的还是会触发离屏渲染的。" class="headerlink" title="iOS 9.0 之后UIButton设置圆角会触发离屏渲染，而UIImageView里png图片设置圆角不会触发离屏渲染了，如果设置其他阴影效果之类的还是会触发离屏渲染的。"></a>iOS 9.0 之后UIButton设置圆角会触发离屏渲染，而UIImageView里png图片设置圆角不会触发离屏渲染了，如果设置其他阴影效果之类的还是会触发离屏渲染的。</h3><h3 id="这可能是苹果也意识到离屏渲染会产生性能问题，所以能不产生离屏渲染的地方苹果也就不用离屏渲染了。"><a href="#这可能是苹果也意识到离屏渲染会产生性能问题，所以能不产生离屏渲染的地方苹果也就不用离屏渲染了。" class="headerlink" title="这可能是苹果也意识到离屏渲染会产生性能问题，所以能不产生离屏渲染的地方苹果也就不用离屏渲染了。"></a>这可能是苹果也意识到离屏渲染会产生性能问题，所以能不产生离屏渲染的地方苹果也就不用离屏渲染了。</h3><h3 id="参考自："><a href="#参考自：" class="headerlink" title="参考自："></a>参考自：</h3><p><a href="http://www.jianshu.com/p/6d24a4c29e18" target="_blank" rel="external">离屏渲染的研究</a><br><a href="http://foggry.com/blog/2015/05/06/chi-ping-xuan-ran-xue-xi-bi-ji/?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">离屏渲染学习笔记</a></p>
+<p><a href="https://zsisme.gitbooks.io/ios-/content/chapter15/offscreen-rendering.html" target="_blank" rel="external">离屏渲染</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------本文结束😘<i class="fa fa-paw"></i>感谢阅读------</div>
+    
+</div>
+    
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/25/iOS监听tableView组头切换事件/" rel="next" title="iOS监听tableView组头切换事件">
+                <i class="fa fa-chevron-left"></i> iOS监听tableView组头切换事件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/13/calayer-uiview-uiwindow/" rel="prev" title="UIView,UIWindow,CALayer之间的区别联系">
+                UIView,UIWindow,CALayer之间的区别联系 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="飘金" />
+          <p class="site-author-name" itemprop="name">飘金</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/piaojin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/da7864faa1be" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-piaojin"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#GPU渲染机制："><span class="nav-number">1.</span> <span class="nav-text">GPU渲染机制：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU-计算好显示内容提交到-GPU，GPU-渲染完成后将渲染结果放入帧缓冲区，随后视频控制器会按照-VSync-信号逐行读取帧缓冲区的数据，经过可能的数模转换传递给显示器显示。"><span class="nav-number">1.1.</span> <span class="nav-text">CPU 计算好显示内容提交到 GPU，GPU 渲染完成后将渲染结果放入帧缓冲区，随后视频控制器会按照 VSync 信号逐行读取帧缓冲区的数据，经过可能的数模转换传递给显示器显示。</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GPU屏幕渲染有以下两种方式："><span class="nav-number">2.</span> <span class="nav-text">GPU屏幕渲染有以下两种方式：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#On-Screen-Rendering"><span class="nav-number">2.1.</span> <span class="nav-text">On-Screen Rendering</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#意为当前屏幕渲染，指的是GPU的渲染操作是在当前用于显示的屏幕缓冲区中进行。"><span class="nav-number">2.1.1.</span> <span class="nav-text">意为当前屏幕渲染，指的是GPU的渲染操作是在当前用于显示的屏幕缓冲区中进行。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Off-Screen-Rendering"><span class="nav-number">2.2.</span> <span class="nav-text">Off-Screen Rendering</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#意为离屏渲染，指的是GPU在当前屏幕缓冲区以外新开辟一个缓冲区进行渲染操作。"><span class="nav-number">2.2.1.</span> <span class="nav-text">意为离屏渲染，指的是GPU在当前屏幕缓冲区以外新开辟一个缓冲区进行渲染操作。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#离屏渲染的触发方式"><span class="nav-number">2.3.</span> <span class="nav-text">离屏渲染的触发方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置了以下属性时，都会触发离屏绘制："><span class="nav-number">2.4.</span> <span class="nav-text">设置了以下属性时，都会触发离屏绘制：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shouldRasterize（光栅化）"><span class="nav-number">2.5.</span> <span class="nav-text">shouldRasterize（光栅化）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#masks（遮罩）"><span class="nav-number">2.6.</span> <span class="nav-text">masks（遮罩）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shadows（阴影）"><span class="nav-number">2.7.</span> <span class="nav-text">shadows（阴影）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#edge"><span class="nav-number">2.8.</span> <span class="nav-text">edge</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#antialiasing（抗锯齿）"><span class="nav-number">2.9.</span> <span class="nav-text">antialiasing（抗锯齿）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#group-opacity（不透明）"><span class="nav-number">2.10.</span> <span class="nav-text">group opacity（不透明）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复杂形状设置圆角等"><span class="nav-number">2.11.</span> <span class="nav-text">复杂形状设置圆角等</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渐变"><span class="nav-number">2.12.</span> <span class="nav-text">渐变</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意："><span class="nav-number">2.12.1.</span> <span class="nav-text">注意：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对于经常变动的内容-这个时候不要开启-否则会造成性能的浪费"><span class="nav-number">2.12.2.</span> <span class="nav-text">对于经常变动的内容,这个时候不要开启,否则会造成性能的浪费</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例如我们日程经常打交道的TableViewCell-因为TableViewCell的重绘是很频繁的（因为Cell的复用）-如果Cell的内容不断变化-则Cell需要不断重绘-如果此时设置了cell-layer可光栅化。则会造成大量的离屏渲染-降低图形性能。"><span class="nav-number">2.12.3.</span> <span class="nav-text">例如我们日程经常打交道的TableViewCell,因为TableViewCell的重绘是很频繁的（因为Cell的复用）,如果Cell的内容不断变化,则Cell需要不断重绘,如果此时设置了cell.layer可光栅化。则会造成大量的离屏渲染,降低图形性能。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#离屏渲染的代价"><span class="nav-number">2.13.</span> <span class="nav-text">离屏渲染的代价</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相比于当前屏幕渲染，离屏渲染的代价是很高的，主要体现在两个方面："><span class="nav-number">2.14.</span> <span class="nav-text">相比于当前屏幕渲染，离屏渲染的代价是很高的，主要体现在两个方面：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建新缓冲区"><span class="nav-number">2.15.</span> <span class="nav-text">创建新缓冲区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#要想进行离屏渲染，首先要创建一个新的缓冲区。"><span class="nav-number">2.16.</span> <span class="nav-text">要想进行离屏渲染，首先要创建一个新的缓冲区。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上下文切换"><span class="nav-number">2.17.</span> <span class="nav-text">上下文切换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#离屏渲染的整个过程，需要多次切换上下文环境：先是从当前屏幕（On-Screen）切换到离屏（Off-Screen）；等到离屏渲染结束以后，将离屏缓冲区的渲染结果显示到屏幕上有需要将上下文环境从离屏切换到当前屏幕。而上下文环境的切换是要付出很大代价的。"><span class="nav-number">2.18.</span> <span class="nav-text">离屏渲染的整个过程，需要多次切换上下文环境：先是从当前屏幕（On-Screen）切换到离屏（Off-Screen）；等到离屏渲染结束以后，将离屏缓冲区的渲染结果显示到屏幕上有需要将上下文环境从离屏切换到当前屏幕。而上下文环境的切换是要付出很大代价的。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么会使用离屏渲染"><span class="nav-number">2.19.</span> <span class="nav-text">为什么会使用离屏渲染</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#当使用圆角，阴影，遮罩的时候，图层属性的混合体被指定为在未预合成之前不能直接在屏幕中绘制，所以就需要屏幕外渲染被唤起。"><span class="nav-number">2.20.</span> <span class="nav-text">当使用圆角，阴影，遮罩的时候，图层属性的混合体被指定为在未预合成之前不能直接在屏幕中绘制，所以就需要屏幕外渲染被唤起。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#屏幕外渲染并不意味着软件绘制，但是它意味着图层必须在被显示之前在一个屏幕外上下文中被渲染（不论CPU还是GPU）。"><span class="nav-number">2.21.</span> <span class="nav-text">屏幕外渲染并不意味着软件绘制，但是它意味着图层必须在被显示之前在一个屏幕外上下文中被渲染（不论CPU还是GPU）。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#所以当使用离屏渲染的时候会很容易造成性能消耗，因为在OPENGL里离屏渲染会单独在内存中创建一个屏幕外缓冲区并进行渲染，而屏幕外缓冲区跟当前屏幕缓冲区上下文切换是很耗性能的。"><span class="nav-number">2.22.</span> <span class="nav-text">所以当使用离屏渲染的时候会很容易造成性能消耗，因为在OPENGL里离屏渲染会单独在内存中创建一个屏幕外缓冲区并进行渲染，而屏幕外缓冲区跟当前屏幕缓冲区上下文切换是很耗性能的。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS版本上的优化"><span class="nav-number">2.23.</span> <span class="nav-text">iOS版本上的优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#iOS-9-0-之前UIimageView跟UIButton设置圆角都会触发离屏渲染"><span class="nav-number">2.23.1.</span> <span class="nav-text">iOS 9.0 之前UIimageView跟UIButton设置圆角都会触发离屏渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iOS-9-0-之后UIButton设置圆角会触发离屏渲染，而UIImageView里png图片设置圆角不会触发离屏渲染了，如果设置其他阴影效果之类的还是会触发离屏渲染的。"><span class="nav-number">2.23.2.</span> <span class="nav-text">iOS 9.0 之后UIButton设置圆角会触发离屏渲染，而UIImageView里png图片设置圆角不会触发离屏渲染了，如果设置其他阴影效果之类的还是会触发离屏渲染的。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这可能是苹果也意识到离屏渲染会产生性能问题，所以能不产生离屏渲染的地方苹果也就不用离屏渲染了。"><span class="nav-number">2.23.3.</span> <span class="nav-text">这可能是苹果也意识到离屏渲染会产生性能问题，所以能不产生离屏渲染的地方苹果也就不用离屏渲染了。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考自："><span class="nav-number">2.23.4.</span> <span class="nav-text">参考自：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">飘金</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/title.js"></script>

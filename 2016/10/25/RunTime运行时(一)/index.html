@@ -1,0 +1,785 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,Swift" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="RunTime运行时(一)">
+<meta name="keywords" content="iOS,Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RunTime运行时(一)">
+<meta property="og:url" content="http://yoursite.com/2016/10/25/RunTime运行时(一)/index.html">
+<meta property="og:site_name" content="飘金的博客">
+<meta property="og:description" content="RunTime运行时(一)">
+<meta property="og:updated_time" content="2017-07-05T08:00:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RunTime运行时(一)">
+<meta name="twitter:description" content="RunTime运行时(一)">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/25/RunTime运行时(一)/"/>
+
+
+
+
+
+  <title>RunTime运行时(一) | 飘金的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">飘金的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">会炒菜的猿</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/25/RunTime运行时(一)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="飘金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="飘金的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">RunTime运行时(一)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-25T14:23:47+08:00">
+                2016-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><center style="color:#FF7F50">RunTime运行时(一)</center><br><a id="more"></a></p>
+<h3 id="作为一门动态编程语言，Objective-C-会尽可能的将编译和链接时要做的事情推迟到运行时。只要有可能-Objective-C-总是使用动态-的方式来解决问题。这意味着-Objective-C-语言不仅需要一个编译环境-同时也需要一个运行时系统来执行编译好的代码。运行时系统（runtime）扮演的角色类似于-Objective-C-语言的操作系统-Objective-C-基于该系统来工作。因此，runtime好比Objective-C的灵魂-很多东西都是在这个基础上出现的。所以它是值的你花功夫去理解的。"><a href="#作为一门动态编程语言，Objective-C-会尽可能的将编译和链接时要做的事情推迟到运行时。只要有可能-Objective-C-总是使用动态-的方式来解决问题。这意味着-Objective-C-语言不仅需要一个编译环境-同时也需要一个运行时系统来执行编译好的代码。运行时系统（runtime）扮演的角色类似于-Objective-C-语言的操作系统-Objective-C-基于该系统来工作。因此，runtime好比Objective-C的灵魂-很多东西都是在这个基础上出现的。所以它是值的你花功夫去理解的。" class="headerlink" title="作为一门动态编程语言，Objective-C 会尽可能的将编译和链接时要做的事情推迟到运行时。只要有可能,Objective-C 总是使用动态 的方式来解决问题。这意味着 Objective-C 语言不仅需要一个编译环境,同时也需要一个运行时系统来执行编译好的代码。运行时系统（runtime）扮演的角色类似于 Objective-C 语言的操作系统,Objective-C 基于该系统来工作。因此，runtime好比Objective-C的灵魂,很多东西都是在这个基础上出现的。所以它是值的你花功夫去理解的。"></a>作为一门动态编程语言，Objective-C 会尽可能的将编译和链接时要做的事情推迟到运行时。只要有可能,Objective-C 总是使用动态 的方式来解决问题。这意味着 Objective-C 语言不仅需要一个编译环境,同时也需要一个运行时系统来执行编译好的代码。运行时系统（runtime）扮演的角色类似于 Objective-C 语言的操作系统,Objective-C 基于该系统来工作。因此，runtime好比Objective-C的灵魂,很多东西都是在这个基础上出现的。所以它是值的你花功夫去理解的。</h3><h3 id="我们将从以下几个方面了解Objective-C的运行时："><a href="#我们将从以下几个方面了解Objective-C的运行时：" class="headerlink" title="我们将从以下几个方面了解Objective-C的运行时："></a>我们将从以下几个方面了解Objective-C的运行时：</h3><blockquote>
+<p>一、与静态语言编译后的区别</p>
+</blockquote>
+<ul>
+<li>1、静态语言</li>
+</ul>
+<p>一个静态语言程序，如下所示的C程序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#include &lt; stdio.h &gt;  </div><div class="line"></div><div class="line">int main(int argc, const char **argv[]) &#123;  </div><div class="line">printf(&quot;Hello World!&quot;);  </div><div class="line">return 0;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="会经过编译器的语法分析，优化然后将你最佳化的代码翻译成汇编语言，然后完全按照你设计的逻辑和你的代码自上而下的执行。"><a href="#会经过编译器的语法分析，优化然后将你最佳化的代码翻译成汇编语言，然后完全按照你设计的逻辑和你的代码自上而下的执行。" class="headerlink" title="会经过编译器的语法分析，优化然后将你最佳化的代码翻译成汇编语言，然后完全按照你设计的逻辑和你的代码自上而下的执行。"></a>会经过编译器的语法分析，优化然后将你最佳化的代码翻译成汇编语言，然后完全按照你设计的逻辑和你的代码自上而下的执行。</h3><ul>
+<li>2、Objective-C</li>
+</ul>
+<h3 id="很常见的一个消息发送语句："><a href="#很常见的一个消息发送语句：" class="headerlink" title="很常见的一个消息发送语句："></a>很常见的一个消息发送语句：</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[receiver message]</div></pre></td></tr></table></figure>
+<h3 id="会被编译器转化成"><a href="#会被编译器转化成" class="headerlink" title="会被编译器转化成"></a>会被编译器转化成</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">objc_msgSend(receiver, selector)</div></pre></td></tr></table></figure>
+<h3 id="如果有参数则为"><a href="#如果有参数则为" class="headerlink" title="如果有参数则为"></a>如果有参数则为</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">objc_msgSend(receiver, selector, arg1, arg2, …)</div></pre></td></tr></table></figure>
+<h3 id="消息只有到运行时才会和函数实现绑定起来，而不是按照编译好的逻辑一成不变的执行。按照我的理解，编译阶段只是确定了要去向receiver对象发送message消息，但是却没有发送，真正发送是等到运行的时候进行。因此，编译阶段完全不知道message方法的具体实现，甚至，该方法到底有没有被实现也不知道。这就有可能导致运行时崩溃问题。"><a href="#消息只有到运行时才会和函数实现绑定起来，而不是按照编译好的逻辑一成不变的执行。按照我的理解，编译阶段只是确定了要去向receiver对象发送message消息，但是却没有发送，真正发送是等到运行的时候进行。因此，编译阶段完全不知道message方法的具体实现，甚至，该方法到底有没有被实现也不知道。这就有可能导致运行时崩溃问题。" class="headerlink" title="消息只有到运行时才会和函数实现绑定起来，而不是按照编译好的逻辑一成不变的执行。按照我的理解，编译阶段只是确定了要去向receiver对象发送message消息，但是却没有发送，真正发送是等到运行的时候进行。因此，编译阶段完全不知道message方法的具体实现，甚至，该方法到底有没有被实现也不知道。这就有可能导致运行时崩溃问题。"></a>消息只有到运行时才会和函数实现绑定起来，而不是按照编译好的逻辑一成不变的执行。按照我的理解，编译阶段只是确定了要去向receiver对象发送message消息，但是却没有发送，真正发送是等到运行的时候进行。因此，编译阶段完全不知道message方法的具体实现，甚至，该方法到底有没有被实现也不知道。这就有可能导致运行时崩溃问题。</h3><blockquote>
+<p>二、Objective-c </p>
+<h3 id="runtime的几点说明"><a href="#runtime的几点说明" class="headerlink" title="runtime的几点说明"></a>runtime的几点说明</h3></blockquote>
+<ul>
+<li>1、runtime是开源的</li>
+</ul>
+<h3 id="是的，你没看错，runtime确实是开源的。目前苹果公司和GNU各自维护一个开源的runtime版本，这两个版本之间都在努力的保持一致。其中苹果的版本可以猛击该链接下载objc4-437-1-tar-gz"><a href="#是的，你没看错，runtime确实是开源的。目前苹果公司和GNU各自维护一个开源的runtime版本，这两个版本之间都在努力的保持一致。其中苹果的版本可以猛击该链接下载objc4-437-1-tar-gz" class="headerlink" title="是的，你没看错，runtime确实是开源的。目前苹果公司和GNU各自维护一个开源的runtime版本，这两个版本之间都在努力的保持一致。其中苹果的版本可以猛击该链接下载objc4-437.1.tar.gz"></a>是的，你没看错，runtime确实是开源的。目前苹果公司和GNU各自维护一个开源的runtime版本，这两个版本之间都在努力的保持一致。其中苹果的版本可以猛击该链接下载objc4-437.1.tar.gz</h3><ul>
+<li>2、runtime是由C语言实现的</li>
+</ul>
+<h3 id="runtime做为Objective-C最核心的部分，几乎全部由C语言实现。这里的“几乎”所指的例外就包含有的方法（比如下面要说道的objc-msgSend方法）甚至是用汇编实现的！！"><a href="#runtime做为Objective-C最核心的部分，几乎全部由C语言实现。这里的“几乎”所指的例外就包含有的方法（比如下面要说道的objc-msgSend方法）甚至是用汇编实现的！！" class="headerlink" title="runtime做为Objective-C最核心的部分，几乎全部由C语言实现。这里的“几乎”所指的例外就包含有的方法（比如下面要说道的objc_msgSend方法）甚至是用汇编实现的！！"></a>runtime做为Objective-C最核心的部分，几乎全部由C语言实现。这里的“几乎”所指的例外就包含有的方法（比如下面要说道的objc_msgSend方法）甚至是用汇编实现的！！</h3><ul>
+<li>3、runtime的两个版本</li>
+</ul>
+<h3 id="Objective-C运行时系统有两个已知版本-早期版本（Legacy）和现行版本（Modern）。在现行版本中-最显著的新特性就是实例变量是”健壮“-non-fragile-的-在早期版本中-如果您改变类中实例变量的布局-您必须重新编译该类的所有子类。-在现行版本中-如果您改变类中实例变量的布局-您无需重新编译该类的任何子类。此外-现行版本支持声明property的synthesis属性器。目前iPhone-程序和-Mac-OS-X-v10-5-及以后的系统中的-64-位程序使用的都是-Objective-C-运行时系统的现行版-本。其它情况-Mac-OS-X-系统中的-32-位程序-使用的是早期版本。"><a href="#Objective-C运行时系统有两个已知版本-早期版本（Legacy）和现行版本（Modern）。在现行版本中-最显著的新特性就是实例变量是”健壮“-non-fragile-的-在早期版本中-如果您改变类中实例变量的布局-您必须重新编译该类的所有子类。-在现行版本中-如果您改变类中实例变量的布局-您无需重新编译该类的任何子类。此外-现行版本支持声明property的synthesis属性器。目前iPhone-程序和-Mac-OS-X-v10-5-及以后的系统中的-64-位程序使用的都是-Objective-C-运行时系统的现行版-本。其它情况-Mac-OS-X-系统中的-32-位程序-使用的是早期版本。" class="headerlink" title="Objective-C运行时系统有两个已知版本:早期版本（Legacy）和现行版本（Modern）。在现行版本中,最显著的新特性就是实例变量是”健壮“(non-fragile)的: 在早期版本中,如果您改变类中实例变量的布局,您必须重新编译该类的所有子类。 在现行版本中,如果您改变类中实例变量的布局,您无需重新编译该类的任何子类。此外,现行版本支持声明property的synthesis属性器。目前iPhone 程序和 Mac OS X v10.5 及以后的系统中的 64 位程序使用的都是 Objective-C 运行时系统的现行版 本。其它情况(Mac OS X 系统中的 32 位程序)使用的是早期版本。"></a>Objective-C运行时系统有两个已知版本:早期版本（Legacy）和现行版本（Modern）。在现行版本中,最显著的新特性就是实例变量是”健壮“(non-fragile)的: 在早期版本中,如果您改变类中实例变量的布局,您必须重新编译该类的所有子类。 在现行版本中,如果您改变类中实例变量的布局,您无需重新编译该类的任何子类。此外,现行版本支持声明property的synthesis属性器。目前iPhone 程序和 Mac OS X v10.5 及以后的系统中的 64 位程序使用的都是 Objective-C 运行时系统的现行版 本。其它情况(Mac OS X 系统中的 32 位程序)使用的是早期版本。</h3><blockquote>
+<p>三、和runtime ### system交互的三种方式</p>
+</blockquote>
+<ul>
+<li>1、通过Objective-C源代码</li>
+</ul>
+<h3 id="大部分情况下-运行时系统在后台自动运行-我们只需编写和编译-Objective-C-源代码。当编译Objective-C类和方法时-编译器为实现语言动态特性将自动创建一些数据结构和函数。这些数据-结构包含类定义和协议类定义中的信息-如在Objective-C-2-0-程序设计语言中定义类和协议类一节所讨论-的类的对象和协议类的对象-方法选标-实例变量模板-以及其它来自于源代码的信息。运行时系统的主要功能就是根据源代码中的表达式发送消息。"><a href="#大部分情况下-运行时系统在后台自动运行-我们只需编写和编译-Objective-C-源代码。当编译Objective-C类和方法时-编译器为实现语言动态特性将自动创建一些数据结构和函数。这些数据-结构包含类定义和协议类定义中的信息-如在Objective-C-2-0-程序设计语言中定义类和协议类一节所讨论-的类的对象和协议类的对象-方法选标-实例变量模板-以及其它来自于源代码的信息。运行时系统的主要功能就是根据源代码中的表达式发送消息。" class="headerlink" title="大部分情况下,运行时系统在后台自动运行,我们只需编写和编译 Objective-C 源代码。当编译Objective-C类和方法时,编译器为实现语言动态特性将自动创建一些数据结构和函数。这些数据 结构包含类定义和协议类定义中的信息,如在Objective-C 2.0 程序设计语言中定义类和协议类一节所讨论 的类的对象和协议类的对象,方法选标,实例变量模板,以及其它来自于源代码的信息。运行时系统的主要功能就是根据源代码中的表达式发送消息。"></a>大部分情况下,运行时系统在后台自动运行,我们只需编写和编译 Objective-C 源代码。当编译Objective-C类和方法时,编译器为实现语言动态特性将自动创建一些数据结构和函数。这些数据 结构包含类定义和协议类定义中的信息,如在Objective-C 2.0 程序设计语言中定义类和协议类一节所讨论 的类的对象和协议类的对象,方法选标,实例变量模板,以及其它来自于源代码的信息。运行时系统的主要功能就是根据源代码中的表达式发送消息。</h3><ul>
+<li>2、通过类NSObject的方法</li>
+</ul>
+<h3 id="Cocoa程序中绝大部分类都是NSObject类的子类-所以大部分都继承了NSObject类的方法-因而继承-了NSObject的行为-NSProxy类是个例外-。然而-某些情况下-NSObject类仅仅定义了完成某件事情的模板-而没有提供所有需要的代码。例如-NSObject-类定义了description方法-返回该类内容的字符串表示。这主要是用来调试程序-——GDB-中的-print-object-方法就是直接打印出该方法返回的字符串。NSObject-类中该方法的-实现并不知道子类中的内容-所以它只是返回类的名字和对象的地址。NSObject-的子类可以重新实现该方法以提供更多的信息。例如-NSArray-类改写了该方法来返回-NSArray-类包含的每个对象的内容。"><a href="#Cocoa程序中绝大部分类都是NSObject类的子类-所以大部分都继承了NSObject类的方法-因而继承-了NSObject的行为-NSProxy类是个例外-。然而-某些情况下-NSObject类仅仅定义了完成某件事情的模板-而没有提供所有需要的代码。例如-NSObject-类定义了description方法-返回该类内容的字符串表示。这主要是用来调试程序-——GDB-中的-print-object-方法就是直接打印出该方法返回的字符串。NSObject-类中该方法的-实现并不知道子类中的内容-所以它只是返回类的名字和对象的地址。NSObject-的子类可以重新实现该方法以提供更多的信息。例如-NSArray-类改写了该方法来返回-NSArray-类包含的每个对象的内容。" class="headerlink" title="Cocoa程序中绝大部分类都是NSObject类的子类,所以大部分都继承了NSObject类的方法,因而继承 了NSObject的行为(NSProxy类是个例外)。然而,某些情况下, NSObject类仅仅定义了完成某件事情的模板,而没有提供所有需要的代码。例如,NSObject 类定义了description方法,返回该类内容的字符串表示。这主要是用来调试程序 ——GDB 中的 print-object 方法就是直接打印出该方法返回的字符串。NSObject 类中该方法的 实现并不知道子类中的内容,所以它只是返回类的名字和对象的地址。NSObject 的子类可以重新实现该方法以提供更多的信息。例如,NSArray 类改写了该方法来返回 NSArray 类包含的每个对象的内容。"></a>Cocoa程序中绝大部分类都是NSObject类的子类,所以大部分都继承了NSObject类的方法,因而继承 了NSObject的行为(NSProxy类是个例外)。然而,某些情况下, NSObject类仅仅定义了完成某件事情的模板,而没有提供所有需要的代码。例如,NSObject 类定义了description方法,返回该类内容的字符串表示。这主要是用来调试程序 ——GDB 中的 print-object 方法就是直接打印出该方法返回的字符串。NSObject 类中该方法的 实现并不知道子类中的内容,所以它只是返回类的名字和对象的地址。NSObject 的子类可以重新实现该方法以提供更多的信息。例如,NSArray 类改写了该方法来返回 NSArray 类包含的每个对象的内容。</h3><h3 id="某些-NSObject-的方法只是简单地从运行时系统中获得信息-从而允许对象进行一定程度的自我检查。"><a href="#某些-NSObject-的方法只是简单地从运行时系统中获得信息-从而允许对象进行一定程度的自我检查。" class="headerlink" title="某些 NSObject 的方法只是简单地从运行时系统中获得信息,从而允许对象进行一定程度的自我检查。"></a>某些 NSObject 的方法只是简单地从运行时系统中获得信息,从而允许对象进行一定程度的自我检查。</h3><h3 id="例如-class-返回对象的类-isKindOfClass-和-isMemberOfClass-则检查对象是否在指定的-类继承体系中-respondsToSelector-检查对象能否响应指定的消息-conformsToProtocol-检查对象是否实现了指定协议类的方法-methodForSelector-则返回指定方法实现的地址。"><a href="#例如-class-返回对象的类-isKindOfClass-和-isMemberOfClass-则检查对象是否在指定的-类继承体系中-respondsToSelector-检查对象能否响应指定的消息-conformsToProtocol-检查对象是否实现了指定协议类的方法-methodForSelector-则返回指定方法实现的地址。" class="headerlink" title="例如,class 返回对象的类;isKindOfClass:和 isMemberOfClass:则检查对象是否在指定的 类继承体系中;respondsToSelector:检查对象能否响应指定的消息;conformsToProtocol: 检查对象是否实现了指定协议类的方法;methodForSelector:则返回指定方法实现的地址。"></a>例如,class 返回对象的类;isKindOfClass:和 isMemberOfClass:则检查对象是否在指定的 类继承体系中;respondsToSelector:检查对象能否响应指定的消息;conformsToProtocol: 检查对象是否实现了指定协议类的方法;methodForSelector:则返回指定方法实现的地址。</h3><ul>
+<li>3、通过运行时系统的函数</li>
+</ul>
+<h3 id="运行时系统是一个有公开接口的动态库-由一些数据结构和函数的集合组成-这些数据结构和函数的声明-头文件在-usr-include-objc中。这些函数支持用纯C的函数来实现和Objective-C同样的功能。还有一些函数构成了-NSObject-类方法的基础。这些函数使得访问运行时系统接口和提供开发工具成为可-能。尽管大部分情况下它们在-Objective-C-程序不是必须的-但是有时候对于-Objecitve-C-程序来说某些函-数是非常有用的。-这些函数的文档参见-Objective-C-2-0-运行时系统参考库。"><a href="#运行时系统是一个有公开接口的动态库-由一些数据结构和函数的集合组成-这些数据结构和函数的声明-头文件在-usr-include-objc中。这些函数支持用纯C的函数来实现和Objective-C同样的功能。还有一些函数构成了-NSObject-类方法的基础。这些函数使得访问运行时系统接口和提供开发工具成为可-能。尽管大部分情况下它们在-Objective-C-程序不是必须的-但是有时候对于-Objecitve-C-程序来说某些函-数是非常有用的。-这些函数的文档参见-Objective-C-2-0-运行时系统参考库。" class="headerlink" title="运行时系统是一个有公开接口的动态库,由一些数据结构和函数的集合组成,这些数据结构和函数的声明 头文件在/usr/include/objc中。这些函数支持用纯C的函数来实现和Objective-C同样的功能。还有一些函数构成了 NSObject 类方法的基础。这些函数使得访问运行时系统接口和提供开发工具成为可 能。尽管大部分情况下它们在 Objective-C 程序不是必须的,但是有时候对于 Objecitve-C 程序来说某些函 数是非常有用的。 这些函数的文档参见 Objective-C 2.0 运行时系统参考库。"></a>运行时系统是一个有公开接口的动态库,由一些数据结构和函数的集合组成,这些数据结构和函数的声明 头文件在/usr/include/objc中。这些函数支持用纯C的函数来实现和Objective-C同样的功能。还有一些函数构成了 NSObject 类方法的基础。这些函数使得访问运行时系统接口和提供开发工具成为可 能。尽管大部分情况下它们在 Objective-C 程序不是必须的,但是有时候对于 Objecitve-C 程序来说某些函 数是非常有用的。 这些函数的文档参见 Objective-C 2.0 运行时系统参考库。</h3>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------本文结束😘<i class="fa fa-paw"></i>感谢阅读------</div>
+    
+</div>
+    
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/25/RunLoop与Timer以及常用Mode/" rel="next" title="RunLoop与Timer以及常用Mode">
+                <i class="fa fa-chevron-left"></i> RunLoop与Timer以及常用Mode
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/25/RunTime运行时之改变私有属性的值/" rel="prev" title="RunTime运行时之改变私有属性的值">
+                RunTime运行时之改变私有属性的值 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="飘金" />
+          <p class="site-author-name" itemprop="name">飘金</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/piaojin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/da7864faa1be" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-piaojin"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#作为一门动态编程语言，Objective-C-会尽可能的将编译和链接时要做的事情推迟到运行时。只要有可能-Objective-C-总是使用动态-的方式来解决问题。这意味着-Objective-C-语言不仅需要一个编译环境-同时也需要一个运行时系统来执行编译好的代码。运行时系统（runtime）扮演的角色类似于-Objective-C-语言的操作系统-Objective-C-基于该系统来工作。因此，runtime好比Objective-C的灵魂-很多东西都是在这个基础上出现的。所以它是值的你花功夫去理解的。"><span class="nav-number">1.</span> <span class="nav-text">作为一门动态编程语言，Objective-C 会尽可能的将编译和链接时要做的事情推迟到运行时。只要有可能,Objective-C 总是使用动态 的方式来解决问题。这意味着 Objective-C 语言不仅需要一个编译环境,同时也需要一个运行时系统来执行编译好的代码。运行时系统（runtime）扮演的角色类似于 Objective-C 语言的操作系统,Objective-C 基于该系统来工作。因此，runtime好比Objective-C的灵魂,很多东西都是在这个基础上出现的。所以它是值的你花功夫去理解的。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我们将从以下几个方面了解Objective-C的运行时："><span class="nav-number">2.</span> <span class="nav-text">我们将从以下几个方面了解Objective-C的运行时：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会经过编译器的语法分析，优化然后将你最佳化的代码翻译成汇编语言，然后完全按照你设计的逻辑和你的代码自上而下的执行。"><span class="nav-number">3.</span> <span class="nav-text">会经过编译器的语法分析，优化然后将你最佳化的代码翻译成汇编语言，然后完全按照你设计的逻辑和你的代码自上而下的执行。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#很常见的一个消息发送语句："><span class="nav-number">4.</span> <span class="nav-text">很常见的一个消息发送语句：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会被编译器转化成"><span class="nav-number">5.</span> <span class="nav-text">会被编译器转化成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如果有参数则为"><span class="nav-number">6.</span> <span class="nav-text">如果有参数则为</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息只有到运行时才会和函数实现绑定起来，而不是按照编译好的逻辑一成不变的执行。按照我的理解，编译阶段只是确定了要去向receiver对象发送message消息，但是却没有发送，真正发送是等到运行的时候进行。因此，编译阶段完全不知道message方法的具体实现，甚至，该方法到底有没有被实现也不知道。这就有可能导致运行时崩溃问题。"><span class="nav-number">7.</span> <span class="nav-text">消息只有到运行时才会和函数实现绑定起来，而不是按照编译好的逻辑一成不变的执行。按照我的理解，编译阶段只是确定了要去向receiver对象发送message消息，但是却没有发送，真正发送是等到运行的时候进行。因此，编译阶段完全不知道message方法的具体实现，甚至，该方法到底有没有被实现也不知道。这就有可能导致运行时崩溃问题。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#runtime的几点说明"><span class="nav-number">8.</span> <span class="nav-text">runtime的几点说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#是的，你没看错，runtime确实是开源的。目前苹果公司和GNU各自维护一个开源的runtime版本，这两个版本之间都在努力的保持一致。其中苹果的版本可以猛击该链接下载objc4-437-1-tar-gz"><span class="nav-number">9.</span> <span class="nav-text">是的，你没看错，runtime确实是开源的。目前苹果公司和GNU各自维护一个开源的runtime版本，这两个版本之间都在努力的保持一致。其中苹果的版本可以猛击该链接下载objc4-437.1.tar.gz</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#runtime做为Objective-C最核心的部分，几乎全部由C语言实现。这里的“几乎”所指的例外就包含有的方法（比如下面要说道的objc-msgSend方法）甚至是用汇编实现的！！"><span class="nav-number">10.</span> <span class="nav-text">runtime做为Objective-C最核心的部分，几乎全部由C语言实现。这里的“几乎”所指的例外就包含有的方法（比如下面要说道的objc_msgSend方法）甚至是用汇编实现的！！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Objective-C运行时系统有两个已知版本-早期版本（Legacy）和现行版本（Modern）。在现行版本中-最显著的新特性就是实例变量是”健壮“-non-fragile-的-在早期版本中-如果您改变类中实例变量的布局-您必须重新编译该类的所有子类。-在现行版本中-如果您改变类中实例变量的布局-您无需重新编译该类的任何子类。此外-现行版本支持声明property的synthesis属性器。目前iPhone-程序和-Mac-OS-X-v10-5-及以后的系统中的-64-位程序使用的都是-Objective-C-运行时系统的现行版-本。其它情况-Mac-OS-X-系统中的-32-位程序-使用的是早期版本。"><span class="nav-number">11.</span> <span class="nav-text">Objective-C运行时系统有两个已知版本:早期版本（Legacy）和现行版本（Modern）。在现行版本中,最显著的新特性就是实例变量是”健壮“(non-fragile)的: 在早期版本中,如果您改变类中实例变量的布局,您必须重新编译该类的所有子类。 在现行版本中,如果您改变类中实例变量的布局,您无需重新编译该类的任何子类。此外,现行版本支持声明property的synthesis属性器。目前iPhone 程序和 Mac OS X v10.5 及以后的系统中的 64 位程序使用的都是 Objective-C 运行时系统的现行版 本。其它情况(Mac OS X 系统中的 32 位程序)使用的是早期版本。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大部分情况下-运行时系统在后台自动运行-我们只需编写和编译-Objective-C-源代码。当编译Objective-C类和方法时-编译器为实现语言动态特性将自动创建一些数据结构和函数。这些数据-结构包含类定义和协议类定义中的信息-如在Objective-C-2-0-程序设计语言中定义类和协议类一节所讨论-的类的对象和协议类的对象-方法选标-实例变量模板-以及其它来自于源代码的信息。运行时系统的主要功能就是根据源代码中的表达式发送消息。"><span class="nav-number">12.</span> <span class="nav-text">大部分情况下,运行时系统在后台自动运行,我们只需编写和编译 Objective-C 源代码。当编译Objective-C类和方法时,编译器为实现语言动态特性将自动创建一些数据结构和函数。这些数据 结构包含类定义和协议类定义中的信息,如在Objective-C 2.0 程序设计语言中定义类和协议类一节所讨论 的类的对象和协议类的对象,方法选标,实例变量模板,以及其它来自于源代码的信息。运行时系统的主要功能就是根据源代码中的表达式发送消息。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cocoa程序中绝大部分类都是NSObject类的子类-所以大部分都继承了NSObject类的方法-因而继承-了NSObject的行为-NSProxy类是个例外-。然而-某些情况下-NSObject类仅仅定义了完成某件事情的模板-而没有提供所有需要的代码。例如-NSObject-类定义了description方法-返回该类内容的字符串表示。这主要是用来调试程序-——GDB-中的-print-object-方法就是直接打印出该方法返回的字符串。NSObject-类中该方法的-实现并不知道子类中的内容-所以它只是返回类的名字和对象的地址。NSObject-的子类可以重新实现该方法以提供更多的信息。例如-NSArray-类改写了该方法来返回-NSArray-类包含的每个对象的内容。"><span class="nav-number">13.</span> <span class="nav-text">Cocoa程序中绝大部分类都是NSObject类的子类,所以大部分都继承了NSObject类的方法,因而继承 了NSObject的行为(NSProxy类是个例外)。然而,某些情况下, NSObject类仅仅定义了完成某件事情的模板,而没有提供所有需要的代码。例如,NSObject 类定义了description方法,返回该类内容的字符串表示。这主要是用来调试程序 ——GDB 中的 print-object 方法就是直接打印出该方法返回的字符串。NSObject 类中该方法的 实现并不知道子类中的内容,所以它只是返回类的名字和对象的地址。NSObject 的子类可以重新实现该方法以提供更多的信息。例如,NSArray 类改写了该方法来返回 NSArray 类包含的每个对象的内容。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#某些-NSObject-的方法只是简单地从运行时系统中获得信息-从而允许对象进行一定程度的自我检查。"><span class="nav-number">14.</span> <span class="nav-text">某些 NSObject 的方法只是简单地从运行时系统中获得信息,从而允许对象进行一定程度的自我检查。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例如-class-返回对象的类-isKindOfClass-和-isMemberOfClass-则检查对象是否在指定的-类继承体系中-respondsToSelector-检查对象能否响应指定的消息-conformsToProtocol-检查对象是否实现了指定协议类的方法-methodForSelector-则返回指定方法实现的地址。"><span class="nav-number">15.</span> <span class="nav-text">例如,class 返回对象的类;isKindOfClass:和 isMemberOfClass:则检查对象是否在指定的 类继承体系中;respondsToSelector:检查对象能否响应指定的消息;conformsToProtocol: 检查对象是否实现了指定协议类的方法;methodForSelector:则返回指定方法实现的地址。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行时系统是一个有公开接口的动态库-由一些数据结构和函数的集合组成-这些数据结构和函数的声明-头文件在-usr-include-objc中。这些函数支持用纯C的函数来实现和Objective-C同样的功能。还有一些函数构成了-NSObject-类方法的基础。这些函数使得访问运行时系统接口和提供开发工具成为可-能。尽管大部分情况下它们在-Objective-C-程序不是必须的-但是有时候对于-Objecitve-C-程序来说某些函-数是非常有用的。-这些函数的文档参见-Objective-C-2-0-运行时系统参考库。"><span class="nav-number">16.</span> <span class="nav-text">运行时系统是一个有公开接口的动态库,由一些数据结构和函数的集合组成,这些数据结构和函数的声明 头文件在/usr/include/objc中。这些函数支持用纯C的函数来实现和Objective-C同样的功能。还有一些函数构成了 NSObject 类方法的基础。这些函数使得访问运行时系统接口和提供开发工具成为可 能。尽管大部分情况下它们在 Objective-C 程序不是必须的,但是有时候对于 Objecitve-C 程序来说某些函 数是非常有用的。 这些函数的文档参见 Objective-C 2.0 运行时系统参考库。</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">飘金</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/title.js"></script>
