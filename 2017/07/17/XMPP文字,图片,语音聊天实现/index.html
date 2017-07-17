@@ -1,0 +1,793 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,Swift" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="XMPP文字,图片,语音聊天实现">
+<meta name="keywords" content="iOS,Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XMPP文字,图片,语音聊天实现">
+<meta property="og:url" content="http://yoursite.com/2017/07/17/XMPP文字,图片,语音聊天实现/index.html">
+<meta property="og:site_name" content="飘金的博客">
+<meta property="og:description" content="XMPP文字,图片,语音聊天实现">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/530099-405500d49adc357e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-07-17T12:09:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="XMPP文字,图片,语音聊天实现">
+<meta name="twitter:description" content="XMPP文字,图片,语音聊天实现">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/530099-405500d49adc357e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/17/XMPP文字,图片,语音聊天实现/"/>
+
+
+
+
+
+  <title>XMPP文字,图片,语音聊天实现 | 飘金的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">飘金的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">会炒菜的猿</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/17/XMPP文字,图片,语音聊天实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="飘金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="飘金的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">XMPP文字,图片,语音聊天实现</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-17T14:23:47+08:00">
+                2017-07-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><center style="color:#FF7F50">XMPP文字,图片,语音聊天实现</center><br><a id="more"></a></p>
+<h3 id="时间过得很快-我的第一份iOS工作做的就是IM应用-选用的是XMPP-如今也忘得差不多了-利用空闲时间来重写一遍小Demo就当复习一下"><a href="#时间过得很快-我的第一份iOS工作做的就是IM应用-选用的是XMPP-如今也忘得差不多了-利用空闲时间来重写一遍小Demo就当复习一下" class="headerlink" title="时间过得很快,我的第一份iOS工作做的就是IM应用(选用的是XMPP),如今也忘得差不多了.利用空闲时间来重写一遍小Demo就当复习一下."></a>时间过得很快,我的第一份iOS工作做的就是IM应用(选用的是XMPP),如今也忘得差不多了.利用空闲时间来重写一遍小Demo就当复习一下.</h3><h3 id="原理我就不介绍了-服务器的安装与配置可以参考XMPP的mysql和openfire环境配置或者配置介绍这篇"><a href="#原理我就不介绍了-服务器的安装与配置可以参考XMPP的mysql和openfire环境配置或者配置介绍这篇" class="headerlink" title="原理我就不介绍了,服务器的安装与配置可以参考XMPP的mysql和openfire环境配置或者配置介绍这篇"></a>原理我就不介绍了,服务器的安装与配置可以参考<a href="XMPP的mysql和openfire环境配置">XMPP的mysql和openfire环境配置</a>或者<a href="http://blog.csdn.net/u013087513/article/details/49669185" target="_blank" rel="external">配置介绍这篇</a></h3><h3 id="环境配置转自陈怀哲首发自简开始吧"><a href="#环境配置转自陈怀哲首发自简开始吧" class="headerlink" title="环境配置转自陈怀哲首发自简开始吧!"></a><a href="http://www.jianshu.com/p/8894a5a71b70" target="_blank" rel="external">环境配置转自陈怀哲首发自简</a>开始吧!</h3><h2 id="我做的Demo地址为-gitHub-https-github-com-piaojin-XmppIm-里面有很多BUG不要太介意"><a href="#我做的Demo地址为-gitHub-https-github-com-piaojin-XmppIm-里面有很多BUG不要太介意" class="headerlink" title="我做的Demo地址为:(gitHub)[https://github.com/piaojin/XmppIm]里面有很多BUG不要太介意"></a>我做的Demo地址为:(gitHub)[<a href="https://github.com/piaojin/XmppIm]里面有很多BUG不要太介意" target="_blank" rel="external">https://github.com/piaojin/XmppIm]里面有很多BUG不要太介意</a></h2><h3 id="先来一个流程图"><a href="#先来一个流程图" class="headerlink" title="先来一个流程图:"></a>先来一个流程图:</h3><p><img src="http://upload-images.jianshu.io/upload_images/530099-405500d49adc357e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<blockquote>
+<h2 id="必要介绍"><a href="#必要介绍" class="headerlink" title="必要介绍"></a>必要介绍</h2><h4 id="JID"><a href="#JID" class="headerlink" title="JID"></a>JID</h4></blockquote>
+<h4 id="XMPP的地址叫做JabberID（简写为JID），它用来标示XMPP网络中的各个XMPP实体。JID由三部分组成：domain，node-identifier和resource。JID中domain是必不可少的部分。注意：domain和user部分是不分大小写的，但是resource区分大小写。"><a href="#XMPP的地址叫做JabberID（简写为JID），它用来标示XMPP网络中的各个XMPP实体。JID由三部分组成：domain，node-identifier和resource。JID中domain是必不可少的部分。注意：domain和user部分是不分大小写的，但是resource区分大小写。" class="headerlink" title="XMPP的地址叫做JabberID（简写为JID），它用来标示XMPP网络中的各个XMPP实体。JID由三部分组成：domain，node identifier和resource。JID中domain是必不可少的部分。注意：domain和user部分是不分大小写的，但是resource区分大小写。"></a>XMPP的地址叫做JabberID（简写为JID），它用来标示XMPP网络中的各个XMPP实体。JID由三部分组成：domain，node identifier和resource。JID中domain是必不可少的部分。注意：domain和user部分是不分大小写的，但是resource区分大小写。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">jid = [ node &quot;@&quot; ] domain [ &quot;/&quot; resource ]  </div><div class="line">domain = fqdn / address-literal  </div><div class="line">fqdn = (sub-domain 1*(&quot;.&quot; sub-domain))  </div><div class="line">sub-domain = (internationalized domain label)  </div><div class="line">address-literal = IPv4address / IPv6address</div></pre></td></tr></table></figure>
+<h4 id="domain：通常指网络中的网关或者服务器。"><a href="#domain：通常指网络中的网关或者服务器。" class="headerlink" title="domain：通常指网络中的网关或者服务器。"></a>domain：通常指网络中的网关或者服务器。</h4><h4 id="node-identifier：通常表示一个向服务器或网关请求和使用网络服务的实体-比如一个客户端-当然它也能够表示其他的实体-比如在多用户聊天系统中的一个房间-。"><a href="#node-identifier：通常表示一个向服务器或网关请求和使用网络服务的实体-比如一个客户端-当然它也能够表示其他的实体-比如在多用户聊天系统中的一个房间-。" class="headerlink" title="node identifier：通常表示一个向服务器或网关请求和使用网络服务的实体(比如一个客户端),当然它也能够表示其他的实体(比如在多用户聊天系统中的一个房间)。"></a>node identifier：通常表示一个向服务器或网关请求和使用网络服务的实体(比如一个客户端),当然它也能够表示其他的实体(比如在多用户聊天系统中的一个房间)。</h4><h4 id="resource：通常表示一个特定的会话（与某个设备），连接（与某个地址），或者一个附属于某个节点ID实体相关实体的对象（比如多用户聊天室中的一个参加者）。"><a href="#resource：通常表示一个特定的会话（与某个设备），连接（与某个地址），或者一个附属于某个节点ID实体相关实体的对象（比如多用户聊天室中的一个参加者）。" class="headerlink" title="resource：通常表示一个特定的会话（与某个设备），连接（与某个地址），或者一个附属于某个节点ID实体相关实体的对象（比如多用户聊天室中的一个参加者）。"></a>resource：通常表示一个特定的会话（与某个设备），连接（与某个地址），或者一个附属于某个节点ID实体相关实体的对象（比如多用户聊天室中的一个参加者）。</h4><h4 id="JID种类有："><a href="#JID种类有：" class="headerlink" title="JID种类有："></a>JID种类有：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">bare JID：user@domain.tld</div><div class="line">full JID：user@domain.tld/resource</div></pre></td></tr></table></figure>
+<h4 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h4><h4 id="stpeter-jabber-org：表示服务器jabber-org上的用户stpeter。"><a href="#stpeter-jabber-org：表示服务器jabber-org上的用户stpeter。" class="headerlink" title="stpeter@jabber.org：表示服务器jabber.org上的用户stpeter。"></a>stpeter@jabber.org：表示服务器jabber.org上的用户stpeter。</h4><h4 id="room-service：一个用来提供多用户聊天服务的特定的聊天室。这里-“room“-是聊天室的名字，-”service“-是多用户聊天服务的主机名。"><a href="#room-service：一个用来提供多用户聊天服务的特定的聊天室。这里-“room“-是聊天室的名字，-”service“-是多用户聊天服务的主机名。" class="headerlink" title="room@service：一个用来提供多用户聊天服务的特定的聊天室。这里 “room“ 是聊天室的名字， ”service“ 是多用户聊天服务的主机名。"></a>room@service：一个用来提供多用户聊天服务的特定的聊天室。这里 “room“ 是聊天室的名字， ”service“ 是多用户聊天服务的主机名。</h4><h4 id="room-service-nick：加入了聊天室的用户nick的地址。这里-“room“-是聊天室的名字，-”service“-是多用户聊天服务的主机名，”nick“-是用户在聊天室的昵称。"><a href="#room-service-nick：加入了聊天室的用户nick的地址。这里-“room“-是聊天室的名字，-”service“-是多用户聊天服务的主机名，”nick“-是用户在聊天室的昵称。" class="headerlink" title="room@service/nick：加入了聊天室的用户nick的地址。这里 “room“ 是聊天室的名字， ”service“ 是多用户聊天服务的主机名，”nick“ 是用户在聊天室的昵称。"></a>room@service/nick：加入了聊天室的用户nick的地址。这里 “room“ 是聊天室的名字， ”service“ 是多用户聊天服务的主机名，”nick“ 是用户在聊天室的昵称。</h4><h4 id="为了标示JID，XMPP也有自己的URI，例如xmpp-stpeter-jabber-org，默认规则是在JID前加-xmpp-。"><a href="#为了标示JID，XMPP也有自己的URI，例如xmpp-stpeter-jabber-org，默认规则是在JID前加-xmpp-。" class="headerlink" title="为了标示JID，XMPP也有自己的URI，例如xmpp:stpeter@jabber.org，默认规则是在JID前加 xmpp:。"></a>为了标示JID，XMPP也有自己的URI，例如xmpp:stpeter@jabber.org，默认规则是在JID前加 xmpp:。</h4><h4 id="通信原语"><a href="#通信原语" class="headerlink" title="通信原语"></a>通信原语</h4><h4 id="XMPP通信原语有3种：message、presence和iq。"><a href="#XMPP通信原语有3种：message、presence和iq。" class="headerlink" title="XMPP通信原语有3种：message、presence和iq。"></a>XMPP通信原语有3种：message、presence和iq。</h4><h4 id="5-1-message"><a href="#5-1-message" class="headerlink" title="5.1 message"></a>5.1 message</h4><h4 id="message是一种基本推送消息方法，它不要求响应。主要用于IM、groupChat、alert和notification之类的应用中。"><a href="#message是一种基本推送消息方法，它不要求响应。主要用于IM、groupChat、alert和notification之类的应用中。" class="headerlink" title="message是一种基本推送消息方法，它不要求响应。主要用于IM、groupChat、alert和notification之类的应用中。"></a>message是一种基本推送消息方法，它不要求响应。主要用于IM、groupChat、alert和notification之类的应用中。</h4><h4 id="主要-属性如下："><a href="#主要-属性如下：" class="headerlink" title="主要 属性如下："></a>主要 属性如下：</h4><h4 id="5-1-1-type属性，它主要有5种类型："><a href="#5-1-1-type属性，它主要有5种类型：" class="headerlink" title="5.1.1  type属性，它主要有5种类型："></a>5.1.1  type属性，它主要有5种类型：</h4><h4 id="normal：类似于email，主要特点是不要求响应；"><a href="#normal：类似于email，主要特点是不要求响应；" class="headerlink" title="normal：类似于email，主要特点是不要求响应；"></a>normal：类似于email，主要特点是不要求响应；</h4><h4 id="chat：类似于qq里的好友即时聊天，主要特点是实时通讯；"><a href="#chat：类似于qq里的好友即时聊天，主要特点是实时通讯；" class="headerlink" title="chat：类似于qq里的好友即时聊天，主要特点是实时通讯；"></a>chat：类似于qq里的好友即时聊天，主要特点是实时通讯；</h4><h4 id="groupchat：类似于聊天室里的群聊；"><a href="#groupchat：类似于聊天室里的群聊；" class="headerlink" title="groupchat：类似于聊天室里的群聊；"></a>groupchat：类似于聊天室里的群聊；</h4><h4 id="headline：用于发送alert和notification；"><a href="#headline：用于发送alert和notification；" class="headerlink" title="headline：用于发送alert和notification；"></a>headline：用于发送alert和notification；</h4><h4 id="error：如果发送message出错，发现错误的实体会用这个类别来通知发送者出错了；"><a href="#error：如果发送message出错，发现错误的实体会用这个类别来通知发送者出错了；" class="headerlink" title="error：如果发送message出错，发现错误的实体会用这个类别来通知发送者出错了；"></a>error：如果发送message出错，发现错误的实体会用这个类别来通知发送者出错了；</h4><h4 id="5-1-2-to属性：标识消息的接收方。"><a href="#5-1-2-to属性：标识消息的接收方。" class="headerlink" title="5.1.2  to属性：标识消息的接收方。"></a>5.1.2  to属性：标识消息的接收方。</h4><h4 id="5-1-3-from属性：指发送方的名字或标示。为防止地址外泄，这个地址通常由发送者的server填写，而不是发送者。"><a href="#5-1-3-from属性：指发送方的名字或标示。为防止地址外泄，这个地址通常由发送者的server填写，而不是发送者。" class="headerlink" title="5.1.3  from属性：指发送方的名字或标示。为防止地址外泄，这个地址通常由发送者的server填写，而不是发送者。"></a>5.1.3  from属性：指发送方的名字或标示。为防止地址外泄，这个地址通常由发送者的server填写，而不是发送者。</h4><h4 id="载荷（payload）：例如body，subject"><a href="#载荷（payload）：例如body，subject" class="headerlink" title="载荷（payload）：例如body，subject"></a>载荷（payload）：例如body，subject</h4><h4 id="例子：-1"><a href="#例子：-1" class="headerlink" title="例子："></a>例子：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;message  </div><div class="line">to=&quot;lily@jabber.org/contact&quot;  </div><div class="line">type=&quot;chat&quot; &gt; </div><div class="line">&lt;body&gt; 你好，在忙吗&lt;/body&gt; </div><div class="line">&lt;/message&gt;</div></pre></td></tr></table></figure>
+<h4 id="5-2-presence"><a href="#5-2-presence" class="headerlink" title="5.2 presence"></a>5.2 presence</h4><h4 id="presence用来表明用户的状态，如：online、away、dnd-请勿打扰-等。当改变自己的状态时，就会在stream的上下文中插入一个Presence元素，来表明自身的状态。要想接受presence消息，必须经过一个叫做presence-subscription的授权过程。"><a href="#presence用来表明用户的状态，如：online、away、dnd-请勿打扰-等。当改变自己的状态时，就会在stream的上下文中插入一个Presence元素，来表明自身的状态。要想接受presence消息，必须经过一个叫做presence-subscription的授权过程。" class="headerlink" title="presence用来表明用户的状态，如：online、away、dnd(请勿打扰)等。当改变自己的状态时，就会在stream的上下文中插入一个Presence元素，来表明自身的状态。要想接受presence消息，必须经过一个叫做presence subscription的授权过程。"></a>presence用来表明用户的状态，如：online、away、dnd(请勿打扰)等。当改变自己的状态时，就会在stream的上下文中插入一个Presence元素，来表明自身的状态。要想接受presence消息，必须经过一个叫做presence subscription的授权过程。</h4><h4 id="5-2-1-属性："><a href="#5-2-1-属性：" class="headerlink" title="5.2.1 属性："></a>5.2.1 属性：</h4><h4 id="5-2-1-1-type属性，非必须。有以下类别"><a href="#5-2-1-1-type属性，非必须。有以下类别" class="headerlink" title="5.2.1.1 type属性，非必须。有以下类别"></a>5.2.1.1 type属性，非必须。有以下类别</h4><h4 id="subscribe：订阅其他用户的状态"><a href="#subscribe：订阅其他用户的状态" class="headerlink" title="subscribe：订阅其他用户的状态"></a>subscribe：订阅其他用户的状态</h4><h4 id="probe：请求获取其他用户的状态"><a href="#probe：请求获取其他用户的状态" class="headerlink" title="probe：请求获取其他用户的状态"></a>probe：请求获取其他用户的状态</h4><h4 id="unavailable：不可用，离线（offline）状态"><a href="#unavailable：不可用，离线（offline）状态" class="headerlink" title="unavailable：不可用，离线（offline）状态"></a>unavailable：不可用，离线（offline）状态</h4><h4 id="5-2-1-2-to属性：标识消息的接收方。"><a href="#5-2-1-2-to属性：标识消息的接收方。" class="headerlink" title="5.2.1.2 to属性：标识消息的接收方。"></a>5.2.1.2 to属性：标识消息的接收方。</h4><h4 id="5-2-1-3-from属性：指发送方的名字或标示。"><a href="#5-2-1-3-from属性：指发送方的名字或标示。" class="headerlink" title="5.2.1.3 from属性：指发送方的名字或标示。"></a>5.2.1.3 from属性：指发送方的名字或标示。</h4><h4 id="5-2-2-载荷（payload）："><a href="#5-2-2-载荷（payload）：" class="headerlink" title="5.2.2 载荷（payload）："></a>5.2.2 载荷（payload）：</h4><h4 id="5-2-2-1-show："><a href="#5-2-2-1-show：" class="headerlink" title="5.2.2.1 show："></a>5.2.2.1 show：</h4><h4 id="chat：聊天中"><a href="#chat：聊天中" class="headerlink" title="chat：聊天中"></a>chat：聊天中</h4><h4 id="away：暂时离开"><a href="#away：暂时离开" class="headerlink" title="away：暂时离开"></a>away：暂时离开</h4><h4 id="xa：eXtend-Away，长时间离开"><a href="#xa：eXtend-Away，长时间离开" class="headerlink" title="xa：eXtend Away，长时间离开"></a>xa：eXtend Away，长时间离开</h4><h4 id="dnd：勿打扰"><a href="#dnd：勿打扰" class="headerlink" title="dnd：勿打扰"></a>dnd：勿打扰</h4><h4 id="5-2-2-2-status：格式自由，可阅读的文本。也叫做rich-presence或者extended-presence，常用来表示用户当前心情，活动，听的歌曲，看的视频，所在的聊天室，访问的网页，玩的游戏等等。"><a href="#5-2-2-2-status：格式自由，可阅读的文本。也叫做rich-presence或者extended-presence，常用来表示用户当前心情，活动，听的歌曲，看的视频，所在的聊天室，访问的网页，玩的游戏等等。" class="headerlink" title="5.2.2.2 status：格式自由，可阅读的文本。也叫做rich presence或者extended presence，常用来表示用户当前心情，活动，听的歌曲，看的视频，所在的聊天室，访问的网页，玩的游戏等等。"></a>5.2.2.2 status：格式自由，可阅读的文本。也叫做rich presence或者extended presence，常用来表示用户当前心情，活动，听的歌曲，看的视频，所在的聊天室，访问的网页，玩的游戏等等。</h4><h4 id="5-2-2-3-priority：范围-128-127。高优先级的resource能接受发送到bare-JID的消息，低优先级的resource不能。优先级为负数的resource不能收到发送到bare-JID的消息。"><a href="#5-2-2-3-priority：范围-128-127。高优先级的resource能接受发送到bare-JID的消息，低优先级的resource不能。优先级为负数的resource不能收到发送到bare-JID的消息。" class="headerlink" title="5.2.2.3 priority：范围-128~127。高优先级的resource能接受发送到bare JID的消息，低优先级的resource不能。优先级为负数的resource不能收到发送到bare JID的消息。"></a>5.2.2.3 priority：范围-128~127。高优先级的resource能接受发送到bare JID的消息，低优先级的resource不能。优先级为负数的resource不能收到发送到bare JID的消息。</h4><h4 id="例子：-2"><a href="#例子：-2" class="headerlink" title="例子："></a>例子：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;presence from=&quot;alice@wonderland.lit/pda&quot;&gt; </div><div class="line">&lt;show&gt;xa&lt;/show&gt; </div><div class="line">&lt;status&gt;down the rabbit hole!&lt;/status&gt; </div><div class="line">&lt;/presence&gt;</div></pre></td></tr></table></figure>
+<h4 id="5-3-iq-（Info-Query）"><a href="#5-3-iq-（Info-Query）" class="headerlink" title="5.3 iq （Info / Query）"></a>5.3 iq （Info / Query）</h4><h4 id="一种请求／响应机制，从一个实体从发送请求，另外一个实体接受请求，并进行响应。例如，client在stream的上下文中插入一个元素，向Server请求得到自己的好友列表，Server返回一个，里面是请求的结果。"><a href="#一种请求／响应机制，从一个实体从发送请求，另外一个实体接受请求，并进行响应。例如，client在stream的上下文中插入一个元素，向Server请求得到自己的好友列表，Server返回一个，里面是请求的结果。" class="headerlink" title="一种请求／响应机制，从一个实体从发送请求，另外一个实体接受请求，并进行响应。例如，client在stream的上下文中插入一个元素，向Server请求得到自己的好友列表，Server返回一个，里面是请求的结果。"></a>一种请求／响应机制，从一个实体从发送请求，另外一个实体接受请求，并进行响应。例如，client在stream的上下文中插入一个元素，向Server请求得到自己的好友列表，Server返回一个，里面是请求的结果。</h4><h4 id="主要的属性是type。包括"><a href="#主要的属性是type。包括" class="headerlink" title="主要的属性是type。包括:"></a>主要的属性是type。包括:</h4><h4 id="Get-获取当前域值。类似于http-get方法。"><a href="#Get-获取当前域值。类似于http-get方法。" class="headerlink" title="Get :获取当前域值。类似于http get方法。"></a>Get :获取当前域值。类似于http get方法。</h4><h4 id="Set-设置或替换get查询的值。类似于http-put方法。"><a href="#Set-设置或替换get查询的值。类似于http-put方法。" class="headerlink" title="Set :设置或替换get查询的值。类似于http put方法。"></a>Set :设置或替换get查询的值。类似于http put方法。</h4><h4 id="Result-说明成功的响应了先前的查询。类似于http状态码200。"><a href="#Result-说明成功的响应了先前的查询。类似于http状态码200。" class="headerlink" title="Result :说明成功的响应了先前的查询。类似于http状态码200。"></a>Result :说明成功的响应了先前的查询。类似于http状态码200。</h4><h4 id="Error-查询和响应中出现的错误。"><a href="#Error-查询和响应中出现的错误。" class="headerlink" title="Error: 查询和响应中出现的错误。"></a>Error: 查询和响应中出现的错误。</h4><h4 id="例子：-3"><a href="#例子：-3" class="headerlink" title="例子："></a>例子：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;iq from=&quot;alice@wonderland.lit/pda&quot;  </div><div class="line">id=&quot;rr82a1z7&quot; </div><div class="line">to=&quot;alice@wonderland.lit&quot;  </div><div class="line">type=&quot;get&quot;&gt; </div><div class="line">&lt;query xmlns=&quot;jabber:iq:roster&quot;/&gt; </div><div class="line">&lt;/iq&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<h2 id="XMPPFramework结构与核心类"><a href="#XMPPFramework结构与核心类" class="headerlink" title="XMPPFramework结构与核心类"></a>XMPPFramework结构与核心类</h2></blockquote>
+<h4 id="在进入下一步之前，先给大家讲讲XMPPFramework的目录结构，以便新手们更容易读懂文章。我们来看看下图："><a href="#在进入下一步之前，先给大家讲讲XMPPFramework的目录结构，以便新手们更容易读懂文章。我们来看看下图：" class="headerlink" title="在进入下一步之前，先给大家讲讲XMPPFramework的目录结构，以便新手们更容易读懂文章。我们来看看下图："></a>在进入下一步之前，先给大家讲讲XMPPFramework的目录结构，以便新手们更容易读懂文章。我们来看看下图：</h4><h4 id="虽然这里有很多个目录，但是我们在开发中基本只关心Core和Extensions这两个目录下的类。各个目录主要用来干嘛的？"><a href="#虽然这里有很多个目录，但是我们在开发中基本只关心Core和Extensions这两个目录下的类。各个目录主要用来干嘛的？" class="headerlink" title="虽然这里有很多个目录，但是我们在开发中基本只关心Core和Extensions这两个目录下的类。各个目录主要用来干嘛的？"></a>虽然这里有很多个目录，但是我们在开发中基本只关心Core和Extensions这两个目录下的类。各个目录主要用来干嘛的？</h4><h4 id="Authentication：这一看名字就知道与授权验证相关的。"><a href="#Authentication：这一看名字就知道与授权验证相关的。" class="headerlink" title="Authentication：这一看名字就知道与授权验证相关的。"></a>Authentication：这一看名字就知道与授权验证相关的。</h4><h4 id="Categories：主要是一些扩展，尤其是NSXMLElement-XMPP扩展是必备的。"><a href="#Categories：主要是一些扩展，尤其是NSXMLElement-XMPP扩展是必备的。" class="headerlink" title="Categories：主要是一些扩展，尤其是NSXMLElement+XMPP扩展是必备的。"></a>Categories：主要是一些扩展，尤其是NSXMLElement+XMPP扩展是必备的。</h4><h4 id="Core：这里是XMPP的核心文件目录，我们最主要的目光还是要放在这个目录上。"><a href="#Core：这里是XMPP的核心文件目录，我们最主要的目光还是要放在这个目录上。" class="headerlink" title="Core：这里是XMPP的核心文件目录，我们最主要的目光还是要放在这个目录上。"></a>Core：这里是XMPP的核心文件目录，我们最主要的目光还是要放在这个目录上。</h4><h4 id="Extensions：这个目录是XMPP的扩展，用于扩展各种协议和各种独立的功能，其下每个子目录都是对应的一个单独的子功能。我们最常用到的功能有Reconnect、Roster、CoreDataStorage等。"><a href="#Extensions：这个目录是XMPP的扩展，用于扩展各种协议和各种独立的功能，其下每个子目录都是对应的一个单独的子功能。我们最常用到的功能有Reconnect、Roster、CoreDataStorage等。" class="headerlink" title="Extensions：这个目录是XMPP的扩展，用于扩展各种协议和各种独立的功能，其下每个子目录都是对应的一个单独的子功能。我们最常用到的功能有Reconnect、Roster、CoreDataStorage等。"></a>Extensions：这个目录是XMPP的扩展，用于扩展各种协议和各种独立的功能，其下每个子目录都是对应的一个单独的子功能。我们最常用到的功能有Reconnect、Roster、CoreDataStorage等。</h4><h4 id="Utilities：都是辅助类，我们开发者不用关心这里。"><a href="#Utilities：都是辅助类，我们开发者不用关心这里。" class="headerlink" title="Utilities：都是辅助类，我们开发者不用关心这里。"></a>Utilities：都是辅助类，我们开发者不用关心这里。</h4><h4 id="Vendor：这个目录是XMPP所引用的第三方类库，如CocoaAsyncSocket、KissXML等，我们也不用关心这里。"><a href="#Vendor：这个目录是XMPP所引用的第三方类库，如CocoaAsyncSocket、KissXML等，我们也不用关心这里。" class="headerlink" title="Vendor：这个目录是XMPP所引用的第三方类库，如CocoaAsyncSocket、KissXML等，我们也不用关心这里。"></a>Vendor：这个目录是XMPP所引用的第三方类库，如CocoaAsyncSocket、KissXML等，我们也不用关心这里。</h4><h4 id="阅读到此，对XMPPFramework的结构有所了解了吧！"><a href="#阅读到此，对XMPPFramework的结构有所了解了吧！" class="headerlink" title="阅读到此，对XMPPFramework的结构有所了解了吧！"></a>阅读到此，对XMPPFramework的结构有所了解了吧！</h4><h4 id="概念知识"><a href="#概念知识" class="headerlink" title="概念知识"></a>概念知识</h4><h4 id="登录需要到账号，而所谓的账号其实就是用户唯一标识符（JID），在XMPP中使用XMPPJID类来表示。那么，用户唯一标识（JID）有什么组成？"><a href="#登录需要到账号，而所谓的账号其实就是用户唯一标识符（JID），在XMPP中使用XMPPJID类来表示。那么，用户唯一标识（JID）有什么组成？" class="headerlink" title="登录需要到账号，而所谓的账号其实就是用户唯一标识符（JID），在XMPP中使用XMPPJID类来表示。那么，用户唯一标识（JID）有什么组成？"></a>登录需要到账号，而所谓的账号其实就是用户唯一标识符（JID），在XMPP中使用XMPPJID类来表示。那么，用户唯一标识（JID）有什么组成？</h4><h4 id="JID一般由三部分构成：用户名，域名和资源名，格式为user-domain-resource，例如：-test-example-com-Anthony。对应于XMPPJID类中的三个属性user、domain、resource。"><a href="#JID一般由三部分构成：用户名，域名和资源名，格式为user-domain-resource，例如：-test-example-com-Anthony。对应于XMPPJID类中的三个属性user、domain、resource。" class="headerlink" title="JID一般由三部分构成：用户名，域名和资源名，格式为user@domain/resource，例如： test@example.com /Anthony。对应于XMPPJID类中的三个属性user、domain、resource。"></a>JID一般由三部分构成：用户名，域名和资源名，格式为user@domain/resource，例如： test@example.com /Anthony。对应于XMPPJID类中的三个属性user、domain、resource。</h4><h4 id="如果没有设置主机名（HOST），则使用JID的域名（domain）作为主机名，而端口号是可选的，默认是5222，一般也没有必要改动它。"><a href="#如果没有设置主机名（HOST），则使用JID的域名（domain）作为主机名，而端口号是可选的，默认是5222，一般也没有必要改动它。" class="headerlink" title="如果没有设置主机名（HOST），则使用JID的域名（domain）作为主机名，而端口号是可选的，默认是5222，一般也没有必要改动它。"></a>如果没有设置主机名（HOST），则使用JID的域名（domain）作为主机名，而端口号是可选的，默认是5222，一般也没有必要改动它。</h4><h4 id="XMPPStream类"><a href="#XMPPStream类" class="headerlink" title="XMPPStream类"></a>XMPPStream类</h4><h4 id="我们要与服务器连接，就必须通过XMPPStream类了，它提供了很多的API和属性设置，通过socket来实现的。我们看到Verdor目录了吗，包含了CocoaAsyncSocket这个非常有名的socket编程库。XMPPStream类还遵守并实现了GCDAsyncSocketDelegate代理，用于客户端与服务器交互。"><a href="#我们要与服务器连接，就必须通过XMPPStream类了，它提供了很多的API和属性设置，通过socket来实现的。我们看到Verdor目录了吗，包含了CocoaAsyncSocket这个非常有名的socket编程库。XMPPStream类还遵守并实现了GCDAsyncSocketDelegate代理，用于客户端与服务器交互。" class="headerlink" title="我们要与服务器连接，就必须通过XMPPStream类了，它提供了很多的API和属性设置，通过socket来实现的。我们看到Verdor目录了吗，包含了CocoaAsyncSocket这个非常有名的socket编程库。XMPPStream类还遵守并实现了GCDAsyncSocketDelegate代理，用于客户端与服务器交互。"></a>我们要与服务器连接，就必须通过XMPPStream类了，它提供了很多的API和属性设置，通过socket来实现的。我们看到Verdor目录了吗，包含了CocoaAsyncSocket这个非常有名的socket编程库。XMPPStream类还遵守并实现了GCDAsyncSocketDelegate代理，用于客户端与服务器交互。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@interface XMPPStream : NSObject &lt;GCDAsyncSocketDelegate&gt;</div></pre></td></tr></table></figure>
+<h4 id="当我们创建XMPPStream对象后，我们需要设置代理，才能回调我们的代理方法，这个是支持multicast-delegate，也就是说对于一个XMPPStream对象，可以设置多个代理对象，其中协议是XMPPStreamDelegate："><a href="#当我们创建XMPPStream对象后，我们需要设置代理，才能回调我们的代理方法，这个是支持multicast-delegate，也就是说对于一个XMPPStream对象，可以设置多个代理对象，其中协议是XMPPStreamDelegate：" class="headerlink" title="当我们创建XMPPStream对象后，我们需要设置代理，才能回调我们的代理方法，这个是支持multicast delegate，也就是说对于一个XMPPStream对象，可以设置多个代理对象，其中协议是XMPPStreamDelegate："></a>当我们创建XMPPStream对象后，我们需要设置代理，才能回调我们的代理方法，这个是支持multicast delegate，也就是说对于一个XMPPStream对象，可以设置多个代理对象，其中协议是XMPPStreamDelegate：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (void)addDelegate:(id)delegatedelegateQueue:(dispatch_queue_t)delegateQueue;</div></pre></td></tr></table></figure>
+<h4 id="而当我们不希望某个XMPPStream对象继续接收到代理回调时，我们通过这样的方式来移除代理："><a href="#而当我们不希望某个XMPPStream对象继续接收到代理回调时，我们通过这样的方式来移除代理：" class="headerlink" title="而当我们不希望某个XMPPStream对象继续接收到代理回调时，我们通过这样的方式来移除代理："></a>而当我们不希望某个XMPPStream对象继续接收到代理回调时，我们通过这样的方式来移除代理：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">- (void)removeDelegate:(id)delegatedelegateQueue:(dispatch_queue_t)delegateQueue;</div><div class="line">- (void)removeDelegate:(id)delegate;</div></pre></td></tr></table></figure>
+<h4 id="接下来，我们要设置主机和端口，通过设置这两个属性："><a href="#接下来，我们要设置主机和端口，通过设置这两个属性：" class="headerlink" title="接下来，我们要设置主机和端口，通过设置这两个属性："></a>接下来，我们要设置主机和端口，通过设置这两个属性：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">* The server&apos;s hostname that should be used to make the TCP connection.</div><div class="line">* 注释太长，简单说就是主机。这个属性是可选设置的，如果没有设置主机，默认会使用domain</div><div class="line">*/</div><div class="line">@property (readwrite, copy) NSString *hostName;</div><div class="line"></div><div class="line">/**</div><div class="line">* The port the xmpp server is running on.</div><div class="line">* If you do not explicitly set the port, the default port will be used.</div><div class="line">* If you set the port to zero, the default port will be used.</div><div class="line">*</div><div class="line">* The default port is 5222.</div><div class="line">**/</div><div class="line">@property (readwrite, assign) UInt16 hostPort;</div></pre></td></tr></table></figure>
+<h4 id="XMPPStream有XMPPJID类对象作为属性，标识用户，因为我们后续很多操作都需要到myJID："><a href="#XMPPStream有XMPPJID类对象作为属性，标识用户，因为我们后续很多操作都需要到myJID：" class="headerlink" title="XMPPStream有XMPPJID类对象作为属性，标识用户，因为我们后续很多操作都需要到myJID："></a>XMPPStream有XMPPJID类对象作为属性，标识用户，因为我们后续很多操作都需要到myJID：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@property (readwrite, copy) XMPPJID *myJID;</div></pre></td></tr></table></figure>
+<h4 id="而管理用户在线状态的就交由XMPPPresence类了，它同样被作为XMPPStream的属性，组合到XMPPStream中，后续很多关于用户的操作是需要到处理用户状态的："><a href="#而管理用户在线状态的就交由XMPPPresence类了，它同样被作为XMPPStream的属性，组合到XMPPStream中，后续很多关于用户的操作是需要到处理用户状态的：" class="headerlink" title="而管理用户在线状态的就交由XMPPPresence类了，它同样被作为XMPPStream的属性，组合到XMPPStream中，后续很多关于用户的操作是需要到处理用户状态的："></a>而管理用户在线状态的就交由XMPPPresence类了，它同样被作为XMPPStream的属性，组合到XMPPStream中，后续很多关于用户的操作是需要到处理用户状态的：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">* Represents the last sent presence element concerning the presence of myJID on the server.</div><div class="line">* In other words, it represents the presence as others see us.</div><div class="line">*</div><div class="line">* This excludes presence elements sent concerning subscriptions, MUC rooms, etc.</div><div class="line">*</div><div class="line">* @see resendMyPresence</div><div class="line">**/</div><div class="line">@property (strong, readonly) XMPPPresence *myPresence;</div></pre></td></tr></table></figure>
+<h4 id="XMPPStreamDelegate"><a href="#XMPPStreamDelegate" class="headerlink" title="XMPPStreamDelegate"></a>XMPPStreamDelegate</h4><h4 id="这个协议是非常关键的，我们的很多主要操作都集中在这个协议的代理回调上。它分为好几种类型的代理API，比如授权的、注册的、安全的等："><a href="#这个协议是非常关键的，我们的很多主要操作都集中在这个协议的代理回调上。它分为好几种类型的代理API，比如授权的、注册的、安全的等：" class="headerlink" title="这个协议是非常关键的，我们的很多主要操作都集中在这个协议的代理回调上。它分为好几种类型的代理API，比如授权的、注册的、安全的等："></a>这个协议是非常关键的，我们的很多主要操作都集中在这个协议的代理回调上。它分为好几种类型的代理API，比如授权的、注册的、安全的等：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div></pre></td><td class="code"><pre><div class="line">@protocol XMPPStreamDelegate</div><div class="line">@optional</div><div class="line">// 将要与服务器连接是回调</div><div class="line">- (void)xmppStreamWillConnect:(XMPPStream *)sender;</div><div class="line"></div><div class="line">// 当tcp socket已经与远程主机连接上时会回调此代理方法</div><div class="line">// 若App要求在后台运行，需要设置XMPPStream&apos;s enableBackgroundingOnSocket属性</div><div class="line">- (void)xmppStream:(XMPPStream *)sendersocketDidConnect:(GCDAsyncSocket *)socket;</div><div class="line"></div><div class="line">// 当TCP与服务器建立连接后会回调此代理方法</div><div class="line">- (void)xmppStreamDidStartNegotiation:(XMPPStream *)sender;</div><div class="line"></div><div class="line">// TLS传输层协议在将要验证安全设置时会回调</div><div class="line">// 参数settings会被传到startTLS</div><div class="line">// 此方法可以不实现的，若选择实现它，可以可以在</div><div class="line">// 若服务端使用自签名的证书，需要在settings中添加GCDAsyncSocketManuallyEvaluateTrust=YES</div><div class="line">//</div><div class="line">- (void)xmppStream:(XMPPStream *)senderwillSecureWithSettings:(NSMutableDictionary *)settings;</div><div class="line"></div><div class="line">// 上面的方法执行后，下一步就会执行这个代理回调</div><div class="line">// 用于在TCP握手时手动验证是否受信任</div><div class="line">- (void)xmppStream:(XMPPStream *)senderdidReceiveTrust:(SecTrustRef)trust</div><div class="line">completionHandler:(void (^)(BOOL shouldTrustPeer))completionHandler;</div><div class="line"></div><div class="line">// 当stream通过了SSL/TLS的安全验证时，会回调此代理方法</div><div class="line">- (void)xmppStreamDidSecure:(XMPPStream *)sender;</div><div class="line"></div><div class="line">// 当XML流已经完全打开时（也就是与服务器的连接完成时）会回调此代理方法。此时可以安全地与服务器通信了。</div><div class="line">- (void)xmppStreamDidConnect:(XMPPStream *)sender;</div><div class="line"></div><div class="line">// 注册新用户成功时的回调</div><div class="line">- (void)xmppStreamDidRegister:(XMPPStream *)sender;</div><div class="line"></div><div class="line">// 注册新用户失败时的回调</div><div class="line">- (void)xmppStream:(XMPPStream *)senderdidNotRegister:(NSXMLElement *)error;</div><div class="line"></div><div class="line">// 授权通过时的回调，也就是登录成功的回调</div><div class="line">- (void)xmppStreamDidAuthenticate:(XMPPStream *)sender;</div><div class="line"></div><div class="line">// 授权失败时的回调，也就是登录失败时的回调</div><div class="line">- (void)xmppStream:(XMPPStream *)senderdidNotAuthenticate:(NSXMLElement *)error;</div><div class="line"></div><div class="line">// 将要绑定JID resource时的回调，这是授权程序的标准部分，当验证JID用户名通过时，下一步就验证resource。若使用标准绑定处理，return nil或者不要实现此方法</div><div class="line">- (id &lt;XMPPCustomBinding&gt;)xmppStreamWillBind:(XMPPStream *)sender;</div><div class="line"></div><div class="line">// 如果服务器出现resouce冲突而导致不允许resource选择时，会回调此代理方法。返回指定的resource或者返回nil让服务器自动帮助我们来选择。一般不用实现它。</div><div class="line">- (NSString *)xmppStream:(XMPPStream *)senderalternativeResourceForConflictingResource:(NSString *)conflictingResource;</div><div class="line"></div><div class="line">// 将要发送IQ（消息查询）时的回调</div><div class="line">- (XMPPIQ *)xmppStream:(XMPPStream *)senderwillReceiveIQ:(XMPPIQ *)iq;</div><div class="line">// 将要接收到消息时的回调</div><div class="line">- (XMPPMessage *)xmppStream:(XMPPStream *)senderwillReceiveMessage:(XMPPMessage *)message;</div><div class="line">// 将要接收到用户在线状态时的回调</div><div class="line">- (XMPPPresence *)xmppStream:(XMPPStream *)senderwillReceivePresence:(XMPPPresence *)presence;</div><div class="line"></div><div class="line">/**</div><div class="line">* This method is called if any of the xmppStream:willReceiveX: methods filter the incoming stanza.</div><div class="line">*</div><div class="line">* It may be useful for some extensions to know that something was received,</div><div class="line">* even if it was filtered for some reason.</div><div class="line">**/</div><div class="line">// 当xmppStream:willReceiveX:(也就是前面这三个API回调后)，过滤了stanza，会回调此代理方法。</div><div class="line">// 通过实现此代理方法，可以知道被过滤的原因，有一定的帮助。</div><div class="line">- (void)xmppStreamDidFilterStanza:(XMPPStream *)sender;</div><div class="line"></div><div class="line">// 在接收了IQ（消息查询后）会回调此代理方法</div><div class="line">- (BOOL)xmppStream:(XMPPStream *)senderdidReceiveIQ:(XMPPIQ *)iq;</div><div class="line">// 在接收了消息后会回调此代理方法</div><div class="line">- (void)xmppStream:(XMPPStream *)senderdidReceiveMessage:(XMPPMessage *)message;</div><div class="line">// 在接收了用户在线状态消息后会回调此代理方法</div><div class="line">- (void)xmppStream:(XMPPStream *)senderdidReceivePresence:(XMPPPresence *)presence;</div><div class="line"></div><div class="line">// 在接收IQ/messag、presence出错时，会回调此代理方法</div><div class="line">- (void)xmppStream:(XMPPStream *)senderdidReceiveError:(NSXMLElement *)error;</div><div class="line"></div><div class="line">// 将要发送IQ（消息查询时）时会回调此代理方法</div><div class="line">- (XMPPIQ *)xmppStream:(XMPPStream *)senderwillSendIQ:(XMPPIQ *)iq;</div><div class="line">// 在将要发送消息时，会回调此代理方法</div><div class="line">- (XMPPMessage *)xmppStream:(XMPPStream *)senderwillSendMessage:(XMPPMessage *)message;</div><div class="line">// 在将要发送用户在线状态信息时，会回调此方法</div><div class="line">- (XMPPPresence *)xmppStream:(XMPPStream *)senderwillSendPresence:(XMPPPresence *)presence;</div><div class="line"></div><div class="line">// 在发送IQ（消息查询）成功后会回调此代理方法</div><div class="line">- (void)xmppStream:(XMPPStream *)senderdidSendIQ:(XMPPIQ *)iq;</div><div class="line">// 在发送消息成功后，会回调此代理方法</div><div class="line">- (void)xmppStream:(XMPPStream *)senderdidSendMessage:(XMPPMessage *)message;</div><div class="line">// 在发送用户在线状态信息成功后，会回调此方法</div><div class="line">- (void)xmppStream:(XMPPStream *)senderdidSendPresence:(XMPPPresence *)presence;</div><div class="line"></div><div class="line">// 在发送IQ（消息查询）失败后会回调此代理方法</div><div class="line">- (void)xmppStream:(XMPPStream *)senderdidFailToSendIQ:(XMPPIQ *)iqerror:(NSError *)error;</div><div class="line">// 在发送消息失败后，会回调此代理方法</div><div class="line">- (void)xmppStream:(XMPPStream *)senderdidFailToSendMessage:(XMPPMessage *)messageerror:(NSError *)error;</div><div class="line">// 在发送用户在线状态失败信息后，会回调此方法</div><div class="line">- (void)xmppStream:(XMPPStream *)senderdidFailToSendPresence:(XMPPPresence *)presenceerror:(NSError *)error;</div><div class="line"></div><div class="line">// 当修改了JID信息时，会回调此代理方法</div><div class="line">- (void)xmppStreamDidChangeMyJID:(XMPPStream *)xmppStream;</div><div class="line"></div><div class="line">// 当Stream被告知与服务器断开连接时会回调此代理方法</div><div class="line">- (void)xmppStreamWasToldToDisconnect:(XMPPStream *)sender;</div><div class="line"></div><div class="line">// 当发送了&lt;/stream:stream&gt;节点时，会回调此代理方法</div><div class="line">- (void)xmppStreamDidSendClosingStreamStanza:(XMPPStream *)sender;</div><div class="line"></div><div class="line">// 连接超时时会回调此代理方法</div><div class="line">- (void)xmppStreamConnectDidTimeout:(XMPPStream *)sender;</div><div class="line"></div><div class="line">// 当与服务器断开连接后，会回调此代理方法</div><div class="line">- (void)xmppStreamDidDisconnect:(XMPPStream *)senderwithError:(NSError *)error;</div><div class="line"></div><div class="line">// p2p类型相关的</div><div class="line">- (void)xmppStream:(XMPPStream *)senderdidReceiveP2PFeatures:(NSXMLElement *)streamFeatures;</div><div class="line">- (void)xmppStream:(XMPPStream *)senderwillSendP2PFeatures:(NSXMLElement *)streamFeatures;</div><div class="line"></div><div class="line"></div><div class="line">- (void)xmppStream:(XMPPStream *)senderdidRegisterModule:(id)module;</div><div class="line">- (void)xmppStream:(XMPPStream *)senderwillUnregisterModule:(id)module;</div><div class="line"></div><div class="line">// 当发送非XMPP元素节点时，会回调此代理方法。也就是说，如果发送的element不是</div><div class="line">// &lt;iq&gt;, &lt;message&gt; 或者 &lt;presence&gt;，那么就会回调此代理方法</div><div class="line">- (void)xmppStream:(XMPPStream *)senderdidSendCustomElement:(NSXMLElement *)element;</div><div class="line">// 当接收到非XMPP元素节点时，会回调此代理方法。也就是说，如果接收的element不是</div><div class="line">// &lt;iq&gt;, &lt;message&gt; 或者 &lt;presence&gt;，那么就会回调此代理方法</div><div class="line">- (void)xmppStream:(XMPPStream *)senderdidReceiveCustomElement:(NSXMLElement *)element;</div></pre></td></tr></table></figure>
+<h4 id="到此，也就理解了XMPPStream五五六六了吧！！！"><a href="#到此，也就理解了XMPPStream五五六六了吧！！！" class="headerlink" title="到此，也就理解了XMPPStream五五六六了吧！！！"></a>到此，也就理解了XMPPStream五五六六了吧！！！</h4><h4 id="XMPPIQ"><a href="#XMPPIQ" class="headerlink" title="XMPPIQ"></a>XMPPIQ</h4><h4 id="消息查询（IQ）就是通过此类来处理的了。XMPP给我们提供了IQ方便创建的类，用于快速生成XML数据。若头文件声明如下："><a href="#消息查询（IQ）就是通过此类来处理的了。XMPP给我们提供了IQ方便创建的类，用于快速生成XML数据。若头文件声明如下：" class="headerlink" title="消息查询（IQ）就是通过此类来处理的了。XMPP给我们提供了IQ方便创建的类，用于快速生成XML数据。若头文件声明如下："></a>消息查询（IQ）就是通过此类来处理的了。XMPP给我们提供了IQ方便创建的类，用于快速生成XML数据。若头文件声明如下：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">@interfaceXMPPIQ: XMPPElement</div><div class="line"></div><div class="line">// 生成iq</div><div class="line">+ (XMPPIQ *)iq;</div><div class="line">+ (XMPPIQ *)iqWithType:(NSString *)type;</div><div class="line">+ (XMPPIQ *)iqWithType:(NSString *)typeto:(XMPPJID *)jid;</div><div class="line">+ (XMPPIQ *)iqWithType:(NSString *)typeto:(XMPPJID *)jidelementID:(NSString *)eid;</div><div class="line">+ (XMPPIQ *)iqWithType:(NSString *)typeto:(XMPPJID *)jidelementID:(NSString *)eidchild:(NSXMLElement *)childElement;</div><div class="line">+ (XMPPIQ *)iqWithType:(NSString *)typeelementID:(NSString *)eid;</div><div class="line">+ (XMPPIQ *)iqWithType:(NSString *)typeelementID:(NSString *)eidchild:(NSXMLElement *)childElement;</div><div class="line">+ (XMPPIQ *)iqWithType:(NSString *)typechild:(NSXMLElement *)childElement;</div><div class="line"></div><div class="line">- (id)init;</div><div class="line">- (id)initWithType:(NSString *)type;</div><div class="line">- (id)initWithType:(NSString *)typeto:(XMPPJID *)jid;</div><div class="line">- (id)initWithType:(NSString *)typeto:(XMPPJID *)jidelementID:(NSString *)eid;</div><div class="line">- (id)initWithType:(NSString *)typeto:(XMPPJID *)jidelementID:(NSString *)eidchild:(NSXMLElement *)childElement;</div><div class="line">- (id)initWithType:(NSString *)typeelementID:(NSString *)eid;</div><div class="line">- (id)initWithType:(NSString *)typeelementID:(NSString *)eidchild:(NSXMLElement *)childElement;</div><div class="line">- (id)initWithType:(NSString *)typechild:(NSXMLElement *)childElement;</div><div class="line"></div><div class="line">// IQ类型，看下面的说明</div><div class="line">- (NSString *)type;</div><div class="line"></div><div class="line">// 判断type类型</div><div class="line">- (BOOL)isGetIQ;</div><div class="line">- (BOOL)isSetIQ;</div><div class="line">- (BOOL)isResultIQ;</div><div class="line">- (BOOL)isErrorIQ;</div><div class="line"></div><div class="line">// 当type为get或者set时，这个API是很有用的，用于指定是否要求有响应</div><div class="line">- (BOOL)requiresResponse;</div><div class="line"></div><div class="line">- (NSXMLElement *)childElement;</div><div class="line">- (NSXMLElement *)childErrorElement;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<h4 id="IQ是一种请求／响应机制，从一个实体从发送请求，另外一个实体接受请求并进行响应。例如，client在stream的上下文中插入一个元素，向Server请求得到自己的好友列表，Server返回一个，里面是请求的结果。"><a href="#IQ是一种请求／响应机制，从一个实体从发送请求，另外一个实体接受请求并进行响应。例如，client在stream的上下文中插入一个元素，向Server请求得到自己的好友列表，Server返回一个，里面是请求的结果。" class="headerlink" title="IQ是一种请求／响应机制，从一个实体从发送请求，另外一个实体接受请求并进行响应。例如，client在stream的上下文中插入一个元素，向Server请求得到自己的好友列表，Server返回一个，里面是请求的结果。"></a>IQ是一种请求／响应机制，从一个实体从发送请求，另外一个实体接受请求并进行响应。例如，client在stream的上下文中插入一个元素，向Server请求得到自己的好友列表，Server返回一个，里面是请求的结果。</h4><h4 id="有以下类别（可选设置如：get）："><a href="#有以下类别（可选设置如：get）：" class="headerlink" title="有以下类别（可选设置如：get）："></a><type></type>有以下类别（可选设置如：<type>get</type>）：</h4><h4 id="get-获取当前域值。类似于http-get方法。"><a href="#get-获取当前域值。类似于http-get方法。" class="headerlink" title="get :获取当前域值。类似于http get方法。"></a>get :获取当前域值。类似于http get方法。</h4><h4 id="set-设置或替换get查询的值。类似于http-put方法。"><a href="#set-设置或替换get查询的值。类似于http-put方法。" class="headerlink" title="set :设置或替换get查询的值。类似于http put方法。"></a>set :设置或替换get查询的值。类似于http put方法。</h4><h4 id="result-说明成功的响应了先前的查询。类似于http状态码200。"><a href="#result-说明成功的响应了先前的查询。类似于http状态码200。" class="headerlink" title="result :说明成功的响应了先前的查询。类似于http状态码200。"></a>result :说明成功的响应了先前的查询。类似于http状态码200。</h4><h4 id="error-查询和响应中出现的错误。"><a href="#error-查询和响应中出现的错误。" class="headerlink" title="error: 查询和响应中出现的错误。"></a>error: 查询和响应中出现的错误。</h4><h4 id="下面是一个IQ例子："><a href="#下面是一个IQ例子：" class="headerlink" title="下面是一个IQ例子："></a>下面是一个IQ例子：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;iqfrom=&quot;huangyibiao@welcome.com/ios&quot;  </div><div class="line">id=&quot;xxxxxxx&quot; </div><div class="line">to=&quot;biaoge@welcome.com/ios&quot;  </div><div class="line">type=&quot;get&quot;&gt; </div><div class="line">&lt;queryxmlns=&quot;jabber:iq:roster&quot;/&gt; </div><div class="line">&lt;/iq&gt;</div></pre></td></tr></table></figure>
+<h4 id="XMPPPresence"><a href="#XMPPPresence" class="headerlink" title="XMPPPresence"></a>XMPPPresence</h4><h4 id="这个类代表节点，我们通过此类提供的方法来生成XML数据。它代表用户在线状态，它的头文件内容很少的："><a href="#这个类代表节点，我们通过此类提供的方法来生成XML数据。它代表用户在线状态，它的头文件内容很少的：" class="headerlink" title="这个类代表节点，我们通过此类提供的方法来生成XML数据。它代表用户在线状态，它的头文件内容很少的："></a>这个类代表节点，我们通过此类提供的方法来生成XML数据。它代表用户在线状态，它的头文件内容很少的：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">@interfaceXMPPPresence: XMPPElement</div><div class="line"></div><div class="line">// Converts an NSXMLElement to an XMPPPresence element in place (no memory allocations or copying)</div><div class="line">+ (XMPPPresence *)presenceFromElement:(NSXMLElement *)element;</div><div class="line"></div><div class="line">+ (XMPPPresence *)presence;</div><div class="line">+ (XMPPPresence *)presenceWithType:(NSString *)type;</div><div class="line">// type：用户在线状态，看下面的讲解</div><div class="line">// to：接收方的JID</div><div class="line">+ (XMPPPresence *)presenceWithType:(NSString *)typeto:(XMPPJID *)to;</div><div class="line"></div><div class="line">- (id)init;</div><div class="line">- (id)initWithType:(NSString *)type;</div><div class="line"></div><div class="line">// type：用户在线状态，看下面的讲解</div><div class="line">// to：接收方的JID</div><div class="line">- (id)initWithType:(NSString *)typeto:(XMPPJID *)to;</div><div class="line"></div><div class="line">- (NSString *)type;</div><div class="line"></div><div class="line">- (NSString *)show;</div><div class="line">- (NSString *)status;</div><div class="line"></div><div class="line">- (int)priority;</div><div class="line"></div><div class="line">- (int)intShow;</div><div class="line"></div><div class="line">- (BOOL)isErrorPresence;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<h4 id="presence用来表明用户的状态，如：online、away、dnd-请勿打扰-等。当改变自己的状态时，就会在stream的上下文中插入一个Presence元素，来表明自身的状态。要想接受presence消息，必须经过一个叫做presence-subscription的授权过程。-1"><a href="#presence用来表明用户的状态，如：online、away、dnd-请勿打扰-等。当改变自己的状态时，就会在stream的上下文中插入一个Presence元素，来表明自身的状态。要想接受presence消息，必须经过一个叫做presence-subscription的授权过程。-1" class="headerlink" title="presence用来表明用户的状态，如：online、away、dnd(请勿打扰)等。当改变自己的状态时，就会在stream的上下文中插入一个Presence元素，来表明自身的状态。要想接受presence消息，必须经过一个叫做presence subscription的授权过程。"></a>presence用来表明用户的状态，如：online、away、dnd(请勿打扰)等。当改变自己的状态时，就会在stream的上下文中插入一个Presence元素，来表明自身的状态。要想接受presence消息，必须经过一个叫做presence subscription的授权过程。</h4><h4 id="有以下类别（可选设置如：subscribe）："><a href="#有以下类别（可选设置如：subscribe）：" class="headerlink" title="有以下类别（可选设置如：subscribe）："></a><type></type>有以下类别（可选设置如：<type>subscribe</type>）：</h4><h4 id="subscribe：订阅其他用户的状态-1"><a href="#subscribe：订阅其他用户的状态-1" class="headerlink" title="subscribe：订阅其他用户的状态"></a>subscribe：订阅其他用户的状态</h4><h4 id="probe：请求获取其他用户的状态-1"><a href="#probe：请求获取其他用户的状态-1" class="headerlink" title="probe：请求获取其他用户的状态"></a>probe：请求获取其他用户的状态</h4><h4 id="unavailable：不可用，离线（offline）状态-1"><a href="#unavailable：不可用，离线（offline）状态-1" class="headerlink" title="unavailable：不可用，离线（offline）状态"></a>unavailable：不可用，离线（offline）状态</h4><h4 id="节点有以下类别，如dnd："><a href="#节点有以下类别，如dnd：" class="headerlink" title="节点有以下类别，如dnd："></a><show></show>节点有以下类别，如<show>dnd</show>：</h4><h4 id="chat：聊天中-1"><a href="#chat：聊天中-1" class="headerlink" title="chat：聊天中"></a>chat：聊天中</h4><h4 id="away：暂时离开-1"><a href="#away：暂时离开-1" class="headerlink" title="away：暂时离开"></a>away：暂时离开</h4><h4 id="xa：eXtend-Away，长时间离开-1"><a href="#xa：eXtend-Away，长时间离开-1" class="headerlink" title="xa：eXtend Away，长时间离开"></a>xa：eXtend Away，长时间离开</h4><h4 id="dnd：勿打扰-1"><a href="#dnd：勿打扰-1" class="headerlink" title="dnd：勿打扰"></a>dnd：勿打扰</h4><h4 id="节点"><a href="#节点" class="headerlink" title="节点"></a><status></status>节点</h4><h4 id="这个节点表示状态信息，内容比较自由，几乎可以是所有类型的内容。常用来表示用户当前心情，活动，听的歌曲，看的视频，所在的聊天室，访问的网页，玩的游戏等等。"><a href="#这个节点表示状态信息，内容比较自由，几乎可以是所有类型的内容。常用来表示用户当前心情，活动，听的歌曲，看的视频，所在的聊天室，访问的网页，玩的游戏等等。" class="headerlink" title="这个节点表示状态信息，内容比较自由，几乎可以是所有类型的内容。常用来表示用户当前心情，活动，听的歌曲，看的视频，所在的聊天室，访问的网页，玩的游戏等等。"></a>这个节点表示状态信息，内容比较自由，几乎可以是所有类型的内容。常用来表示用户当前心情，活动，听的歌曲，看的视频，所在的聊天室，访问的网页，玩的游戏等等。</h4><h4 id="节点-1"><a href="#节点-1" class="headerlink" title="节点"></a><priority></priority>节点</h4><h4 id="范围-128-127。高优先级的resource能接受发送到bare-JID的消息，低优先级的resource不能。优先级为负数的resource不能收到发送到bare-JID的消息。"><a href="#范围-128-127。高优先级的resource能接受发送到bare-JID的消息，低优先级的resource不能。优先级为负数的resource不能收到发送到bare-JID的消息。" class="headerlink" title="范围-128~127。高优先级的resource能接受发送到bare JID的消息，低优先级的resource不能。优先级为负数的resource不能收到发送到bare JID的消息。"></a>范围-128~127。高优先级的resource能接受发送到bare JID的消息，低优先级的resource不能。优先级为负数的resource不能收到发送到bare JID的消息。</h4><h4 id="发送一个用户在线状态的例子："><a href="#发送一个用户在线状态的例子：" class="headerlink" title="发送一个用户在线状态的例子："></a>发送一个用户在线状态的例子：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;presencefrom=&quot;alice@wonderland.lit/pda&quot;&gt; </div><div class="line">&lt;show&gt;dnd&lt;/show&gt; </div><div class="line">&lt;status&gt;浏览器搜索：标哥的技术博客，或者直接访问www.henishuo.com&lt;/status&gt; </div><div class="line">&lt;/presence&gt;</div></pre></td></tr></table></figure>
+<h4 id="XMPPMessage"><a href="#XMPPMessage" class="headerlink" title="XMPPMessage"></a>XMPPMessage</h4><h4 id="XMPPMessage是XMPP框架给我们提供的，方便用于生成XML消息的数据，其头文件如下："><a href="#XMPPMessage是XMPP框架给我们提供的，方便用于生成XML消息的数据，其头文件如下：" class="headerlink" title="XMPPMessage是XMPP框架给我们提供的，方便用于生成XML消息的数据，其头文件如下："></a>XMPPMessage是XMPP框架给我们提供的，方便用于生成XML消息的数据，其头文件如下：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">@interfaceXMPPMessage: XMPPElement</div><div class="line"></div><div class="line">+ (XMPPMessage *)messageFromElement:(NSXMLElement *)element;</div><div class="line"></div><div class="line">+ (XMPPMessage *)message;</div><div class="line">+ (XMPPMessage *)messageWithType:(NSString *)type;</div><div class="line">+ (XMPPMessage *)messageWithType:(NSString *)typeto:(XMPPJID *)to;</div><div class="line">+ (XMPPMessage *)messageWithType:(NSString *)typeto:(XMPPJID *)jidelementID:(NSString *)eid;</div><div class="line">+ (XMPPMessage *)messageWithType:(NSString *)typeto:(XMPPJID *)jidelementID:(NSString *)eidchild:(NSXMLElement *)childElement;</div><div class="line">+ (XMPPMessage *)messageWithType:(NSString *)typeelementID:(NSString *)eid;</div><div class="line">+ (XMPPMessage *)messageWithType:(NSString *)typeelementID:(NSString *)eidchild:(NSXMLElement *)childElement;</div><div class="line">+ (XMPPMessage *)messageWithType:(NSString *)typechild:(NSXMLElement *)childElement;</div><div class="line"></div><div class="line">- (id)init;</div><div class="line">- (id)initWithType:(NSString *)type;</div><div class="line">- (id)initWithType:(NSString *)typeto:(XMPPJID *)to;</div><div class="line">- (id)initWithType:(NSString *)typeto:(XMPPJID *)jidelementID:(NSString *)eid;</div><div class="line">- (id)initWithType:(NSString *)typeto:(XMPPJID *)jidelementID:(NSString *)eidchild:(NSXMLElement *)childElement;</div><div class="line">- (id)initWithType:(NSString *)typeelementID:(NSString *)eid;</div><div class="line">- (id)initWithType:(NSString *)typeelementID:(NSString *)eidchild:(NSXMLElement *)childElement;</div><div class="line">- (id)initWithType:(NSString *)typechild:(NSXMLElement *)childElement;</div><div class="line"></div><div class="line">- (NSString *)type;</div><div class="line">- (NSString *)subject;</div><div class="line">- (NSString *)body;</div><div class="line">- (NSString *)bodyForLanguage:(NSString *)language;</div><div class="line">- (NSString *)thread;</div><div class="line"></div><div class="line">- (void)addSubject:(NSString *)subject;</div><div class="line">- (void)addBody:(NSString *)body;</div><div class="line">- (void)addBody:(NSString *)bodywithLanguage:(NSString *)language;</div><div class="line">- (void)addThread:(NSString *)thread;</div><div class="line"></div><div class="line">- (BOOL)isChatMessage;</div><div class="line">- (BOOL)isChatMessageWithBody;</div><div class="line">- (BOOL)isErrorMessage;</div><div class="line">- (BOOL)isMessageWithBody;</div><div class="line"></div><div class="line">- (NSError *)errorMessage;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<h4 id="message是一种基本-推送-消息方法，它不要求响应。主要用于IM、groupChat、alert和notification之类的应用中。"><a href="#message是一种基本-推送-消息方法，它不要求响应。主要用于IM、groupChat、alert和notification之类的应用中。" class="headerlink" title="message是一种基本 推送 消息方法，它不要求响应。主要用于IM、groupChat、alert和notification之类的应用中。"></a>message是一种基本 推送 消息方法，它不要求响应。主要用于IM、groupChat、alert和notification之类的应用中。</h4><h4 id="有以下类别（可选设置如：-chat）："><a href="#有以下类别（可选设置如：-chat）：" class="headerlink" title="有以下类别（可选设置如： chat）："></a><type></type>有以下类别（可选设置如：<type> chat</type>）：</h4><h4 id="normal：类似于email，主要特点是不要求响应；-1"><a href="#normal：类似于email，主要特点是不要求响应；-1" class="headerlink" title="normal：类似于email，主要特点是不要求响应；"></a>normal：类似于email，主要特点是不要求响应；</h4><h4 id="chat：类似于qq里的好友即时聊天，主要特点是实时通讯；-1"><a href="#chat：类似于qq里的好友即时聊天，主要特点是实时通讯；-1" class="headerlink" title="chat：类似于qq里的好友即时聊天，主要特点是实时通讯；"></a>chat：类似于qq里的好友即时聊天，主要特点是实时通讯；</h4><h4 id="groupchat：类似于聊天室里的群聊；-1"><a href="#groupchat：类似于聊天室里的群聊；-1" class="headerlink" title="groupchat：类似于聊天室里的群聊；"></a>groupchat：类似于聊天室里的群聊；</h4><h4 id="headline：用于发送alert和notification；-1"><a href="#headline：用于发送alert和notification；-1" class="headerlink" title="headline：用于发送alert和notification；"></a>headline：用于发送alert和notification；</h4><h4 id="error：如果发送message出错，发现错误的实体会用这个类别来通知发送者出错了；-1"><a href="#error：如果发送message出错，发现错误的实体会用这个类别来通知发送者出错了；-1" class="headerlink" title="error：如果发送message出错，发现错误的实体会用这个类别来通知发送者出错了；"></a>error：如果发送message出错，发现错误的实体会用这个类别来通知发送者出错了；</h4><h4 id="节点-2"><a href="#节点-2" class="headerlink" title="节点"></a><body></body>节点</h4><h4 id="所要发送的内容就放在body节点下"><a href="#所要发送的内容就放在body节点下" class="headerlink" title="所要发送的内容就放在body节点下"></a>所要发送的内容就放在body节点下</h4><h4 id="消息节点的例子："><a href="#消息节点的例子：" class="headerlink" title="消息节点的例子："></a>消息节点的例子：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;messageto=&quot;lily@jabber.org/contact&quot; type=&quot;chat&quot;&gt; </div><div class="line">&lt;body&gt;您好？您的博客名是叫标哥的技术博客吗？地址是http://www.henishuo.com吗？&lt;/body&gt;</div><div class="line">&lt;/message&gt;</div></pre></td></tr></table></figure>
+<h4 id="吧啦吧啦一大堆-其实我是从别人的文章copy来的"><a href="#吧啦吧啦一大堆-其实我是从别人的文章copy来的" class="headerlink" title="吧啦吧啦一大堆,其实我是从别人的文章copy来的"></a>吧啦吧啦一大堆,其实我是从别人的文章copy来的</h4><blockquote>
+<h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><h3 id="登录的流程是这样"><a href="#登录的流程是这样" class="headerlink" title="登录的流程是这样:"></a>登录的流程是这样:</h3><h4 id="1-初始化一个xmppStream"><a href="#1-初始化一个xmppStream" class="headerlink" title="1.初始化一个xmppStream"></a>1.初始化一个xmppStream</h4><h4 id="2-连接服务器（成功或者失败）"><a href="#2-连接服务器（成功或者失败）" class="headerlink" title="2.连接服务器（成功或者失败）"></a>2.连接服务器（成功或者失败）</h4><h4 id="3-成功的基础上，服务器验证（成功或者失败）"><a href="#3-成功的基础上，服务器验证（成功或者失败）" class="headerlink" title="3.成功的基础上，服务器验证（成功或者失败）"></a>3.成功的基础上，服务器验证（成功或者失败）</h4><h4 id="4-成功的基础上，发送上线消息"><a href="#4-成功的基础上，发送上线消息" class="headerlink" title="4.成功的基础上，发送上线消息"></a>4.成功的基础上，发送上线消息</h4></blockquote>
+<h3 id="初始化相关类"><a href="#初始化相关类" class="headerlink" title="初始化相关类"></a>初始化相关类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">- (XMPPStream *)xmppStream&#123;</div><div class="line">if(!_xmppStream)&#123;</div><div class="line">//聊天初始化</div><div class="line">//1.初始化xmppStream，登录和注册的时候都会用到它</div><div class="line">_xmppStream = [[XMPPStream alloc] init];</div><div class="line">//设置服务器地址,这里用的是本地地址（可换成公司具体地址）</div><div class="line">[_xmppStream setHostName:@&quot;192.168.21.202&quot;];</div><div class="line">//设置端口号</div><div class="line">[_xmppStream setHostPort:5222];</div><div class="line">&#125;</div><div class="line">return _xmppStream;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div></pre></td><td class="code"><pre><div class="line">- (void)loginWithName:(NSString *)userName password:(NSString *)password&#123;</div><div class="line">//标记连接服务器的目的</div><div class="line">self.connectType = XMPPLogin;</div><div class="line">//这里记录用户输入的密码，在登录（注册）的方法里面使用</div><div class="line">self.currentUser.password = password;</div><div class="line">self.currentUser.userName = userName;</div><div class="line">//  创建xmppjid（用户0,  @param NSString 用户名，域名，登录服务器的方式（苹果，安卓等）</div><div class="line">XMPPJID *jid = [XMPPJID jidWithUser:userName domain:DoMain resource:Resource];</div><div class="line">self.xmppStream.myJID = jid;</div><div class="line">//连接到服务器</div><div class="line">[self connectToServer];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)connectToServer&#123;</div><div class="line">//如果已经存在一个连接或正在连接中，需要将当前的连接断开，然后再开始新的连接</div><div class="line">if ([self.xmppStream isConnected] || [self.xmppStream isConnecting]) &#123;</div><div class="line">[self logout];</div><div class="line">&#125;</div><div class="line">NSError *error = nil;</div><div class="line">[self.xmppStream connectWithTimeout:6.0f error:&amp;error];</div><div class="line">if (error) &#123;</div><div class="line">NSLog(@&quot;error = %@&quot;,error);</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">#pragma XMPPStream 代理</div><div class="line">#pragma mark 连接服务器失败的方法</div><div class="line">- (void)xmppStreamConnectDidTimeout:(XMPPStream *)sender&#123;</div><div class="line">[SVProgressHUD showErrorWithStatus:@&quot;连接服务器超时&quot;];</div><div class="line">NSLog(@&quot;连接服务器失败的方法，请检查网络是否正常&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)xmppStream:(XMPPStream *)sender didReceiveError:(DDXMLElement *)error&#123;</div><div class="line">[SVProgressHUD showErrorWithStatus:@&quot;连接服务器失败&quot;];</div><div class="line">NSLog(@&quot;didReceiveError&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">#pragma mark 连接服务器成功的方法</div><div class="line">- (void)xmppStreamDidConnect:(XMPPStream *)sender&#123;</div><div class="line">NSLog(@&quot;连接服务器成功的方法&quot;);</div><div class="line">//登录</div><div class="line">if (self.connectType == XMPPLogin) &#123;</div><div class="line">NSError *error = nil;</div><div class="line">//向服务器发送密码验证 //验证可能失败或者成功</div><div class="line">[sender authenticateWithPassword:self.currentUser.password error:&amp;error];</div><div class="line">if(!error)&#123;</div><div class="line">self.currentUser.jid = sender.myJID;</div><div class="line">NSLog(@&quot;登录成功&quot;);</div><div class="line">&#125;else&#123;</div><div class="line">NSLog(@&quot;登录失败&quot;);</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">//注册</div><div class="line">else&#123;</div><div class="line">//向服务器发送一个密码注册（成功或者失败）</div><div class="line">if([sender registerWithPassword:self.currentUser.password error:nil])&#123;</div><div class="line">NSLog(@&quot;注册成功&quot;);</div><div class="line">&#125;else&#123;</div><div class="line">NSLog(@&quot;注册失败&quot;);</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//登录成功</div><div class="line">- (void)xmppStreamDidAuthenticate:(XMPPStream *)sender&#123;</div><div class="line">NSLog(@&quot;xmppStreamDidAuthenticate登录成功&quot;);</div><div class="line">_isLogout = NO;</div><div class="line">//发起上线状态</div><div class="line">[self goOnline];</div><div class="line">//发出登录通知成功通知</div><div class="line">[[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccess object:nil];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(DDXMLElement *)error&#123;</div><div class="line">NSLog(@&quot;密码不正确%@&quot;,error);</div><div class="line">_isLogout = YES;</div><div class="line">[self offline];</div><div class="line">//发出登录通知失败通知</div><div class="line">[[NSNotificationCenter defaultCenter] postNotificationName:LoginFaild object:nil];</div><div class="line">&#125;</div><div class="line"></div><div class="line">//发起上线状态给服务器</div><div class="line">- (void)goOnline&#123;</div><div class="line">// 发送一个&lt;presence/&gt; 默认值avaliable 在线 是指服务器收到空的presence 会认为是这个</div><div class="line">// status ---自定义的内容，可以是任何的。</div><div class="line">// show 是固定的，有几种类型 dnd、xa、away、chat，在方法XMPPPresence 的intShow中可以看到</div><div class="line">XMPPPresence *presence = [XMPPPresence presence];</div><div class="line">[presence addChild:[DDXMLNode elementWithName:@&quot;status&quot; stringValue:@&quot;我现在很忙&quot;]];</div><div class="line">[presence addChild:[DDXMLNode elementWithName:@&quot;show&quot; stringValue:@&quot;xa&quot;]];</div><div class="line"></div><div class="line">[self.xmppStream sendElement:presence];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="以上就是登录流程-比较暴力直接贴了一堆代码"><a href="#以上就是登录流程-比较暴力直接贴了一堆代码" class="headerlink" title="以上就是登录流程,比较暴力直接贴了一堆代码"></a>以上就是登录流程,比较暴力直接贴了一堆代码</h3><blockquote>
+<p>##添加好友</p>
+<h4 id="添加实际是发送一个IQ请求"><a href="#添加实际是发送一个IQ请求" class="headerlink" title="添加实际是发送一个IQ请求"></a>添加实际是发送一个IQ请求</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">#pragma mark 添加好友</div><div class="line">- (void)addFriend:(UserModel *)user&#123;</div><div class="line">if(user)&#123;</div><div class="line">//这里的nickname是我对它的备注，并非他的个人资料中得nickname</div><div class="line">[[XMPPManager shareInstanceManager].xmppRoster addUser:user.jid withNickname:user.userName];</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">#pragma mark ===== 好友模块=======</div><div class="line">/** 收到出席订阅请求（代表对方想添加自己为好友) */</div><div class="line">- (void)xmppRoster:(XMPPRoster *)sender didReceivePresenceSubscriptionRequest:(XMPPPresence *)presence&#123;</div><div class="line">//添加好友一定会订阅对方，但是接受订阅不一定要添加对方为好友</div><div class="line">self.pj_newFriend.jid = presence.from;</div><div class="line"></div><div class="line">NSString *message = [NSString stringWithFormat:@&quot;【%@】想加你为好友&quot;,presence.from.bare];</div><div class="line">UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:message delegate:self cancelButtonTitle:@&quot;拒绝&quot; otherButtonTitles:@&quot;同意&quot;, nil];</div><div class="line">[alertView show];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence&#123;</div><div class="line">//收到对方取消定阅我得消息</div><div class="line">if ([presence.type isEqualToString:@&quot;unsubscribe&quot;]) &#123;</div><div class="line">//从我的本地通讯录中将他移除</div><div class="line">[self.xmppRoster removeUser:presence.from];</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="XMPPRoster获取好友列表-获取的是在线的好友列表"><a href="#XMPPRoster获取好友列表-获取的是在线的好友列表" class="headerlink" title="XMPPRoster获取好友列表(获取的是在线的好友列表"></a>XMPPRoster获取好友列表(获取的是在线的好友列表</h2><h4 id="XMPPRoster-可以处理和好友相关的事：获取好友列表，添加好友，接收好友请求，同意添加好友，拒绝添加好友"><a href="#XMPPRoster-可以处理和好友相关的事：获取好友列表，添加好友，接收好友请求，同意添加好友，拒绝添加好友" class="headerlink" title="XMPPRoster 可以处理和好友相关的事：获取好友列表，添加好友，接收好友请求，同意添加好友，拒绝添加好友"></a>XMPPRoster 可以处理和好友相关的事：获取好友列表，添加好友，接收好友请求，同意添加好友，拒绝添加好友</h4><h4 id="XMPPRosterCoreDataStorage用于存储好友-需要知道一些CoreData相关"><a href="#XMPPRosterCoreDataStorage用于存储好友-需要知道一些CoreData相关" class="headerlink" title="XMPPRosterCoreDataStorage用于存储好友(需要知道一些CoreData相关)"></a>XMPPRosterCoreDataStorage用于存储好友(需要知道一些CoreData相关)</h4><h3 id="初始化相关类-1"><a href="#初始化相关类-1" class="headerlink" title="初始化相关类"></a>初始化相关类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">- (XMPPRoster *)xmppRoster&#123;</div><div class="line">if(!_xmppRoster)&#123;</div><div class="line">_xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:self.xmppRosterCoreDataStorage dispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];</div><div class="line">//关闭自动同步好友列表,在需要拉取好友列表的地方调用fetchRoster方法去拉取</div><div class="line">[_xmppRoster setAutoFetchRoster:NO];</div><div class="line">&#125;</div><div class="line">return _xmppRoster;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (XMPPRosterCoreDataStorage *)xmppRosterCoreDataStorage&#123;</div><div class="line">if(!_xmppRosterCoreDataStorage)&#123;</div><div class="line">// 3.好友模块 支持我们管理、同步、申请、删除好友</div><div class="line">_xmppRosterCoreDataStorage = [XMPPRosterCoreDataStorage sharedInstance];</div><div class="line">&#125;</div><div class="line">return _xmppRosterCoreDataStorage;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="在需要拉取在线好友的地方"><a href="#在需要拉取在线好友的地方" class="headerlink" title="在需要拉取在线好友的地方:"></a>在需要拉取在线好友的地方:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//好友列表代理</div><div class="line">[[XMPPManager shareInstanceManager].xmppRoster addDelegate:self delegateQueue:dispatch_get_main_queue()];</div><div class="line">//主动拉取好友列表,不过这边拉取的好友是在线好友</div><div class="line">[[XMPPManager shareInstanceManager].xmppRoster fetchRoster];</div></pre></td></tr></table></figure>
+<h4 id="以上代码执行后会走一下回调"><a href="#以上代码执行后会走一下回调" class="headerlink" title="以上代码执行后会走一下回调"></a>以上代码执行后会走一下回调</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">#pragma mark -- 好友列表协议方法</div><div class="line">/**</div><div class="line">* 开始同步服务器发送过来的自己的好友列表</div><div class="line">**/</div><div class="line">- (void)xmppRosterDidBeginPopulating:(XMPPRoster *)sender&#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">//收到每一个好友</div><div class="line">- (void)xmppRoster:(XMPPRoster *)sender didReceiveRosterItem:(NSXMLElement *)item&#123;</div><div class="line">//得到item的jid</div><div class="line">NSString *jid = [[item attributeForName:@&quot;jid&quot;]stringValue];</div><div class="line"></div><div class="line">//转换成XMPPJID类型</div><div class="line">XMPPJID *userJID = [XMPPJID jidWithString:jid];</div><div class="line">NSLog(@&quot;%@&quot;,[userJID user]);</div><div class="line">UserModel *friend = [[UserModel alloc] initWithJid:userJID];</div><div class="line">[self.contacts addObject:friend];</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line">* 同步结束</div><div class="line">**/</div><div class="line">//收到好友列表IQ会进入的方法，并且已经存入我的存储器</div><div class="line">-(void)xmppRosterDidEndPopulating:(XMPPRoster *)sender&#123;</div><div class="line">NSLog(@&quot;获取好友列表结束,此处向外部传值&quot;);</div><div class="line">[self loadFreinds];</div><div class="line">[self.tableView reloadData];</div><div class="line">[self.tableView.mj_header endRefreshing];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="同步sqlite中的好友"><a href="#同步sqlite中的好友" class="headerlink" title="同步sqlite中的好友"></a>同步sqlite中的好友</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">*  好友列表加载</div><div class="line">NSFetchedResultsController，官方解释是可以有效地管理从Core Data读取到的提供给UITableView对象的数据。</div><div class="line"></div><div class="line">使用方法分为3步：</div><div class="line">1. 配置一个request，指定要查询的数据库表</div><div class="line">2. 至少为获取到的数据设置一个排序方法</div><div class="line">3. 可以为数据设置过滤条件</div><div class="line"></div><div class="line">除此之外，它还提供以下两个功能：</div><div class="line">1. 监听和它关联的上下文（NSManagedObjectContext）的改变，并报告这些改变</div><div class="line">2. 缓存结果，重新显示相同的数据的时候不需要再获取一遍</div><div class="line">*/</div><div class="line">- (void)loadFreinds&#123;</div><div class="line">//显示好友数据（保存在XMPPRoster.sqlite）</div><div class="line">//1.上下文，关联XMPPRoster.sqlite</div><div class="line">NSManagedObjectContext *rosterContext = [[XMPPManager shareInstanceManager].xmppRosterCoreDataStorage mainThreadManagedObjectContext];</div><div class="line"></div><div class="line">//2.请求查询哪张表</div><div class="line">NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@&quot;XMPPUserCoreDataStorageObject&quot;];</div><div class="line"></div><div class="line">//设置排序</div><div class="line">NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@&quot;displayName&quot; ascending:YES];</div><div class="line">request.sortDescriptors = @[sort];</div><div class="line"></div><div class="line">//过滤没有添加成功的好友</div><div class="line">//语法和sql一样</div><div class="line">NSPredicate *predicate = [NSPredicate predicateWithFormat:@&quot;subscription != %@&quot;, @&quot;none&quot;];</div><div class="line">request.predicate = predicate;</div><div class="line"></div><div class="line">//3.执行请求</div><div class="line">//3.1创建结果控制器</div><div class="line">_resultContr = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:rosterContext sectionNameKeyPath:nil cacheName:nil];</div><div class="line">_resultContr.delegate = self;</div><div class="line">//3.2执行</div><div class="line">NSError *error = nil;</div><div class="line">[_resultContr performFetch:&amp;error];</div><div class="line"></div><div class="line">for(XMPPUserCoreDataStorageObject *user in _resultContr.fetchedObjects)&#123;</div><div class="line">NSLog(@&quot;好友:%@&quot;,user.displayName);</div><div class="line">UserModel *friend = [[UserModel alloc] initWithXMPPUserCoreDataStorageObject:user];</div><div class="line">[self.contacts addObject:friend];</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="接下来就进入聊天模块了"><a href="#接下来就进入聊天模块了" class="headerlink" title="接下来就进入聊天模块了"></a>接下来就进入聊天模块了</h3><blockquote>
+<h2 id="发送文字"><a href="#发送文字" class="headerlink" title="发送文字"></a>发送文字</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//发送消息的方法</div><div class="line">/**</div><div class="line">* This method handles sending an XML stanza.</div><div class="line">* If the XMPPStream is not connected, this method does nothing.</div><div class="line">**/</div><div class="line">- (void)sendElement:(NSXMLElement *)element;</div></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="自己封装消息并且发送"><a href="#自己封装消息并且发送" class="headerlink" title="自己封装消息并且发送"></a>自己封装消息并且发送</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">//发送文本消息</div><div class="line">- (void)sendTextMessage&#123;</div><div class="line">XMPPMessage *message = [XMPPMessage messageWithType:@&quot;chat&quot; to:_chatUserModel.jid];</div><div class="line">[message addBody:_inputBar.messageContent];</div><div class="line">[message addSubject:TextMessage];</div><div class="line">//自定义文本消息类</div><div class="line">PJContentMessage *contentMessage = [[PJContentMessage alloc] initWithXMPPMessage:message];</div><div class="line">contentMessage.showMessageIn = ShowMessageInRight;</div><div class="line">[self.chatArray addObject:contentMessage];</div><div class="line">[self.tableView reloadData];</div><div class="line">[self tableViewScrollToBottom];</div><div class="line">[[XMPPManager shareInstanceManager].xmppStream sendElement:message];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<h2 id="发送图片"><a href="#发送图片" class="headerlink" title="发送图片"></a>发送图片</h2><h3 id="发送方式"><a href="#发送方式" class="headerlink" title="发送方式:"></a>发送方式:</h3><h4 id="1：首先将图片变成2进制（NSData）格式，然后利用Base64将其变为字符串，当文字发送，然后在发送端添加设置其属性，接收端通过判断其属性来判断传过来的到底是啥。如果是图片再用Base64将字符串解成NSData然后转成图片即可。"><a href="#1：首先将图片变成2进制（NSData）格式，然后利用Base64将其变为字符串，当文字发送，然后在发送端添加设置其属性，接收端通过判断其属性来判断传过来的到底是啥。如果是图片再用Base64将字符串解成NSData然后转成图片即可。" class="headerlink" title="1：首先将图片变成2进制（NSData）格式，然后利用Base64将其变为字符串，当文字发送，然后在发送端添加设置其属性，接收端通过判断其属性来判断传过来的到底是啥。如果是图片再用Base64将字符串解成NSData然后转成图片即可。"></a>1：首先将图片变成2进制（NSData）格式，然后利用Base64将其变为字符串，当文字发送，然后在发送端添加设置其属性，接收端通过判断其属性来判断传过来的到底是啥。如果是图片再用Base64将字符串解成NSData然后转成图片即可。</h4><h4 id="2：将图片直接转为2进制，然后利用ASI将其上传到服务器，然后发送端发送你图片所在的地址给接收端，然后接收端从此地址下载即可。"><a href="#2：将图片直接转为2进制，然后利用ASI将其上传到服务器，然后发送端发送你图片所在的地址给接收端，然后接收端从此地址下载即可。" class="headerlink" title="2：将图片直接转为2进制，然后利用ASI将其上传到服务器，然后发送端发送你图片所在的地址给接收端，然后接收端从此地址下载即可。"></a>2：将图片直接转为2进制，然后利用ASI将其上传到服务器，然后发送端发送你图片所在的地址给接收端，然后接收端从此地址下载即可。</h4><h4 id="关于图片发送："><a href="#关于图片发送：" class="headerlink" title="关于图片发送："></a>关于图片发送：</h4><h4 id="语音的话首先通过AVAudioRecorder录音，选择好格式-acc-amr-。微信就是用的amr转码。然后剩下的跟图片方案一样"><a href="#语音的话首先通过AVAudioRecorder录音，选择好格式-acc-amr-。微信就是用的amr转码。然后剩下的跟图片方案一样" class="headerlink" title="语音的话首先通过AVAudioRecorder录音，选择好格式(acc,amr)。微信就是用的amr转码。然后剩下的跟图片方案一样"></a>语音的话首先通过AVAudioRecorder录音，选择好格式(acc,amr)。微信就是用的amr转码。然后剩下的跟图片方案一样</h4></blockquote>
+<h3 id="图片和音频文件发送的基本思路就是："><a href="#图片和音频文件发送的基本思路就是：" class="headerlink" title="图片和音频文件发送的基本思路就是："></a>图片和音频文件发送的基本思路就是：</h3><h4 id="先将图片转化成二进制文件，然后将二进制文件进行base64编码，编码后成字符串。在即将发送的message内添加一个子节点，节点的stringValue（节点的值）设置这个编码后的字符串。然后消息发出后取出消息文件的时候，通过messageType-先判断是不是图片信息，如果是图片信息先通过自己之前设置的节点名称，把这个子节点的stringValue取出来，应该是一个base64之后的字符串"><a href="#先将图片转化成二进制文件，然后将二进制文件进行base64编码，编码后成字符串。在即将发送的message内添加一个子节点，节点的stringValue（节点的值）设置这个编码后的字符串。然后消息发出后取出消息文件的时候，通过messageType-先判断是不是图片信息，如果是图片信息先通过自己之前设置的节点名称，把这个子节点的stringValue取出来，应该是一个base64之后的字符串" class="headerlink" title="先将图片转化成二进制文件，然后将二进制文件进行base64编码，编码后成字符串。在即将发送的message内添加一个子节点，节点的stringValue（节点的值）设置这个编码后的字符串。然后消息发出后取出消息文件的时候，通过messageType 先判断是不是图片信息，如果是图片信息先通过自己之前设置的节点名称，把这个子节点的stringValue取出来，应该是一个base64之后的字符串."></a>先将图片转化成二进制文件，然后将二进制文件进行base64编码，编码后成字符串。在即将发送的message内添加一个子节点，节点的stringValue（节点的值）设置这个编码后的字符串。然后消息发出后取出消息文件的时候，通过messageType 先判断是不是图片信息，如果是图片信息先通过自己之前设置的节点名称，把这个子节点的stringValue取出来，应该是一个base64之后的字符串.</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">//发送图片消息</div><div class="line">- (void)sendImageMessage:(UIImage *)image&#123;</div><div class="line">XMPPMessage *message = [XMPPMessage messageWithType:@&quot;chat&quot; to:_chatUserModel.jid];</div><div class="line">[message addBody:ImageMessage];</div><div class="line">[message addSubject:ImageMessage];</div><div class="line">//自定义图片类</div><div class="line">PJImageMessage *imageMessage = [[PJImageMessage alloc] initWithXMPPMessage:message];</div><div class="line">imageMessage.showMessageIn = ShowMessageInRight;</div><div class="line">//给图片取名</div><div class="line">imageMessage.imageName = [NSString stringWithFormat:@&quot;%@%@&quot;,[[PJDateTool shareInstance] currentDate],_chatUserModel.userName];</div><div class="line"></div><div class="line">NSData *imageData = UIImagePNGRepresentation(image);</div><div class="line">NSString *imageBase64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];</div><div class="line"></div><div class="line">//自己发送的图片先缓存在发送</div><div class="line">[PJCacheManager cacheImage:imageData imageMessage:imageMessage];</div><div class="line"></div><div class="line">// 设置节点内容,图片的内容base64str</div><div class="line">XMPPElement *attachment = [XMPPElement elementWithName:ImageMessage stringValue:imageBase64Str];</div><div class="line">// 包含子节点</div><div class="line">[message addChild:attachment];</div><div class="line"></div><div class="line">// 图片的节点名称(图片的加载是通过图片名称在到缓存中查询加载)</div><div class="line">XMPPElement *imageAttachment = [XMPPElement elementWithName:XMPPElementImageMessage stringValue:imageMessage.imageName];</div><div class="line">// 包含子节点</div><div class="line">[message addChild:imageAttachment];</div><div class="line"></div><div class="line">[self.chatArray addObject:imageMessage];</div><div class="line">[self.tableView reloadData];</div><div class="line">[self tableViewScrollToBottom];</div><div class="line">[[XMPPManager shareInstanceManager].xmppStream sendElement:message];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="图片的缓存"><a href="#图片的缓存" class="headerlink" title="图片的缓存"></a>图片的缓存</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">//这边的图片缓存只是简单的保存到沙盒中并且是在主线程中执行保存必然会造成卡顿,实际中需要对图片进行压缩等操作</div><div class="line">+ (void)cacheImage:(NSData *)imageData imageMessage:(PJImageMessage *)imageMessage&#123;</div><div class="line"></div><div class="line">if(!imageData || [NSString isBlankString:imageMessage.imageName])&#123;</div><div class="line">return;</div><div class="line">&#125;</div><div class="line"></div><div class="line">NSString *sandoxPath = NSHomeDirectory();</div><div class="line">//设置一个图片的存储路径</div><div class="line">NSString *imageDirectoryPath = [sandoxPath stringByAppendingString:[NSString stringWithFormat:@&quot;/Documents/%@&quot;,[XMPPManager shareInstanceManager].currentUser.userName]];</div><div class="line"></div><div class="line">//创建每个聊天者对应的文件夹</div><div class="line">NSFileManager *fileManager = [NSFileManager defaultManager];</div><div class="line">if(![fileManager fileExistsAtPath:imageDirectoryPath])&#123;</div><div class="line">//目录不存在创建一个</div><div class="line">[fileManager createDirectoryAtPath:imageDirectoryPath withIntermediateDirectories:YES attributes:nil error:nil];</div><div class="line">&#125;</div><div class="line"></div><div class="line">//创建文件路径</div><div class="line">NSString *filePath= [imageDirectoryPath stringByAppendingPathComponent:[NSString stringWithFormat:@&quot;%@.png&quot;,imageMessage.imageName]];</div><div class="line"></div><div class="line">if([imageData writeToFile:filePath atomically:YES])&#123;</div><div class="line">//设置缓存好的图片的本地路径</div><div class="line">imageMessage.localUrl = filePath;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<h2 id="发送语音"><a href="#发送语音" class="headerlink" title="发送语音"></a>发送语音</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">//发送语音消息,PJVoiceMessage为自定义语音类,里面包含了录制好的语音的位置</div><div class="line">- (void)sendVoiceMesage:(PJVoiceMessage *)voiceMessage&#123;</div><div class="line">XMPPMessage *message = [XMPPMessage messageWithType:@&quot;chat&quot; to:_chatUserModel.jid];</div><div class="line">[message addBody:VoiceMessage];</div><div class="line">[message addSubject:VoiceMessage];</div><div class="line">voiceMessage.showMessageIn = ShowMessageInRight;</div><div class="line"></div><div class="line">NSData *voiceData = [NSData dataWithContentsOfFile:voiceMessage.localUrl];</div><div class="line">NSString *voiceBase64Str = [voiceData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];</div><div class="line"></div><div class="line">// 设置节点内容,语音的内容base64str</div><div class="line">XMPPElement *attachment = [XMPPElement elementWithName:VoiceMessage stringValue:voiceBase64Str];</div><div class="line">NSLog(@&quot;voiceBase64Str:%@&quot;,voiceBase64Str);</div><div class="line">// 包含子节点</div><div class="line">[message addChild:attachment];</div><div class="line"></div><div class="line">// 语音的节点名称(语音的加载是通过语音名称在到缓存中查询加载)</div><div class="line">XMPPElement *voiceAttachment = [XMPPElement elementWithName:XMPPElementVoiceMessage stringValue:voiceMessage.voiceName];</div><div class="line">// 包含子节点</div><div class="line">[message addChild:voiceAttachment];</div><div class="line"></div><div class="line">[self.chatArray addObject:voiceMessage];</div><div class="line">[self.tableView reloadData];</div><div class="line">[self tableViewScrollToBottom];</div><div class="line">[[XMPPManager shareInstanceManager].xmppStream sendElement:message];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="收到语音消息后缓存语音"><a href="#收到语音消息后缓存语音" class="headerlink" title="收到语音消息后缓存语音"></a>收到语音消息后缓存语音</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">//这边的语音缓存只是简单的保存到沙盒中并且是在主线程中执行保存必然会造成卡顿,实际中需要对语音进行压缩等操作</div><div class="line">+ (void)cacheVoice:(NSData *)voiceData voiceMessage:(PJVoiceMessage *)voiceMessage&#123;</div><div class="line"></div><div class="line">if(!voiceData || [NSString isBlankString:voiceMessage.voiceName])&#123;</div><div class="line">return;</div><div class="line">&#125;</div><div class="line"></div><div class="line">NSString *sandoxPath = NSHomeDirectory();</div><div class="line">//设置一个语音的存储路径</div><div class="line">NSString *voiceDirectoryPath = [sandoxPath stringByAppendingString:[NSString stringWithFormat:@&quot;/Documents/%@/voice/&quot;,[XMPPManager shareInstanceManager].currentUser.userName]];</div><div class="line"></div><div class="line">//创建每个聊天者对应的文件夹</div><div class="line">NSFileManager *fileManager = [NSFileManager defaultManager];</div><div class="line">if(![fileManager fileExistsAtPath:voiceDirectoryPath])&#123;</div><div class="line">//目录不存在创建一个</div><div class="line">[fileManager createDirectoryAtPath:voiceDirectoryPath withIntermediateDirectories:YES attributes:nil error:nil];</div><div class="line">&#125;</div><div class="line"></div><div class="line">//创建文件路径</div><div class="line">NSString *filePath= [voiceDirectoryPath stringByAppendingPathComponent:[NSString stringWithFormat:@&quot;%@.aac&quot;,voiceMessage.voiceName]];</div><div class="line"></div><div class="line">if([voiceData writeToFile:filePath atomically:YES])&#123;</div><div class="line">//设置缓存好的语音的本地路径</div><div class="line">voiceMessage.localUrl = filePath;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="好了-大概就这些-比较基本的-我做的Demo地址为-gitHub-https-github-com-piaojin-XmppIm-里面有很多BUG不要太介意"><a href="#好了-大概就这些-比较基本的-我做的Demo地址为-gitHub-https-github-com-piaojin-XmppIm-里面有很多BUG不要太介意" class="headerlink" title="好了,大概就这些,比较基本的,我做的Demo地址为:(gitHub)[https://github.com/piaojin/XmppIm]里面有很多BUG不要太介意"></a>好了,大概就这些,比较基本的,我做的Demo地址为:(gitHub)[<a href="https://github.com/piaojin/XmppIm]里面有很多BUG不要太介意" target="_blank" rel="external">https://github.com/piaojin/XmppIm]里面有很多BUG不要太介意</a></h2>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------本文结束😘<i class="fa fa-paw"></i>感谢阅读------</div>
+    
+</div>
+    
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/15/SpriteKitSwiftGamePanda/" rel="next" title="用SpriteKit写的熊猫跑酷小游戏">
+                <i class="fa fa-chevron-left"></i> 用SpriteKit写的熊猫跑酷小游戏
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="飘金" />
+          <p class="site-author-name" itemprop="name">飘金</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/piaojin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/da7864faa1be" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-piaojin"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#时间过得很快-我的第一份iOS工作做的就是IM应用-选用的是XMPP-如今也忘得差不多了-利用空闲时间来重写一遍小Demo就当复习一下"><span class="nav-number">1.</span> <span class="nav-text">时间过得很快,我的第一份iOS工作做的就是IM应用(选用的是XMPP),如今也忘得差不多了.利用空闲时间来重写一遍小Demo就当复习一下.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原理我就不介绍了-服务器的安装与配置可以参考XMPP的mysql和openfire环境配置或者配置介绍这篇"><span class="nav-number">2.</span> <span class="nav-text">原理我就不介绍了,服务器的安装与配置可以参考XMPP的mysql和openfire环境配置或者配置介绍这篇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境配置转自陈怀哲首发自简开始吧"><span class="nav-number">3.</span> <span class="nav-text">环境配置转自陈怀哲首发自简开始吧!</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我做的Demo地址为-gitHub-https-github-com-piaojin-XmppIm-里面有很多BUG不要太介意"><span class="nav-number"></span> <span class="nav-text">我做的Demo地址为:(gitHub)[https://github.com/piaojin/XmppIm]里面有很多BUG不要太介意</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#先来一个流程图"><span class="nav-number">1.</span> <span class="nav-text">先来一个流程图:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#必要介绍"><span class="nav-number"></span> <span class="nav-text">必要介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JID"><span class="nav-number">0.1.</span> <span class="nav-text">JID</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XMPP的地址叫做JabberID（简写为JID），它用来标示XMPP网络中的各个XMPP实体。JID由三部分组成：domain，node-identifier和resource。JID中domain是必不可少的部分。注意：domain和user部分是不分大小写的，但是resource区分大小写。"><span class="nav-number">0.2.</span> <span class="nav-text">XMPP的地址叫做JabberID（简写为JID），它用来标示XMPP网络中的各个XMPP实体。JID由三部分组成：domain，node identifier和resource。JID中domain是必不可少的部分。注意：domain和user部分是不分大小写的，但是resource区分大小写。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#domain：通常指网络中的网关或者服务器。"><span class="nav-number">0.3.</span> <span class="nav-text">domain：通常指网络中的网关或者服务器。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#node-identifier：通常表示一个向服务器或网关请求和使用网络服务的实体-比如一个客户端-当然它也能够表示其他的实体-比如在多用户聊天系统中的一个房间-。"><span class="nav-number">0.4.</span> <span class="nav-text">node identifier：通常表示一个向服务器或网关请求和使用网络服务的实体(比如一个客户端),当然它也能够表示其他的实体(比如在多用户聊天系统中的一个房间)。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#resource：通常表示一个特定的会话（与某个设备），连接（与某个地址），或者一个附属于某个节点ID实体相关实体的对象（比如多用户聊天室中的一个参加者）。"><span class="nav-number">0.5.</span> <span class="nav-text">resource：通常表示一个特定的会话（与某个设备），连接（与某个地址），或者一个附属于某个节点ID实体相关实体的对象（比如多用户聊天室中的一个参加者）。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JID种类有："><span class="nav-number">0.6.</span> <span class="nav-text">JID种类有：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例子："><span class="nav-number">0.7.</span> <span class="nav-text">例子：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#stpeter-jabber-org：表示服务器jabber-org上的用户stpeter。"><span class="nav-number">0.8.</span> <span class="nav-text">stpeter@jabber.org：表示服务器jabber.org上的用户stpeter。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#room-service：一个用来提供多用户聊天服务的特定的聊天室。这里-“room“-是聊天室的名字，-”service“-是多用户聊天服务的主机名。"><span class="nav-number">0.9.</span> <span class="nav-text">room@service：一个用来提供多用户聊天服务的特定的聊天室。这里 “room“ 是聊天室的名字， ”service“ 是多用户聊天服务的主机名。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#room-service-nick：加入了聊天室的用户nick的地址。这里-“room“-是聊天室的名字，-”service“-是多用户聊天服务的主机名，”nick“-是用户在聊天室的昵称。"><span class="nav-number">0.10.</span> <span class="nav-text">room@service/nick：加入了聊天室的用户nick的地址。这里 “room“ 是聊天室的名字， ”service“ 是多用户聊天服务的主机名，”nick“ 是用户在聊天室的昵称。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为了标示JID，XMPP也有自己的URI，例如xmpp-stpeter-jabber-org，默认规则是在JID前加-xmpp-。"><span class="nav-number">0.11.</span> <span class="nav-text">为了标示JID，XMPP也有自己的URI，例如xmpp:stpeter@jabber.org，默认规则是在JID前加 xmpp:。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通信原语"><span class="nav-number">0.12.</span> <span class="nav-text">通信原语</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XMPP通信原语有3种：message、presence和iq。"><span class="nav-number">0.13.</span> <span class="nav-text">XMPP通信原语有3种：message、presence和iq。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-message"><span class="nav-number">0.14.</span> <span class="nav-text">5.1 message</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#message是一种基本推送消息方法，它不要求响应。主要用于IM、groupChat、alert和notification之类的应用中。"><span class="nav-number">0.15.</span> <span class="nav-text">message是一种基本推送消息方法，它不要求响应。主要用于IM、groupChat、alert和notification之类的应用中。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主要-属性如下："><span class="nav-number">0.16.</span> <span class="nav-text">主要 属性如下：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-1-type属性，它主要有5种类型："><span class="nav-number">0.17.</span> <span class="nav-text">5.1.1  type属性，它主要有5种类型：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#normal：类似于email，主要特点是不要求响应；"><span class="nav-number">0.18.</span> <span class="nav-text">normal：类似于email，主要特点是不要求响应；</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#chat：类似于qq里的好友即时聊天，主要特点是实时通讯；"><span class="nav-number">0.19.</span> <span class="nav-text">chat：类似于qq里的好友即时聊天，主要特点是实时通讯；</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#groupchat：类似于聊天室里的群聊；"><span class="nav-number">0.20.</span> <span class="nav-text">groupchat：类似于聊天室里的群聊；</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#headline：用于发送alert和notification；"><span class="nav-number">0.21.</span> <span class="nav-text">headline：用于发送alert和notification；</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#error：如果发送message出错，发现错误的实体会用这个类别来通知发送者出错了；"><span class="nav-number">0.22.</span> <span class="nav-text">error：如果发送message出错，发现错误的实体会用这个类别来通知发送者出错了；</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-2-to属性：标识消息的接收方。"><span class="nav-number">0.23.</span> <span class="nav-text">5.1.2  to属性：标识消息的接收方。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-3-from属性：指发送方的名字或标示。为防止地址外泄，这个地址通常由发送者的server填写，而不是发送者。"><span class="nav-number">0.24.</span> <span class="nav-text">5.1.3  from属性：指发送方的名字或标示。为防止地址外泄，这个地址通常由发送者的server填写，而不是发送者。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#载荷（payload）：例如body，subject"><span class="nav-number">0.25.</span> <span class="nav-text">载荷（payload）：例如body，subject</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例子：-1"><span class="nav-number">0.26.</span> <span class="nav-text">例子：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-presence"><span class="nav-number">0.27.</span> <span class="nav-text">5.2 presence</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#presence用来表明用户的状态，如：online、away、dnd-请勿打扰-等。当改变自己的状态时，就会在stream的上下文中插入一个Presence元素，来表明自身的状态。要想接受presence消息，必须经过一个叫做presence-subscription的授权过程。"><span class="nav-number">0.28.</span> <span class="nav-text">presence用来表明用户的状态，如：online、away、dnd(请勿打扰)等。当改变自己的状态时，就会在stream的上下文中插入一个Presence元素，来表明自身的状态。要想接受presence消息，必须经过一个叫做presence subscription的授权过程。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-1-属性："><span class="nav-number">0.29.</span> <span class="nav-text">5.2.1 属性：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-1-1-type属性，非必须。有以下类别"><span class="nav-number">0.30.</span> <span class="nav-text">5.2.1.1 type属性，非必须。有以下类别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#subscribe：订阅其他用户的状态"><span class="nav-number">0.31.</span> <span class="nav-text">subscribe：订阅其他用户的状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#probe：请求获取其他用户的状态"><span class="nav-number">0.32.</span> <span class="nav-text">probe：请求获取其他用户的状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#unavailable：不可用，离线（offline）状态"><span class="nav-number">0.33.</span> <span class="nav-text">unavailable：不可用，离线（offline）状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-1-2-to属性：标识消息的接收方。"><span class="nav-number">0.34.</span> <span class="nav-text">5.2.1.2 to属性：标识消息的接收方。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-1-3-from属性：指发送方的名字或标示。"><span class="nav-number">0.35.</span> <span class="nav-text">5.2.1.3 from属性：指发送方的名字或标示。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-2-载荷（payload）："><span class="nav-number">0.36.</span> <span class="nav-text">5.2.2 载荷（payload）：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-2-1-show："><span class="nav-number">0.37.</span> <span class="nav-text">5.2.2.1 show：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#chat：聊天中"><span class="nav-number">0.38.</span> <span class="nav-text">chat：聊天中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#away：暂时离开"><span class="nav-number">0.39.</span> <span class="nav-text">away：暂时离开</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xa：eXtend-Away，长时间离开"><span class="nav-number">0.40.</span> <span class="nav-text">xa：eXtend Away，长时间离开</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dnd：勿打扰"><span class="nav-number">0.41.</span> <span class="nav-text">dnd：勿打扰</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-2-2-status：格式自由，可阅读的文本。也叫做rich-presence或者extended-presence，常用来表示用户当前心情，活动，听的歌曲，看的视频，所在的聊天室，访问的网页，玩的游戏等等。"><span class="nav-number">0.42.</span> <span class="nav-text">5.2.2.2 status：格式自由，可阅读的文本。也叫做rich presence或者extended presence，常用来表示用户当前心情，活动，听的歌曲，看的视频，所在的聊天室，访问的网页，玩的游戏等等。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-2-3-priority：范围-128-127。高优先级的resource能接受发送到bare-JID的消息，低优先级的resource不能。优先级为负数的resource不能收到发送到bare-JID的消息。"><span class="nav-number">0.43.</span> <span class="nav-text">5.2.2.3 priority：范围-128~127。高优先级的resource能接受发送到bare JID的消息，低优先级的resource不能。优先级为负数的resource不能收到发送到bare JID的消息。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例子：-2"><span class="nav-number">0.44.</span> <span class="nav-text">例子：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-iq-（Info-Query）"><span class="nav-number">0.45.</span> <span class="nav-text">5.3 iq （Info / Query）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一种请求／响应机制，从一个实体从发送请求，另外一个实体接受请求，并进行响应。例如，client在stream的上下文中插入一个元素，向Server请求得到自己的好友列表，Server返回一个，里面是请求的结果。"><span class="nav-number">0.46.</span> <span class="nav-text">一种请求／响应机制，从一个实体从发送请求，另外一个实体接受请求，并进行响应。例如，client在stream的上下文中插入一个元素，向Server请求得到自己的好友列表，Server返回一个，里面是请求的结果。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主要的属性是type。包括"><span class="nav-number">0.47.</span> <span class="nav-text">主要的属性是type。包括:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Get-获取当前域值。类似于http-get方法。"><span class="nav-number">0.48.</span> <span class="nav-text">Get :获取当前域值。类似于http get方法。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Set-设置或替换get查询的值。类似于http-put方法。"><span class="nav-number">0.49.</span> <span class="nav-text">Set :设置或替换get查询的值。类似于http put方法。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Result-说明成功的响应了先前的查询。类似于http状态码200。"><span class="nav-number">0.50.</span> <span class="nav-text">Result :说明成功的响应了先前的查询。类似于http状态码200。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Error-查询和响应中出现的错误。"><span class="nav-number">0.51.</span> <span class="nav-text">Error: 查询和响应中出现的错误。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例子：-3"><span class="nav-number">0.52.</span> <span class="nav-text">例子：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XMPPFramework结构与核心类"><span class="nav-number"></span> <span class="nav-text">XMPPFramework结构与核心类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在进入下一步之前，先给大家讲讲XMPPFramework的目录结构，以便新手们更容易读懂文章。我们来看看下图："><span class="nav-number">0.1.</span> <span class="nav-text">在进入下一步之前，先给大家讲讲XMPPFramework的目录结构，以便新手们更容易读懂文章。我们来看看下图：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#虽然这里有很多个目录，但是我们在开发中基本只关心Core和Extensions这两个目录下的类。各个目录主要用来干嘛的？"><span class="nav-number">0.2.</span> <span class="nav-text">虽然这里有很多个目录，但是我们在开发中基本只关心Core和Extensions这两个目录下的类。各个目录主要用来干嘛的？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Authentication：这一看名字就知道与授权验证相关的。"><span class="nav-number">0.3.</span> <span class="nav-text">Authentication：这一看名字就知道与授权验证相关的。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Categories：主要是一些扩展，尤其是NSXMLElement-XMPP扩展是必备的。"><span class="nav-number">0.4.</span> <span class="nav-text">Categories：主要是一些扩展，尤其是NSXMLElement+XMPP扩展是必备的。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Core：这里是XMPP的核心文件目录，我们最主要的目光还是要放在这个目录上。"><span class="nav-number">0.5.</span> <span class="nav-text">Core：这里是XMPP的核心文件目录，我们最主要的目光还是要放在这个目录上。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Extensions：这个目录是XMPP的扩展，用于扩展各种协议和各种独立的功能，其下每个子目录都是对应的一个单独的子功能。我们最常用到的功能有Reconnect、Roster、CoreDataStorage等。"><span class="nav-number">0.6.</span> <span class="nav-text">Extensions：这个目录是XMPP的扩展，用于扩展各种协议和各种独立的功能，其下每个子目录都是对应的一个单独的子功能。我们最常用到的功能有Reconnect、Roster、CoreDataStorage等。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Utilities：都是辅助类，我们开发者不用关心这里。"><span class="nav-number">0.7.</span> <span class="nav-text">Utilities：都是辅助类，我们开发者不用关心这里。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vendor：这个目录是XMPP所引用的第三方类库，如CocoaAsyncSocket、KissXML等，我们也不用关心这里。"><span class="nav-number">0.8.</span> <span class="nav-text">Vendor：这个目录是XMPP所引用的第三方类库，如CocoaAsyncSocket、KissXML等，我们也不用关心这里。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#阅读到此，对XMPPFramework的结构有所了解了吧！"><span class="nav-number">0.9.</span> <span class="nav-text">阅读到此，对XMPPFramework的结构有所了解了吧！</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#概念知识"><span class="nav-number">0.10.</span> <span class="nav-text">概念知识</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录需要到账号，而所谓的账号其实就是用户唯一标识符（JID），在XMPP中使用XMPPJID类来表示。那么，用户唯一标识（JID）有什么组成？"><span class="nav-number">0.11.</span> <span class="nav-text">登录需要到账号，而所谓的账号其实就是用户唯一标识符（JID），在XMPP中使用XMPPJID类来表示。那么，用户唯一标识（JID）有什么组成？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JID一般由三部分构成：用户名，域名和资源名，格式为user-domain-resource，例如：-test-example-com-Anthony。对应于XMPPJID类中的三个属性user、domain、resource。"><span class="nav-number">0.12.</span> <span class="nav-text">JID一般由三部分构成：用户名，域名和资源名，格式为user@domain/resource，例如： test@example.com /Anthony。对应于XMPPJID类中的三个属性user、domain、resource。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如果没有设置主机名（HOST），则使用JID的域名（domain）作为主机名，而端口号是可选的，默认是5222，一般也没有必要改动它。"><span class="nav-number">0.13.</span> <span class="nav-text">如果没有设置主机名（HOST），则使用JID的域名（domain）作为主机名，而端口号是可选的，默认是5222，一般也没有必要改动它。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XMPPStream类"><span class="nav-number">0.14.</span> <span class="nav-text">XMPPStream类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#我们要与服务器连接，就必须通过XMPPStream类了，它提供了很多的API和属性设置，通过socket来实现的。我们看到Verdor目录了吗，包含了CocoaAsyncSocket这个非常有名的socket编程库。XMPPStream类还遵守并实现了GCDAsyncSocketDelegate代理，用于客户端与服务器交互。"><span class="nav-number">0.15.</span> <span class="nav-text">我们要与服务器连接，就必须通过XMPPStream类了，它提供了很多的API和属性设置，通过socket来实现的。我们看到Verdor目录了吗，包含了CocoaAsyncSocket这个非常有名的socket编程库。XMPPStream类还遵守并实现了GCDAsyncSocketDelegate代理，用于客户端与服务器交互。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#当我们创建XMPPStream对象后，我们需要设置代理，才能回调我们的代理方法，这个是支持multicast-delegate，也就是说对于一个XMPPStream对象，可以设置多个代理对象，其中协议是XMPPStreamDelegate："><span class="nav-number">0.16.</span> <span class="nav-text">当我们创建XMPPStream对象后，我们需要设置代理，才能回调我们的代理方法，这个是支持multicast delegate，也就是说对于一个XMPPStream对象，可以设置多个代理对象，其中协议是XMPPStreamDelegate：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#而当我们不希望某个XMPPStream对象继续接收到代理回调时，我们通过这样的方式来移除代理："><span class="nav-number">0.17.</span> <span class="nav-text">而当我们不希望某个XMPPStream对象继续接收到代理回调时，我们通过这样的方式来移除代理：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#接下来，我们要设置主机和端口，通过设置这两个属性："><span class="nav-number">0.18.</span> <span class="nav-text">接下来，我们要设置主机和端口，通过设置这两个属性：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XMPPStream有XMPPJID类对象作为属性，标识用户，因为我们后续很多操作都需要到myJID："><span class="nav-number">0.19.</span> <span class="nav-text">XMPPStream有XMPPJID类对象作为属性，标识用户，因为我们后续很多操作都需要到myJID：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#而管理用户在线状态的就交由XMPPPresence类了，它同样被作为XMPPStream的属性，组合到XMPPStream中，后续很多关于用户的操作是需要到处理用户状态的："><span class="nav-number">0.20.</span> <span class="nav-text">而管理用户在线状态的就交由XMPPPresence类了，它同样被作为XMPPStream的属性，组合到XMPPStream中，后续很多关于用户的操作是需要到处理用户状态的：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XMPPStreamDelegate"><span class="nav-number">0.21.</span> <span class="nav-text">XMPPStreamDelegate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#这个协议是非常关键的，我们的很多主要操作都集中在这个协议的代理回调上。它分为好几种类型的代理API，比如授权的、注册的、安全的等："><span class="nav-number">0.22.</span> <span class="nav-text">这个协议是非常关键的，我们的很多主要操作都集中在这个协议的代理回调上。它分为好几种类型的代理API，比如授权的、注册的、安全的等：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#到此，也就理解了XMPPStream五五六六了吧！！！"><span class="nav-number">0.23.</span> <span class="nav-text">到此，也就理解了XMPPStream五五六六了吧！！！</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XMPPIQ"><span class="nav-number">0.24.</span> <span class="nav-text">XMPPIQ</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#消息查询（IQ）就是通过此类来处理的了。XMPP给我们提供了IQ方便创建的类，用于快速生成XML数据。若头文件声明如下："><span class="nav-number">0.25.</span> <span class="nav-text">消息查询（IQ）就是通过此类来处理的了。XMPP给我们提供了IQ方便创建的类，用于快速生成XML数据。若头文件声明如下：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IQ是一种请求／响应机制，从一个实体从发送请求，另外一个实体接受请求并进行响应。例如，client在stream的上下文中插入一个元素，向Server请求得到自己的好友列表，Server返回一个，里面是请求的结果。"><span class="nav-number">0.26.</span> <span class="nav-text">IQ是一种请求／响应机制，从一个实体从发送请求，另外一个实体接受请求并进行响应。例如，client在stream的上下文中插入一个元素，向Server请求得到自己的好友列表，Server返回一个，里面是请求的结果。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有以下类别（可选设置如：get）："><span class="nav-number">0.27.</span> <span class="nav-text">有以下类别（可选设置如：get）：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#get-获取当前域值。类似于http-get方法。"><span class="nav-number">0.28.</span> <span class="nav-text">get :获取当前域值。类似于http get方法。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#set-设置或替换get查询的值。类似于http-put方法。"><span class="nav-number">0.29.</span> <span class="nav-text">set :设置或替换get查询的值。类似于http put方法。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#result-说明成功的响应了先前的查询。类似于http状态码200。"><span class="nav-number">0.30.</span> <span class="nav-text">result :说明成功的响应了先前的查询。类似于http状态码200。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#error-查询和响应中出现的错误。"><span class="nav-number">0.31.</span> <span class="nav-text">error: 查询和响应中出现的错误。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下面是一个IQ例子："><span class="nav-number">0.32.</span> <span class="nav-text">下面是一个IQ例子：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XMPPPresence"><span class="nav-number">0.33.</span> <span class="nav-text">XMPPPresence</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#这个类代表节点，我们通过此类提供的方法来生成XML数据。它代表用户在线状态，它的头文件内容很少的："><span class="nav-number">0.34.</span> <span class="nav-text">这个类代表节点，我们通过此类提供的方法来生成XML数据。它代表用户在线状态，它的头文件内容很少的：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#presence用来表明用户的状态，如：online、away、dnd-请勿打扰-等。当改变自己的状态时，就会在stream的上下文中插入一个Presence元素，来表明自身的状态。要想接受presence消息，必须经过一个叫做presence-subscription的授权过程。-1"><span class="nav-number">0.35.</span> <span class="nav-text">presence用来表明用户的状态，如：online、away、dnd(请勿打扰)等。当改变自己的状态时，就会在stream的上下文中插入一个Presence元素，来表明自身的状态。要想接受presence消息，必须经过一个叫做presence subscription的授权过程。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有以下类别（可选设置如：subscribe）："><span class="nav-number">0.36.</span> <span class="nav-text">有以下类别（可选设置如：subscribe）：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#subscribe：订阅其他用户的状态-1"><span class="nav-number">0.37.</span> <span class="nav-text">subscribe：订阅其他用户的状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#probe：请求获取其他用户的状态-1"><span class="nav-number">0.38.</span> <span class="nav-text">probe：请求获取其他用户的状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#unavailable：不可用，离线（offline）状态-1"><span class="nav-number">0.39.</span> <span class="nav-text">unavailable：不可用，离线（offline）状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#节点有以下类别，如dnd："><span class="nav-number">0.40.</span> <span class="nav-text">节点有以下类别，如dnd：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#chat：聊天中-1"><span class="nav-number">0.41.</span> <span class="nav-text">chat：聊天中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#away：暂时离开-1"><span class="nav-number">0.42.</span> <span class="nav-text">away：暂时离开</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xa：eXtend-Away，长时间离开-1"><span class="nav-number">0.43.</span> <span class="nav-text">xa：eXtend Away，长时间离开</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dnd：勿打扰-1"><span class="nav-number">0.44.</span> <span class="nav-text">dnd：勿打扰</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#节点"><span class="nav-number">0.45.</span> <span class="nav-text">节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#这个节点表示状态信息，内容比较自由，几乎可以是所有类型的内容。常用来表示用户当前心情，活动，听的歌曲，看的视频，所在的聊天室，访问的网页，玩的游戏等等。"><span class="nav-number">0.46.</span> <span class="nav-text">这个节点表示状态信息，内容比较自由，几乎可以是所有类型的内容。常用来表示用户当前心情，活动，听的歌曲，看的视频，所在的聊天室，访问的网页，玩的游戏等等。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#节点-1"><span class="nav-number">0.47.</span> <span class="nav-text">节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#范围-128-127。高优先级的resource能接受发送到bare-JID的消息，低优先级的resource不能。优先级为负数的resource不能收到发送到bare-JID的消息。"><span class="nav-number">0.48.</span> <span class="nav-text">范围-128~127。高优先级的resource能接受发送到bare JID的消息，低优先级的resource不能。优先级为负数的resource不能收到发送到bare JID的消息。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#发送一个用户在线状态的例子："><span class="nav-number">0.49.</span> <span class="nav-text">发送一个用户在线状态的例子：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XMPPMessage"><span class="nav-number">0.50.</span> <span class="nav-text">XMPPMessage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XMPPMessage是XMPP框架给我们提供的，方便用于生成XML消息的数据，其头文件如下："><span class="nav-number">0.51.</span> <span class="nav-text">XMPPMessage是XMPP框架给我们提供的，方便用于生成XML消息的数据，其头文件如下：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#message是一种基本-推送-消息方法，它不要求响应。主要用于IM、groupChat、alert和notification之类的应用中。"><span class="nav-number">0.52.</span> <span class="nav-text">message是一种基本 推送 消息方法，它不要求响应。主要用于IM、groupChat、alert和notification之类的应用中。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有以下类别（可选设置如：-chat）："><span class="nav-number">0.53.</span> <span class="nav-text">有以下类别（可选设置如： chat）：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#normal：类似于email，主要特点是不要求响应；-1"><span class="nav-number">0.54.</span> <span class="nav-text">normal：类似于email，主要特点是不要求响应；</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#chat：类似于qq里的好友即时聊天，主要特点是实时通讯；-1"><span class="nav-number">0.55.</span> <span class="nav-text">chat：类似于qq里的好友即时聊天，主要特点是实时通讯；</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#groupchat：类似于聊天室里的群聊；-1"><span class="nav-number">0.56.</span> <span class="nav-text">groupchat：类似于聊天室里的群聊；</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#headline：用于发送alert和notification；-1"><span class="nav-number">0.57.</span> <span class="nav-text">headline：用于发送alert和notification；</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#error：如果发送message出错，发现错误的实体会用这个类别来通知发送者出错了；-1"><span class="nav-number">0.58.</span> <span class="nav-text">error：如果发送message出错，发现错误的实体会用这个类别来通知发送者出错了；</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#节点-2"><span class="nav-number">0.59.</span> <span class="nav-text">节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#所要发送的内容就放在body节点下"><span class="nav-number">0.60.</span> <span class="nav-text">所要发送的内容就放在body节点下</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#消息节点的例子："><span class="nav-number">0.61.</span> <span class="nav-text">消息节点的例子：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#吧啦吧啦一大堆-其实我是从别人的文章copy来的"><span class="nav-number">0.62.</span> <span class="nav-text">吧啦吧啦一大堆,其实我是从别人的文章copy来的</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登录"><span class="nav-number"></span> <span class="nav-text">登录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#登录的流程是这样"><span class="nav-number">1.</span> <span class="nav-text">登录的流程是这样:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-初始化一个xmppStream"><span class="nav-number">1.1.</span> <span class="nav-text">1.初始化一个xmppStream</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-连接服务器（成功或者失败）"><span class="nav-number">1.2.</span> <span class="nav-text">2.连接服务器（成功或者失败）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-成功的基础上，服务器验证（成功或者失败）"><span class="nav-number">1.3.</span> <span class="nav-text">3.成功的基础上，服务器验证（成功或者失败）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-成功的基础上，发送上线消息"><span class="nav-number">1.4.</span> <span class="nav-text">4.成功的基础上，发送上线消息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化相关类"><span class="nav-number">2.</span> <span class="nav-text">初始化相关类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以上就是登录流程-比较暴力直接贴了一堆代码"><span class="nav-number">3.</span> <span class="nav-text">以上就是登录流程,比较暴力直接贴了一堆代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加实际是发送一个IQ请求"><span class="nav-number">3.1.</span> <span class="nav-text">添加实际是发送一个IQ请求</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XMPPRoster获取好友列表-获取的是在线的好友列表"><span class="nav-number"></span> <span class="nav-text">XMPPRoster获取好友列表(获取的是在线的好友列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#XMPPRoster-可以处理和好友相关的事：获取好友列表，添加好友，接收好友请求，同意添加好友，拒绝添加好友"><span class="nav-number">0.1.</span> <span class="nav-text">XMPPRoster 可以处理和好友相关的事：获取好友列表，添加好友，接收好友请求，同意添加好友，拒绝添加好友</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XMPPRosterCoreDataStorage用于存储好友-需要知道一些CoreData相关"><span class="nav-number">0.2.</span> <span class="nav-text">XMPPRosterCoreDataStorage用于存储好友(需要知道一些CoreData相关)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化相关类-1"><span class="nav-number">1.</span> <span class="nav-text">初始化相关类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在需要拉取在线好友的地方"><span class="nav-number">1.1.</span> <span class="nav-text">在需要拉取在线好友的地方:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#以上代码执行后会走一下回调"><span class="nav-number">1.2.</span> <span class="nav-text">以上代码执行后会走一下回调</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同步sqlite中的好友"><span class="nav-number">1.3.</span> <span class="nav-text">同步sqlite中的好友</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接下来就进入聊天模块了"><span class="nav-number">2.</span> <span class="nav-text">接下来就进入聊天模块了</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发送文字"><span class="nav-number"></span> <span class="nav-text">发送文字</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#自己封装消息并且发送"><span class="nav-number">0.1.</span> <span class="nav-text">自己封装消息并且发送</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发送图片"><span class="nav-number"></span> <span class="nav-text">发送图片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#发送方式"><span class="nav-number">1.</span> <span class="nav-text">发送方式:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1：首先将图片变成2进制（NSData）格式，然后利用Base64将其变为字符串，当文字发送，然后在发送端添加设置其属性，接收端通过判断其属性来判断传过来的到底是啥。如果是图片再用Base64将字符串解成NSData然后转成图片即可。"><span class="nav-number">1.1.</span> <span class="nav-text">1：首先将图片变成2进制（NSData）格式，然后利用Base64将其变为字符串，当文字发送，然后在发送端添加设置其属性，接收端通过判断其属性来判断传过来的到底是啥。如果是图片再用Base64将字符串解成NSData然后转成图片即可。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2：将图片直接转为2进制，然后利用ASI将其上传到服务器，然后发送端发送你图片所在的地址给接收端，然后接收端从此地址下载即可。"><span class="nav-number">1.2.</span> <span class="nav-text">2：将图片直接转为2进制，然后利用ASI将其上传到服务器，然后发送端发送你图片所在的地址给接收端，然后接收端从此地址下载即可。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于图片发送："><span class="nav-number">1.3.</span> <span class="nav-text">关于图片发送：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#语音的话首先通过AVAudioRecorder录音，选择好格式-acc-amr-。微信就是用的amr转码。然后剩下的跟图片方案一样"><span class="nav-number">1.4.</span> <span class="nav-text">语音的话首先通过AVAudioRecorder录音，选择好格式(acc,amr)。微信就是用的amr转码。然后剩下的跟图片方案一样</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图片和音频文件发送的基本思路就是："><span class="nav-number">2.</span> <span class="nav-text">图片和音频文件发送的基本思路就是：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#先将图片转化成二进制文件，然后将二进制文件进行base64编码，编码后成字符串。在即将发送的message内添加一个子节点，节点的stringValue（节点的值）设置这个编码后的字符串。然后消息发出后取出消息文件的时候，通过messageType-先判断是不是图片信息，如果是图片信息先通过自己之前设置的节点名称，把这个子节点的stringValue取出来，应该是一个base64之后的字符串"><span class="nav-number">2.1.</span> <span class="nav-text">先将图片转化成二进制文件，然后将二进制文件进行base64编码，编码后成字符串。在即将发送的message内添加一个子节点，节点的stringValue（节点的值）设置这个编码后的字符串。然后消息发出后取出消息文件的时候，通过messageType 先判断是不是图片信息，如果是图片信息先通过自己之前设置的节点名称，把这个子节点的stringValue取出来，应该是一个base64之后的字符串.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图片的缓存"><span class="nav-number">2.2.</span> <span class="nav-text">图片的缓存</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发送语音"><span class="nav-number"></span> <span class="nav-text">发送语音</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#收到语音消息后缓存语音"><span class="nav-number">0.1.</span> <span class="nav-text">收到语音消息后缓存语音</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#好了-大概就这些-比较基本的-我做的Demo地址为-gitHub-https-github-com-piaojin-XmppIm-里面有很多BUG不要太介意"><span class="nav-number"></span> <span class="nav-text">好了,大概就这些,比较基本的,我做的Demo地址为:(gitHub)[https://github.com/piaojin/XmppIm]里面有很多BUG不要太介意</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">飘金</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/title.js"></script>
