@@ -1,0 +1,755 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,Swift" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="iOS对象关联">
+<meta name="keywords" content="iOS,Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS对象关联">
+<meta property="og:url" content="http://yoursite.com/2017/07/17/iOS对象关联/index.html">
+<meta property="og:site_name" content="飘金的博客">
+<meta property="og:description" content="iOS对象关联">
+<meta property="og:updated_time" content="2017-07-18T07:03:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS对象关联">
+<meta name="twitter:description" content="iOS对象关联">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/17/iOS对象关联/"/>
+
+
+
+
+
+  <title>iOS对象关联 | 飘金的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">飘金的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">会炒菜的猿</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/17/iOS对象关联/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="飘金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="飘金的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS对象关联</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-17T14:23:47+08:00">
+                2017-07-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><center style="color:#FF7F50">iOS对象关联</center><br><a id="more"></a></p>
+<h3 id="什么是关联对象"><a href="#什么是关联对象" class="headerlink" title="什么是关联对象"></a>什么是关联对象</h3><h4 id="关联对象是指某个OC对象通过一个唯一的key连接到一个类的实例上。"><a href="#关联对象是指某个OC对象通过一个唯一的key连接到一个类的实例上。" class="headerlink" title="关联对象是指某个OC对象通过一个唯一的key连接到一个类的实例上。"></a>关联对象是指某个OC对象通过一个唯一的key连接到一个类的实例上。</h4><h4 id="举个例子：xiaoming是Person类的一个实例，他的dog（一个OC对象）通过一根绳子（key）被他牵着散步，这可以说xiaoming和dog是关联起来的，当然xiaoming可以牵着多个dog。"><a href="#举个例子：xiaoming是Person类的一个实例，他的dog（一个OC对象）通过一根绳子（key）被他牵着散步，这可以说xiaoming和dog是关联起来的，当然xiaoming可以牵着多个dog。" class="headerlink" title="举个例子：xiaoming是Person类的一个实例，他的dog（一个OC对象）通过一根绳子（key）被他牵着散步，这可以说xiaoming和dog是关联起来的，当然xiaoming可以牵着多个dog。"></a>举个例子：xiaoming是Person类的一个实例，他的dog（一个OC对象）通过一根绳子（key）被他牵着散步，这可以说xiaoming和dog是关联起来的，当然xiaoming可以牵着多个dog。</h4><h3 id="怎样关联对象"><a href="#怎样关联对象" class="headerlink" title="怎样关联对象"></a>怎样关联对象</h3><h4 id="runtime提供給我们的方法："><a href="#runtime提供給我们的方法：" class="headerlink" title="runtime提供給我们的方法："></a>runtime提供給我们的方法：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//关联对象</div><div class="line">void objc_setAssociatedObject(id object, const void *key, id value, objc_AssociationPolicy policy)</div><div class="line">//获取关联的对象</div><div class="line">id objc_getAssociatedObject(id object, const void *key)</div><div class="line">//移除关联的对象</div><div class="line">void objc_removeAssociatedObjects(id object)</div></pre></td></tr></table></figure>
+<h4 id="变量说明："><a href="#变量说明：" class="headerlink" title="变量说明："></a>变量说明：</h4><h4 id="id-object：被关联的对象（如xiaoming）"><a href="#id-object：被关联的对象（如xiaoming）" class="headerlink" title="id object：被关联的对象（如xiaoming）"></a>id object：被关联的对象（如xiaoming）</h4><h4 id="const-void-key：关联的key，要求唯一"><a href="#const-void-key：关联的key，要求唯一" class="headerlink" title="const void *key：关联的key，要求唯一"></a>const void *key：关联的key，要求唯一</h4><h4 id="id-value：关联的对象（如dog）"><a href="#id-value：关联的对象（如dog）" class="headerlink" title="id value：关联的对象（如dog）"></a>id value：关联的对象（如dog）</h4><h4 id="objc-AssociationPolicy-policy：内存管理的策略"><a href="#objc-AssociationPolicy-policy：内存管理的策略" class="headerlink" title="objc_AssociationPolicy policy：内存管理的策略"></a>objc_AssociationPolicy policy：内存管理的策略</h4><h4 id="objc-AssociationPolicy-policy的enum值有："><a href="#objc-AssociationPolicy-policy的enum值有：" class="headerlink" title="objc_AssociationPolicy policy的enum值有："></a>objc_AssociationPolicy policy的enum值有：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">OBJC_ASSOCIATION_ASSIGN = 0,          </div><div class="line">OBJC_ASSOCIATION_RETAIN_NONATOMIC = 1, </div><div class="line">OBJC_ASSOCIATION_COPY_NONATOMIC = 3,  </div><div class="line">OBJC_ASSOCIATION_RETAIN = 01401,       </div><div class="line">OBJC_ASSOCIATION_COPY = 01403</div></pre></td></tr></table></figure>
+<h4 id="当对象被释放时，会根据这个策略来决定是否释放关联的对象，当策略是RETAIN-COPY时，会释放（release）关联的对象，当是ASSIGN，将不会释放。"><a href="#当对象被释放时，会根据这个策略来决定是否释放关联的对象，当策略是RETAIN-COPY时，会释放（release）关联的对象，当是ASSIGN，将不会释放。" class="headerlink" title="当对象被释放时，会根据这个策略来决定是否释放关联的对象，当策略是RETAIN/COPY时，会释放（release）关联的对象，当是ASSIGN，将不会释放。"></a>当对象被释放时，会根据这个策略来决定是否释放关联的对象，当策略是RETAIN/COPY时，会释放（release）关联的对象，当是ASSIGN，将不会释放。</h4><h4 id="值得注意的是，我们不需要主动调用removeAssociated来接触关联的对象，如果需要解除指定的对象，可以使用setAssociatedObject置nil来实现。"><a href="#值得注意的是，我们不需要主动调用removeAssociated来接触关联的对象，如果需要解除指定的对象，可以使用setAssociatedObject置nil来实现。" class="headerlink" title="值得注意的是，我们不需要主动调用removeAssociated来接触关联的对象，如果需要解除指定的对象，可以使用setAssociatedObject置nil来实现。"></a>值得注意的是，我们不需要主动调用removeAssociated来接触关联的对象，如果需要解除指定的对象，可以使用setAssociatedObject置nil来实现。</h4><h3 id="关联对象的应用"><a href="#关联对象的应用" class="headerlink" title="关联对象的应用"></a>关联对象的应用</h3><h4 id="1、添加公共属性"><a href="#1、添加公共属性" class="headerlink" title="1、添加公共属性"></a>1、添加公共属性</h4><h4 id="这是最常用的一个模式，通常我们会在类声明里面添加属性，但是出于某些需求（如前言描述的情况），我们需要在分类里添加一个或多个属性的话，编译器就会报错，这个问题的解决方案就是使用runtime的关联对象。"><a href="#这是最常用的一个模式，通常我们会在类声明里面添加属性，但是出于某些需求（如前言描述的情况），我们需要在分类里添加一个或多个属性的话，编译器就会报错，这个问题的解决方案就是使用runtime的关联对象。" class="headerlink" title="这是最常用的一个模式，通常我们会在类声明里面添加属性，但是出于某些需求（如前言描述的情况），我们需要在分类里添加一个或多个属性的话，编译器就会报错，这个问题的解决方案就是使用runtime的关联对象。"></a>这是最常用的一个模式，通常我们会在类声明里面添加属性，但是出于某些需求（如前言描述的情况），我们需要在分类里添加一个或多个属性的话，编译器就会报错，这个问题的解决方案就是使用runtime的关联对象。</h4><h4 id="应用举例："><a href="#应用举例：" class="headerlink" title="应用举例："></a>应用举例：</h4><h4 id="我们需要自定义一个tabbar，并暴露公共的属性和方法。（读者们可以思考下使用继承和分类实现的优点和不足之处）"><a href="#我们需要自定义一个tabbar，并暴露公共的属性和方法。（读者们可以思考下使用继承和分类实现的优点和不足之处）" class="headerlink" title="我们需要自定义一个tabbar，并暴露公共的属性和方法。（读者们可以思考下使用继承和分类实现的优点和不足之处）"></a>我们需要自定义一个tabbar，并暴露公共的属性和方法。（读者们可以思考下使用继承和分类实现的优点和不足之处）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">@interface UITabBarController (Custom)</div><div class="line"></div><div class="line">@property (nonatomic, strong) SUCustomTabbar * customTabbar;</div><div class="line"></div><div class="line">@end</div><div class="line">#import &quot;UITabBarController+Custom.h&quot;</div><div class="line">#import &lt;objc/runtime.h&gt;</div><div class="line"></div><div class="line">@implementation UITabBarController (Custom)</div><div class="line"></div><div class="line">- (void)setCustomTabbar:(UIView *)customTabbar &#123;</div><div class="line">//这里使用方法的指针地址作为唯一的key</div><div class="line">objc_setAssociatedObject(self, @selector(customTabbar), customTabbar, OBJC_ASSOCIATION_RETAIN_NONATOMIC);</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (UIView *)customTabbar &#123;</div><div class="line">return objc_getAssociatedObject(self, @selector(customTabbar));</div><div class="line">&#125;</div><div class="line"></div><div class="line">//其他方法...</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<h4 id="这样，我们就可以像原生的tabbar一样使用自定义的tabbar："><a href="#这样，我们就可以像原生的tabbar一样使用自定义的tabbar：" class="headerlink" title="这样，我们就可以像原生的tabbar一样使用自定义的tabbar："></a>这样，我们就可以像原生的tabbar一样使用自定义的tabbar：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[self.tabBarController.customTabbar doSomgthig];</div></pre></td></tr></table></figure>
+<h4 id="例如在iOS中我们都是用过UIAlert类，当用户要处理点击事件的时候，需要通过委托协议来实现。这时候就需要把视图和事先动作的代码分开。例如："><a href="#例如在iOS中我们都是用过UIAlert类，当用户要处理点击事件的时候，需要通过委托协议来实现。这时候就需要把视图和事先动作的代码分开。例如：" class="headerlink" title="例如在iOS中我们都是用过UIAlert类，当用户要处理点击事件的时候，需要通过委托协议来实现。这时候就需要把视图和事先动作的代码分开。例如："></a>例如在iOS中我们都是用过UIAlert类，当用户要处理点击事件的时候，需要通过委托协议来实现。这时候就需要把视图和事先动作的代码分开。例如：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">-(void)userAlert &#123;</div><div class="line">UIAlert *alert = [[UIAlert alloc] initWithTitle:@&quot;Alert&quot; </div><div class="line">message:@&quot;do you want to close?&quot; </div><div class="line">delegate: self</div><div class="line">cancelButtonTitle:@&quot;Cancel&quot;</div><div class="line">otherButtonTitles:@&quot;OK&quot;,nil];</div><div class="line">[alert show];</div><div class="line">&#125;</div><div class="line"></div><div class="line">#param -mark UIAlertView Delegate</div><div class="line">- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger:)buttonIndex&#123;</div><div class="line">if(buttonIndex == 0)&#123;</div><div class="line">//do action</div><div class="line">&#125; else &#123;</div><div class="line">//do action</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="通常都是这么做，但是如果代码中使用多个UIAlerView的时候，还需要通过在回调中判断alertView的类型，然后再去处理响应的逻辑。要是能够是创建视图的时候，就把每个按钮响应的逻辑写好，那就简单多了。于是可以："><a href="#通常都是这么做，但是如果代码中使用多个UIAlerView的时候，还需要通过在回调中判断alertView的类型，然后再去处理响应的逻辑。要是能够是创建视图的时候，就把每个按钮响应的逻辑写好，那就简单多了。于是可以：" class="headerlink" title="通常都是这么做，但是如果代码中使用多个UIAlerView的时候，还需要通过在回调中判断alertView的类型，然后再去处理响应的逻辑。要是能够是创建视图的时候，就把每个按钮响应的逻辑写好，那就简单多了。于是可以："></a>通常都是这么做，但是如果代码中使用多个UIAlerView的时候，还需要通过在回调中判断alertView的类型，然后再去处理响应的逻辑。要是能够是创建视图的时候，就把每个按钮响应的逻辑写好，那就简单多了。于是可以：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">_alertView = [[UIAlertView alloc] initWithTitle:@&quot;Alert&quot; message:@&quot;This is deprecated?&quot; </div><div class="line">delegate:self </div><div class="line">cancelButtonTitle:@&quot;Cancel&quot; </div><div class="line">otherButtonTitles:@&quot;Ok&quot;, nil];</div><div class="line">void (^block)(NSInteger) = ^(NSInteger buttonIndex)&#123;</div><div class="line">if (buttonIndex == 0) &#123;</div><div class="line">[self doCancel];</div><div class="line">&#125; else &#123;</div><div class="line">[self doOk];</div><div class="line">&#125;</div><div class="line">&#125;;</div><div class="line">objc_setAssociatedObject(self.alertView, MyAlertViewKey, block, OBJC_ASSOCIATION_COPY);</div><div class="line"></div><div class="line">#pragma -mark UIAlertViewDelegate</div><div class="line">- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex &#123;</div><div class="line">void (^block)(NSInteger) = objc_getAssociatedObject(alertView, MyAlertViewKey);</div><div class="line">block(buttonIndex);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2、添加私有成员变量"><a href="#2、添加私有成员变量" class="headerlink" title="2、添加私有成员变量"></a>2、添加私有成员变量</h3><h4 id="有时候，需要在分类中添加不想暴露在公共声明的成员变量。"><a href="#有时候，需要在分类中添加不想暴露在公共声明的成员变量。" class="headerlink" title="有时候，需要在分类中添加不想暴露在公共声明的成员变量。"></a>有时候，需要在分类中添加不想暴露在公共声明的成员变量。</h4><h4 id="应用举例：給按钮添加点击时间的回调"><a href="#应用举例：給按钮添加点击时间的回调" class="headerlink" title="应用举例：給按钮添加点击时间的回调"></a>应用举例：給按钮添加点击时间的回调</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">@interface UIButton (Callback)</div><div class="line"></div><div class="line">- (instancetype)initWithFrame:(CGRect)frame callback:(void (^)(UIButton *))callbackBlock;</div><div class="line"></div><div class="line">@end</div><div class="line">@interface UIButton ()</div><div class="line"></div><div class="line">@property (nonatomic, copy) void (^callbackBlock)(UIButton * button);</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation UIButton (Callback)</div><div class="line"></div><div class="line">- (void (^)(UIButton *))callbackBlock &#123;</div><div class="line">return objc_getAssociatedObject(self, @selector(callbackBlock));</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)setCallbackBlock:(void (^)(UIButton *))callbackBlock &#123;</div><div class="line">objc_setAssociatedObject(self, @selector(callbackBlock), callbackBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (instancetype)initWithFrame:(CGRect)frame callback:(void (^)(UIButton *))callbackBlock &#123;</div><div class="line"></div><div class="line">if (self = [super initWithFrame:frame]) &#123;</div><div class="line">self.callbackBlock = callbackBlock;</div><div class="line">[self addTarget:self action:@selector(didClickAction:) forControlEvents:UIControlEventTouchUpInside];</div><div class="line">&#125;</div><div class="line">return self;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)didClickAction:(UIButton *)button &#123;</div><div class="line">self.callbackBlock(button);</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------本文结束😘<i class="fa fa-paw"></i>感谢阅读------</div>
+    
+</div>
+    
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/15/SpriteKitSwiftGamePanda/" rel="next" title="用SpriteKit写的熊猫跑酷小游戏">
+                <i class="fa fa-chevron-left"></i> 用SpriteKit写的熊猫跑酷小游戏
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/17/XMPP文字,图片,语音聊天实现/" rel="prev" title="XMPP文字,图片,语音聊天实现">
+                XMPP文字,图片,语音聊天实现 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="飘金" />
+          <p class="site-author-name" itemprop="name">飘金</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/piaojin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/da7864faa1be" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-piaojin"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是关联对象"><span class="nav-number">1.</span> <span class="nav-text">什么是关联对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关联对象是指某个OC对象通过一个唯一的key连接到一个类的实例上。"><span class="nav-number">1.1.</span> <span class="nav-text">关联对象是指某个OC对象通过一个唯一的key连接到一个类的实例上。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#举个例子：xiaoming是Person类的一个实例，他的dog（一个OC对象）通过一根绳子（key）被他牵着散步，这可以说xiaoming和dog是关联起来的，当然xiaoming可以牵着多个dog。"><span class="nav-number">1.2.</span> <span class="nav-text">举个例子：xiaoming是Person类的一个实例，他的dog（一个OC对象）通过一根绳子（key）被他牵着散步，这可以说xiaoming和dog是关联起来的，当然xiaoming可以牵着多个dog。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#怎样关联对象"><span class="nav-number">2.</span> <span class="nav-text">怎样关联对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#runtime提供給我们的方法："><span class="nav-number">2.1.</span> <span class="nav-text">runtime提供給我们的方法：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变量说明："><span class="nav-number">2.2.</span> <span class="nav-text">变量说明：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#id-object：被关联的对象（如xiaoming）"><span class="nav-number">2.3.</span> <span class="nav-text">id object：被关联的对象（如xiaoming）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#const-void-key：关联的key，要求唯一"><span class="nav-number">2.4.</span> <span class="nav-text">const void *key：关联的key，要求唯一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#id-value：关联的对象（如dog）"><span class="nav-number">2.5.</span> <span class="nav-text">id value：关联的对象（如dog）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#objc-AssociationPolicy-policy：内存管理的策略"><span class="nav-number">2.6.</span> <span class="nav-text">objc_AssociationPolicy policy：内存管理的策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#objc-AssociationPolicy-policy的enum值有："><span class="nav-number">2.7.</span> <span class="nav-text">objc_AssociationPolicy policy的enum值有：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#当对象被释放时，会根据这个策略来决定是否释放关联的对象，当策略是RETAIN-COPY时，会释放（release）关联的对象，当是ASSIGN，将不会释放。"><span class="nav-number">2.8.</span> <span class="nav-text">当对象被释放时，会根据这个策略来决定是否释放关联的对象，当策略是RETAIN/COPY时，会释放（release）关联的对象，当是ASSIGN，将不会释放。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#值得注意的是，我们不需要主动调用removeAssociated来接触关联的对象，如果需要解除指定的对象，可以使用setAssociatedObject置nil来实现。"><span class="nav-number">2.9.</span> <span class="nav-text">值得注意的是，我们不需要主动调用removeAssociated来接触关联的对象，如果需要解除指定的对象，可以使用setAssociatedObject置nil来实现。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联对象的应用"><span class="nav-number">3.</span> <span class="nav-text">关联对象的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、添加公共属性"><span class="nav-number">3.1.</span> <span class="nav-text">1、添加公共属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#这是最常用的一个模式，通常我们会在类声明里面添加属性，但是出于某些需求（如前言描述的情况），我们需要在分类里添加一个或多个属性的话，编译器就会报错，这个问题的解决方案就是使用runtime的关联对象。"><span class="nav-number">3.2.</span> <span class="nav-text">这是最常用的一个模式，通常我们会在类声明里面添加属性，但是出于某些需求（如前言描述的情况），我们需要在分类里添加一个或多个属性的话，编译器就会报错，这个问题的解决方案就是使用runtime的关联对象。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用举例："><span class="nav-number">3.3.</span> <span class="nav-text">应用举例：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#我们需要自定义一个tabbar，并暴露公共的属性和方法。（读者们可以思考下使用继承和分类实现的优点和不足之处）"><span class="nav-number">3.4.</span> <span class="nav-text">我们需要自定义一个tabbar，并暴露公共的属性和方法。（读者们可以思考下使用继承和分类实现的优点和不足之处）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#这样，我们就可以像原生的tabbar一样使用自定义的tabbar："><span class="nav-number">3.5.</span> <span class="nav-text">这样，我们就可以像原生的tabbar一样使用自定义的tabbar：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例如在iOS中我们都是用过UIAlert类，当用户要处理点击事件的时候，需要通过委托协议来实现。这时候就需要把视图和事先动作的代码分开。例如："><span class="nav-number">3.6.</span> <span class="nav-text">例如在iOS中我们都是用过UIAlert类，当用户要处理点击事件的时候，需要通过委托协议来实现。这时候就需要把视图和事先动作的代码分开。例如：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通常都是这么做，但是如果代码中使用多个UIAlerView的时候，还需要通过在回调中判断alertView的类型，然后再去处理响应的逻辑。要是能够是创建视图的时候，就把每个按钮响应的逻辑写好，那就简单多了。于是可以："><span class="nav-number">3.7.</span> <span class="nav-text">通常都是这么做，但是如果代码中使用多个UIAlerView的时候，还需要通过在回调中判断alertView的类型，然后再去处理响应的逻辑。要是能够是创建视图的时候，就把每个按钮响应的逻辑写好，那就简单多了。于是可以：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、添加私有成员变量"><span class="nav-number">4.</span> <span class="nav-text">2、添加私有成员变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#有时候，需要在分类中添加不想暴露在公共声明的成员变量。"><span class="nav-number">4.1.</span> <span class="nav-text">有时候，需要在分类中添加不想暴露在公共声明的成员变量。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用举例：給按钮添加点击时间的回调"><span class="nav-number">4.2.</span> <span class="nav-text">应用举例：給按钮添加点击时间的回调</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">飘金</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/title.js"></script>
