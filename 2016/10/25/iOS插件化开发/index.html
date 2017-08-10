@@ -1,0 +1,804 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,Swift,iOS插件化开发" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="iOS插件化开发">
+<meta name="keywords" content="iOS,Swift,iOS插件化开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS插件化开发">
+<meta property="og:url" content="http://yoursite.com/2016/10/25/iOS插件化开发/index.html">
+<meta property="og:site_name" content="飘金的博客">
+<meta property="og:description" content="iOS插件化开发">
+<meta property="og:image" content="http://www.cocoachina.com/cms/uploads/allimg/140613/8370_140613105121_1.png">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3362328-e35b40996b9f365f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3362328-f4e604fa6b7fdbb4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3362328-df378f49549957f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3362328-a42784b6233d18b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3362328-40fce1ff119b9f02.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3362328-6514287f8bf90891.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3362328-ab103ded0d2e6bab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3362328-e13d96b2257c6081.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3362328-8a17ae2f015a295e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-08-10T08:00:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS插件化开发">
+<meta name="twitter:description" content="iOS插件化开发">
+<meta name="twitter:image" content="http://www.cocoachina.com/cms/uploads/allimg/140613/8370_140613105121_1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/25/iOS插件化开发/"/>
+
+
+
+
+
+  <title>iOS插件化开发 | 飘金的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">飘金的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">会炒菜的猿</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/25/iOS插件化开发/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="飘金">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="飘金的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS插件化开发</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-25T22:02:00+08:00">
+                2016-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><center style="color:#FF7F50">iOS插件化开发</center><br><a id="more"></a></p>
+<h3 id="framework是Cocoa-Cocoa-Touch程序中使用的一种资源打包方式，可以将将代码文件、头文件、资源文件、说明文档等集中在一起，方便开发者使用，作为一名Cocoa-Cocoa-Touch程序员每天都要跟各种各样的Framework打交道。Cocoa-Cocoa-Touch开发框架本身提供了大量的Framework，比如Foundation-framework-UIKit-framework-AppKit-framework等。需要注意的是，这些framework无一例外都是动态库。"><a href="#framework是Cocoa-Cocoa-Touch程序中使用的一种资源打包方式，可以将将代码文件、头文件、资源文件、说明文档等集中在一起，方便开发者使用，作为一名Cocoa-Cocoa-Touch程序员每天都要跟各种各样的Framework打交道。Cocoa-Cocoa-Touch开发框架本身提供了大量的Framework，比如Foundation-framework-UIKit-framework-AppKit-framework等。需要注意的是，这些framework无一例外都是动态库。" class="headerlink" title="framework是Cocoa/Cocoa Touch程序中使用的一种资源打包方式，可以将将代码文件、头文件、资源文件、说明文档等集中在一起，方便开发者使用，作为一名Cocoa/Cocoa Touch程序员每天都要跟各种各样的Framework打交道。Cocoa/Cocoa Touch开发框架本身提供了大量的Framework，比如Foundation.framework/UIKit.framework/AppKit.framework等。需要注意的是，这些framework无一例外都是动态库。"></a>framework是Cocoa/Cocoa Touch程序中使用的一种资源打包方式，可以将将代码文件、头文件、资源文件、说明文档等集中在一起，方便开发者使用，作为一名Cocoa/Cocoa Touch程序员每天都要跟各种各样的Framework打交道。Cocoa/Cocoa Touch开发框架本身提供了大量的Framework，比如Foundation.framework/UIKit.framework/AppKit.framework等。需要注意的是，这些framework无一例外都是动态库。</h3><h3 id="但残忍的是，Cocoa-Touch上并不允许我们使用自己创建的framework。不过由于framework是一种优秀的资源打包方式，拥有无穷智慧的程序员们便想出了以framework的形式打包静态库的招数，因此我们平时看到的第三方发布的framework无一例外都是静态库，真正的动态库是上不了AppStore的。"><a href="#但残忍的是，Cocoa-Touch上并不允许我们使用自己创建的framework。不过由于framework是一种优秀的资源打包方式，拥有无穷智慧的程序员们便想出了以framework的形式打包静态库的招数，因此我们平时看到的第三方发布的framework无一例外都是静态库，真正的动态库是上不了AppStore的。" class="headerlink" title="但残忍的是，Cocoa Touch上并不允许我们使用自己创建的framework。不过由于framework是一种优秀的资源打包方式，拥有无穷智慧的程序员们便想出了以framework的形式打包静态库的招数，因此我们平时看到的第三方发布的framework无一例外都是静态库，真正的动态库是上不了AppStore的。"></a>但残忍的是，Cocoa Touch上并不允许我们使用自己创建的framework。不过由于framework是一种优秀的资源打包方式，拥有无穷智慧的程序员们便想出了以framework的形式打包静态库的招数，因此我们平时看到的第三方发布的framework无一例外都是静态库，真正的动态库是上不了AppStore的。</h3><h3 id="WWDC2014给我的一个很大感触是苹果对iOS的开放态度：允许使用动态库、允许第三方键盘、App-Extension等等，这些在之前是想都不敢想的事。"><a href="#WWDC2014给我的一个很大感触是苹果对iOS的开放态度：允许使用动态库、允许第三方键盘、App-Extension等等，这些在之前是想都不敢想的事。" class="headerlink" title="WWDC2014给我的一个很大感触是苹果对iOS的开放态度：允许使用动态库、允许第三方键盘、App Extension等等，这些在之前是想都不敢想的事。"></a>WWDC2014给我的一个很大感触是苹果对iOS的开放态度：允许使用动态库、允许第三方键盘、App Extension等等，这些在之前是想都不敢想的事。</h3><h3 id="iOS上动态库可以做什么"><a href="#iOS上动态库可以做什么" class="headerlink" title="iOS上动态库可以做什么"></a>iOS上动态库可以做什么</h3><h3 id="和静态库在编译时和app代码链接并打进同一个二进制包中不同，动态库可以在运行时手动加载，这样就可以做很多事情，比如："><a href="#和静态库在编译时和app代码链接并打进同一个二进制包中不同，动态库可以在运行时手动加载，这样就可以做很多事情，比如：" class="headerlink" title="和静态库在编译时和app代码链接并打进同一个二进制包中不同，动态库可以在运行时手动加载，这样就可以做很多事情，比如："></a>和静态库在编译时和app代码链接并打进同一个二进制包中不同，动态库可以在运行时手动加载，这样就可以做很多事情，比如：</h3><ul>
+<li><h3 id="应用插件化"><a href="#应用插件化" class="headerlink" title="应用插件化"></a>应用插件化</h3><h3 id="目前很多应用功能越做越多，软件显得越来越臃肿。因此插件化就成了很多软件发展的必经之路，比如支付宝这种平台级别的软件："><a href="#目前很多应用功能越做越多，软件显得越来越臃肿。因此插件化就成了很多软件发展的必经之路，比如支付宝这种平台级别的软件：" class="headerlink" title="目前很多应用功能越做越多，软件显得越来越臃肿。因此插件化就成了很多软件发展的必经之路，比如支付宝这种平台级别的软件："></a>目前很多应用功能越做越多，软件显得越来越臃肿。因此插件化就成了很多软件发展的必经之路，比如支付宝这种平台级别的软件：</h3><img src="http://www.cocoachina.com/cms/uploads/allimg/140613/8370_140613105121_1.png" alt=""></li>
+</ul>
+<h3 id="首页上密密麻麻的功能，而且还在增多，照这个趋势发展下去，软件包的大小将会不可想象。目前常用的解决方案是使用web页面，但用户体验和Native界面是没法比的。"><a href="#首页上密密麻麻的功能，而且还在增多，照这个趋势发展下去，软件包的大小将会不可想象。目前常用的解决方案是使用web页面，但用户体验和Native界面是没法比的。" class="headerlink" title="首页上密密麻麻的功能，而且还在增多，照这个趋势发展下去，软件包的大小将会不可想象。目前常用的解决方案是使用web页面，但用户体验和Native界面是没法比的。"></a>首页上密密麻麻的功能，而且还在增多，照这个趋势发展下去，软件包的大小将会不可想象。目前常用的解决方案是使用web页面，但用户体验和Native界面是没法比的。</h3><h3 id="设想，如果每一个功能点都是一个动态库，在用户想使用某个功能的时候让其从网络下载，然后手动加载动态库，实现功能的的插件化，就再也不用担心功能点的无限增多了，这该是件多么美好的事！"><a href="#设想，如果每一个功能点都是一个动态库，在用户想使用某个功能的时候让其从网络下载，然后手动加载动态库，实现功能的的插件化，就再也不用担心功能点的无限增多了，这该是件多么美好的事！" class="headerlink" title="设想，如果每一个功能点都是一个动态库，在用户想使用某个功能的时候让其从网络下载，然后手动加载动态库，实现功能的的插件化，就再也不用担心功能点的无限增多了，这该是件多么美好的事！"></a>设想，如果每一个功能点都是一个动态库，在用户想使用某个功能的时候让其从网络下载，然后手动加载动态库，实现功能的的插件化，就再也不用担心功能点的无限增多了，这该是件多么美好的事！</h3><ul>
+<li><h3 id="软件版本实时模块升级"><a href="#软件版本实时模块升级" class="headerlink" title="软件版本实时模块升级"></a>软件版本实时模块升级</h3><h3 id="还在忍受苹果动辄一周，甚至更长的审核周期吗？有了动态库妈妈就再也不用担心你的软件升级了！"><a href="#还在忍受苹果动辄一周，甚至更长的审核周期吗？有了动态库妈妈就再也不用担心你的软件升级了！" class="headerlink" title="还在忍受苹果动辄一周，甚至更长的审核周期吗？有了动态库妈妈就再也不用担心你的软件升级了！"></a>还在忍受苹果动辄一周，甚至更长的审核周期吗？有了动态库妈妈就再也不用担心你的软件升级了！</h3></li>
+</ul>
+<h3 id="如果软件中的某个功能点出现了严重的bug，或者想在其中新增功能，你的这个功能点又是通过动态库实现的，这时候你只需要在适当的时候从服务器上将新版本的动态库文件下载到本地，然后在用户重启应用的时候即可实现新功能的展现。"><a href="#如果软件中的某个功能点出现了严重的bug，或者想在其中新增功能，你的这个功能点又是通过动态库实现的，这时候你只需要在适当的时候从服务器上将新版本的动态库文件下载到本地，然后在用户重启应用的时候即可实现新功能的展现。" class="headerlink" title="如果软件中的某个功能点出现了严重的bug，或者想在其中新增功能，你的这个功能点又是通过动态库实现的，这时候你只需要在适当的时候从服务器上将新版本的动态库文件下载到本地，然后在用户重启应用的时候即可实现新功能的展现。"></a>如果软件中的某个功能点出现了严重的bug，或者想在其中新增功能，你的这个功能点又是通过动态库实现的，这时候你只需要在适当的时候从服务器上将新版本的动态库文件下载到本地，然后在用户重启应用的时候即可实现新功能的展现。</h3><ul>
+<li><h3 id="共享可执行文件"><a href="#共享可执行文件" class="headerlink" title="共享可执行文件"></a>共享可执行文件</h3><h3 id="在其它大部分平台上，动态库都可以用于不同应用间共享，这就大大节省了内存。从目前来看，iOS仍然不允许进程间共享动态库，即iOS上的动态库只能是私有的，因为我们仍然不能将动态库文件放置在除了自身沙盒以外的其它任何地方。"><a href="#在其它大部分平台上，动态库都可以用于不同应用间共享，这就大大节省了内存。从目前来看，iOS仍然不允许进程间共享动态库，即iOS上的动态库只能是私有的，因为我们仍然不能将动态库文件放置在除了自身沙盒以外的其它任何地方。" class="headerlink" title="在其它大部分平台上，动态库都可以用于不同应用间共享，这就大大节省了内存。从目前来看，iOS仍然不允许进程间共享动态库，即iOS上的动态库只能是私有的，因为我们仍然不能将动态库文件放置在除了自身沙盒以外的其它任何地方。"></a>在其它大部分平台上，动态库都可以用于不同应用间共享，这就大大节省了内存。从目前来看，iOS仍然不允许进程间共享动态库，即iOS上的动态库只能是私有的，因为我们仍然不能将动态库文件放置在除了自身沙盒以外的其它任何地方。</h3></li>
+</ul>
+<h3 id="不过iOS8上开放了App-Extension功能，可以为一个应用创建插件，这样主app和插件之间共享动态库还是可行的。"><a href="#不过iOS8上开放了App-Extension功能，可以为一个应用创建插件，这样主app和插件之间共享动态库还是可行的。" class="headerlink" title="不过iOS8上开放了App Extension功能，可以为一个应用创建插件，这样主app和插件之间共享动态库还是可行的。"></a>不过iOS8上开放了App Extension功能，可以为一个应用创建插件，这样主app和插件之间共享动态库还是可行的。</h3><h4 id="PS：-上述关于动态库在iOS平台的使用，在技术上都是可行的，但本人并没有真正尝试过做出一个上线AppStore的应用，因此并不保证按照上述方式使用动态库一定能通过苹果审核！"><a href="#PS：-上述关于动态库在iOS平台的使用，在技术上都是可行的，但本人并没有真正尝试过做出一个上线AppStore的应用，因此并不保证按照上述方式使用动态库一定能通过苹果审核！" class="headerlink" title="PS： 上述关于动态库在iOS平台的使用，在技术上都是可行的，但本人并没有真正尝试过做出一个上线AppStore的应用，因此并不保证按照上述方式使用动态库一定能通过苹果审核！"></a>PS： 上述关于动态库在iOS平台的使用，在技术上都是可行的，但本人并没有真正尝试过做出一个上线AppStore的应用，因此并不保证按照上述方式使用动态库一定能通过苹果审核！</h4><blockquote>
+<h2 id="创建动态库"><a href="#创建动态库" class="headerlink" title="创建动态库"></a>创建动态库</h2></blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3362328-e35b40996b9f365f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3362328-f4e604fa6b7fdbb4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h3 id="这边是PiaoJinDylib"><a href="#这边是PiaoJinDylib" class="headerlink" title="这边是PiaoJinDylib"></a>这边是PiaoJinDylib</h3><blockquote>
+<h2 id="创建你测试类PiaoJin"><a href="#创建你测试类PiaoJin" class="headerlink" title="创建你测试类PiaoJin"></a>创建你测试类PiaoJin</h2><h3 id="头文件部分"><a href="#头文件部分" class="headerlink" title="头文件部分"></a>头文件部分</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">@interface PiaoJin : NSObject</div><div class="line"></div><div class="line">- (void)love;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="实现部分"><a href="#实现部分" class="headerlink" title="实现部分"></a>实现部分</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">#import &quot;PiaoJin.h&quot;</div><div class="line">#import &lt;UIKit/UIKit.h&gt;</div><div class="line"></div><div class="line">@implementation PiaoJin</div><div class="line"></div><div class="line">- (void)love&#123;</div><div class="line">    NSLog(@&quot;love you more than I can say!&quot;);</div><div class="line">    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@&quot;love you more than I can say by 飘金!&quot; message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@&quot;确定&quot;, nil];</div><div class="line">    [alertView show];</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<h3 id="在PiaoJinDylib中引入"><a href="#在PiaoJinDylib中引入" class="headerlink" title="在PiaoJinDylib中引入"></a>在PiaoJinDylib中引入</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#import &lt;UIKit/UIKit.h&gt;</div><div class="line"></div><div class="line">//! Project version number for PiaoJinDylib.</div><div class="line">FOUNDATION_EXPORT double PiaoJinDylibVersionNumber;</div><div class="line"></div><div class="line">//! Project version string for PiaoJinDylib.</div><div class="line">FOUNDATION_EXPORT const unsigned char PiaoJinDylibVersionString[];</div><div class="line"></div><div class="line">// In this header, you should import all the public headers of your framework using statements like #import &lt;PiaoJinDylib/PublicHeader.h&gt;</div><div class="line">#import &quot;PiaoJin.h&quot;</div></pre></td></tr></table></figure>
+<h3 id="设置开放的头文件"><a href="#设置开放的头文件" class="headerlink" title="设置开放的头文件"></a>设置开放的头文件</h3><p>一个库里面可以后很多的代码，但是我们需要设置能够提供给外界使用的接口，可以通过Target—&gt;Build Phases—&gt;Headers来设置，如下图所示：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3362328-df378f49549957f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h3 id="我们只需将希望开放的头文件放到Public列表中即可，比如我开放了Dylib-h和Person-h两个头文件，在生成的framework的Header目录下就可以看到这两个头文件-一切完成，Run以后就能成功生成framework文件了。"><a href="#我们只需将希望开放的头文件放到Public列表中即可，比如我开放了Dylib-h和Person-h两个头文件，在生成的framework的Header目录下就可以看到这两个头文件-一切完成，Run以后就能成功生成framework文件了。" class="headerlink" title="我们只需将希望开放的头文件放到Public列表中即可，比如我开放了Dylib.h和Person.h两个头文件，在生成的framework的Header目录下就可以看到这两个头文件.一切完成，Run以后就能成功生成framework文件了。"></a>我们只需将希望开放的头文件放到Public列表中即可，比如我开放了Dylib.h和Person.h两个头文件，在生成的framework的Header目录下就可以看到这两个头文件.一切完成，Run以后就能成功生成framework文件了。</h3><p>##前面只是我们只是创建了一个动态库文件，但是和静态库类似，该动态库并同时不支持真机和模拟器，可以通过以下步骤创建通用动态库：</p>
+<blockquote>
+<h2 id="创建Aggregate-Target-PiaoJinDylib工程下"><a href="#创建Aggregate-Target-PiaoJinDylib工程下" class="headerlink" title="创建Aggregate Target(PiaoJinDylib工程下)"></a>创建Aggregate Target(PiaoJinDylib工程下)</h2></blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3362328-a42784b6233d18b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3362328-40fce1ff119b9f02.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h3 id="我给Aggregate的Target的命名是CommonDylib。"><a href="#我给Aggregate的Target的命名是CommonDylib。" class="headerlink" title="我给Aggregate的Target的命名是CommonDylib。"></a>我给Aggregate的Target的命名是CommonDylib。</h3><h3 id="设置Target-Dependencies"><a href="#设置Target-Dependencies" class="headerlink" title="设置Target Dependencies"></a>设置Target Dependencies</h3><h3 id="按以下路径设置CommonDylib对应的Target-Dependencies"><a href="#按以下路径设置CommonDylib对应的Target-Dependencies" class="headerlink" title="按以下路径设置CommonDylib对应的Target Dependencies:"></a>按以下路径设置CommonDylib对应的Target Dependencies:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TARGETS--&gt;CommonDylib--&gt;Build Phases--&gt;Target Dependencies</div></pre></td></tr></table></figure>
+<h3 id="将真正的动态库PiaoJinDylib-Target添加到其中。"><a href="#将真正的动态库PiaoJinDylib-Target添加到其中。" class="headerlink" title="将真正的动态库PiaoJinDylib Target添加到其中。"></a>将真正的动态库PiaoJinDylib Target添加到其中。</h3><h3 id="添加Run-Script"><a href="#添加Run-Script" class="headerlink" title="添加Run Script"></a>添加Run Script</h3><h3 id="按以下路径为CommonDylib添加Run-Script"><a href="#按以下路径为CommonDylib添加Run-Script" class="headerlink" title="按以下路径为CommonDylib添加Run Script:"></a>按以下路径为CommonDylib添加Run Script:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TARGETS--&gt;CommonDylib--&gt;Build Phases--&gt;Run Script</div></pre></td></tr></table></figure>
+<h3 id="添加的脚本为："><a href="#添加的脚本为：" class="headerlink" title="添加的脚本为："></a>添加的脚本为：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"># Sets the target folders and the final framework product. </div><div class="line">FMK_NAME=$&#123;PROJECT_NAME&#125; </div><div class="line"> </div><div class="line"># Install dir will be the final output to the framework. </div><div class="line"># The following line create it in the root folder of the current project. </div><div class="line">INSTALL_DIR=$&#123;SRCROOT&#125;/Products/$&#123;FMK_NAME&#125;.framework </div><div class="line"> </div><div class="line"># Working dir will be deleted after the framework creation. </div><div class="line">WRK_DIR=build </div><div class="line">DEVICE_DIR=$&#123;WRK_DIR&#125;/Release-iphoneos/$&#123;FMK_NAME&#125;.framework </div><div class="line">SIMULATOR_DIR=$&#123;WRK_DIR&#125;/Release-iphonesimulator/$&#123;FMK_NAME&#125;.framework </div><div class="line"> </div><div class="line"># -configuration $&#123;CONFIGURATION&#125;  </div><div class="line"># Clean and Building both architectures. </div><div class="line">xcodebuild -configuration &quot;Release&quot; -target &quot;$&#123;FMK_NAME&#125;&quot; -sdk iphoneos clean build </div><div class="line">xcodebuild -configuration &quot;Release&quot; -target &quot;$&#123;FMK_NAME&#125;&quot; -sdk iphonesimulator clean build </div><div class="line"> </div><div class="line"># Cleaning the oldest. </div><div class="line">if [ -d &quot;$&#123;INSTALL_DIR&#125;&quot; ] </div><div class="line">then </div><div class="line">rm -rf &quot;$&#123;INSTALL_DIR&#125;&quot; </div><div class="line">fi </div><div class="line"> </div><div class="line">mkdir -p &quot;$&#123;INSTALL_DIR&#125;&quot; </div><div class="line"> </div><div class="line">cp -R &quot;$&#123;DEVICE_DIR&#125;/&quot; &quot;$&#123;INSTALL_DIR&#125;/&quot; </div><div class="line"> </div><div class="line"># Uses the Lipo Tool to merge both binary files (i386 + armv6/armv7) into one Universal final product. </div><div class="line">lipo -create &quot;$&#123;DEVICE_DIR&#125;/$&#123;FMK_NAME&#125;&quot; &quot;$&#123;SIMULATOR_DIR&#125;/$&#123;FMK_NAME&#125;&quot; -output &quot;$&#123;INSTALL_DIR&#125;/$&#123;FMK_NAME&#125;&quot; </div><div class="line"> </div><div class="line">rm -r &quot;$&#123;WRK_DIR&#125;&quot;</div></pre></td></tr></table></figure>
+<h3 id="添加以后的效果"><a href="#添加以后的效果" class="headerlink" title="添加以后的效果:"></a>添加以后的效果:</h3><p><img src="http://upload-images.jianshu.io/upload_images/3362328-6514287f8bf90891.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h3 id="脚本的主要功能是："><a href="#脚本的主要功能是：" class="headerlink" title="脚本的主要功能是："></a>脚本的主要功能是：</h3><h4 id="1-分别编译生成真机和模拟器使用的framework；"><a href="#1-分别编译生成真机和模拟器使用的framework；" class="headerlink" title="1.分别编译生成真机和模拟器使用的framework；"></a>1.分别编译生成真机和模拟器使用的framework；</h4><h4 id="2-使用lipo命令将其合并成一个通用framework；"><a href="#2-使用lipo命令将其合并成一个通用framework；" class="headerlink" title="2.使用lipo命令将其合并成一个通用framework；"></a>2.使用lipo命令将其合并成一个通用framework；</h4><h4 id="3-最后将生成的通用framework放置在工程根目录下新建的Products目录下。"><a href="#3-最后将生成的通用framework放置在工程根目录下新建的Products目录下。" class="headerlink" title="3.最后将生成的通用framework放置在工程根目录下新建的Products目录下。"></a>3.最后将生成的通用framework放置在工程根目录下新建的Products目录下。</h4><h4 id="如果一切顺利，对CommonDylib-target执行run操作以后就能生成一个如图所示的通用framework文件了："><a href="#如果一切顺利，对CommonDylib-target执行run操作以后就能生成一个如图所示的通用framework文件了：" class="headerlink" title="如果一切顺利，对CommonDylib target执行run操作以后就能生成一个如图所示的通用framework文件了："></a>如果一切顺利，对CommonDylib target执行run操作以后就能生成一个如图所示的通用framework文件了：</h4><p><img src="http://upload-images.jianshu.io/upload_images/3362328-ab103ded0d2e6bab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3362328-e13d96b2257c6081.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<blockquote>
+<h2 id="使用动态库"><a href="#使用动态库" class="headerlink" title="使用动态库"></a>使用动态库</h2><h3 id="实际过程中动态库是需要从服务器下载并且保存到app的沙盒中的-这边直接模拟已经下载好了动态库并且保存到沙盒中"><a href="#实际过程中动态库是需要从服务器下载并且保存到app的沙盒中的-这边直接模拟已经下载好了动态库并且保存到沙盒中" class="headerlink" title="实际过程中动态库是需要从服务器下载并且保存到app的沙盒中的,这边直接模拟已经下载好了动态库并且保存到沙盒中:"></a>实际过程中动态库是需要从服务器下载并且保存到app的沙盒中的,这边直接模拟已经下载好了动态库并且保存到沙盒中:</h3></blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3362328-8a17ae2f015a295e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<blockquote>
+<h2 id="使用动态库-1"><a href="#使用动态库-1" class="headerlink" title="使用动态库"></a>使用动态库</h2><h3 id="使用NSBundle加载动态库"><a href="#使用NSBundle加载动态库" class="headerlink" title="使用NSBundle加载动态库"></a>使用NSBundle加载动态库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">- (IBAction)loadFrameWorkByBundle:(id)sender &#123;</div><div class="line">    //从服务器去下载并且存入Documents下(只要知道存哪里即可),事先要知道framework名字,然后去加载</div><div class="line">    NSString *frameworkPath = [NSString stringWithFormat:@&quot;%@/Documents/PiaoJinDylib.framework&quot;,NSHomeDirectory()];</div><div class="line">    </div><div class="line">    NSError *err = nil;</div><div class="line">    NSBundle *bundle = [NSBundle bundleWithPath:frameworkPath];</div><div class="line">    NSString *str = @&quot;加载动态库失败!&quot;;</div><div class="line">    if ([bundle loadAndReturnError:&amp;err]) &#123;</div><div class="line">        NSLog(@&quot;bundle load framework success.&quot;);</div><div class="line">        str = @&quot;加载动态库成功!&quot;;</div><div class="line">    &#125; else &#123;</div><div class="line">        NSLog(@&quot;bundle load framework err:%@&quot;,err);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:str message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@&quot;确定&quot;, nil];</div><div class="line">    [alertView show];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="使用dlopen加载动态库"><a href="#使用dlopen加载动态库" class="headerlink" title="使用dlopen加载动态库"></a>使用dlopen加载动态库</h3><h3 id="以PiaoJinDylib-framework为例，动态库中真正的可执行代码为PiaoJinDylib-framework-PiaoJinDylib文件，因此使用dlopen时指定加载动态库的路径为PiaoJinDylib-framework-PiaoJinDylib。"><a href="#以PiaoJinDylib-framework为例，动态库中真正的可执行代码为PiaoJinDylib-framework-PiaoJinDylib文件，因此使用dlopen时指定加载动态库的路径为PiaoJinDylib-framework-PiaoJinDylib。" class="headerlink" title="以PiaoJinDylib.framework为例，动态库中真正的可执行代码为PiaoJinDylib.framework/PiaoJinDylib文件，因此使用dlopen时指定加载动态库的路径为PiaoJinDylib.framework/PiaoJinDylib。"></a>以PiaoJinDylib.framework为例，动态库中真正的可执行代码为PiaoJinDylib.framework/PiaoJinDylib文件，因此使用dlopen时指定加载动态库的路径为PiaoJinDylib.framework/PiaoJinDylib。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"> NSString *documentsPath = [NSString stringWithFormat:@&quot;%@/Documents/PiaoJinDylib.framework/PiaoJinDylib&quot;,NSHomeDirectory()]; </div><div class="line">[self dlopenLoadDylibWithPath:documentsPath];</div><div class="line">    if (dlopen([path cStringUsingEncoding:NSUTF8StringEncoding], RTLD_NOW) == NULL) &#123; </div><div class="line">        char *error = dlerror(); </div><div class="line">        NSLog(@&quot;dlopen error: %s&quot;, error); </div><div class="line">    &#125; else &#123; </div><div class="line">        NSLog(@&quot;dlopen load framework success.&quot;); </div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<h2 id="调用动态库中的方法"><a href="#调用动态库中的方法" class="headerlink" title="调用动态库中的方法"></a>调用动态库中的方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">//调用FrameWork的方法,利用runTime运行时</div><div class="line">- (IBAction)callMethodOfFrameWork:(id)sender &#123;</div><div class="line">    Class piaoJinClass = NSClassFromString(@&quot;PiaoJin&quot;);</div><div class="line">    if(piaoJinClass)&#123;</div><div class="line">        //事先要知道有什么方法在这个FrameWork中</div><div class="line">        id object = [[piaoJinClass alloc] init];</div><div class="line">        //由于没有引入相关头文件故通过performSelector调用</div><div class="line">        [object performSelector:@selector(love)];</div><div class="line">    &#125;else &#123;</div><div class="line">        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@&quot;调用方法失败!&quot; message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@&quot;确定&quot;, nil];</div><div class="line">        [alertView show];</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="监测动态库的加载和移除"><a href="#监测动态库的加载和移除" class="headerlink" title="监测动态库的加载和移除"></a>监测动态库的加载和移除</h3><h3 id="我们可以通过下述方式，为动态库的加载和移除添加监听回调："><a href="#我们可以通过下述方式，为动态库的加载和移除添加监听回调：" class="headerlink" title="我们可以通过下述方式，为动态库的加载和移除添加监听回调："></a>我们可以通过下述方式，为动态库的加载和移除添加监听回调：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">+ (void)load </div><div class="line">&#123; </div><div class="line">  _dyld_register_func_for_add_image(&amp;image_added); </div><div class="line">  _dyld_register_func_for_remove_image(&amp;image_removed); </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="github上有一个完整的示例代码。"><a href="#github上有一个完整的示例代码。" class="headerlink" title="github上有一个完整的示例代码。"></a>github上有一个完整的<a href="https://github.com/ddeville/ImageLogger" target="_blank" rel="external">示例代码</a>。</h3><blockquote>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2></blockquote>
+<h3 id="这边只是一件最简单的例子-实际项目中肯定需要与动态库所代表的模块进行交互-数据的共享等等-这些都是需要去根据实际项目场景再去设计解决的"><a href="#这边只是一件最简单的例子-实际项目中肯定需要与动态库所代表的模块进行交互-数据的共享等等-这些都是需要去根据实际项目场景再去设计解决的" class="headerlink" title="这边只是一件最简单的例子,实际项目中肯定需要与动态库所代表的模块进行交互,数据的共享等等,这些都是需要去根据实际项目场景再去设计解决的!"></a>这边只是一件最简单的例子,实际项目中肯定需要与动态库所代表的模块进行交互,数据的共享等等,这些都是需要去根据实际项目场景再去设计解决的!</h3><h3 id="如果是真机调试可以通过运行需打开iTunes导入到PiaoJinFrameWorkDemo应用中。"><a href="#如果是真机调试可以通过运行需打开iTunes导入到PiaoJinFrameWorkDemo应用中。" class="headerlink" title="如果是真机调试可以通过运行需打开iTunes导入到PiaoJinFrameWorkDemo应用中。"></a>如果是真机调试可以通过运行需打开iTunes导入到PiaoJinFrameWorkDemo应用中。</h3><h2 id="该Demo已经上传GitHub-有需要的码友可以去看看"><a href="#该Demo已经上传GitHub-有需要的码友可以去看看" class="headerlink" title="该Demo已经上传GitHub,有需要的码友可以去看看"></a>该Demo已经上传<a href="https://github.com/piaojin/PiaoJinFrameWorkDemo/tree/master" target="_blank" rel="external">GitHub</a>,有需要的码友可以去看看</h2><h3 id="参考文档："><a href="#参考文档：" class="headerlink" title="参考文档："></a>参考文档：</h3><p><a href="http://www.cocoachina.com/industry/20140613/8810.html" target="_blank" rel="external">WWDC2014之iOS使用动态库</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">------本文结束😘<i class="fa fa-paw"></i>感谢阅读------</div>
+    
+</div>
+    
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/25/离屏渲染浅析/" rel="next" title="离屏渲染">
+                <i class="fa fa-chevron-left"></i> 离屏渲染
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/13/calayer-uiview-uiwindow/" rel="prev" title="UIView,UIWindow,CALayer之间的区别联系">
+                UIView,UIWindow,CALayer之间的区别联系 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="飘金" />
+          <p class="site-author-name" itemprop="name">飘金</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/piaojin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/da7864faa1be" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-piaojin"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#framework是Cocoa-Cocoa-Touch程序中使用的一种资源打包方式，可以将将代码文件、头文件、资源文件、说明文档等集中在一起，方便开发者使用，作为一名Cocoa-Cocoa-Touch程序员每天都要跟各种各样的Framework打交道。Cocoa-Cocoa-Touch开发框架本身提供了大量的Framework，比如Foundation-framework-UIKit-framework-AppKit-framework等。需要注意的是，这些framework无一例外都是动态库。"><span class="nav-number">1.</span> <span class="nav-text">framework是Cocoa/Cocoa Touch程序中使用的一种资源打包方式，可以将将代码文件、头文件、资源文件、说明文档等集中在一起，方便开发者使用，作为一名Cocoa/Cocoa Touch程序员每天都要跟各种各样的Framework打交道。Cocoa/Cocoa Touch开发框架本身提供了大量的Framework，比如Foundation.framework/UIKit.framework/AppKit.framework等。需要注意的是，这些framework无一例外都是动态库。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#但残忍的是，Cocoa-Touch上并不允许我们使用自己创建的framework。不过由于framework是一种优秀的资源打包方式，拥有无穷智慧的程序员们便想出了以framework的形式打包静态库的招数，因此我们平时看到的第三方发布的framework无一例外都是静态库，真正的动态库是上不了AppStore的。"><span class="nav-number">2.</span> <span class="nav-text">但残忍的是，Cocoa Touch上并不允许我们使用自己创建的framework。不过由于framework是一种优秀的资源打包方式，拥有无穷智慧的程序员们便想出了以framework的形式打包静态库的招数，因此我们平时看到的第三方发布的framework无一例外都是静态库，真正的动态库是上不了AppStore的。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WWDC2014给我的一个很大感触是苹果对iOS的开放态度：允许使用动态库、允许第三方键盘、App-Extension等等，这些在之前是想都不敢想的事。"><span class="nav-number">3.</span> <span class="nav-text">WWDC2014给我的一个很大感触是苹果对iOS的开放态度：允许使用动态库、允许第三方键盘、App Extension等等，这些在之前是想都不敢想的事。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iOS上动态库可以做什么"><span class="nav-number">4.</span> <span class="nav-text">iOS上动态库可以做什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#和静态库在编译时和app代码链接并打进同一个二进制包中不同，动态库可以在运行时手动加载，这样就可以做很多事情，比如："><span class="nav-number">5.</span> <span class="nav-text">和静态库在编译时和app代码链接并打进同一个二进制包中不同，动态库可以在运行时手动加载，这样就可以做很多事情，比如：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用插件化"><span class="nav-number">6.</span> <span class="nav-text">应用插件化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目前很多应用功能越做越多，软件显得越来越臃肿。因此插件化就成了很多软件发展的必经之路，比如支付宝这种平台级别的软件："><span class="nav-number">7.</span> <span class="nav-text">目前很多应用功能越做越多，软件显得越来越臃肿。因此插件化就成了很多软件发展的必经之路，比如支付宝这种平台级别的软件：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#首页上密密麻麻的功能，而且还在增多，照这个趋势发展下去，软件包的大小将会不可想象。目前常用的解决方案是使用web页面，但用户体验和Native界面是没法比的。"><span class="nav-number">8.</span> <span class="nav-text">首页上密密麻麻的功能，而且还在增多，照这个趋势发展下去，软件包的大小将会不可想象。目前常用的解决方案是使用web页面，但用户体验和Native界面是没法比的。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设想，如果每一个功能点都是一个动态库，在用户想使用某个功能的时候让其从网络下载，然后手动加载动态库，实现功能的的插件化，就再也不用担心功能点的无限增多了，这该是件多么美好的事！"><span class="nav-number">9.</span> <span class="nav-text">设想，如果每一个功能点都是一个动态库，在用户想使用某个功能的时候让其从网络下载，然后手动加载动态库，实现功能的的插件化，就再也不用担心功能点的无限增多了，这该是件多么美好的事！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软件版本实时模块升级"><span class="nav-number">10.</span> <span class="nav-text">软件版本实时模块升级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#还在忍受苹果动辄一周，甚至更长的审核周期吗？有了动态库妈妈就再也不用担心你的软件升级了！"><span class="nav-number">11.</span> <span class="nav-text">还在忍受苹果动辄一周，甚至更长的审核周期吗？有了动态库妈妈就再也不用担心你的软件升级了！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如果软件中的某个功能点出现了严重的bug，或者想在其中新增功能，你的这个功能点又是通过动态库实现的，这时候你只需要在适当的时候从服务器上将新版本的动态库文件下载到本地，然后在用户重启应用的时候即可实现新功能的展现。"><span class="nav-number">12.</span> <span class="nav-text">如果软件中的某个功能点出现了严重的bug，或者想在其中新增功能，你的这个功能点又是通过动态库实现的，这时候你只需要在适当的时候从服务器上将新版本的动态库文件下载到本地，然后在用户重启应用的时候即可实现新功能的展现。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#共享可执行文件"><span class="nav-number">13.</span> <span class="nav-text">共享可执行文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在其它大部分平台上，动态库都可以用于不同应用间共享，这就大大节省了内存。从目前来看，iOS仍然不允许进程间共享动态库，即iOS上的动态库只能是私有的，因为我们仍然不能将动态库文件放置在除了自身沙盒以外的其它任何地方。"><span class="nav-number">14.</span> <span class="nav-text">在其它大部分平台上，动态库都可以用于不同应用间共享，这就大大节省了内存。从目前来看，iOS仍然不允许进程间共享动态库，即iOS上的动态库只能是私有的，因为我们仍然不能将动态库文件放置在除了自身沙盒以外的其它任何地方。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不过iOS8上开放了App-Extension功能，可以为一个应用创建插件，这样主app和插件之间共享动态库还是可行的。"><span class="nav-number">15.</span> <span class="nav-text">不过iOS8上开放了App Extension功能，可以为一个应用创建插件，这样主app和插件之间共享动态库还是可行的。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PS：-上述关于动态库在iOS平台的使用，在技术上都是可行的，但本人并没有真正尝试过做出一个上线AppStore的应用，因此并不保证按照上述方式使用动态库一定能通过苹果审核！"><span class="nav-number">15.1.</span> <span class="nav-text">PS： 上述关于动态库在iOS平台的使用，在技术上都是可行的，但本人并没有真正尝试过做出一个上线AppStore的应用，因此并不保证按照上述方式使用动态库一定能通过苹果审核！</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建动态库"><span class="nav-number"></span> <span class="nav-text">创建动态库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#这边是PiaoJinDylib"><span class="nav-number">1.</span> <span class="nav-text">这边是PiaoJinDylib</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建你测试类PiaoJin"><span class="nav-number"></span> <span class="nav-text">创建你测试类PiaoJin</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#头文件部分"><span class="nav-number">1.</span> <span class="nav-text">头文件部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现部分"><span class="nav-number">2.</span> <span class="nav-text">实现部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在PiaoJinDylib中引入"><span class="nav-number">3.</span> <span class="nav-text">在PiaoJinDylib中引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置开放的头文件"><span class="nav-number">4.</span> <span class="nav-text">设置开放的头文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我们只需将希望开放的头文件放到Public列表中即可，比如我开放了Dylib-h和Person-h两个头文件，在生成的framework的Header目录下就可以看到这两个头文件-一切完成，Run以后就能成功生成framework文件了。"><span class="nav-number">5.</span> <span class="nav-text">我们只需将希望开放的头文件放到Public列表中即可，比如我开放了Dylib.h和Person.h两个头文件，在生成的framework的Header目录下就可以看到这两个头文件.一切完成，Run以后就能成功生成framework文件了。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建Aggregate-Target-PiaoJinDylib工程下"><span class="nav-number"></span> <span class="nav-text">创建Aggregate Target(PiaoJinDylib工程下)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#我给Aggregate的Target的命名是CommonDylib。"><span class="nav-number">1.</span> <span class="nav-text">我给Aggregate的Target的命名是CommonDylib。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置Target-Dependencies"><span class="nav-number">2.</span> <span class="nav-text">设置Target Dependencies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按以下路径设置CommonDylib对应的Target-Dependencies"><span class="nav-number">3.</span> <span class="nav-text">按以下路径设置CommonDylib对应的Target Dependencies:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将真正的动态库PiaoJinDylib-Target添加到其中。"><span class="nav-number">4.</span> <span class="nav-text">将真正的动态库PiaoJinDylib Target添加到其中。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加Run-Script"><span class="nav-number">5.</span> <span class="nav-text">添加Run Script</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按以下路径为CommonDylib添加Run-Script"><span class="nav-number">6.</span> <span class="nav-text">按以下路径为CommonDylib添加Run Script:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加的脚本为："><span class="nav-number">7.</span> <span class="nav-text">添加的脚本为：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加以后的效果"><span class="nav-number">8.</span> <span class="nav-text">添加以后的效果:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#脚本的主要功能是："><span class="nav-number">9.</span> <span class="nav-text">脚本的主要功能是：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-分别编译生成真机和模拟器使用的framework；"><span class="nav-number">9.1.</span> <span class="nav-text">1.分别编译生成真机和模拟器使用的framework；</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-使用lipo命令将其合并成一个通用framework；"><span class="nav-number">9.2.</span> <span class="nav-text">2.使用lipo命令将其合并成一个通用framework；</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-最后将生成的通用framework放置在工程根目录下新建的Products目录下。"><span class="nav-number">9.3.</span> <span class="nav-text">3.最后将生成的通用framework放置在工程根目录下新建的Products目录下。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如果一切顺利，对CommonDylib-target执行run操作以后就能生成一个如图所示的通用framework文件了："><span class="nav-number">9.4.</span> <span class="nav-text">如果一切顺利，对CommonDylib target执行run操作以后就能生成一个如图所示的通用framework文件了：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用动态库"><span class="nav-number"></span> <span class="nav-text">使用动态库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实际过程中动态库是需要从服务器下载并且保存到app的沙盒中的-这边直接模拟已经下载好了动态库并且保存到沙盒中"><span class="nav-number">1.</span> <span class="nav-text">实际过程中动态库是需要从服务器下载并且保存到app的沙盒中的,这边直接模拟已经下载好了动态库并且保存到沙盒中:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用动态库-1"><span class="nav-number"></span> <span class="nav-text">使用动态库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用NSBundle加载动态库"><span class="nav-number">1.</span> <span class="nav-text">使用NSBundle加载动态库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用dlopen加载动态库"><span class="nav-number">2.</span> <span class="nav-text">使用dlopen加载动态库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以PiaoJinDylib-framework为例，动态库中真正的可执行代码为PiaoJinDylib-framework-PiaoJinDylib文件，因此使用dlopen时指定加载动态库的路径为PiaoJinDylib-framework-PiaoJinDylib。"><span class="nav-number">3.</span> <span class="nav-text">以PiaoJinDylib.framework为例，动态库中真正的可执行代码为PiaoJinDylib.framework/PiaoJinDylib文件，因此使用dlopen时指定加载动态库的路径为PiaoJinDylib.framework/PiaoJinDylib。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调用动态库中的方法"><span class="nav-number"></span> <span class="nav-text">调用动态库中的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#监测动态库的加载和移除"><span class="nav-number">1.</span> <span class="nav-text">监测动态库的加载和移除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我们可以通过下述方式，为动态库的加载和移除添加监听回调："><span class="nav-number">2.</span> <span class="nav-text">我们可以通过下述方式，为动态库的加载和移除添加监听回调：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#github上有一个完整的示例代码。"><span class="nav-number">3.</span> <span class="nav-text">github上有一个完整的示例代码。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number"></span> <span class="nav-text">后记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#这边只是一件最简单的例子-实际项目中肯定需要与动态库所代表的模块进行交互-数据的共享等等-这些都是需要去根据实际项目场景再去设计解决的"><span class="nav-number">1.</span> <span class="nav-text">这边只是一件最简单的例子,实际项目中肯定需要与动态库所代表的模块进行交互,数据的共享等等,这些都是需要去根据实际项目场景再去设计解决的!</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如果是真机调试可以通过运行需打开iTunes导入到PiaoJinFrameWorkDemo应用中。"><span class="nav-number">2.</span> <span class="nav-text">如果是真机调试可以通过运行需打开iTunes导入到PiaoJinFrameWorkDemo应用中。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#该Demo已经上传GitHub-有需要的码友可以去看看"><span class="nav-number"></span> <span class="nav-text">该Demo已经上传GitHub,有需要的码友可以去看看</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文档："><span class="nav-number">1.</span> <span class="nav-text">参考文档：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">飘金</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+<!--崩溃欺骗-->
+<script type="text/javascript" src="/js/src/title.js"></script>
